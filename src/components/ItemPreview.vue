@@ -1,25 +1,62 @@
 <template>
-<!-- <pre>{{ props.item }}</pre> -->
-<section class="item-preview">
-    
-    <input type="checkbox" id="item-checkbox">
-    <label for="item-checkbox">
-        <span>{{ props.item.name }}</span> | 
-        <span>{{ props.item.icon}}</span>
-        
-   </label>
+    <!-- <pre>{{ props.item }}</pre> -->
+    <section ref="previewRef" :class="`item-preview ${isSwiped ? 'swiped' : 'disabled'}`">
 
-  <span>{{ item.group }}</span>
-    
-</section>
+        <label :for="item._id" @click.stop="$emit('selectItem', props.item._id)">
+            <input type="checkbox" :id="item._id" :checked="item.isSelected">
+            <span>{{ props.item.name }}</span> |
+            <span>{{ props.item.icon }}</span>
+
+        </label>
+
+    </section>
 </template>
 
-<script setup> 
+<script setup>
+import Hammer from 'hammerjs';
+import { computed, defineProps, onMounted, ref } from 'vue';
 
-import { defineProps } from 'vue';
-const props= defineProps({
-  item: Object
+const props = defineProps({
+    item: Object
 })
+
+const previewRef = ref(null)
+const isSwiped = ref(false)
+let elHammer = null
+
+onMounted(() => {
+
+    elHammer = new Hammer(previewRef.value)
+    elHammer.on('swipe', handleSwipe)
+    // console.log('previewRef',previewRef.value);
+
+    // console.log(elHammer);
+})
+
+
+function handleSwipe(ev) {
+    if (ev.type === 'swipe') {
+        isSwiped.value = !isSwiped.value
+    }
+}
+
+
+
+
+
+
+
+
+
 </script>
 
-<style scoped></style>
+<style scoped>
+.swiped {
+    margin-inline-start: 2rem;
+}
+
+.disabled {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+</style>

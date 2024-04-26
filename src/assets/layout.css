@@ -1,0 +1,15 @@
+.main-layout{
+    display: grid;
+    grid-template-columns: 1rem 1fr 1rem;
+    place-items: center;
+
+    
+}
+
+.main-layout > *:not(.full){
+    grid-column: 2;
+}
+
+.full{
+    grid-area: 1/-1;
+}

@@ -1,6 +1,6 @@
 [
     {
-      "id": "1",
+      "_id": "1",
       "name": "Apples",
       "icon": "🍎",
       "group": "fruit",
@@ -9,7 +9,7 @@
       "isSelected": false
     },
     {
-      "id": "2",
+      "_id": "2",
       "name": "Milk",
       "icon": "🥛",
       "group": "dairy",
@@ -18,7 +18,7 @@
       "isSelected": false
     },
     {
-      "id": "3",
+      "_id": "3",
       "name": "Bread",
       "icon": "🍞",
       "group": "grains",
@@ -27,7 +27,7 @@
       "isSelected": false
     },
     {
-      "id": "4",
+      "_id": "4",
       "name": "Bananas",
       "icon": "🍌",
       "group":"fruit",
@@ -36,25 +36,34 @@
       "isSelected": false
     },
     {
-      "id": "5",
+      "_id": "5",
+      "name": "Salmon",
+      "icon": "🐟",
+      "group": "fish and seafood",
+      "readMoreURL": "https://example.com/eggs-info",
+      "color": "pink",
+      "isSelected": false
+    },
+    {
+      "_id": "6",
       "name": "Eggs",
       "icon": "🥚",
-      "group": "protein",
+      "group": "meat poultry",
       "readMoreURL": "https://example.com/eggs-info",
       "color": "white",
       "isSelected": false
     },
     {
-      "id": "6",
+      "_id": "6",
       "name": "Chicken",
       "icon": "🍗",
-      "group":  "meat",
+      "group":  "meat poultry",
       "readMoreURL": "https://example.com/chicken-info",
       "color": "lightbrown",
       "isSelected": false
     },
     {
-      "id": "7",
+      "_id": "7",
       "name": "Spinach",
       "icon": "🥬",
       "group":"vegetable",
@@ -63,7 +72,7 @@
       "isSelected": false
     },
     {
-      "id": "8",
+      "_id": "8",
       "name": "Tomatoes",
       "icon": "🍅",
       "group": "vegetable",
@@ -72,7 +81,7 @@
       "isSelected": false
     },
     {
-      "id": "9",
+      "_id": "9",
       "name": "Cheese",
       "icon": "🧀",
       "group": "dairy",
@@ -81,7 +90,7 @@
       "isSelected": false
     },
     {
-      "id": "10",
+      "_id": "10",
       "name": "Rice",
       "icon": "🍚",
       "group": "grains",
