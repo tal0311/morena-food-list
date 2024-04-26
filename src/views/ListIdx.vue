@@ -61,9 +61,7 @@ function onDone(){
     isModalOpen.value = !isModalOpen.value
 
 }
-function onTakeTour() {
-    router.push('list/summary')
-}
+
 
 
 
@@ -78,7 +76,7 @@ function toggleSelect(id) {
 <style scoped>
 .list-idx {
     display: grid;
-    background-color: lightgreen;
+    /* background-color: lightgreen; */
     height: 100%;
     width: 100%; 
 
@@ -86,7 +84,7 @@ function toggleSelect(id) {
     
 }
 .list-container {
-    background-color: aqua;
+   
     margin-bottom: auto;
 }
 

@@ -3,7 +3,7 @@
     <section ref="previewRef" :class="`item-preview ${isSwiped ? 'swiped' : 'disabled'}`">
 
         <label :for="item._id" @click.stop="$emit('selectItem', props.item._id)">
-            <input type="checkbox" :id="item._id" :checked="item.isSelected">
+            <input type="checkbox" :id="item._id" :checked="item.isSelected" :disabled="!isSwiped">
             <span>{{ props.item.name }}</span> |
             <span>{{ props.item.icon }}</span>
 

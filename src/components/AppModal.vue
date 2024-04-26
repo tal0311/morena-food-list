@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { onBeforeMount, watchEffect, ref, onMounted } from 'vue';
+import { watchEffect, ref } from 'vue';
 
 const props = defineProps({
     isModalOpen: {
@@ -21,11 +21,6 @@ const props = defineProps({
 })
 
 const dialogRef = ref(null)
-
-onMounted(() => {
-    console.log('dialogRef', dialogRef.value);
-
-})
 
 
 watchEffect(() => {
