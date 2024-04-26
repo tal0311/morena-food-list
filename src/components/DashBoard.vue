@@ -71,7 +71,7 @@ export default {
 
   props: {
     chartData: {
-      type: Object,
+      type: Array,
       required: true,
     },
     labels: {

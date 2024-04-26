@@ -17,13 +17,13 @@ export const itemService = {
 window.itemService = itemService
 
 async function query(filterBy={}) {
-  console.log('filterBy',filterBy);
+  
   let items = await storageService.query(STORAGE_KEY)
   if (filterBy.txt) {
     const regex = new RegExp(filterBy.txt, 'i')
     items = items.filter((item) => regex.test(item.txt))
   }
-  console.log(items);
+  
   return items
 }
 function getById(itemId) {
@@ -49,14 +49,14 @@ async function save(item) {
   return savedItem
 }
 
-function getEmptyItem(txt) {
+function getEmptyItem(name) {
   return  {
     id: "",
-    name: "",
+    name,
     icon: "",
-    label: [],
+    group:"",
     readMoreURL: "https://example.com/rice-info",
-    color: "white",
+    color: "",
     isSelected: false
   }
 }
@@ -79,8 +79,8 @@ function prepDataForChart(list) {
       })
   }
 
-
-  return { labels: Object.keys(groupList.value), data }
+console.log('data',data);
+  return data 
 }
 
 
