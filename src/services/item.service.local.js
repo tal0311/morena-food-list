@@ -11,6 +11,7 @@ export const itemService = {
   save,
   remove,
   getEmptyItem,
+  prepDataForChart
 
 }
 window.itemService = itemService
@@ -60,7 +61,27 @@ function getEmptyItem(txt) {
   }
 }
 
+function prepDataForChart(list) {
+  const itemsMap = {}
+  list.reduce((acc, item) => {
+      if (!acc[item.group]) {
+          acc[item.group] = []
+      }
+      acc[item.group].push(item)
+      return acc
+  }, itemsMap)
 
+  const data = []
+  for (const key in groupList.value) {
+      data.push({
+          name: key,
+          value: groupList.value[key].length
+      })
+  }
+
+
+  return { labels: Object.keys(groupList.value), data }
+}
 
 
 // TEST DATA

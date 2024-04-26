@@ -17,9 +17,10 @@
 
         </footer>
 
-        
+
         <RouterView />
-        <AppModal :isModalOpen="isModalOpen"/>
+
+        <AppModal :isModalOpen="isModalOpen" />
     </section>
 </template>
 
@@ -49,6 +50,8 @@ const groupList = computed(() => listStore?.getList?.reduce((acc, item) => {
     return acc
 }, {}))
 
+
+
 watchEffect(() => {
     if (groupList.value) {
         labelList.value = Object.keys(groupList.value)
@@ -57,7 +60,7 @@ watchEffect(() => {
 
 
 const isModalOpen = ref(false)
-function onDone(){
+function onDone() {
     isModalOpen.value = !isModalOpen.value
 
 }
@@ -69,7 +72,7 @@ function onDone(){
 
 function toggleSelect(id) {
     console.log('toggleSelect', id);
-    // listStore.toggleSelect(id)
+    listStore.toggleSelect(id)
 }
 </script>
 
@@ -78,24 +81,25 @@ function toggleSelect(id) {
     display: grid;
     /* background-color: lightgreen; */
     height: 100%;
-    width: 100%; 
+    width: 100%;
 
-    
-    
+
+
 }
+
 .list-container {
-   
+
     margin-bottom: auto;
 }
 
-footer{
-  position: fixed;
-  bottom: 3rem;
-  /* background-color: lightcoral; */
-  width: 100%;
-  left: 0;
-  display: grid;
-  place-content: center;
+footer {
+    position: fixed;
+    bottom: 3rem;
+    /* background-color: lightcoral; */
+    width: 100%;
+    left: 0;
+    display: grid;
+    place-content: center;
 }
 
 summary {

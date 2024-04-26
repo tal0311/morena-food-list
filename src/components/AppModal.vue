@@ -13,6 +13,8 @@
 
 <script setup>
 import { watchEffect, ref } from 'vue';
+import {useRouter} from 'vue-router'
+import {shareService} from '@/services/share.service.js'
 
 const props = defineProps({
     isModalOpen: {
@@ -20,6 +22,7 @@ const props = defineProps({
     }
 })
 
+const router = useRouter()
 const dialogRef = ref(null)
 
 
@@ -44,10 +47,14 @@ function onPrintList() {
 }
 
 function onShowSummary() {
-    console.log('onShowSummary');
+    closeModal()
+    router.push({name: 'list-summary'})
 }
 
 function onSendList() {
+    closeModal()
+     
+    shareService.shareTo()
     console.log('onSendList');
 }
 

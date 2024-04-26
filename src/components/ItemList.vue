@@ -1,7 +1,8 @@
 <template>
     <section>
         <!-- {{ props.list }} -->
-        <ItemPreview v-for="item in props.list" :item="item" :key="item._id"
+        
+        <ItemPreview v-for="item in props.list" :item="item" :key="item._id" 
             @selectItem="$emit('selectItem', $event)" />
     </section>
 </template>

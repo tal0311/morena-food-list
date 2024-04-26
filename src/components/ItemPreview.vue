@@ -14,8 +14,10 @@
 
 <script setup>
 import Hammer from 'hammerjs';
-import { computed, defineProps, onMounted, ref } from 'vue';
+import {useRouter, useRoute}  from 'vue-router'
+import { computed, defineProps, onMounted, ref, watchEffect } from 'vue';
 
+// TODO add text area for category
 const props = defineProps({
     item: Object
 })
@@ -25,13 +27,9 @@ const isSwiped = ref(false)
 let elHammer = null
 
 onMounted(() => {
-
     elHammer = new Hammer(previewRef.value)
     elHammer.on('swipe', handleSwipe)
-    // console.log('previewRef',previewRef.value);
-
-    // console.log(elHammer);
-})
+ })
 
 
 function handleSwipe(ev) {
@@ -39,6 +37,14 @@ function handleSwipe(ev) {
         isSwiped.value = !isSwiped.value
     }
 }
+
+const route = useRoute()
+watchEffect(() => {
+    if (route.name === 'list-summary') {
+        isSwiped.value = true
+    }
+})
+
 
 
 

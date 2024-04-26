@@ -1,10 +1,11 @@
-import { utilService } from './util.service.js'
+import { utilService } from '@/services/util.service.js'
 export const shareService = {
   shareTo
 }
 
-const defaultMsg = 'Check this video '
-function shareTo(platform, data) {
+const defaultMsg = 'היי, רשימת הקניות שלי נראית כך: '
+function shareTo(platform = 'whatsapp', data) {
+
   utilService.isMobile() ? shareToMobile(data) : shareToDesktop(platform, data)
 }
 
@@ -24,10 +25,12 @@ function _getPlatform(platform) {
   }
   return opts[platform]
 }
-
-function shareToMobile(data) {
-  navigator.share({
+ 
+async function shareToMobile(data) {
+  await navigator.share({
     title: defaultMsg,
     text: data
   })
 }
+
+// shareService.shareTo('whatsapp', 'list: milk, bread, eggs')
