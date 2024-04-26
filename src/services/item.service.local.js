@@ -1,9 +1,9 @@
-import { storageService } from './async-storage.service.js'
+import { storageService } from "./async-storage.service.js";
 // import { httpService } from './http.service.js'
-import { utilService } from './util.service.js'
+import { utilService } from "./util.service.js";
 
-import items from './../data/item.json'
-const STORAGE_KEY = 'item_DB'
+import items from "./../data/item.json";
+const STORAGE_KEY = "item_DB";
 
 export const itemService = {
   query,
@@ -11,80 +11,81 @@ export const itemService = {
   save,
   remove,
   getEmptyItem,
-  prepDataForChart
+  prepDataForChart,
+  // getGroupsLabels,
+};
+window.itemService = itemService;
 
-}
-window.itemService = itemService
-
-async function query(filterBy={}) {
-  
-  let items = await storageService.query(STORAGE_KEY)
+async function query(filterBy = {}) {
+  let items = await storageService.query(STORAGE_KEY);
   if (filterBy.txt) {
-    const regex = new RegExp(filterBy.txt, 'i')
-    items = items.filter((item) => regex.test(item.txt))
+    const regex = new RegExp(filterBy.txt, "i");
+    items = items.filter((item) => regex.test(item.txt));
   }
-  
-  return items
+
+  return items;
 }
 function getById(itemId) {
-  return storageService.get(STORAGE_KEY, itemId)
+  return storageService.get(STORAGE_KEY, itemId);
   // return httpService.get(`item/${itemId}`)
 }
 
 async function remove(itemId) {
-  await storageService.remove(STORAGE_KEY, itemId)
+  await storageService.remove(STORAGE_KEY, itemId);
   // return httpService.delete(`item/${itemId}`)
 }
 async function save(item) {
-  var savedItem
+  var savedItem;
   if (item._id) {
-    savedItem = await storageService.put(STORAGE_KEY, item)
+    savedItem = await storageService.put(STORAGE_KEY, item);
     // savedItem = await httpService.put(`item/${item._id}`, item)
   } else {
     // Later, owner is set by the backend
-    item.owner = userService.getLoggedInUser()
-    savedItem = await storageService.item(STORAGE_KEY, item)
+    item.owner = userService.getLoggedInUser();
+    savedItem = await storageService.item(STORAGE_KEY, item);
     // savedItem = await httpService.item('item', item)
   }
-  return savedItem
+  return savedItem;
 }
 
 function getEmptyItem(name) {
-  return  {
+  return {
     id: "",
     name,
     icon: "",
-    group:"",
+    group: "",
     readMoreURL: "https://example.com/rice-info",
     color: "",
-    isSelected: false
-  }
+    isSelected: false,
+  };
 }
 
+// async function getGroupsLabels() {
+//   const items = await query();
+//   return Object.values(items.map((item) => item.group));
+// }
 function prepDataForChart(list) {
-  const itemsMap = {}
+  const itemsMap = {};
   list.reduce((acc, item) => {
-      if (!acc[item.group]) {
-          acc[item.group] = []
-      }
-      acc[item.group].push(item)
-      return acc
-  }, itemsMap)
+    if (!acc[item.group]) {
+      acc[item.group] = [];
+    }
+    acc[item.group].push(item);
+    return acc;
+  }, itemsMap);
 
-  const data = []
-  for (const key in groupList.value) {
-      data.push({
-          name: key,
-          value: groupList.value[key].length
-      })
+  for (const group in itemsMap) {
+    itemsMap[group] = itemsMap[group].length;
   }
 
-console.log('data',data);
-  return data 
-}
 
+ 
+
+  console.log("data", itemsMap);
+  return itemsMap;
+}
 
 // TEST DATA
-;(async () => {
-  utilService.saveToStorage(STORAGE_KEY, items)
-})()
+(async () => {
+  utilService.saveToStorage(STORAGE_KEY, items);
+})();

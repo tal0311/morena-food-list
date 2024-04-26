@@ -1,6 +1,7 @@
 <template>
     <section>
         
+        <slot></slot>
         <ItemPreview v-for="item in props.list" :item="item" :key="item._id"
             @selectItem="$emit('selectItem', $event)" />
     </section>

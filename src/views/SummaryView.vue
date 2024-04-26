@@ -3,15 +3,16 @@
 
 
         <!-- <pre>{{ selectItems }}</pre> -->
-        <ItemList v-if="selectItems.length" :list="selectItems"/>
+        <ItemList v-if="selectItems.length" :list="selectItems">
+           <p>Here is a list summary of your items</p>
+        </ItemList>
         <section v-else class="no-items grid">
             <h2>No items for display, check them in you list</h2>
         </section>
 
         <div v-if="chartData" class="summary-charts">
-            <h2>Summary Charts</h2>
             <p>Here are some charts to help you understand your list better</p>
-            <DashBoard :chartData="chartData" />
+            <DashBoard :chartData="chartData" :labels="labels"/>
         </div>
         <div v-else>
             <h2>Summary Charts</h2>
@@ -32,21 +33,23 @@ import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
 import DashBoard from '@/components/DashBoard.vue'
 import { itemService } from '@/services/item.service.local.js'
-console.log('ItemService',);
+
 
 const listStore = useListStore()
 
 const selectItems = computed(() => listStore.getSelectedItems)
 
 let chartData = ref(null)
+let labels = ref(null)
 
-
-onBeforeMount(() => {
+watchEffect(async() => {
     if (selectItems.value.length) {
-        selectItems.value
-        chartData = itemService.prepDataForChart(JSON.parse(JSON.stringify(selectItems.value)))
+        const data = itemService.prepDataForChart(JSON.parse(JSON.stringify(selectItems.value)))
+        chartData.value = Object.values(data)
+        labels.value = Object.keys(data)
     }
 })
+
 
 </script>
 

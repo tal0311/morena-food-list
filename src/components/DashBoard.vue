@@ -1,19 +1,6 @@
 <template>
   <section class="dashboard-container grid">
-    <!-- <section class="grid-item dashboard-stats flex stats">
-      <article class="stat flex">
-        <h4>Total board tasks</h4>
-        <h2>48</h2>
-      </article>
-      <article class="stat flex">
-        <h4>Board members</h4>
-        <h2>4</h2>
-      </article>
-      <article class="stat flex">
-        <h4>Total board groups</h4>
-        <h2>8</h2>
-      </article>
-    </section> -->
+   
 
     <PieChart
     
@@ -42,6 +29,8 @@
     />
  
   </section>
+
+  <pre>{{  }}</pre>
 </template>
 
 <script>
@@ -75,7 +64,7 @@ export default {
       required: true,
     },
     labels: {
-      type: Object,
+      type:Array,
       required: false,
       default: () => ['Vegetables', 'Dairy', 'Meat And Poultry', 'Grains', 'Fruits'],
     },
@@ -86,9 +75,9 @@ export default {
         labels: [...this.labels],
         datasets: [
           {
-            data: [300, 50, 100, 40, 120],
+            data: [...this.chartData],
             backgroundColor: [
-              'red',
+              '#FF6633',
               '#77CEFF',
               '#0079AF',
               '#123E6B',
