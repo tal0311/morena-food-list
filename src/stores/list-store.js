@@ -7,7 +7,6 @@ export const useListStore = defineStore("list", () => {
   const selectedItems = ref([]);
   const currLang = ref("en");
 
-
   const getList = computed(() => list?.value);
   const getSelectedItems = computed(() => selectedItems?.value);
   const getCurrLang = computed(() => currLang.value);
@@ -21,12 +20,16 @@ export const useListStore = defineStore("list", () => {
     const item = list.value[itemIdx];
     item.isSelected = !item.isSelected;
     list.value.splice(itemIdx, 1, item);
-    selectedItems.value.push(item);
+    if (item.isSelected) {
+      selectedItems.value.push(item);
+    } else {
+      selectedItems.value = selectedItems.value.filter((i) => i._id === itemId);
+    }
   }
 
   function setLang(lang) {
     const langOptions = ["en", "he", "es"];
-    console.log('lang',lang);
+    console.log("lang", lang);
     currLang.value = langOptions.includes(lang) ? lang : "en";
     document.body.setAttribute("dir", currLang.value === "he" ? "rtl" : "ltr");
   }

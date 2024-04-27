@@ -22,6 +22,8 @@ const props = defineProps({
     item: Object
 })
 
+const emit= defineEmits(['selectItem'])
+
 const previewRef = ref(null)
 const isSwiped = ref(false)
 let elHammer = null
@@ -35,6 +37,9 @@ onMounted(() => {
 function handleSwipe(ev) {
     if (ev.type === 'swipe') {
         isSwiped.value = !isSwiped.value
+        if(props.item.isSelected){
+            emit('selectItem', props.item._id)
+        }
     }
 }
 
