@@ -10,6 +10,7 @@ export default defineConfig({
     vue(),
     VueDevTools(),
   ],
+  base: '/grocery-list',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
