@@ -33,6 +33,17 @@ function setLang(lang) {
 </script>
 
 <style scoped>
+.icon {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-content: center;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
 footer {
   position: fixed;
   bottom: 3rem;

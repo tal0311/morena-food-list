@@ -74,4 +74,9 @@ watchEffect(async() => {
     place-content: center;
     opacity: 0.5;
 }
+
+footer button{
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+}
 </style>
