@@ -516,7 +516,7 @@ const gTrans = {
   "no-items-to-show": {
     en: "No items to show",
     es: "No hay elementos para mostrar",
-    he: "אין פריטים להצגה",
+    he: "אין פריטים להצגה ברשימה",
   },
 
   'no-chart-items': {

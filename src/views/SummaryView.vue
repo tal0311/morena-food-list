@@ -7,14 +7,17 @@
         <ItemList v-if="selectItems.length" :list="selectItems"/>
         <section v-else class="no-items grid">
             <h2>{{ $trans('no-items-to-show') }}</h2>
-        </section>
 
+            <div class="svg-placeholder grid" v-html="$svg('list')"></div>
+        </section>
+        
         <div v-if="chartData" class="summary-charts">
             <p>Here are some charts to help you understand your list better</p>
             <DashBoard :chartData="chartData" :labels="labels"/>
         </div>
         <div v-else>
             <h2>{{ $trans('no-chart-items') }}</h2>
+            <div class="svg-placeholder grid" v-html="$svg('chart')"></div>
         </div>
 
         <footer>
@@ -63,5 +66,10 @@ watchEffect(async() => {
     height: 90vh;
     align-content: space-between;
 
+}
+
+.svg-placeholder{
+    place-content: center;
+    opacity: 0.5;
 }
 </style>
