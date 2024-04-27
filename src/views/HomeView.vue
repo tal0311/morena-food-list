@@ -44,6 +44,7 @@ function setLang(lang) {
   width: 100%;
   height: 100%;
 }
+
 footer {
   position: fixed;
   bottom: 3rem;
@@ -52,6 +53,14 @@ footer {
 
 .lang-modal {
   position: absolute;
-  top: -250%;
+  top: -170%;
+}
+
+.lang-modal button {
+
+  font-size: 1.2rem;
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
 }
 </style>
