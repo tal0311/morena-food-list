@@ -1,102 +1,101 @@
 [
-    {
-      "_id": "1",
-      "name": "Apples",
-      "icon": "🍎",
-      "group": "fruit",
-      "readMoreURL": "https://example.com/apples-info",
-      "color": "red",
-      "isSelected": false
-    },
-    {
-      "_id": "2",
-      "name": "Milk",
-      "icon": "🥛",
-      "group": "dairy",
-      "readMoreURL": "https://example.com/milk-info",
-      "color": "white",
-      "isSelected": false
-    },
-    {
-      "_id": "3",
-      "name": "Bread",
-      "icon": "🍞",
-      "group": "grains",
-      "readMoreURL": "https://example.com/bread-info",
-      "color": "brown",
-      "isSelected": false
-    },
-    {
-      "_id": "4",
-      "name": "Bananas",
-      "icon": "🍌",
-      "group":"fruit",
-      "readMoreURL": "https://example.com/bananas-info",
-      "color": "yellow",
-      "isSelected": false
-    },
-    {
-      "_id": "5",
-      "name": "Salmon",
-      "icon": "🐟",
-      "group": "fish-and-seafood",
-      "readMoreURL": "https://example.com/eggs-info",
-      "color": "pink",
-      "isSelected": false
-    },
-    {
-      "_id": "6",
-      "name": "Eggs",
-      "icon": "🥚",
-      "group": "meat-and-poultry",
-      "readMoreURL": "https://example.com/eggs-info",
-      "color": "white",
-      "isSelected": false
-    },
-    {
-      "_id": "7",
-      "name": "Chicken",
-      "icon": "🍗",
-      "group":  "meat-and-poultry",
-      "readMoreURL": "https://example.com/chicken-info",
-      "color": "lightbrown",
-      "isSelected": false
-    },
-    {
-      "_id": "8",
-      "name": "Spinach",
-      "icon": "🥬",
-      "group":"vegetable",
-      "readMoreURL": "https://example.com/spinach-info",
-      "color": "green",
-      "isSelected": false
-    },
-    {
-      "_id": "9",
-      "name": "Tomatoes",
-      "icon": "🍅",
-      "group": "vegetable",
-      "readMoreURL": "https://example.com/tomatoes-info",
-      "color": "red",
-      "isSelected": false
-    },
-    {
-      "_id": "10",
-      "name": "Cheese",
-      "icon": "🧀",
-      "group": "dairy",
-      "readMoreURL": "https://example.com/cheese-info",
-      "color": "yellow",
-      "isSelected": false
-    },
-    {
-      "_id": "11",
-      "name": "Rice",
-      "icon": "🍚",
-      "group": "grains",
-      "readMoreURL": "https://example.com/rice-info",
-      "color": "white",
-      "isSelected": false
-    }
-  ]
-  
+  {
+    "_id": "1",
+    "name": "Apples",
+    "icon": "🍎",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/apples-info",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "2",
+    "name": "Milk",
+    "icon": "🥛",
+    "group": "dairy",
+    "readMoreURL": "https://example.com/milk-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "3",
+    "name": "Bread",
+    "icon": "🍞",
+    "group": "grains",
+    "readMoreURL": "https://example.com/bread-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "4",
+    "name": "Bananas",
+    "icon": "🍌",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/bananas-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "5",
+    "name": "Salmon",
+    "icon": "🐟",
+    "group": "fish-and-seafood",
+    "readMoreURL": "https://example.com/eggs-info",
+    "color": "pink",
+    "isSelected": false
+  },
+  {
+    "_id": "6",
+    "name": "Eggs",
+    "icon": "🥚",
+    "group": "meat-and-poultry",
+    "readMoreURL": "https://example.com/eggs-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "7",
+    "name": "Chicken",
+    "icon": "🍗",
+    "group": "meat-and-poultry",
+    "readMoreURL": "https://example.com/chicken-info",
+    "color": "lightbrown",
+    "isSelected": false
+  },
+  {
+    "_id": "8",
+    "name": "Spinach",
+    "icon": "🥬",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/spinach-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "9",
+    "name": "Tomatoes",
+    "icon": "🍅",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/tomatoes-info",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "10",
+    "name": "Cheese",
+    "icon": "🧀",
+    "group": "dairy",
+    "readMoreURL": "https://example.com/cheese-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "11",
+    "name": "Rice",
+    "icon": "🍚",
+    "group": "grains",
+    "readMoreURL": "https://example.com/rice-info",
+    "color": "white",
+    "isSelected": false
+  }
+]
