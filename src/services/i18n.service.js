@@ -44,17 +44,17 @@ const gTrans = {
     es: "Pescado y mariscos",
     he: "דגים ומאכלי ים",
   },
-  apple: {
+  apples: {
     en: "Apple",
     es: "Manzana",
     he: "תפוח",
   },
-  banana: {
+  bananas: {
     en: "Banana",
     es: "Banana",
     he: "בננה",
   },
-  cherry: {
+  cherries: {
     en: "Cherry",
     es: "Cereza",
     he: "דובדבן",
@@ -64,17 +64,17 @@ const gTrans = {
     es: "Patata",
     he: "תפוח אדמה",
   },
-  tomato: {
-    en: "Tomato",
-    es: "Tomate",
+  tomatoes: {
+    en: "Tomatoes",
+    es: "Tomates",
     he: "עגבניה",
   },
-  carrot: {
-    en: "Carrot",
+  carrots: {
+    en: "Carrots",
     es: "Zanahoria",
     he: "גזר",
   },
-  onion: {
+  onions: {
     en: "Onion",
     es: "Cebolla",
     he: "בצל",
@@ -84,8 +84,8 @@ const gTrans = {
     es: "Ajo",
     he: "שום",
   },
-  cucumber: {
-    en: "Cucumber",
+  cucumbers: {
+    en: "Cucumbers",
     es: "Pepino",
     he: "מלפפון",
   },
@@ -94,8 +94,8 @@ const gTrans = {
     es: "Lechuga",
     he: "חסה",
   },
-  pepper: {
-    en: "Pepper",
+  peppers: {
+    en: "Peppers",
     es: "Pimiento",
     he: "פלפל",
   },
@@ -370,6 +370,38 @@ const gTrans = {
     he: "תבלינים",
   },
 
+  milk: {
+    en: "Milk",
+    es: "Leche",
+    he: "חלב",
+  },
+  yogurt: {
+    en: "Yogurt",
+    es: "Yogur",
+    he: "יוגורט",
+  },
+  cheese: {
+    en: "Cheese",
+    es: "Queso",
+    he: "גבינה",
+  },
+  salmon:{
+    en: "Salmon",
+    es: "Salmón",
+    he: "סלמון",
+  },
+  eggs: {
+    en: "Eggs",
+    es: "Huevos",
+    he: "ביצים",
+  },
+  chicken: {
+    en: "Chicken",
+    es: "Pollo",
+    he: "עוף",
+  },
+  
+//  time
   time: {
     en: "Time",
     es: "Hora",
@@ -487,11 +519,23 @@ const gTrans = {
     he: "אין פריטים להצגה",
   },
 
+  'no-chart-items': {
+    en: "No items to show in chart",
+    es: "No hay elementos para mostrar en el gráfico",
+    he: "אין פריטים להצגה בתרשים",
+  
+  },
+  'items-in-chart': {
+    en: "Here are some charts to help you understand your list better",
+    es: "Aquí hay algunos gráficos para ayudarte a entender mejor tu lista",
+    he: "הנה כמה תרשימים שיעזרו לך להבין את הרשימה שלך טוב יותר",
+  },
+
   // pages
   "home-page": {
     en: "Nice to see you here again",
     es: "Encantado de verte de nuevo",
-    he: "!כיף שבאת",
+    he: "כיף שבאת!",
   },
   "home-action-1": {
     en: "What to Do?",
@@ -503,9 +547,33 @@ const gTrans = {
     es: "Estoy en casa aquí",
     he: "אני מרגיש כאן בבית",
   },
+
+  print: {
+    en: "Print",
+    es: "Imprimir",
+    he: "הדפס",
+  },
+  summary: {
+    en: "Summary",
+    es: "Resumen",
+    he: "סיכום",
+  },
+  'send-to-moran':{
+    en: "Send to Moran",
+    es: "Enviar a Moran",
+    he: "שלח למורן",
+  
+
+  },
+  back:{
+    en: "Back",
+    es: "Atrás",
+    he: "חזור",
+  }
 };
 
-function doTrans(key, currLang = "en") {
+function doTrans(key, currLang) {
+  
   var translation = gTrans[key][currLang];
   if (!translation) return "UNKNOWN";
   return translation;

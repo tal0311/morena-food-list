@@ -4,7 +4,7 @@
 
         <label :for="item._id" @click.stop="$emit('selectItem', props.item._id)">
             <input type="checkbox" :id="item._id" :checked="item.isSelected" :disabled="!isSwiped">
-            <span>{{ props.item.name }}</span> |
+            <span>{{ $trans(props.item.name) }}</span> |
             <span>{{ props.item.icon }}</span>
 
         </label>
@@ -17,7 +17,7 @@ import Hammer from 'hammerjs';
 import {useRouter, useRoute}  from 'vue-router'
 import { computed, defineProps, onMounted, ref, watchEffect } from 'vue';
 
-// TODO add text area for category
+// TODO add text area for notes
 const props = defineProps({
     item: Object
 })
@@ -44,14 +44,6 @@ watchEffect(() => {
         isSwiped.value = true
     }
 })
-
-
-
-
-
-
-
-
 
 
 </script>

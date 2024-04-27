@@ -4,11 +4,9 @@
 
         <!-- <pre>{{ selectItems }}</pre> -->
       
-        <ItemList v-if="selectItems.length" :list="selectItems">
-           <p>Here is a list summary of your items</p>
-        </ItemList>
+        <ItemList v-if="selectItems.length" :list="selectItems"/>
         <section v-else class="no-items grid">
-            <h2>No items for display, check them in you list</h2>
+            <h2>{{ $trans('no-items-to-show') }}</h2>
         </section>
 
         <div v-if="chartData" class="summary-charts">
@@ -16,12 +14,11 @@
             <DashBoard :chartData="chartData" :labels="labels"/>
         </div>
         <div v-else>
-            <h2>Summary Charts</h2>
-            <p>There are no items selected for charting</p>
+            <h2>{{ $trans('no-chart-items') }}</h2>
         </div>
 
         <footer>
-            <button @click="$router.push({ name: 'list' })">Back</button>
+            <button @click="$router.push({ name: 'list' })">{{ $trans('back') }}</button>
         </footer>
 
 

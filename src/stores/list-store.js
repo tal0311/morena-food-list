@@ -6,10 +6,11 @@ export const useListStore = defineStore("list", () => {
   const list = ref(null);
   const selectedItems = ref([]);
   const currLang = ref("he");
+  document.body.setAttribute("dir", 'rtl')
 
   const getList = computed(() => list?.value);
   const getSelectedItems = computed(() => selectedItems?.value);
-  const getCurrLang = computed(() => currLang?.value);
+  const getCurrLang = computed(() => currLang.value);
 
   async function loadList() {
     list.value = await itemService.query();
@@ -24,8 +25,10 @@ export const useListStore = defineStore("list", () => {
   }
 
   function setLang(lang) {
-    langOptions = ["en", "he", "es"];
+    const langOptions = ["en", "he", "es"];
+    console.log('lang',lang);
     currLang.value = langOptions.includes(lang) ? lang : "en";
+    document.body.setAttribute("dir", currLang.value === "he" ? "rtl" : "ltr");
   }
 
   return {

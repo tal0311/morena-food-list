@@ -3,10 +3,10 @@
 
         <div class="actions-container grid">
 
-            <button @click="onPrintList">Print</button>
-            <button @click="onShowSummary">Summary</button>
-            <button @click="onSendList">Send to Moran</button>
-            <button @click="closeModal">Back</button>
+            <button @click="onPrintList">{{ $trans('print') }}</button>
+            <button @click="onShowSummary">{{ $trans('summary') }}</button>
+            <button @click="onSendList">{{ $trans('send-to-moran') }}</button>
+            <button @click="closeModal">{{ $trans('back') }}</button>
         </div>
     </dialog>
 </template>
