@@ -1,8 +1,6 @@
 <template>
     <dialog ref="dialogRef">
-
         <div class="actions-container grid">
-
             <button @click="onPrintList">{{ $trans('print') }}</button>
             <button @click="onShowSummary">{{ $trans('summary') }}</button>
             <button @click="onSendList">{{ $trans('send-to-moran') }}</button>
@@ -63,6 +61,12 @@ function onSendList() {
 
 
 <style scoped>
+button{
+    padding: 0.8rem;
+}
+dialog{
+    width: 50%;
+}
 .actions-container{
     gap: 1rem;
 }

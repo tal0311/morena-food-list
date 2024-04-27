@@ -1,26 +1,15 @@
 <template>
- 
-    <!-- <pre>{{ groupList }}</pre> -->
     <section class="list-idx grid">
-        <!-- <ItemList :list="list" /> -->
         <div class="list-container">
-        
-
             <details v-for="label in labelList" :key="label">
                 <summary>{{ $trans(label) }}</summary>
                 <ItemList :list="groupList[label]" @selectItem="toggleSelect" />
             </details>
-
         </div>
-
         <footer>
-            <button @click="onDone">Done</button>
-
+            <button @click="onDone" v-html="$svg('done')"></button>
         </footer>
-
-
         <RouterView />
-
         <AppModal :isModalOpen="isModalOpen" />
     </section>
 </template>
@@ -43,6 +32,7 @@ const labelList = ref(null)
 onBeforeMount(() => {
     listStore.loadList()
 })
+
 const groupList = computed(() => listStore?.getList?.reduce((acc, item) => {
     if (!acc[item.group]) {
         acc[item.group] = []
@@ -59,20 +49,12 @@ watchEffect(() => {
     }
 })
 
-
 const isModalOpen = ref(false)
 function onDone() {
     isModalOpen.value = !isModalOpen.value
-
 }
 
-
-
-
-
-
 function toggleSelect(id) {
-    console.log('toggleSelect', id);
     listStore.toggleSelect(id)
 }
 </script>
@@ -80,23 +62,17 @@ function toggleSelect(id) {
 <style scoped>
 .list-idx {
     display: grid;
-    /* background-color: lightgreen; */
     height: 100%;
     width: 100%;
-
-
-
 }
 
 .list-container {
-
     margin-bottom: auto;
 }
 
 footer {
     position: fixed;
     bottom: 3rem;
-    /* background-color: lightcoral; */
     width: 100%;
     left: 0;
     display: grid;

@@ -1,10 +1,10 @@
 <template>
     <!-- <pre>{{ props.item }}</pre> -->
-    <section ref="previewRef" :class="`item-preview ${isSwiped ? 'swiped' : 'disabled'}`">
+    <section ref="previewRef" :class="`item-preview  ${isSwiped ? 'swiped' : 'disabled'}`">
 
-        <label :for="item._id" @click.stop="$emit('selectItem', props.item._id)">
+        <label class="label-container grid" :for="item._id" @click.stop="$emit('selectItem', props.item._id)">
             <input type="checkbox" :id="item._id" :checked="item.isSelected" :disabled="!isSwiped">
-            <span>{{ $trans(props.item.name) }}</span> |
+            <span>{{ $trans(props.item.name) }}</span>
             <span>{{ props.item.icon }}</span>
 
         </label>
@@ -14,7 +14,7 @@
 
 <script setup>
 import Hammer from 'hammerjs';
-import {useRouter, useRoute}  from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { computed, defineProps, onMounted, ref, watchEffect } from 'vue';
 
 // TODO add text area for notes
@@ -29,7 +29,7 @@ let elHammer = null
 onMounted(() => {
     elHammer = new Hammer(previewRef.value)
     elHammer.on('swipe', handleSwipe)
- })
+})
 
 
 function handleSwipe(ev) {
@@ -49,12 +49,26 @@ watchEffect(() => {
 </script>
 
 <style scoped>
+.label-container {
+    font-size: 1.5rem;
+    grid-auto-flow: column;
+    grid-template-columns: 20px 50% 1fr;
+    align-items: center;
+    gap: 1rem;
+}
+
+input {
+    width: 20px;
+    height: 20px;
+    /* margin-inline-start: 1rem; */
+}
+
 .swiped {
     margin-inline-start: 2rem;
 }
 
 .disabled {
-    text-decoration: line-through;
+
     opacity: 0.5;
 }
 </style>

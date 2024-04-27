@@ -4,7 +4,9 @@
 
         <!-- <pre>{{ selectItems }}</pre> -->
       
-        <ItemList v-if="selectItems.length" :list="selectItems"/>
+        <ItemList v-if="selectItems.length" :list="selectItems">
+            <h4>{{ $trans('list-results') }}</h4>
+        </ItemList>
         <section v-else class="no-items grid">
             <h2>{{ $trans('no-items-to-show') }}</h2>
 
@@ -12,7 +14,7 @@
         </section>
         
         <div v-if="chartData" class="summary-charts">
-            <p>Here are some charts to help you understand your list better</p>
+            <h4>{{ $trans('chart-results') }}</h4>
             <DashBoard :chartData="chartData" :labels="labels"/>
         </div>
         <div v-else>

@@ -569,13 +569,26 @@ const gTrans = {
     en: "Back",
     es: "Atrás",
     he: "חזור",
-  }
+  },
+  'chart-results':{
+    en: "Here are some charts to help you understand your list better",
+    es: " Aquí hay algunos gráficos para ayudarte a entender mejor tu lista",
+    he: "הנה כמה תרשימים שיעזרו לך להבין את הרשימה שלך טוב יותר",
+  
+  },
+  'list-results':{
+    en: "Here are the results of your list",
+    es: "Aquí están los resultados de tu lista",
+    he: "הנה תוצאות הרשימה שלך",
+  
+  },
+  
 };
 
 function doTrans(key, currLang) {
   
   var translation = gTrans[key][currLang];
-  if (!translation) return "UNKNOWN";
+  if (!translation) return key;
   return translation;
 }
 
