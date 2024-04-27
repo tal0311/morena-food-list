@@ -77,11 +77,6 @@ function prepDataForChart(list) {
   for (const group in itemsMap) {
     itemsMap[group] = itemsMap[group].length;
   }
-
-
- 
-
-  console.log("data", itemsMap);
   return itemsMap;
 }
 

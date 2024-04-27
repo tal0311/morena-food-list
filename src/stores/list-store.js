@@ -23,7 +23,7 @@ export const useListStore = defineStore("list", () => {
     if (item.isSelected) {
       selectedItems.value.push(item);
     } else {
-      selectedItems.value = selectedItems.value.filter((i) => i._id === itemId);
+      selectedItems.value = selectedItems.value.filter((i) => i._id !== itemId);
     }
   }
 
