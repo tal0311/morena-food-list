@@ -1,12 +1,12 @@
 
 <template>
  <section>
-  <h1>welcome to the home page</h1>
+  <h1>{{$trans('home-page')}}</h1>
 
   <div class="action-container">
-    <button @click="onTakeTour">What to do?</button>
+    <button @click="onTakeTour">{{ $trans('home-action-1') }}</button>
     <button to="/register">
-      <RouterLink to="/list">I'm At home here</RouterLink>
+      <RouterLink to="/list">{{ $trans('home-action-2') }}</RouterLink>
     </button>
   </div>
  </section>

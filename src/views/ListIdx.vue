@@ -1,12 +1,13 @@
 <template>
-
+ 
     <!-- <pre>{{ groupList }}</pre> -->
     <section class="list-idx grid">
         <!-- <ItemList :list="list" /> -->
         <div class="list-container">
+        
 
             <details v-for="label in labelList" :key="label">
-                <summary>{{ label }}</summary>
+                <summary>{{ $trans(label) }}</summary>
                 <ItemList :list="groupList[label]" @selectItem="toggleSelect" />
             </details>
 

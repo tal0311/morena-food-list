@@ -39,7 +39,7 @@
       "_id": "5",
       "name": "Salmon",
       "icon": "🐟",
-      "group": "fish and seafood",
+      "group": "fish-and-seafood",
       "readMoreURL": "https://example.com/eggs-info",
       "color": "pink",
       "isSelected": false
@@ -48,7 +48,7 @@
       "_id": "6",
       "name": "Eggs",
       "icon": "🥚",
-      "group": "meat poultry",
+      "group": "meat-and-poultry",
       "readMoreURL": "https://example.com/eggs-info",
       "color": "white",
       "isSelected": false
@@ -57,7 +57,7 @@
       "_id": "7",
       "name": "Chicken",
       "icon": "🍗",
-      "group":  "meat poultry",
+      "group":  "meat-and-poultry",
       "readMoreURL": "https://example.com/chicken-info",
       "color": "lightbrown",
       "isSelected": false

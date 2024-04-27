@@ -1,8 +1,9 @@
 <template>
-    <section class="summary-view">
+    <section class="summary-view grid">
 
 
         <!-- <pre>{{ selectItems }}</pre> -->
+      
         <ItemList v-if="selectItems.length" :list="selectItems">
            <p>Here is a list summary of your items</p>
         </ItemList>
@@ -55,18 +56,15 @@ watchEffect(async() => {
 
 <style scoped>
 .summary-view {
-
     position: fixed;
     width: 80vw;
-
     background-color: white;
-
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     overflow-y: auto;
     height: 90vh;
-
+    align-content: space-between;
 
 }
 </style>
