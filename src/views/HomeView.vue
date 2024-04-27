@@ -1,20 +1,26 @@
 <template>
-  <main class="">
-    <TheWelcome />
-  </main>
+  <section>
+    <header >
+      <h1>Morena's list</h1>
+      <p>{{ getIcon }}</p>
+    </header>
 
-  <footer>
-    <div v-if="isLangModalOpen" class="lang-modal grid">
-      <button @click="setLang('en')">English</button>
-      <button @click="setLang('es')">Español</button>
-      <button @click="setLang('he')">עברית</button>
-    </div>
-    <button @click="toggleLangMOdal" class="icon" v-html="$svg('translate')"></button>
-  </footer>
+    <section class="grid">
+      <TheWelcome />
+      <footer>
+        <div v-if="isLangModalOpen" class="lang-modal grid">
+          <button @click="setLang('en')">English</button>
+          <button @click="setLang('es')">Español</button>
+          <button @click="setLang('he')">עברית</button>
+        </div>
+        <button @click="toggleLangMOdal" class="icon" v-html="$svg('translate')"></button>
+      </footer>
+    </section>
+  </section>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import TheWelcome from '@/components/TheWelcome.vue'
 import { useListStore } from '@/stores/list-store'
 
@@ -28,11 +34,37 @@ const listStore = useListStore()
 function setLang(lang) {
   toggleLangMOdal()
   listStore.setLang(lang)
-
 }
+
+const getIcon = computed(() => {
+  const icons = ["✅", "🥬", "🥦", "🥒", "🥑", "🫒", "🍅", "🍄", "🍑", "🍌", "🍇", "☕", "🥛", "🥩", "🧀", "🥚", "🥝", "🍉", "🍎", "🥭", "🍍", "🍌", "🍋", "🍊", "🍒", "🍓", "🫐", "🫑", "🌽", "🍆", "🫒", "🍅"];
+  return icons[Math.floor(Math.random() * icons.length)];
+})
+
+
 </script>
 
 <style scoped>
+
+header {
+ position: fixed;
+  top: 1rem;
+  width: 100%;
+  text-align: center;
+  left: 0;
+  font-size: 2.8rem;
+}
+
+h1,p{
+  margin: 0;
+
+}
+section {
+  display: grid;
+  place-content: center;
+
+}
+
 .icon {
   width: 3rem;
   height: 3rem;
