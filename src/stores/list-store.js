@@ -5,8 +5,8 @@ import { itemService } from "@/services/item.service.local";
 export const useListStore = defineStore("list", () => {
   const list = ref(null);
   const selectedItems = ref([]);
-  const currLang = ref("he");
-  document.body.setAttribute("dir", 'rtl')
+  const currLang = ref("en");
+
 
   const getList = computed(() => list?.value);
   const getSelectedItems = computed(() => selectedItems?.value);
