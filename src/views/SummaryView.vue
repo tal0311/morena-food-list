@@ -64,9 +64,7 @@ onBeforeMount(() => {
 })
 
 function prepDataForChart() {
-    // debugger
     const data = itemService.prepDataForChart(JSON.parse(JSON.stringify(selectItems.value)))
-    console.log('data', data);
     if (!Object.keys(data).length === 0) return
     chartData.value = Object.values(data)
     labels.value = Object.keys(data)
