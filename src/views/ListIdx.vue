@@ -12,9 +12,7 @@
         <RouterView />
         <AppModal :isModalOpen="isModalOpen" />
     </section>
-    <section v-else>
-        loading...
-    </section>
+    <AppLoader v-else />
 </template>
 
 <script setup>
@@ -25,6 +23,7 @@ import ItemList from '@/components/ItemList.vue'
 import AppModal from '@/components/AppModal.vue'
 import { useTour } from '@/composables/useTour.js'
 import { useAppStore } from '@/stores/app-store'
+import AppLoader from '@/components/AppLoader.vue'
 
 
 const router = useRouter()

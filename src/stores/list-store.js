@@ -13,6 +13,7 @@ export const useListStore = defineStore("list", () => {
 
   async function loadList() {
     list.value = await itemService.query();
+    // list.value = null
   }
 
   function toggleSelect(itemId) {
