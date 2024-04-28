@@ -1,9 +1,9 @@
 <template>
     <section v-if="groupList" class="list-idx grid">
         <div id="list-container" class="list-container">
-            <details v-for="label, idx in labelList" :key="label"  :class="`list-details ${label}`">
+            <details v-for="label, idx in labelList" :key="label" :class="`list-details ${label}`">
                 <summary>{{ $trans(label) }}</summary>
-                <ItemList :list="groupList[label]" @selectItem="toggleSelect"  />
+                <ItemList :list="groupList[label]" @selectItem="toggleSelect" />
             </details>
         </div>
         <footer id="footer-container" class="footer-container">
@@ -66,20 +66,18 @@ const route = useRoute()
 const appStore = useAppStore()
 const isTourActive = computed(() => appStore.getIsTourActive)
 
+// set timeout is to make sure the dom is rendered before the tour starts
 onMounted(() => {
     setTimeout(() => {
-        
         if (isTourActive.value) {
-            document.querySelectorAll('details').forEach((el,idx) => {
-                if(idx === 0){
+            document.querySelectorAll('details').forEach((el, idx) => {
+                if (idx === 0) {
                     el.setAttribute('open', true)
                 }
+                useTour(route.name)
             })
-            
-            useTour(route.name)
-            
         }
-    },800);
+    }, 800);
 })
 
 

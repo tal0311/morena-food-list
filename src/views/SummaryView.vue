@@ -1,32 +1,31 @@
 <template>
     <section class="summary-view grid">
+        <div id="list-container">
+            <ItemList v-if="selectItems.length" :list="selectItems">
+                <h4>{{ $trans('list-results') }}</h4>
+            </ItemList>
+            <section v-else class="no-items grid">
+                <h2>{{ $trans('no-items-to-show') }}</h2>
 
-
-        <!-- <pre>{{ selectItems }}</pre> -->
-      
-        <ItemList v-if="selectItems.length" :list="selectItems">
-            <h4>{{ $trans('list-results') }}</h4>
-        </ItemList>
-        <section v-else class="no-items grid">
-            <h2>{{ $trans('no-items-to-show') }}</h2>
-
-            <div class="svg-placeholder grid" v-html="$svg('list')"></div>
-        </section>
-        
-        <div v-if="chartData" class="summary-charts">
-            <h4>{{ $trans('chart-results') }}</h4>
-            <DashBoard :chartData="chartData" :labels="labels"/>
+                <div class="svg-placeholder grid" v-html="$svg('list')"></div>
+            </section>
         </div>
-        <div v-else>
-            <h2>{{ $trans('no-chart-items') }}</h2>
-            <div class="svg-placeholder grid" v-html="$svg('chart')"></div>
+
+        <div id="chart-container">
+            <div v-if="chartData" class="summary-charts">
+                <h4>{{ $trans('chart-results') }}</h4>
+                <DashBoard :chartData="chartData" :labels="labels" />
+            </div>
+            <div v-else>
+                <h2>{{ $trans('no-chart-items') }}</h2>
+                <div class="svg-placeholder grid" v-html="$svg('chart')"></div>
+            </div>
         </div>
 
         <footer>
             <button @click="$router.push({ name: 'list' })">{{ $trans('back') }}</button>
         </footer>
-
-
+        
     </section>
 </template>
 
@@ -45,7 +44,7 @@ const selectItems = computed(() => listStore.getSelectedItems)
 let chartData = ref(null)
 let labels = ref(null)
 
-watchEffect(async() => {
+watchEffect(async () => {
     if (selectItems.value.length) {
         const data = itemService.prepDataForChart(JSON.parse(JSON.stringify(selectItems.value)))
         chartData.value = Object.values(data)
@@ -70,12 +69,12 @@ watchEffect(async() => {
 
 }
 
-.svg-placeholder{
+.svg-placeholder {
     place-content: center;
     opacity: 0.5;
 }
 
-footer button{
+footer button {
     padding: 0.5rem 1.5rem;
     font-size: 1rem;
 }

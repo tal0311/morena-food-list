@@ -11,9 +11,9 @@ export function useTour(routeName) {
     if (routeName === "list") {
       steps = getStepsByRoute(routeName);
     }
-  //   if (routeName === "list-summary") {
-  //     steps = getStepsByRoute(routeName);
-  //   }
+    if (routeName === "list-summary") {
+      steps = getStepsByRoute(routeName);
+    }
 
   console.log(steps);
   const driverObj = driver({
@@ -67,13 +67,15 @@ function getStepsByRoute(routeName) {
 
     "list-summary": [
       {
-        element: "list-container",
+        element: "#list-container",
         popover: {
           title: "Summary",
           description: "This is a simple summary for you'r product list.",
           position: "bottom",
         },
-        element: "chart-container",
+    },
+    {
+        element: "#chart-container",
         popover: {
           title: "Summary",
           description:
