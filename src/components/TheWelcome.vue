@@ -1,11 +1,11 @@
 <template>
-  <section class="welcome-view grid">
+  <section  id="welcome-view" class="welcome-view grid">
     <h1>{{ $trans('home-page') }}</h1>
 
     <div class="action-container grid">
-      <button @click="onTakeTour">{{ $trans('home-action-1') }}</button>
+      <button class="tour-btn" @click="$emit('toggleTour')">{{ $trans('home-action-1') }}</button>
       <button class="link-btn">
-        <RouterLink to="/list">{{ $trans('home-action-2') }}</RouterLink>
+      {{ $trans('home-action-2') }}
       </button>
     </div>
   </section>
@@ -13,12 +13,9 @@
 
 <script setup>
 
-import { useRouter } from 'vue-router'
-const router = useRouter()
 
-const onTakeTour = () => {
-  router.push('/list?tour=true')
-}
+
+
 </script>
 
 <style scoped>
@@ -27,18 +24,7 @@ h1 {
 
 }
 
-button:not(.link-btn) {
-  padding: 0.8rem;
-}
-.link-btn{
-  padding: 0;
-}
-
-a {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-content: center;
+button {
   padding: 0.8rem;
 }
 

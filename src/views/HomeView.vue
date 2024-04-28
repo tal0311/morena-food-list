@@ -5,9 +5,11 @@
       <p>{{ getIcon }}</p>
     </header>
 
-    <section class="grid">
-      <TheWelcome />
-      <footer>
+    <section class="welcome-section grid">
+     
+        <TheWelcome  @toggleTour="toggleTour"/>
+      
+        <footer id="language-modal">
         <div v-if="isLangModalOpen" class="lang-modal grid">
           <button @click="setLang('en')">English</button>
           <button @click="setLang('es')">Español</button>
@@ -20,9 +22,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import TheWelcome from '@/components/TheWelcome.vue'
 import { useListStore } from '@/stores/list-store'
+import {useRoute} from 'vue-router'
+import {useAppStore} from '@/stores/app-store'
+import {useTour} from '@/composables/useTour'
 
 const isLangModalOpen = ref(false)
 
@@ -39,6 +44,21 @@ function setLang(lang) {
 const getIcon = computed(() => {
   const icons = ["✅", "🥬", "🥦", "🥒", "🥑", "🫒", "🍅", "🍄", "🍑", "🍌", "🍇", "☕", "🥛", "🥩", "🧀", "🥚", "🥝", "🍉", "🍎", "🥭", "🍍", "🍌", "🍋", "🍊", "🍒", "🍓", "🫐", "🫑", "🌽", "🍆", "🫒", "🍅"];
   return icons[Math.floor(Math.random() * icons.length)];
+})
+
+const appStore = useAppStore()
+function toggleTour(){
+ appStore.toggleTourState()
+}
+ 
+const isTourActive = computed(() => appStore.getIsTourActive)
+const route = useRoute()
+watchEffect(() => {
+  if(isTourActive.value){
+    useTour(route.name)
+    console.log('tour is active');
+
+  }
 })
 
 
