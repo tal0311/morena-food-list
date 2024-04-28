@@ -1,10 +1,9 @@
 <template>
     <!-- <pre>{{ props.item }}</pre> -->
-    {{ props.idx }}
     <section ref="previewRef" :class="`item-preview idx- ${isSwiped ? 'swiped' : 'disabled'}`">
 
-        <label class="label-container grid" :for="item._id" @click.stop="$emit('selectItem', props.item._id)">
-            <input type="checkbox" :id="item._id" :checked="item.isSelected" :disabled="!isSwiped">
+        <label class="label-container grid"  @click.stop="$emit('selectItem', props.item._id)">
+            <input type="checkbox"  :checked="item.isSelected" :disabled="!isSwiped">
             <span>{{ $trans(props.item.name) }}</span>
             <span>{{ props.item.icon }}</span>
 
@@ -18,7 +17,7 @@ import Hammer from 'hammerjs';
 import { useRouter, useRoute } from 'vue-router'
 import { computed, onMounted, ref, watchEffect } from 'vue';
 
-// TODO add text area for notes
+// TODO add text area for product 
 const props = defineProps({
     item: Object,
     idx: Number,
@@ -60,11 +59,7 @@ watchEffect(() => {
     }
 })
 
-watchEffect(() => {
-    if (props.isTourActive && props.idx === 0) {
-      
-    }
-})
+
 
 
 </script>

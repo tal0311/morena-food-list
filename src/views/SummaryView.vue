@@ -1,7 +1,7 @@
 <template>
     <section class="summary-view grid">
         <div id="list-container">
-            <ItemList v-if="selectItems.length" :list="selectItems">
+            <ItemList v-if="selectItems.length" :list="selectItems" @selectItem="toggleSelect">
                 <h4>{{ $trans('list-results') }}</h4>
             </ItemList>
             <section v-else class="no-items grid">
@@ -12,9 +12,9 @@
         </div>
 
         <div id="chart-container">
-            <div v-if="chartData" class="summary-charts">
+            <div v-if="chartData && chartData?.length" class="summary-charts">
                 <h4>{{ $trans('chart-results') }}</h4>
-                <DashBoard :chartData="chartData" :labels="labels" />
+                <DashBoard :chartData="chartData" :labels="labels" :key="cmpKey" />
             </div>
             <div v-else>
                 <h2>{{ $trans('no-chart-items') }}</h2>
@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, computed, watchEffect, watch,onMounted } from 'vue'
+import { ref, onBeforeMount, computed, watchEffect, watch, onMounted } from 'vue'
 import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
 import DashBoard from '@/components/DashBoard.vue'
@@ -39,31 +39,55 @@ import { useRoute } from 'vue-router'
 import { useAppStore } from '@/stores/app-store'
 import { useTour } from '@/composables/useTour.js'
 
-
 const listStore = useListStore()
-
-const selectItems = computed(() => listStore.getSelectedItems)
 
 let chartData = ref(null)
 let labels = ref(null)
 
-watchEffect(async () => {
-    if (selectItems.value.length) {
-        const data = itemService.prepDataForChart(JSON.parse(JSON.stringify(selectItems.value)))
-        chartData.value = Object.values(data)
-        labels.value = Object.keys(data)
+const render = ref(false)
+const cmpKey = ref(0)
+
+const selectItems = computed(() => listStore.getSelectedItems)
+
+watch(selectItems, (newVal, oldVal) => {
+    if (oldVal !== newVal) {
+        prepDataForChart()
+        return
     }
+},
+    { deep: true },
+    { immediate: true }
+)
+
+onBeforeMount(() => {
+    prepDataForChart()
 })
 
+function prepDataForChart() {
+    // debugger
+    const data = itemService.prepDataForChart(JSON.parse(JSON.stringify(selectItems.value)))
+    console.log('data', data);
+    if (!Object.keys(data).length === 0) return
+    chartData.value = Object.values(data)
+    labels.value = Object.keys(data)
+    cmpKey.value++
+}
+
+function toggleSelect(id) {
+    listStore.toggleSelect(id)
+
+}
+// Tour logic
 const route = useRoute()
 const appStore = useAppStore()
 const isTourActive = computed(() => appStore.getIsTourActive)
+
 onMounted(() => {
-    if (!isTourActive.value) {
-        
+    if (isTourActive.value) {
         useTour(route.name)
     }
 })
+
 
 
 </script>

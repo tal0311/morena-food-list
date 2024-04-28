@@ -14,7 +14,6 @@ export function useTour(routeName) {
     steps = tourService.getStepsByRoute(routeName);
   }
 
-  console.log(steps);
   const driverObj = driver({
     showProgress: true,
     steps,
@@ -22,5 +21,3 @@ export function useTour(routeName) {
 
   driverObj.drive();
 }
-
-

@@ -1,36 +1,16 @@
 <template>
   <section class="dashboard-container grid">
-   
 
-    <PieChart
-    
-     
-      class="grid-item pie1"
-      :chartData="data"
-      :options="options"
-    />
-  
-    <PieChart
-    
-     
-      class="grid-item pie2"
-      :chartData="data"
-      :options="options"
-    />
- 
-    <BarChart
-    
-    
-      :width="500"
-      :height="500"
-      class="grid-item bar-chart"
-      :chartData="data"
-      :options="options"
-    />
- 
+
+    <PieChart class="grid-item pie1" :chartData="data" :options="options" />
+
+    <PieChart class="grid-item pie2" :chartData="data" :options="options" />
+
+    <BarChart :width="500" :height="500" class="grid-item bar-chart" :chartData="data" :options="options" />
+
   </section>
 
-  <pre>{{  }}</pre>
+  <pre>{{ }}</pre>
 </template>
 
 <script>
@@ -64,10 +44,11 @@ export default {
       required: true,
     },
     labels: {
-      type:Array,
+      type: Array,
       required: false,
       default: () => ['Vegetables', 'Dairy', 'Meat And Poultry', 'Grains', 'Fruits'],
     },
+   
   },
   data() {
     return {
@@ -100,42 +81,52 @@ export default {
       },
     }
   },
+  
+
 }
+
+
+
 </script>
 <style>
+.dashboard-container.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 
-  .dashboard-container.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr ;
-    grid-template-rows: 1fr 1fr;
-  
-     grid-template-areas:
-      'pie1 pie2'
-      'bar-chart bar-chart';
-  }
-  .bar-chart {
-    grid-area: bar-chart;
-  }
-  .bar-chart #bar-chart,
-  .bar-chart #line-chart {
-    /* width: 400px; */
-    aspect-ratio: 2/1;
-  }
-  .pie1 {
-    grid-area: pie1;
-  }
-  .pie2 {
-    grid-area: pie2;
-  }
-  .stats {
-    grid-area: stats;
-  }
-  .stat {
-    height: 100%;
-    font-size: 1.15rem;
-  }
-  .stat h2 {
-    font-size: 72px;
-  }
+  grid-template-areas:
+    'pie1 pie2'
+    'bar-chart bar-chart';
+}
 
+.bar-chart {
+  grid-area: bar-chart;
+}
+
+.bar-chart #bar-chart,
+.bar-chart #line-chart {
+  /* width: 400px; */
+  aspect-ratio: 2/1;
+}
+
+.pie1 {
+  grid-area: pie1;
+}
+
+.pie2 {
+  grid-area: pie2;
+}
+
+.stats {
+  grid-area: stats;
+}
+
+.stat {
+  height: 100%;
+  font-size: 1.15rem;
+}
+
+.stat h2 {
+  font-size: 72px;
+}
 </style>
