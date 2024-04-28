@@ -1,12 +1,12 @@
 <template>
     <section v-if="groupList" class="list-idx grid">
-        <div class="list-container">
-            <details class="list-details" v-for="label in labelList" :key="label">
+        <div id="list-container" class="list-container">
+            <details v-for="label, idx in labelList" :key="label"  :class="`list-details ${label}`">
                 <summary>{{ $trans(label) }}</summary>
-                <ItemList :list="groupList[label]" @selectItem="toggleSelect" />
+                <ItemList :list="groupList[label]" @selectItem="toggleSelect"  />
             </details>
         </div>
-        <footer class="footer-container">
+        <footer id="footer-container" class="footer-container">
             <button @click="onDone" v-html="$svg('done')"></button>
         </footer>
         <RouterView />
@@ -24,13 +24,12 @@ import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
 import AppModal from '@/components/AppModal.vue'
 import { useTour } from '@/composables/useTour.js'
+import { useAppStore } from '@/stores/app-store'
 
 
 const router = useRouter()
 const listStore = useListStore()
 const labelList = ref(null)
-
-
 
 // fetch('https://cdn.jsdelivr.net/gh/tal0311/grocery-list/src/data/item.json')
 //     .then(response => response.json())
@@ -48,8 +47,6 @@ const groupList = computed(() => listStore?.getList?.reduce((acc, item) => {
     return acc
 }, {}))
 
-
-
 watchEffect(() => {
     if (groupList.value) {
         labelList.value = Object.keys(groupList.value)
@@ -66,10 +63,23 @@ function toggleSelect(id) {
 }
 
 const route = useRoute()
-watchEffect(() => {
-    if (groupList.value) {
-        useTour(route.name)
-    }
+const appStore = useAppStore()
+const isTourActive = computed(() => appStore.getIsTourActive)
+
+onMounted(() => {
+    setTimeout(() => {
+        
+        if (isTourActive.value) {
+            document.querySelectorAll('details').forEach((el,idx) => {
+                if(idx === 0){
+                    el.setAttribute('open', true)
+                }
+            })
+            
+            useTour(route.name)
+            
+        }
+    },800);
 })
 
 

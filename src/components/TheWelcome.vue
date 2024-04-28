@@ -5,29 +5,33 @@
     <div class="action-container grid">
       <button class="tour-btn" @click="$emit('toggleTour')">{{ $trans('home-action-1') }}</button>
       <button class="link-btn">
-      {{ $trans('home-action-2') }}
+        <RouterLink to="/list">{{ $trans('home-action-2') }}</RouterLink>
       </button>
     </div>
   </section>
 </template>
 
-<script setup>
-
-
-
-
-</script>
+<script setup></script>
 
 <style scoped>
 h1 {
   margin: 0;
 
 }
-
-button {
+button:not(.link-btn) {
   padding: 0.8rem;
 }
+.link-btn{
+  padding: 0;
+}
 
+a {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  padding: 0.8rem;
+}
 .welcome-view {
   display: grid;
   text-align: center;

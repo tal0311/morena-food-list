@@ -1,6 +1,7 @@
 <template>
     <!-- <pre>{{ props.item }}</pre> -->
-    <section ref="previewRef" :class="`item-preview  ${isSwiped ? 'swiped' : 'disabled'}`">
+    {{ props.idx }}
+    <section ref="previewRef" :class="`item-preview idx- ${isSwiped ? 'swiped' : 'disabled'}`">
 
         <label class="label-container grid" :for="item._id" @click.stop="$emit('selectItem', props.item._id)">
             <input type="checkbox" :id="item._id" :checked="item.isSelected" :disabled="!isSwiped">
@@ -19,10 +20,15 @@ import { computed, defineProps, onMounted, ref, watchEffect } from 'vue';
 
 // TODO add text area for notes
 const props = defineProps({
-    item: Object
+    item: Object,
+    idx: Number,
+    isTourActive: {
+        default: true
+
+    }
 })
 
-const emit= defineEmits(['selectItem'])
+const emit = defineEmits(['selectItem'])
 
 const previewRef = ref(null)
 const isSwiped = ref(false)
@@ -37,16 +43,26 @@ onMounted(() => {
 function handleSwipe(ev) {
     if (ev.type === 'swipe') {
         isSwiped.value = !isSwiped.value
-        if(props.item.isSelected){
+        if (props.item.isSelected) {
             emit('selectItem', props.item._id)
         }
     }
 }
 
+const isFirstItem = computed(() => {
+    return props.idx.pIdx===0 && props.idx.idx === 0 ?'first':''
+})
+
 const route = useRoute()
 watchEffect(() => {
     if (route.name === 'list-summary') {
         isSwiped.value = true
+    }
+})
+
+watchEffect(() => {
+    if (props.isTourActive && props.idx === 0) {
+      
     }
 })
 

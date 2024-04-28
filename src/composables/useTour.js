@@ -8,9 +8,9 @@ export function useTour(routeName) {
   if (routeName === "home") {
     steps = getStepsByRoute(routeName);
   }
-  //   if (routeName === "list") {
-  //     steps = getStepsByRoute(routeName);
-  //   }
+    if (routeName === "list") {
+      steps = getStepsByRoute(routeName);
+    }
   //   if (routeName === "list-summary") {
   //     steps = getStepsByRoute(routeName);
   //   }
@@ -47,12 +47,20 @@ function getStepsByRoute(routeName) {
 
     list: [
       {
-        element: "details",
+        element: "#list-container",
         popover: {
           title: "Product List",
           description:
             "This is the group details. Click on the group name to see the group items. you can activate or deactivate the item by swiping it",
-          position: "bottom",
+          //   position: "bottom",
+        },
+      },
+      {
+        element: "#footer-container",
+        popover: {
+          title: "Done",
+          description:
+            "When you finish with the list, click on the done button to see the summary of the list",
         },
       },
     ],
