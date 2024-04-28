@@ -25,16 +25,19 @@
         <footer>
             <button @click="$router.push({ name: 'list' })">{{ $trans('back') }}</button>
         </footer>
-        
+
     </section>
 </template>
 
 <script setup>
-import { ref, onBeforeMount, computed, watchEffect, watch } from 'vue'
+import { ref, onBeforeMount, computed, watchEffect, watch,onMounted } from 'vue'
 import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
 import DashBoard from '@/components/DashBoard.vue'
 import { itemService } from '@/services/item.service.local.js'
+import { useRoute } from 'vue-router'
+import { useAppStore } from '@/stores/app-store'
+import { useTour } from '@/composables/useTour.js'
 
 
 const listStore = useListStore()
@@ -49,6 +52,16 @@ watchEffect(async () => {
         const data = itemService.prepDataForChart(JSON.parse(JSON.stringify(selectItems.value)))
         chartData.value = Object.values(data)
         labels.value = Object.keys(data)
+    }
+})
+
+const route = useRoute()
+const appStore = useAppStore()
+const isTourActive = computed(() => appStore.getIsTourActive)
+onMounted(() => {
+    if (!isTourActive.value) {
+        
+        useTour(route.name)
     }
 })
 

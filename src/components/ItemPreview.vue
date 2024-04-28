@@ -16,7 +16,7 @@
 <script setup>
 import Hammer from 'hammerjs';
 import { useRouter, useRoute } from 'vue-router'
-import { computed, defineProps, onMounted, ref, watchEffect } from 'vue';
+import { computed, onMounted, ref, watchEffect } from 'vue';
 
 // TODO add text area for notes
 const props = defineProps({
