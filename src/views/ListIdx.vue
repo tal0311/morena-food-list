@@ -30,9 +30,6 @@ import AppLoader from '@/components/AppLoader.vue'
 const listStore = useListStore()
 const labelList = ref(null)
 
-// TODO : move this to store make it work from js delivery
-
-
 onBeforeMount(() => {
     listStore.loadList()
 })

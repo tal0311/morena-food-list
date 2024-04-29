@@ -39,7 +39,7 @@ import { useRoute } from 'vue-router'
 import { useAppStore } from '@/stores/app-store'
 import { useTour } from '@/composables/useTour.js'
 
-
+// TODO: fix chart labels and data to human readable
 const listStore = useListStore()
 
 let chartData = ref(null)
