@@ -26,10 +26,10 @@ import { useAppStore } from '@/stores/app-store'
 import AppLoader from '@/components/AppLoader.vue'
 
 
-// const router = useRouter()
 const listStore = useListStore()
 const labelList = ref(null)
 
+// TODO : move this to store make it work from js delivery
 // fetch('https://cdn.jsdelivr.net/gh/tal0311/grocery-list/src/data/item.json')
 //     .then(response => response.json())
 //     .then(data => console.log('data:',data));

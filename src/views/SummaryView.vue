@@ -101,7 +101,12 @@ onMounted(() => {
     height: 90vh;
     align-content: space-between;
     backdrop-filter: blur(10px);
+    &>*:not(footer) {
+        text-align: center;
+    }
 }
+
+
 
 .svg-placeholder {
     place-content: center;
