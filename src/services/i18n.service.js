@@ -559,9 +559,9 @@ const gTrans = {
     he: "סיכום",
   },
   'send-to-moran':{
-    en: "Send to Moran",
-    es: "Enviar a Moran",
-    he: "שלח למורן",
+    en: "Send to Morana",
+    es: "Enviar a Morana",
+    he: "שלח למורנה",
   
 
   },
