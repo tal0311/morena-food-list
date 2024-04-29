@@ -2,10 +2,10 @@
     <section class="summary-view grid blur-bg">
         <div id="list-container">
             <ItemList v-if="selectItems.length" :list="selectItems" @selectItem="toggleSelect">
-                <h4>{{ $trans('list-results') }}</h4>
+                <h3>{{ $trans('list-results') }}</h3>
             </ItemList>
             <section v-else class="no-items grid">
-                <h2>{{ $trans('no-items-to-show') }}</h2>
+                <h3>{{ $trans('no-items-to-show') }}</h3>
 
                 <div class="svg-placeholder grid" v-html="$svg('list')"></div>
             </section>
@@ -13,11 +13,11 @@
 
         <div id="chart-container">
             <div v-if="chartData && chartData?.length" class="summary-charts">
-                <h4>{{ $trans('chart-results') }}</h4>
+                <h3>{{ $trans('chart-results') }}</h3>
                 <DashBoard :chartData="chartData" :labels="labels" :key="cmpKey" />
             </div>
             <div v-else>
-                <h2>{{ $trans('no-chart-items') }}</h2>
+                <h3>{{ $trans('no-chart-items') }}</h3>
                 <div class="svg-placeholder grid" v-html="$svg('chart')"></div>
             </div>
         </div>
@@ -93,14 +93,14 @@ onMounted(() => {
 .summary-view {
     position: fixed;
     width: 80vw;
-    background-color: white;
+    /* background-color: white; */
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     overflow-y: auto;
     height: 90vh;
     align-content: space-between;
-
+    backdrop-filter: blur(10px);
 }
 
 .svg-placeholder {

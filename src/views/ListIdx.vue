@@ -83,7 +83,7 @@ onMounted(() => {
 
 
 
-
+// TODO: convert all css to nested css
 </script>
 
 <style scoped>
@@ -94,6 +94,7 @@ onMounted(() => {
 }
 
 .list-container {
+    margin-block-start: 1rem;
     margin-bottom: auto;
     gap: 1rem;
 }
