@@ -1,3 +1,7 @@
-:root{
-    --br:0.5rem
+:root {
+  --br: 0.5rem;
+  --bClr1: #e8e8e8;
+  --bClr2: #ffffff;
+  --bClr3: #7c94bb;
+  --bClr4: #262626;
 }

@@ -385,7 +385,7 @@ const gTrans = {
     es: "Queso",
     he: "גבינה",
   },
-  salmon:{
+  salmon: {
     en: "Salmon",
     es: "Salmón",
     he: "סלמון",
@@ -400,8 +400,7 @@ const gTrans = {
     es: "Pollo",
     he: "עוף",
   },
-  
-//  time
+  //  time
   time: {
     en: "Time",
     es: "Hora",
@@ -437,7 +436,6 @@ const gTrans = {
     es: "Resumen de la lista",
     he: "סיכום רשימה",
   },
-
   search: {
     en: "Search",
     es: "Buscar",
@@ -518,19 +516,16 @@ const gTrans = {
     es: "No hay elementos para mostrar",
     he: "אין פריטים להצגה ברשימה",
   },
-
-  'no-chart-items': {
+  "no-chart-items": {
     en: "No items to show in chart",
     es: "No hay elementos para mostrar en el gráfico",
     he: "אין פריטים להצגה בתרשים",
-  
   },
-  'items-in-chart': {
+  "items-in-chart": {
     en: "Here are some charts to help you understand your list better",
     es: "Aquí hay algunos gráficos para ayudarte a entender mejor tu lista",
     he: "הנה כמה תרשימים שיעזרו לך להבין את הרשימה שלך טוב יותר",
   },
-
   // pages
   "home-page": {
     en: "Nice to see you here again",
@@ -547,7 +542,6 @@ const gTrans = {
     es: "Estoy en casa aquí",
     he: "אני מרגיש כאן בבית",
   },
-
   print: {
     en: "Print",
     es: "Imprimir",
@@ -558,35 +552,29 @@ const gTrans = {
     es: "Resumen",
     he: "סיכום",
   },
-  'send-to-moran':{
+  "send-to-moran": {
     en: "Send to Morana",
     es: "Enviar a Morana",
     he: "שלח למורנה",
-  
-
   },
-  back:{
+  back: {
     en: "Back",
     es: "Atrás",
     he: "חזור",
   },
-  'chart-results':{
+  "chart-results": {
     en: "Here are some charts to help you understand your list better",
     es: " Aquí hay algunos gráficos para ayudarte a entender mejor tu lista",
     he: "הנה כמה תרשימים שיעזרו לך להבין את הרשימה שלך טוב יותר",
-  
   },
-  'list-results':{
+  "list-results": {
     en: "Here are the results of your list",
     es: "Aquí están los resultados de tu lista",
     he: "הנה תוצאות הרשימה שלך",
-  
   },
-  
 };
 
 function doTrans(key, currLang) {
-  
   var translation = gTrans[key][currLang];
   if (!translation) return key;
   return translation;

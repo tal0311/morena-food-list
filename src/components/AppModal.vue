@@ -35,8 +35,13 @@ function openModal() {
     dialogRef.value.showModal()
 }
 
+//TODO: make this better 
+const emit = defineEmits(['reset-modal'])
+
 function closeModal() {
+    console.log('closing');
     dialogRef.value.close()
+    emit('reset-modal')
 }
 
 function onPrintList() {

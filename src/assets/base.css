@@ -3,6 +3,7 @@ html {
 }
 
 body {
+  color: var(--bClr4);
   margin: 0;
 }
 
@@ -24,9 +25,9 @@ a {
 .primary-btn {
   background: none;
   border: none;
-  background-color: var(--clr26);
+  background-color: var(--bClr3);
   border-radius: var(--br);
-  color: var(--clr10);
+  color: var(--bClr2);
   font-weight: 600;
   letter-spacing: 0.1em;
   display: grid;
@@ -46,8 +47,8 @@ a {
 
 .secondary-btn {
   border: none;
-  background-color: var(--clr10);
-  outline: 1px solid var(--clr26);
-  color: var(--clr26);
+  background-color: var(--bClr2);
+  outline: 1px solid var(--bClr3);
+  color: var(--bClr3);
   border-radius: var(--br);
 }

@@ -10,7 +10,7 @@
             <button class="primary-btn done" @click.stop="onDone" v-html="$svg('done')"></button>
         </footer>
         <RouterView />
-        <AppModal :isModalOpen="isModalOpen" />
+        <AppModal :isModalOpen="isModalOpen" @reset-modal="isModalOpen=false" />
     </section>
     <AppLoader v-else />
 </template>
@@ -26,7 +26,7 @@ import { useAppStore } from '@/stores/app-store'
 import AppLoader from '@/components/AppLoader.vue'
 
 
-const router = useRouter()
+// const router = useRouter()
 const listStore = useListStore()
 const labelList = ref(null)
 
@@ -56,6 +56,7 @@ watchEffect(() => {
 const isModalOpen = ref(false)
 function onDone() {
     isModalOpen.value = !isModalOpen.value
+    console.log('isModalOpen',isModalOpen.value);
 }
 
 function toggleSelect(id) {
@@ -121,7 +122,7 @@ summary {
 
 
 details {
-  box-shadow: 0 0 2px 0px #c9c9c9;
+  box-shadow: 0 0 2px 0px var(--clr4);
   /* outline: 1px solid #c9c9c9; */
   border-radius: 2px;
   padding: 0.5em 0.5em 0;
@@ -134,6 +135,7 @@ details {
     color: var(--clr7);
     &::marker{
         color: var(--clr7);
+        /* content:'' */
     }
   }
 

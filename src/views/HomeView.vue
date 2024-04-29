@@ -108,7 +108,7 @@ footer {
   position: absolute;
   top: -230%;
   border: none;
-  background: var(--clr1);
+  background: var(--bClr1);
   box-shadow: 0 0 1px 0 var(--clr7);
   border-radius: 0.5rem;
   gap: 1rem;
