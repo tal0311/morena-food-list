@@ -14,6 +14,7 @@ body {
 
 dialog {
   background: var(--clr10);
+
 }
 
 a {
@@ -25,16 +26,21 @@ a {
   background: none;
   border: none;
   background-color: var(--clr26);
-  border-radius: 0.5rem;
+  border-radius:var(--br);
   color: var(--clr10);
   font-weight: 600;
   letter-spacing: 0.1em;
-  /* line-height: 1.5rem; */
+  display: grid;
+  place-content: center;
 }
 
 .icon {
   border: none;
   background: none;
   box-shadow: 0 0 1px 0 var(--clr7);
+  border-radius: 0.5rem;
+}
+
+.blur-bg{
   border-radius: 0.5rem;
 }

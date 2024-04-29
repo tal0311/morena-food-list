@@ -18,6 +18,10 @@ h1 {
   margin: 0;
 
 }
+
+button{
+  line-height: 1.5rem;
+}
 button:not(.link-btn) {
   padding: 0.8rem;
 }

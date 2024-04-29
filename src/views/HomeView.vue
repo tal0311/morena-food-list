@@ -1,17 +1,17 @@
 <template>
   <section class="home-view">
-    <header >
+    <header>
       <h1>Morena's list</h1>
       <p>{{ getIcon }}</p>
     </header>
 
     <section class="welcome-section grid">
-     
-        <TheWelcome  @toggleTour="toggleTour"/>
-      
-        <footer id="language-modal">
+
+      <TheWelcome @toggleTour="toggleTour" />
+
+      <footer id="language-modal">
         <div v-if="isLangModalOpen" class="lang-modal grid">
-          <button @click="setLang('en')">English</button>
+          <button class="" @click="setLang('en')">English</button>
           <button @click="setLang('es')">Español</button>
           <button @click="setLang('he')">עברית</button>
         </div>
@@ -25,9 +25,9 @@
 import { ref, computed, watchEffect } from 'vue'
 import TheWelcome from '@/components/TheWelcome.vue'
 import { useListStore } from '@/stores/list-store'
-import {useRoute} from 'vue-router'
-import {useAppStore} from '@/stores/app-store'
-import {useTour} from '@/composables/useTour'
+import { useRoute } from 'vue-router'
+import { useAppStore } from '@/stores/app-store'
+import { useTour } from '@/composables/useTour'
 
 const isLangModalOpen = ref(false)
 
@@ -47,14 +47,14 @@ const getIcon = computed(() => {
 })
 
 const appStore = useAppStore()
-function toggleTour(){
- appStore.toggleTourState()
+function toggleTour() {
+  appStore.toggleTourState()
 }
- 
+
 const isTourActive = computed(() => appStore.getIsTourActive)
 const route = useRoute()
 watchEffect(() => {
-  if(isTourActive.value){
+  if (isTourActive.value) {
     useTour(route.name)
     console.log('tour is active');
 
@@ -65,9 +65,8 @@ watchEffect(() => {
 </script>
 
 <style scoped>
-
 header {
- position: fixed;
+  position: fixed;
   top: 1rem;
   width: 100%;
   text-align: center;
@@ -75,10 +74,12 @@ header {
   font-size: 2.8rem;
 }
 
-h1,p{
+h1,
+p {
   margin: 0;
 
 }
+
 section {
   display: grid;
   place-content: center;
@@ -105,14 +106,18 @@ footer {
 
 .lang-modal {
   position: absolute;
-  top: -170%;
+  top: -230%;
+  border: none;
+  background: var(--clr1);
+  box-shadow: 0 0 1px 0 var(--clr7);
+  border-radius: 0.5rem;
+  gap: 1rem;
+  padding-block: 0.5rem;
 }
 
 .lang-modal button {
+  all: unset;
+  padding-inline: 0.5rem;
 
-  font-size: 1.2rem;
-  background-color: white;
-  border: 1px solid black;
-  cursor: pointer;
 }
 </style>

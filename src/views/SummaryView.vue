@@ -1,5 +1,5 @@
 <template>
-    <section class="summary-view grid">
+    <section class="summary-view grid blur-bg">
         <div id="list-container">
             <ItemList v-if="selectItems.length" :list="selectItems" @selectItem="toggleSelect">
                 <h4>{{ $trans('list-results') }}</h4>
