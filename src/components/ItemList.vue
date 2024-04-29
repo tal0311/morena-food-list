@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="item-list">
         <slot></slot>
         <ItemPreview v-for="item, idx in props.list" :item="item" :key="item._id" :isTourActive="props.isTourActive"
             @selectItem="$emit('selectItem', $event)" />

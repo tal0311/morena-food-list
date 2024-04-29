@@ -1,13 +1,13 @@
 <template>
     <section v-if="groupList" class="list-idx grid">
-        <div id="list-container" class="list-container">
+        <div id="list-container" class="list-container grid">
             <details v-for="label, idx in labelList" :key="label" :class="`list-details ${label}`">
                 <summary>{{ $trans(label) }}</summary>
                 <ItemList :list="groupList[label]" @selectItem="toggleSelect" />
             </details>
         </div>
         <footer id="footer-container" class="footer-container">
-            <button class="primary-btn done" @click="onDone" v-html="$svg('done')"></button>
+            <button class="primary-btn done" @click.stop="onDone" v-html="$svg('done')"></button>
         </footer>
         <RouterView />
         <AppModal :isModalOpen="isModalOpen" />
@@ -95,6 +95,7 @@ onMounted(() => {
 
 .list-container {
     margin-bottom: auto;
+    gap: 1rem;
 }
 
 footer {
@@ -115,5 +116,33 @@ summary {
 
 .done{
     padding: 0.8rem 0.8rem;
+}
+
+
+details {
+  box-shadow: 0 0 2px 0px #c9c9c9;
+  /* outline: 1px solid #c9c9c9; */
+  border-radius: 2px;
+  padding: 0.5em 0.5em 0;
+
+  summary {
+    position: relative;
+    font-weight: bold;
+    margin: -0.5em -0.5em 0;
+    padding: 0.5em;
+    color: var(--clr7);
+    &::marker{
+        color: var(--clr7);
+    }
+  }
+
+  &[open] {
+    padding: 0.5em;
+  }
+
+  &[open] summary {
+    /* box-shadow: 0 0 2px 0px #c9c9c9; */
+    margin-bottom: 0.5em;
+  }
 }
 </style>
