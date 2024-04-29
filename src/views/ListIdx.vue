@@ -7,7 +7,7 @@
             </details>
         </div>
         <footer id="footer-container" class="footer-container">
-            <button class="primary-btn" @click="onDone" v-html="$svg('done')"></button>
+            <button class="primary-btn done" @click="onDone" v-html="$svg('done')"></button>
         </footer>
         <RouterView />
         <AppModal :isModalOpen="isModalOpen" />
@@ -111,5 +111,9 @@ summary {
     font-size: 1.5rem;
     cursor: pointer;
 
+}
+
+.done{
+    padding: 0.8rem 0.8rem;
 }
 </style>
