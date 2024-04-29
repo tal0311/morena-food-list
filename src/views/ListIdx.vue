@@ -16,7 +16,8 @@
 </template>
 
 <script setup>
-import { useRouter, useRoute } from 'vue-router'
+import { showUserMsg } from '@/services/event-bus.service';
+import { useRoute } from 'vue-router'
 import { ref, onBeforeMount, computed, watchEffect, onMounted } from 'vue'
 import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
@@ -30,9 +31,7 @@ const listStore = useListStore()
 const labelList = ref(null)
 
 // TODO : move this to store make it work from js delivery
-// fetch('https://cdn.jsdelivr.net/gh/tal0311/grocery-list/src/data/item.json')
-//     .then(response => response.json())
-//     .then(data => console.log('data:',data));
+
 
 onBeforeMount(() => {
     listStore.loadList()
@@ -102,18 +101,12 @@ onMounted(() => {
 footer {
     position: fixed;
     bottom: 3rem;
-    width: 100%;
-    left: 0;
+    left: 50%;
     display: grid;
     place-content: center;
+    transform: translateX(-50%);
 }
 
-summary {
-    text-transform: capitalize;
-    font-size: 1.5rem;
-    cursor: pointer;
-
-}
 
 .done {
     padding: 0.8rem 0.8rem;
@@ -132,6 +125,9 @@ details {
         margin: -0.5em -0.5em 0;
         padding: 0.5em;
         color: var(--clr7);
+        text-transform: capitalize;
+        font-size: 1.5rem;
+        cursor: pointer;
 
         &::marker {
             color: var(--clr7);

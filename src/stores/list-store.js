@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { itemService } from "@/services/item.service.local";
+import { showUserMsg } from "@/services/event-bus.service";
 
 export const useListStore = defineStore("list", () => {
   const list = ref(null);
@@ -12,7 +13,12 @@ export const useListStore = defineStore("list", () => {
   const getCurrLang = computed(() => currLang.value);
 
   async function loadList() {
-    list.value = await itemService.query();
+    try {
+      list.value = await itemService.query();
+    } catch (error) {
+      console.debug("Failed to load list", error);
+      showUserMsg("Failed to load list, please try again later");
+    }
     // list.value = null
   }
 
@@ -30,7 +36,6 @@ export const useListStore = defineStore("list", () => {
 
   function setLang(lang) {
     const langOptions = ["en", "he", "es"];
-    console.log("lang", lang);
     currLang.value = langOptions.includes(lang) ? lang : "en";
     document.body.setAttribute("dir", currLang.value === "he" ? "rtl" : "ltr");
   }

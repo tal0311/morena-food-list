@@ -75,8 +75,8 @@ function prepDataForChart() {
 
 function toggleSelect(id) {
     listStore.toggleSelect(id)
-
 }
+
 // Tour logic
 const route = useRoute()
 const appStore = useAppStore()
@@ -90,7 +90,6 @@ onMounted(() => {
         setTimeout(() => {
             window.print()
         }, 1000)
-            
     }
 })
 
@@ -109,6 +108,7 @@ onMounted(() => {
     height: 90vh;
     align-content: space-between;
     backdrop-filter: blur(10px);
+
     &>*:not(footer) {
         text-align: center;
     }

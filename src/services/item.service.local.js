@@ -16,6 +16,8 @@ export const itemService = {
 };
 window.itemService = itemService;
 
+loadItems();
+
 async function query(filterBy = {}) {
   let items = await storageService.query(STORAGE_KEY);
   if (filterBy.txt) {
@@ -60,10 +62,6 @@ function getEmptyItem(name) {
   };
 }
 
-// async function getGroupsLabels() {
-//   const items = await query();
-//   return Object.values(items.map((item) => item.group));
-// }
 function prepDataForChart(list) {
   const itemsMap = {};
   list.reduce((acc, item) => {
@@ -78,6 +76,21 @@ function prepDataForChart(list) {
     itemsMap[group] = itemsMap[group].length;
   }
   return itemsMap;
+}
+
+async function loadItems() {
+  let items = utilService.loadFromStorage(STORAGE_KEY);
+  if (!items || !items.length) {
+    try {
+      const res = await fetch(import.meta.env.VITE_DATA_URL      );
+      items = await res.json();
+
+      utilService.saveToStorage(STORAGE_KEY, items);
+      console.debug("Loaded and saved items", items);
+    } catch (error) {
+      console.debug("Failed to load items", error);
+    }
+  }
 }
 
 // TEST DATA
