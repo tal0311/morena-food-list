@@ -11,8 +11,8 @@
 
 <script setup>
 import { watchEffect, ref } from 'vue';
-import {useRouter} from 'vue-router'
-import {shareService} from '@/services/share.service.js'
+import { useRouter } from 'vue-router'
+import { shareService } from '@/services/share.service.js'
 
 const props = defineProps({
     isModalOpen: {
@@ -44,18 +44,17 @@ function closeModal() {
 }
 
 function onPrintList() {
-    closeModal()
-    window.print()
+    onShowSummary({ print: true })
 }
 
-function onShowSummary() {
+function onShowSummary(query) {
     closeModal()
-    router.push({name: 'list-summary'})
+    router.push({ name: 'list-summary', query: query })
 }
 
 function onSendList() {
     closeModal()
-     
+
     shareService.shareTo()
     console.log('onSendList');
 }
@@ -70,17 +69,19 @@ function slickOutSide(ev) {
 
 
 <style scoped>
-button{
+button {
     padding: 0.8rem;
 }
-dialog.blur-bg{
+
+dialog.blur-bg {
     width: 60%;
     border: none;
     padding: 1rem;
     border-radius: var(--br);
 
 }
-.actions-container{
+
+.actions-container {
     gap: 1rem;
 }
 </style>

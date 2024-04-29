@@ -39,6 +39,7 @@ import { useRoute } from 'vue-router'
 import { useAppStore } from '@/stores/app-store'
 import { useTour } from '@/composables/useTour.js'
 
+
 const listStore = useListStore()
 
 let chartData = ref(null)
@@ -56,6 +57,8 @@ watch(selectItems, (newVal, oldVal) => {
     { deep: true },
     { immediate: true }
 )
+
+
 
 onBeforeMount(() => {
     prepDataForChart()
@@ -83,8 +86,13 @@ onMounted(() => {
     if (isTourActive.value) {
         useTour(route.name)
     }
+    if (route.query.print) {
+        setTimeout(() => {
+            window.print()
+        }, 1000)
+            
+    }
 })
-
 
 
 </script>

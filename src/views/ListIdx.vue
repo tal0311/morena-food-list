@@ -10,14 +10,14 @@
             <button class="primary-btn done" @click.stop="onDone" v-html="$svg('done')"></button>
         </footer>
         <RouterView />
-        <AppModal :isModalOpen="isModalOpen" @reset-modal="isModalOpen=false" />
+        <AppModal :isModalOpen="isModalOpen" @reset-modal="isModalOpen = false" />
     </section>
     <AppLoader v-else />
 </template>
 
 <script setup>
 import { useRouter, useRoute } from 'vue-router'
-import { ref, onBeforeMount, computed, watchEffect, watch, onMounted } from 'vue'
+import { ref, onBeforeMount, computed, watchEffect, onMounted } from 'vue'
 import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
 import AppModal from '@/components/AppModal.vue'
@@ -56,7 +56,6 @@ watchEffect(() => {
 const isModalOpen = ref(false)
 function onDone() {
     isModalOpen.value = !isModalOpen.value
-    console.log('isModalOpen',isModalOpen.value);
 }
 
 function toggleSelect(id) {
@@ -116,36 +115,37 @@ summary {
 
 }
 
-.done{
+.done {
     padding: 0.8rem 0.8rem;
 }
 
 
 details {
-  box-shadow: 0 0 2px 0px var(--clr4);
-  /* outline: 1px solid #c9c9c9; */
-  border-radius: 2px;
-  padding: 0.5em 0.5em 0;
+    box-shadow: 0 0 2px 0px var(--clr4);
+    /* outline: 1px solid #c9c9c9; */
+    border-radius: 2px;
+    padding: 0.5em 0.5em 0;
 
-  summary {
-    position: relative;
-    font-weight: bold;
-    margin: -0.5em -0.5em 0;
-    padding: 0.5em;
-    color: var(--clr7);
-    &::marker{
+    summary {
+        position: relative;
+        font-weight: bold;
+        margin: -0.5em -0.5em 0;
+        padding: 0.5em;
         color: var(--clr7);
-        /* content:'' */
+
+        &::marker {
+            color: var(--clr7);
+            /* content:'' */
+        }
     }
-  }
 
-  &[open] {
-    padding: 0.5em;
-  }
+    &[open] {
+        padding: 0.5em;
+    }
 
-  &[open] summary {
-    /* box-shadow: 0 0 2px 0px #c9c9c9; */
-    margin-bottom: 0.5em;
-  }
+    &[open] summary {
+        /* box-shadow: 0 0 2px 0px #c9c9c9; */
+        margin-bottom: 0.5em;
+    }
 }
 </style>
