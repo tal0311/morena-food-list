@@ -1,5 +1,5 @@
 <template>
-    <dialog ref="dialogRef" class="blur-bg">
+    <dialog @click="slickOutSide" ref="dialogRef" class="blur-bg">
         <div class="actions-container grid">
             <button class="secondary-btn" @click="onPrintList">{{ $trans('print') }}</button>
             <button class="secondary-btn" @click="onShowSummary">{{ $trans('summary') }}</button>
@@ -56,6 +56,11 @@ function onSendList() {
     console.log('onSendList');
 }
 
+function slickOutSide(ev) {
+    if (!ev.target.classList.contains('actions-container')) {
+        closeModal()
+    }
+}
 
 </script>
 
