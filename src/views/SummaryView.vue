@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, computed, watchEffect, watch, onMounted } from 'vue'
+import { ref, onBeforeMount, computed, watch, onMounted } from 'vue'
 import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
 import DashBoard from '@/components/DashBoard.vue'
@@ -44,9 +44,7 @@ const listStore = useListStore()
 let chartData = ref(null)
 let labels = ref(null)
 
-const render = ref(false)
 const cmpKey = ref(0)
-
 const selectItems = computed(() => listStore.getSelectedItems)
 
 watch(selectItems, (newVal, oldVal) => {
@@ -68,6 +66,7 @@ function prepDataForChart() {
     if (!Object.keys(data).length === 0) return
     chartData.value = Object.values(data)
     labels.value = Object.keys(data)
+    // this is for forcing the chart component to render when data changes
     cmpKey.value++
 }
 

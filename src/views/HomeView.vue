@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="home-view">
     <header >
       <h1>Morena's list</h1>
       <p>{{ getIcon }}</p>

@@ -7,7 +7,7 @@
             </details>
         </div>
         <footer id="footer-container" class="footer-container">
-            <button @click="onDone" v-html="$svg('done')"></button>
+            <button class="primary-btn" @click="onDone" v-html="$svg('done')"></button>
         </footer>
         <RouterView />
         <AppModal :isModalOpen="isModalOpen" />

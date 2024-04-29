@@ -8,15 +8,33 @@ body {
 
 * {
   box-sizing: border-box;
-  background-color: transparent;
-  outline: 1px solid black;
+  /* background-color: transparent;
+  outline: 1px solid black; */
 }
 
 dialog {
-  background: #fff;
+  background: var(--clr10);
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.primary-btn {
+  background: none;
+  border: none;
+  background-color: var(--clr26);
+  border-radius: 0.5rem;
+  color: var(--clr10);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  /* line-height: 1.5rem; */
+}
+
+.icon {
+  border: none;
+  background: none;
+  box-shadow: 0 0 1px 0 var(--clr7);
+  border-radius: 0.5rem;
 }
