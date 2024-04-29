@@ -23,7 +23,7 @@
         </div>
 
         <footer>
-            <button @click="$router.push({ name: 'list' })">{{ $trans('back') }}</button>
+            <button class="secondary-btn" @click="$router.push({ name: 'list' })">{{ $trans('back') }}</button>
         </footer>
 
     </section>
