@@ -24,15 +24,36 @@ const gTrans = {
     es: "Frutos secos y semillas",
     he: "אגוזים וזרעים",
   },
-  grains: {
-    en: "Grains",
-    es: "Cereales",
-    he: "דגנים",
-  },
+
   dairy: {
     en: "Dairy",
     es: "Productos lácteos",
     he: "מוצרי חלב",
+  },
+  "cooking-oils": {
+    en: "Cooking Oils",
+    es: "Aceites de cocina",
+    he: "שמנים לבישול",
+  },
+  "canola-oil": {
+    en: "Canola Oil",
+    es: "Aceite de canola",
+    he: "שמן קנולה",
+  },
+  "soy-sauce": {
+    en: "Soy Sauce",
+    es: "Salsa de soja",
+    he: "רוטב סויה",
+  },
+  condiments: {
+    en: "Condiments",
+    es: "Condimentos",
+    he: "תוספות",
+  },
+  "coconut-oil": {
+    en: "Coconut Oil",
+    es: "Aceite de coco",
+    he: "שמן קוקוס",
   },
   "meat-and-poultry": {
     en: "Meat poultry",
@@ -49,6 +70,7 @@ const gTrans = {
     es: "Manzana",
     he: "תפוח",
   },
+
   bananas: {
     en: "Banana",
     es: "Banana",
@@ -63,6 +85,11 @@ const gTrans = {
     en: "Potatoes",
     es: "Patata",
     he: "תפוח אדמה",
+  },
+  oranges: {
+    en: "Orange",
+    es: "Naranja",
+    he: "תפוז",
   },
   tomatoes: {
     en: "Tomatoes",
@@ -94,6 +121,16 @@ const gTrans = {
     es: "Lechuga",
     he: "חסה",
   },
+  turkey: {
+    en: "Turkey",
+    es: "Pavo",
+    he: "הודו",
+  },
+  beef: {
+    en: "Beef",
+    es: "Carne de vaca",
+    he: "בשר טחון",
+  },
   peppers: {
     en: "Peppers",
     es: "Pimiento",
@@ -108,6 +145,11 @@ const gTrans = {
     en: "Peas",
     es: "Guisantes",
     he: "אפונה",
+  },
+  "olive-oil": {
+    en: "Olive Oil",
+    es: "Aceite de oliva",
+    he: "שמן זית",
   },
   broccoli: {
     en: "Broccoli",
@@ -174,6 +216,96 @@ const gTrans = {
     es: "Pomelo",
     he: "פומלה",
   },
+  peaches: {
+    en: "Peaches",
+    es: "Melocotones",
+    he: "אפרסק",
+  },
+  honey: {
+    en: "Honey",
+    es: "Miel",
+    he: "דבש",
+  },
+  jam: {
+    en: "Jam",
+    es: "Mermelada",
+    he: "קונפיטורה",
+  },
+  sugar: {
+    en: "Sugar",
+    es: "Azúcar",
+    he: "סוכר",
+  },
+  "peanut-butter": {
+    en: "Peanut Butter",
+    es: "Mantequilla de cacahuete",
+    he: "חמאת בוטנים",
+  },
+  tea: {
+    en: "Tea",
+    es: "Té",
+    he: "תה",
+  },
+  coffee: {
+    en: "Coffee",
+    es: "Café",
+    he: "קפה",
+  },
+  salt: {
+    en: "Salt",
+    es: "Sal",
+    he: "מלח",
+  },
+  juice: {
+    en: "Juice",
+    es: "Jugo",
+    he: "מיץ",
+  },
+  cinnamon: {
+    en: "Cinnamon",
+    es: "Canela",
+    he: "קינמון",
+  },
+  vanilla: {
+    en: "Vanilla",
+    es: "Vainilla",
+    he: "וניל",
+  },
+  onion: {
+    en: "Onion",
+    es: "Cebolla",
+    he: "בצל",
+  },
+  garlic: {
+    en: "Garlic",
+    es: "Ajo",
+    he: "שום",
+  },
+  pepper: {
+    en: "Pepper",
+    es: "Pimienta",
+    he: "פלפל",
+  },
+  beer: {
+    en: "Beer",
+    es: "Cerveza",
+    he: "בירה",
+  },
+  wine: {
+    en: "Wine",
+    es: "Vino",
+    he: "יין",
+  },
+  cereal: {
+    en: "Cereal",
+    es: "Cereal",
+    he: "דגנים",
+  },
+  mangoes: {
+    en: "Mangoes",
+    es: "Mangos",
+    he: "מנגו",
+  },
   grapes: {
     en: "Grapes",
     es: "Uvas",
@@ -213,6 +345,11 @@ const gTrans = {
     en: "Pineapple",
     es: "Piña",
     he: "אננס",
+  },
+  butter: {
+    en: "Butter",
+    es: "Mantequilla",
+    he: "חמאה",
   },
   kiwi: {
     en: "Kiwi",
@@ -334,10 +471,20 @@ const gTrans = {
     es: "Cornflakes",
     he: "קורנפלקס",
   },
+  yogurt: {
+    en: "Yogurt",
+    es: "Yogur",
+    he: "יוגורט",
+  },
   muesli: {
     en: "Muesli",
     es: "Muesli",
     he: "מוסלי",
+  },
+  pasta: {
+    en: "Pasta",
+    es: "Pasta",
+    he: "פסטה",
   },
   granola: {
     en: "Granola",
@@ -572,9 +719,76 @@ const gTrans = {
     es: "Aquí están los resultados de tu lista",
     he: "הנה תוצאות הרשימה שלך",
   },
+  "spices-and-seasonings": {
+    en: "Spices & Seasonings",
+    es: "Especias y condimentos",
+    he: "תבלינים ותיבולים",
+  },
+  alcohol: {
+    en: "Alcohol",
+    es: "Alcohol",
+    he: "אלכוהול",
+  },
+  beverages: {
+    en: "Beverages",
+    es: "Bebidas",
+    he: "משקאות",
+  },
+  sweeteners: {
+    en: "Sweeteners",
+    es: "Edulcorantes",
+    he: "ממתיקים",
+  },
+  grains: {
+    en: "Grains",
+    es: "Cereales",
+    he: "דגנים",
+  },
+  oysters: {
+    en: "Oysters",
+    es: "Ostras",
+    he: "צדפות",
+  },
+  mussels: {
+    en: "Mussels",
+    es: "Mejillones",
+    he: "מולים",
+  },
+  trout: {
+    en: "Trout",
+    es: "Trucha",
+    he: "אלתית",
+   },
+   sardines: {
+    en: "Sardines",
+    es: "Sardinas",
+    he: "סרדינים",
+   },
+   crab:{
+    en: "Crab",
+    es: "Cangrejo",
+    he: "סרטן",
+   
+   },
+   lobster:{
+    en: "Lobster",
+    es: "Langosta",
+    he: "לובסטר",
+   },
+   scallops:{
+    en: "Scallops",
+    es: "Vieiras",
+    he: "צדפות סקלופ",
+   },
+   shrimp:{
+    en: "Shrimp",
+    es: "Camarones",
+    he: "צלעות",
+   },
 };
 
 function doTrans(key, currLang) {
+  // console.log("key", key);
   var translation = gTrans[key][currLang];
   if (!translation) return key;
   return translation;

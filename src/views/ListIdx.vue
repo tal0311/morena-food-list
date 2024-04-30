@@ -1,12 +1,12 @@
 <template>
-    <section v-if="groupList" class="list-idx grid">
+    <section v-if="groupList" ref="listRef" class="list-idx grid">
         <div id="list-container" class="list-container grid">
             <details v-for="label, idx in labelList" :key="label" :class="`list-details ${label}`">
                 <summary>{{ $trans(label) }}</summary>
                 <ItemList :list="groupList[label]" @selectItem="toggleSelect" />
             </details>
         </div>
-        <footer id="footer-container" class="footer-container">
+        <footer id="footer-container" :class="['footer-container', isScrolling?'scrolling':'']">
             <button class="primary-btn done" @click.stop="onDone" v-html="$svg('done')"></button>
         </footer>
         <RouterView />
@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { showUserMsg } from '@/services/event-bus.service';
+import { showUserMsg, eventBus } from '@/services/event-bus.service';
 import { useRoute } from 'vue-router'
 import { ref, onBeforeMount, computed, watchEffect, onMounted } from 'vue'
 import { useListStore } from '@/stores/list-store';
@@ -31,6 +31,8 @@ const listStore = useListStore()
 const labelList = ref(null)
 
 onBeforeMount(() => {
+    eventBus.on('userScroll', toggleBtn)
+
     listStore.loadList()
 })
 
@@ -77,6 +79,16 @@ onMounted(() => {
 })
 
 
+const isScrolling = ref(false)
+function toggleBtn() {
+    if (isScrolling.value) return
+    isScrolling.value = true
+    console.log('scrolling');
+    setTimeout(() => {
+        isScrolling.value = false
+        console.log('scrolling end');
+    }, 1500);
+}
 
 
 // TODO: convert all css to nested css
@@ -102,7 +114,14 @@ footer {
     display: grid;
     place-content: center;
     transform: translateX(-50%);
+    transition: transform 0.5s;
+    &.scrolling {
+        transform: translateY(170%);
+        
+    }
 }
+
+
 
 
 .done {
@@ -142,3 +161,7 @@ details {
     }
 }
 </style>
+
+<!-- height: 80vh;
+overflow-y: auto;
+overflow-x: hidden; -->

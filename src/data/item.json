@@ -97,5 +97,392 @@
     "readMoreURL": "https://example.com/rice-info",
     "color": "white",
     "isSelected": false
+  },
+  {
+    "_id": "12",
+    "name": "orange",
+    "icon": "🍊",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/oranges-info",
+    "color": "orange",
+    "isSelected": false
+  },
+  {
+    "_id": "13",
+    "name": "yogurt",
+    "icon": "🥣",
+    "group": "dairy",
+    "readMoreURL": "https://example.com/yogurt-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "14",
+    "name": "pasta",
+    "icon": "🍝",
+    "group": "grains",
+    "readMoreURL": "https://example.com/pasta-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "15",
+    "name": "Pineapple",
+    "icon": "🍍",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/pineapple-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "16",
+    "name": "butter",
+    "icon": "🧈",
+    "group": "dairy",
+    "readMoreURL": "https://example.com/butter-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "17",
+    "name": "carrots",
+    "icon": "🥕",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/carrots-info",
+    "color": "orange",
+    "isSelected": false
+  },
+  {
+    "_id": "18",
+    "name": "lettuce",
+    "icon": "🥗",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/lettuce-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "19",
+    "name": "beef",
+    "icon": "🥩",
+    "group": "meat-and-poultry",
+    "readMoreURL": "https://example.com/beef-info",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "20",
+    "name": "turkey",
+    "icon": "🦃",
+    "group": "meat-and-poultry",
+    "readMoreURL": "https://example.com/turkey-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "21",
+    "name": "broccoli",
+    "icon": "🥦",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/broccoli-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "22",
+    "name": "cucumbers",
+    "icon": "🥒",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/cucumbers-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "23",
+    "name": "potatoes",
+    "icon": "🥔",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/potatoes-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "24",
+    "name": "cabbage",
+    "icon": "🥬",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/cabbage-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "25",
+    "name": "grapes",
+    "icon": "🍇",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/grapes-info",
+    "color": "purple",
+    "isSelected": false
+  },
+  {
+    "_id": "26",
+    "name": "mangoes",
+    "icon": "🥭",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/mangoes-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "27",
+    "name": "peaches",
+    "icon": "🍑",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/peaches-info",
+    "color": "orange",
+    "isSelected": false
+  },
+  {
+    "_id": "28",
+    "name": "cereal",
+    "icon": "🥣",
+    "group": "grains",
+    "readMoreURL": "https://example.com/cereal-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "29",
+    "name": "peanut-butter",
+    "icon": "🥜",
+    "group": "grains",
+    "readMoreURL": "https://example.com/peanut-butter-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "30",
+    "name": "honey",
+    "icon": "🍯",
+    "group": "sweeteners",
+    "readMoreURL": "https://example.com/honey-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "31",
+    "name": "sugar",
+    "icon": "🍬",
+    "group": "sweeteners",
+    "readMoreURL": "https://example.com/sugar-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "32",
+    "name": "coffee",
+    "icon": "☕",
+    "group": "beverages",
+    "readMoreURL": "https://example.com/coffee-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "33",
+    "name": "tea",
+    "icon": "🍵",
+    "group": "beverages",
+    "readMoreURL": "https://example.com/tea-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "34",
+    "name": "beer",
+    "icon": "🍺",
+    "group": "alcohol",
+    "readMoreURL": "https://example.com/beer-info",
+    "color": "golden",
+    "isSelected": false
+  },
+  {
+    "_id": "35",
+    "name": "wine",
+    "icon": "🍷",
+    "group": "alcohol",
+    "readMoreURL": "https://example.com/wine-info",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "39",
+    "name": "salt",
+    "icon": "🧂",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "https://example.com/salt-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "40",
+    "name": "pepper",
+    "icon": "🌶",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "https://example.com/pepper-info",
+    "color": "black",
+    "isSelected": false
+  },
+  {
+    "_id": "41",
+    "name": "cinnamon",
+    "icon": "🌰",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "https://example.com/cinnamon-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "42",
+    "name": "vanilla",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "https://example.com/vanilla-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "43",
+    "name": "garlic",
+    "icon": "🧄",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "https://example.com/garlic-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "44",
+    "name": "onion",
+    "icon": "🧅",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/onions-info",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "45",
+    "name": "peas",
+    "icon": "🌱",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/peas-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "46",
+    "name": "olive-oil",
+    "icon": "🫒",
+    "group": "cooking-oils",
+    "readMoreURL": "https://example.com/olive-oil-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "47",
+    "name": "canola-oil",
+    "icon": "🌻",
+    "group": "cooking-oils",
+    "readMoreURL": "https://example.com/canola-oil-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "48",
+    "name": "coconut-oil",
+    "icon": "🥥",
+    "group": "cooking-oils",
+    "readMoreURL": "https://example.com/coconut-oil-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "49",
+    "name": "soy-sauce",
+    "icon": "🥢",
+    "group": "condiments",
+    "readMoreURL": "https://example.com/soy-sauce-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "68",
+    "name": "shrimp",
+    "icon": "🍤",
+    "group": "fish-and-seafood",
+    "readMoreURL": "https://example.com/shrimp-info",
+    "color": "pink",
+    "isSelected": false
+  },
+  {
+    "_id": "69",
+    "name": "scallops",
+    "icon": "🐚",
+    "group": "fish-and-seafood",
+    "readMoreURL": "https://example.com/scallops-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "70",
+    "name": "lobster",
+    "icon": "🦞",
+    "group": "fish-and-seafood",
+    "readMoreURL": "https://example.com/lobster-info",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "71",
+    "name": "crab",
+    "icon": "🦀",
+    "group": "fish-and-seafood",
+    "readMoreURL": "https://example.com/crab-info",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "72",
+    "name": "trout",
+    "icon": "🐟",
+    "group": "fish-and-seafood",
+    "readMoreURL": "https://example.com/trout-info",
+    "color": "pink",
+    "isSelected": false
+  },
+  {
+    "_id": "73",
+    "name": "mussels",
+    "icon": "🐚",
+    "group": "fish-and-seafood",
+    "readMoreURL": "https://example.com/mussels-info",
+    "color": "black",
+    "isSelected": false
+  },
+  {
+    "_id": "74",
+    "name": "oysters",
+    "icon": "🐚",
+    "group": "fish-and-seafood",
+    "readMoreURL": "https://example.com/oysters-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "75",
+    "name": "sardines",
+    "icon": "🐟",
+    "group": "fish-and-seafood",
+    "readMoreURL": "https://example.com/sardines-info",
+    "color": "silver",
+    "isSelected": false
   }
 ]

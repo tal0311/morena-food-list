@@ -1,5 +1,5 @@
 <template>
-  <section class="main-app main-layout">
+  <section class="main-app main-layout" >
     <RouterView />
     <UserMsg />
   </section>
@@ -10,7 +10,9 @@ import { ref, onBeforeMount } from 'vue';
 import UserMsg from '@/components/UserMsg.vue'
 
 
+
 </script>
+
 
 <style scoped>
 .main-app {
