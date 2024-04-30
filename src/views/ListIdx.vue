@@ -81,12 +81,12 @@ onMounted(() => {
 
 const isScrolling = ref(false)
 function toggleBtn() {
-    if (isScrolling.value) return
+    
     isScrolling.value = true
-    console.log('scrolling');
+    // console.log('scrolling');
     setTimeout(() => {
         isScrolling.value = false
-        console.log('scrolling end');
+        // console.log('scrolling end');
     }, 1500);
 }
 
