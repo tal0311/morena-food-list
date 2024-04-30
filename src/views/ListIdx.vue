@@ -114,9 +114,10 @@ footer {
     display: grid;
     place-content: center;
     transform: translateX(-50%);
-    transition: transform 0.5s;
+    transition: translate 0.5s;
     &.scrolling {
-        transform: translateY(170%);
+         translate:170% 50% 
+        /* transform: translateX(-50%); */
         
     }
 }
