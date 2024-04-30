@@ -83,10 +83,10 @@ const isScrolling = ref(false)
 function toggleBtn() {
     
     isScrolling.value = true
-    // console.log('scrolling');
+    console.log('scrolling');
     setTimeout(() => {
         isScrolling.value = false
-        // console.log('scrolling end');
+        console.log('scrolling end');
     }, 1500);
 }
 
@@ -114,10 +114,10 @@ footer {
     display: grid;
     place-content: center;
     transform: translateX(-50%);
-    transition: translate 0.5s;
+    transition: translate 0.2s;
     &.scrolling {
-         translate:170% 50% 
-        /* transform: translateX(-50%); */
+         translate:170% 50%
+        
         
     }
 }
