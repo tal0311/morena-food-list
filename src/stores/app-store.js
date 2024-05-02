@@ -14,8 +14,10 @@ export const useAppStore = defineStore("app", () => {
     isTourActive.value = !isTourActive.value;
   }
 
-  function logError(err) {
-    showErrorMsg("Opps, it's not you, it's us. We are working on fixing it");
+  function logError(err, isShowError = true) {
+    if (isShowError){
+      showErrorMsg("Opps, it's not you, it's us. We are working on fixing it");
+    }
     errorLogs.value.push(err);
   }
 

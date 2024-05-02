@@ -82,7 +82,7 @@ async function loadItems() {
   let items = utilService.loadFromStorage(STORAGE_KEY);
   if (!items || !items.length) {
     try {
-      const res = await fetch(import.meta.env.VITE_DATA_URL      );
+      const res = await fetch(import.meta.env.VITE_DATA_URL);
       items = await res.json();
 
       utilService.saveToStorage(STORAGE_KEY, items);
