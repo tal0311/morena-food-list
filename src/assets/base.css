@@ -34,6 +34,22 @@ a {
   place-content: center;
 }
 
+.secondary-btn {
+  border: none;
+  background-color: var(--bClr2);
+  outline: 1px solid var(--bClr3);
+  color: var(--bClr3);
+  border-radius: var(--br);
+}
+
+.error-btn{
+  border: none;
+  background-color: var(--bClr2);
+  outline: 1px solid var(--clr12);
+  color: var(--clr12);
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--br);
+}
 .icon {
   border: none;
   background: none;
@@ -45,10 +61,4 @@ a {
   border-radius: 0.5rem;
 }
 
-.secondary-btn {
-  border: none;
-  background-color: var(--bClr2);
-  outline: 1px solid var(--bClr3);
-  color: var(--bClr3);
-  border-radius: var(--br);
-}
+

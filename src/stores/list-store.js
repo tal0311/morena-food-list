@@ -1,7 +1,7 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { itemService } from "@/services/item.service.local";
-import { showUserMsg } from "@/services/event-bus.service";
+import { showUserMsg, showErrorMsg } from "@/services/event-bus.service";
 
 export const useListStore = defineStore("list", () => {
   const list = ref(null);
@@ -17,7 +17,7 @@ export const useListStore = defineStore("list", () => {
       list.value = await itemService.query();
     } catch (error) {
       console.debug("Failed to load list", error);
-      showUserMsg("Failed to load list, please try again later");
+      showErrorMsg("Failed to load list, please try again later");
     }
     // list.value = null
   }

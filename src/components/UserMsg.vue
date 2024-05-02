@@ -1,44 +1,69 @@
 <template>
-    <dialog ref="userMsgRef" class="user-msg">
+    <dialog ref="userMsgRef" :class="`user-msg ${msgType}`">
         <div class="msg-container">
-        <span>{{ userMsg }}</span>
+            <span>{{ userMsg }}</span>
         </div>
+        <button v-if="msgType ==='error'" class="error-btn" @click="onReport">Report</button>
     </dialog>
 </template>
 
 <script setup>
 import { eventBus } from '@/services/event-bus.service';
-import { ref ,watchEffect, onMounted, onBeforeMount } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 
 const userMsgRef = ref(null)
 
 const userMsg = ref('Hello User')
+const msgType = ref('')
 
-onBeforeMount(()=>{
-    eventBus.on('show-msg', (msg)=>{
-        userMsg.value = msg
+onBeforeMount(() => {
+    eventBus.on('show-msg', ({ txt, type }) => {
+
+        userMsg.value = txt
+        msgType.value = type
         userMsgRef.value.showModal()
 
-        setTimeout(()=>{
-            userMsgRef.value.close()
-            userMsg.value = ''
-        },2000)
+        const delay = type === 'error' ? 5000 : 2000
+        console.log('show-msg', txt, type);
+        setTimeout(() => {
+          closeModal()
+        }, delay)
     })
 })
+
+function closeModal() {
+    userMsg.value = ''
+    userMsgRef.value.close()
+}
+
+function onReport() {
+    console.log('onReport');
+   closeModal()
+   
+}
 </script>
 
 <style scoped>
-.user-msg{
+.user-msg {
     border: none;
     padding: 0.8rem;
     background-color: var(--clr8);
     color: var(--bClr2);
     border-radius: var(--br);
-   
-
 }
 
-.user-msg::backdrop{
-        background: none;
+.user-msg.error{
+    text-align: center;
+    background: #ffff;
+    border: 1px solid var(--clr12);
+    color:var(--clr12);
+}
+
+.user-msg.error .msg-container{
+    margin-block-end: 1rem;
+}
+
+.user-msg::backdrop {
+    background: none !important;
 }
 </style>
