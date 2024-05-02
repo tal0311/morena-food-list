@@ -3,13 +3,14 @@
         <div class="msg-container">
             <span>{{ userMsg }}</span>
         </div>
-        <button v-if="msgType ==='error'" class="error-btn" @click="onReport">Report</button>
+        <button v-if="msgType === 'error'" class="error-btn" @click="onReport">Report</button>
     </dialog>
 </template>
 
 <script setup>
 import { eventBus } from '@/services/event-bus.service';
 import { ref, onBeforeMount } from 'vue'
+import { useAppStore } from '@/stores/app-store';
 
 const userMsgRef = ref(null)
 
@@ -23,10 +24,10 @@ onBeforeMount(() => {
         msgType.value = type
         userMsgRef.value.showModal()
 
-        const delay = type === 'error' ? 5000 : 2000
+        const delay = type === 'error' ? 5000 : 1000
         console.log('show-msg', txt, type);
         setTimeout(() => {
-          closeModal()
+            closeModal()
         }, delay)
     })
 })
@@ -36,10 +37,12 @@ function closeModal() {
     userMsgRef.value.close()
 }
 
+const appStore = useAppStore()
 function onReport() {
     console.log('onReport');
-   closeModal()
-   
+    appStore.reportError()
+    closeModal()
+
 }
 </script>
 
@@ -52,14 +55,14 @@ function onReport() {
     border-radius: var(--br);
 }
 
-.user-msg.error{
+.user-msg.error {
     text-align: center;
     background: #ffff;
     border: 1px solid var(--clr12);
-    color:var(--clr12);
+    color: var(--clr12);
 }
 
-.user-msg.error .msg-container{
+.user-msg.error .msg-container {
     margin-block-end: 1rem;
 }
 
