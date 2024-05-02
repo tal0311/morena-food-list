@@ -2,8 +2,8 @@
     <!-- <pre>{{ props.item }}</pre> -->
     <section ref="previewRef" :class="`item-preview idx- ${isSwiped ? 'swiped' : 'disabled'}`">
 
-        <label class="label-container grid"  @click.stop="$emit('selectItem', props.item._id)">
-            <input type="checkbox"  :checked="item.isSelected" :disabled="!isSwiped">
+        <label class="label-container grid"  @click.stop="onSelect">
+            <input type="checkbox"  :checked="item.isSelected && isSwiped" :disabled="!isSwiped">
             <span>{{ $trans(props.item.name) }}</span>
             <span>{{ props.item.icon }}</span>
 
@@ -16,6 +16,7 @@
 import Hammer from 'hammerjs';
 import { useRouter, useRoute } from 'vue-router'
 import { computed, onMounted, ref, watchEffect } from 'vue';
+import { showSuccessMsg } from '@/services/event-bus.service';
 
 // TODO add text area for product 
 const props = defineProps({
@@ -43,9 +44,18 @@ function handleSwipe(ev) {
     if (ev.type === 'swipe') {
         isSwiped.value = !isSwiped.value
         if (props.item.isSelected) {
-            emit('selectItem', props.item._id)
+            onSelect()
         }
     }
+}
+
+
+function onSelect() {
+    if (!isSwiped.value) {
+        showSuccessMsg('Swipe item and click on the checkbox to select it')
+        return
+    }
+    emit('selectItem', props.item._id)
 }
 
 const isFirstItem = computed(() => {

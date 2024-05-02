@@ -3,7 +3,7 @@
     <h1>{{ $trans('home-page') }}</h1>
 
     <div class="action-container grid">
-      <button class="tour-btn primary-btn" @click="$emit('toggleTour')">{{ $trans('home-action-1') }}</button>
+      <button class="tour-btn primary-btn disabled" disabled @click="$emit('toggleTour')">{{ $trans('home-action-1') }}</button>
       <button class="link-btn primary-btn">
         <RouterLink to="/list">{{ $trans('home-action-2') }}</RouterLink>
       </button>
@@ -48,5 +48,9 @@ a {
 
 .action-container {
   gap: 1rem;
+}
+
+.disabled {
+  opacity: 0.5;
 }
 </style>

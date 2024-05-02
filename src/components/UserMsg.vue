@@ -24,7 +24,15 @@ onBeforeMount(() => {
         msgType.value = type
         userMsgRef.value.showModal()
 
-        const delay = type === 'error' ? 5000 : 1000
+        // const delay = txt.length > 20 ? 3000 : 1000
+        let delay=2000
+
+        if (txt.length > 40) {
+            delay = 4000
+        } 
+        if (txt.length > 60) {
+            delay = 6000
+        }
         console.log('show-msg', txt, type);
         setTimeout(() => {
             closeModal()
@@ -48,6 +56,8 @@ function onReport() {
 
 <style scoped>
 .user-msg {
+    
+    text-align: center;
     border: none;
     padding: 0.8rem;
     background-color: var(--clr8);
@@ -56,7 +66,6 @@ function onReport() {
 }
 
 .user-msg.error {
-    text-align: center;
     background: #ffff;
     border: 1px solid var(--clr12);
     color: var(--clr12);

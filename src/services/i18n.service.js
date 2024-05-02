@@ -685,9 +685,9 @@ const gTrans = {
     he: "תראו לי מה עושים כאן",
   },
   "home-action-2": {
-    en: "I'm At home here",
-    es: "Estoy en casa aquí",
-    he: "אני מרגיש כאן בבית",
+    en: "I'm ready to start",
+    es: "Estoy listo para empezar",
+    he: "אני מוכן להתחיל",
   },
   print: {
     en: "Print",
