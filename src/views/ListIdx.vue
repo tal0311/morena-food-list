@@ -6,7 +6,7 @@
                 <ItemList :list="groupList[label]" @selectItem="toggleSelect" />
             </details>
         </div>
-        <footer id="footer-container" :class="['footer-container', isScrolling?'scrolling':'']">
+        <footer id="footer-container" :class="['footer-container']">
             <button class="primary-btn done" @click.stop="onDone" v-html="$svg('done')"></button>
         </footer>
         <RouterView />
@@ -31,8 +31,6 @@ const listStore = useListStore()
 const labelList = ref(null)
 
 onBeforeMount(() => {
-    eventBus.on('userScroll', toggleBtn)
-
     listStore.loadList()
 })
 
@@ -79,17 +77,6 @@ onMounted(() => {
 })
 
 
-const isScrolling = ref(false)
-function toggleBtn() {
-    
-    isScrolling.value = true
-    console.log('scrolling');
-    setTimeout(() => {
-        isScrolling.value = false
-        console.log('scrolling end');
-    }, 1500);
-}
-
 
 // TODO: convert all css to nested css
 </script>
@@ -103,7 +90,7 @@ function toggleBtn() {
 
 .list-container {
     margin-block-start: 1rem;
-    margin-bottom: auto;
+    margin-bottom: 10rem;
     gap: 1rem;
 }
 
@@ -115,15 +102,7 @@ footer {
     place-content: center;
     transform: translateX(-50%);
     transition: translate 0.2s;
-    &.scrolling {
-         translate:170% 50%
-        
-        
-    }
 }
-
-
-
 
 .done {
     padding: 0.8rem 0.8rem;
