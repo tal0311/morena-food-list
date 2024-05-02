@@ -74,14 +74,6 @@ onMounted(() => {
             })
         }
     }, 800);
-
-
-    setTimeout(() => {
-       throw new Error('[This is an error]')
-       throw new Error('[This is an error]')
-       throw new Error('[This is an error]')
-       throw new Error('[This is an error]')
-    }, 1000);
 })
 
 
