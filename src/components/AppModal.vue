@@ -1,15 +1,18 @@
 <template>
     <dialog @click="slickOutSide" ref="dialogRef" class="blur-bg">
         <div class="actions-container grid">
+            
             <button class="secondary-btn" @click="onPrintList">{{ $trans('print') }}</button>
             <button class="secondary-btn" @click="onShowSummary">{{ $trans('summary') }}</button>
             <button class="secondary-btn" @click="onSendList">{{ $trans('send-to-moran') }}</button>
+            <button class="secondary-btn disabled" @click="onRecipe" disabled>{{ 'Recipes (coming soon)' }}</button>
             <button class="secondary-btn" @click="closeModal">{{ $trans('back') }}</button>
         </div>
     </dialog>
 </template>
 
 <script setup>
+//TODO: convert btns to loop 
 import { watchEffect, ref } from 'vue';
 import { useRouter } from 'vue-router'
 import { shareService } from '@/services/share.service.js'
@@ -64,6 +67,10 @@ function slickOutSide(ev) {
         closeModal()
     }
 }
+function onRecipe() {
+    console.log('onRecipe');
+
+}
 
 </script>
 
@@ -83,5 +90,9 @@ dialog.blur-bg {
 
 .actions-container {
     gap: 1rem;
+}
+.disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 </style>
