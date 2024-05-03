@@ -758,33 +758,554 @@ const gTrans = {
     en: "Trout",
     es: "Trucha",
     he: "אלתית",
-   },
-   sardines: {
+  },
+  sardines: {
     en: "Sardines",
     es: "Sardinas",
     he: "סרדינים",
-   },
-   crab:{
+  },
+  crab: {
     en: "Crab",
     es: "Cangrejo",
     he: "סרטן",
-   
-   },
-   lobster:{
+  },
+  lobster: {
     en: "Lobster",
     es: "Langosta",
     he: "לובסטר",
-   },
-   scallops:{
+  },
+  scallops: {
     en: "Scallops",
     es: "Vieiras",
     he: "צדפות סקלופ",
-   },
-   shrimp:{
+  },
+  shrimp: {
     en: "Shrimp",
     es: "Camarones",
-    he: "צלעות",
-   },
+    he: "שרימפס",
+  },
+
+  zucchinis: {
+    en: "Zucchinis",
+    es: "Calabacines",
+    he: "קישואים",
+  },
+  "green-yellow-beans": {
+    en: "Green / Yellow Beans",
+    es: "Judías verdes / amarillas",
+    he: "פול ירוק / צהוב",
+  },
+  "white-purple-cabbage": {
+    en: "White / Purple Cabbage",
+    es: "Repollo blanco / morado",
+    he: "כרוב לבן / סגול",
+  },
+  cauliflower: {
+    en: "Cauliflower",
+    es: "Coliflor",
+    he: "כרובית",
+  },
+  kohlrabi: {
+    en: "Kohlrabi",
+    es: "Colinabo",
+    he: "קולרבי",
+  },
+  leek: {
+    en: "Leek",
+    es: "Puerro",
+    he: "כרישה",
+  },
+  turnip: {
+    en: "Turnip",
+    es: "Nabo",
+    he: "חציל",
+  },
+
+  tarragon: {
+    en: "Tarragon",
+    es: "Estragón",
+    he: "טרגון",
+  },
+  coriander: {
+    en: "Coriander",
+    es: "Cilantro",
+    he: "כוסברה",
+  },
+  "atlantic-salt": {
+    en: "Atlantic Salt",
+    es: "Sal atlántica",
+    he: "מלח אטלנטי",
+  },
+  "black-pepper": {
+    en: "Black Pepper",
+    es: "Pimienta negra",
+    he: "פלפל שחור",
+  },
+  cumin: {
+    en: "Cumin",
+    es: "Comino",
+    he: "כמון",
+  },
+  curry: {
+    en: "Curry",
+    es: "Curry",
+    he: "קארי",
+  },
+  ginger: {
+    en: "Ginger",
+    es: "Jengibre",
+    he: "זנגביל",
+  },
+  paprika: {
+    en: "Paprika",
+    es: "Pimentón",
+    he: "פפריקה",
+  },
+  rosemary: {
+    en: "Rosemary",
+    es: "Romero",
+    he: "רוזמרין",
+  },
+  thyme: {
+    en: "Thyme",
+    es: "Tomillo",
+    he: "תימין",
+  },
+  basil: {
+    en: "Basil",
+    es: "Albahaca",
+    he: "בזיליקום",
+  },
+  "mustard-seeds": {
+    en: "Mustard Seeds",
+    es: "Semillas de mostaza",
+    he: "זרעי חרדל",
+  },
+  "hawaiege-for-soup": {
+    en: "Hawaij for Soup",
+    es: "Hawaij para sopa",
+    he: "חווייג' למרק",
+  },
+  "cayenne-pepper": {
+    en: "Cayenne Pepper",
+    es: "Pimienta de cayena",
+    he: "פלפל קיין",
+  },
+  Bharat: {
+    en: "Bharat",
+    es: "Baharat",
+    he: "בהארת",
+  },
+  clove: {
+    en: "Clove",
+    es: "Clavo",
+    he: "קרון",
+  },
+  "dairy-replacements": {
+    en: "Dairy Replacements",
+    es: "Sustitutos de lácteos",
+    he: "מחליפי חלב",
+  },
+  "nuts-and-seeds": {
+    en: "Nuts and Seeds",
+    es: "Frutos secos y semillas",
+    he: "אגוזים וזרעים",
+  },
+  spread: {
+    en: "Spreads",
+    es: "Untables",
+    he: "ממרחים",
+  },
+  legumes: {
+    en: "Legumes",
+    es: "Legumbres",
+    he: "קטניות",
+  },
+  pears: {
+    en: "Pears",
+    es: "Peras",
+    he: "אגס",
+  },
+  apricots: {
+    en: "Apricots",
+    es: "Albaricoques",
+    he: "מישמיש",
+  },
+  plums: {
+    en: "Plums",
+    es: "Ciruelas",
+    he: "שזיף",
+  },
+  pomegranate: {
+    en: "Pomegranate",
+    es: "Granada",
+    he: "רימון",
+  },
+  cherries: {
+    en: "Cherries",
+    es: "Cerezas",
+    he: "דובדבן",
+  },
+  lemons: {
+    en: "Lemons",
+    es: "Limones",
+    he: "לימון",
+  },
+  limes: {
+    en: "Limes",
+    es: "Limones",
+    he: "לימון ירוק",
+  },
+  ghee: {
+    en: "Ghee",
+    es: "Ghee",
+    he: "גי",
+  },
+  "coconut-butter": {
+    en: "Coconut Butter",
+    es: "Mantequilla de coco",
+    he: "חמאת קוקוס",
+  },
+  "cocoa-butter": {
+    en: "Cocoa Butter",
+    es: "Manteca de cacao",
+    he: "חמאת קקאו",
+  },
+  "wild-rice": {
+    en: "Wild Rice",
+    es: "Arroz salvaje",
+    he: "אורז בר",
+  },
+  amaranth: {
+    en: "Amaranth",
+    es: "Amaranto",
+    he: "אמרנת",
+  },
+  buckwheat: {
+    en: "Buckwheat",
+    es: "Alforfón",
+    he: "כוסמת",
+  },
+  millet: {
+    en: "Millet",
+    es: "Mijo",
+    he: "דחוח",
+  },
+  "red-rice": {
+    en: "Red Rice",
+    es: "Arroz rojo",
+    he: "אורז אדום",
+  },
+  wheat: {
+    en: "Wheat",
+    es: "Trigo",
+    he: "חיטה",
+  },
+  rye: {
+    en: "Rye",
+    es: "Centeno",
+    he: "שיפון",
+  },
+  couscous: {
+    en: "Couscous",
+    es: "Cuscús",
+    he: "קוסקוס",
+  },
+  breads: {
+    en: "Breads",
+    es: "Pan",
+    he: "לחם",
+  },
+  "salmon-eggs": {
+    en: "Salmon Eggs",
+    es: "Huevas de salmón",
+    he: "ביצי סלמון",
+  },
+  "tuna-stake": {
+    en: "Tuna Stake",
+    es: "Filete de atún",
+    he: "פילה טונה",
+  },
+  herring: {
+    en: "Herring",
+    es: "Arenque",
+    he: "הרינג",
+  },
+  "white-fish": {
+    en: "White Fish",
+    es: "Pescado blanco",
+    he: "דג לבן",
+  },
+  caviar: {
+    en: "Caviar",
+    es: "Caviar",
+    he: "קוויאר",
+  },
+  "fish-oil": {
+    en: "Fish Oil",
+    es: "Aceite de pescado",
+    he: "שמן דגים",
+  },
+  pullets: {
+    en: "Pullets",
+    es: "Pollos",
+    he: "פרגיות",
+  },
+  lamb: {
+    en: "Lamb (ribs/thigh)",
+    es: "Cordero",
+    he: "טלה",
+  },
+  "sea-weed": {
+    en: "Sea Weed",
+    es: "Algas marinas",
+    he: "עצות ים",
+  },
+  asparagus: {
+    en: "Asparagus",
+    es: "Espárragos",
+    he: "אספרגוס",
+  },
+  artichoke: {
+    en: "Artichoke",
+    es: "Alcachofa",
+    he: "ארטישוק",
+  },
+  spirulina: {
+    en: "Spirulina",
+    es: "Espirulina",
+    he: "ספירולינה",
+  },
+  kale: {
+    en: "Kale",
+    es: "Col rizada",
+    he: "קייל",
+  },
+  chard: {
+    en: "Chard",
+    es: "Acelga",
+    he: "סלק",
+  },
+  chlorella: {
+    en: "Chlorella",
+    es: "Chlorella",
+    he: "כלורלה",
+  },
+  silan: {
+    en: "Silan",
+    es: "Silan",
+    he: "סילאן",
+  },
+  "maple-syrup": {
+    en: "Maple Syrup",
+    es: "Jarabe de arce",
+    he: "סירופ מייפל",
+  },
+  "agave-syrup": {
+    en: "Agave Syrup",
+    es: "Jarabe de agave",
+    he: "סירופ אגבה",
+  },
+  bharat: {
+    en: "Bharat",
+    es: "Bharat",
+    he: "בהארת",
+  },
+  "mct-oil": {
+    en: "MCT Oil",
+    es: "Aceite MCT",
+    he: "שמן MCT",
+  },
+  "avocado-oil": {
+    en: "Avocado Oil",
+    es: "Aceite de aguacate",
+    he: "שמן אבוקדו",
+  },
+  "grapeseed-oil": {
+    en: "Grapeseed Oil",
+    es: "Aceite de semilla de uva",
+    he: "שמן זרעי ענבים",
+  },
+  "sesame-oil": {
+    en: "Sesame Oil",
+    es: "Aceite de sésamo",
+    he: "שמן שומשום",
+  },
+  "coconut-amino": {
+    en: "Coconut Amino",
+    es: "Amino de coco",
+    he: "אמינו קוקוס",
+  },
+  "balsamic-vinegar": {
+    en: "Balsamic Vinegar",
+    es: "Vinagre balsámico",
+    he: "חומץ בלסמי",
+  },
+  "apple-cider-vinegar": {
+    en: "Apple Cider Vinegar",
+    es: "Vinagre de sidra de manzana",
+    he: "חומץ תפוחים",
+  },
+  "wine-vinegar": {
+    en: "Wine Vinegar",
+    es: "Vinagre de vino",
+    he: "חומץ יין",
+  },
+  "rice-vinegar": {
+    en: "Rice Vinegar",
+    es: "Vinagre de arroz",
+    he: "חומץ אורז",
+  },
+  "soy-milk": {
+    en: "Soy Milk",
+    es: "Leche de soja",
+    he: "חלב סויה",
+  },
+  "almond-milk": {
+    en: "Almond Milk",
+    es: "Leche de almendra",
+    he: "חלב שקדים",
+  },
+  "coconut-milk": {
+    en: "Coconut Milk",
+    es: "Leche de coco",
+    he: "חלב קוקוס",
+  },
+  "oat-milk": {
+    en: "Oat Milk",
+    es: "Leche de avena",
+    he: "חלב שיבולת שועל",
+  },
+  "rice-milk": {
+    en: "Rice Milk",
+    es: "Leche de arroz",
+    he: "חלב אורז",
+  },
+  "cashew-milk": {
+    en: "Cashew Milk",
+    es: "Leche de anacardo",
+    he: "חלב קשיו",
+  },
+  "kefir-milk": {
+    en: "Kefir Milk",
+    es: "Leche de kéfir",
+    he: "חלב קפיר",
+  },
+  "coconut-cream": {
+    en: "Coconut Cream",
+    es: "Crema de coco",
+    he: "קרם קוקוס",
+  },
+  "cashew-cream": {
+    en: "Cashew Cream",
+    es: "Crema de anacardo",
+    he: "קרם קשיו",
+  },
+  "roasted-baru-seeds": {
+    en: "Roasted Baru Seeds",
+    es: "Semillas de baru tostadas",
+    he: "זרעי ברו מטוגנים",
+  },
+  "natural-cashew-nuts": {
+    en: "Natural Cashew Nuts",
+    es: "Anacardos naturales",
+    he: "אגוזי קשיו טבעיים",
+  },
+  "cacao-nibs": {
+    en: "Cacao Nibs",
+    es: "Nibs de cacao",
+    he: "טחינה טבעית",
+  },
+  "hemp-seeds": {
+    en: "Hemp Seeds",
+    es: "Semillas de cáñamo",
+    he: "זרעי קנאביס",
+  },
+  "chia-seeds": {
+    en: "Chia Seeds",
+    es: "Semillas de chía",
+    he: "זרעי צ'יה",
+  },
+  "flax-seeds": {
+    en: "Flax Seeds",
+    es: "Semillas de lino",
+    he: "זרעי פשתן",
+  },
+  "macadamia-nuts": {
+    en: "Macadamia Nuts",
+    es: "Nueces de macadamia",
+    he: "אגוזי מקדמיה",
+  },
+  pistachio: {
+    en: "Pistachios",
+    es: "Pistachos",
+    he: "פיסטוקים",
+  },
+  "pine-nut": {
+    en: "Pine Nuts",
+    es: "Piñones",
+    he: "צנוברים",
+  },
+  "black-sesame-seed": {
+    en: "Black Sesame Seeds",
+    es: "Semillas de sésamo",
+    he: "קצח",
+  },
+  mustard: {
+    en: "Mustard",
+    es: "Mostaza",
+    he: "חרדל",
+  },
+  tahini : {
+    en: "Tahini",
+    es: "Tahini",
+    he: "טחינה",
+  },
+  sechug: {
+    en: "Sechug",
+    es: "Sechug",
+    he: "סחוג",
+  },
+  'whole-wheat-bread': {
+    en: "Whole Wheat Bread",
+    es: "Pan integral",
+    he: "לחם מלא",
+  },
+  'spelled-bread': {
+    en: "Spelled Bread",
+    es: "Pan de espelta",
+    he: "לחם כוסמין",
+  },
+  'rye-bread': {
+    en: "Rye Bread",
+    es: "Pan de centeno",
+    he: "לחם שיפון",
+  },
+  'black-lentils': {
+    en: "Black Lentils",
+    es: "Lentejas negras",
+    he: "עדשים שחורות",
+  },
+  chickpeas: {
+    en: "Chickpeas",
+    es: "Garbanzos",
+    he: "חומוס",
+  },
+  'chickpea-flour': {
+    en: "Chickpea Flour",
+    es: "Harina de garbanzo",
+    he: "קמח חומוס",
+  },
+  'beans-white-brown': {
+    en: "Beans (white / brown)",
+    es: "Judías (blancas / marrones)",
+    he: "שעועית (לבן / חום)",
+  },
+  lentils: {
+    en: "Lentils",
+    es: "Lentejas",
+    he: "עדשים",
+  },
 };
 
 function doTrans(key, currLang) {
