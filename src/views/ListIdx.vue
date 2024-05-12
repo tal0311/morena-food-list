@@ -2,8 +2,18 @@
     <section v-if="groupList" ref="listRef" class="list-idx grid">
         <div id="list-container" class="list-container grid">
             <details v-for="label, idx in labelList" :key="label" :class="`list-details ${label}`">
-                <summary>{{ $trans(label) }}</summary>
+                <summary>
+
+                    <div class="summary-container">
+                        <span>{{ $trans(label) }}</span> <button class="more-btn" disabled
+                            v-html="$svg('more')"></button>
+                    </div>
+
+
+                </summary>
                 <ItemList :list="groupList[label]" @selectItem="toggleSelect" />
+
+                
             </details>
         </div>
         <footer id="footer-container" :class="['footer-container']">
@@ -116,6 +126,8 @@ details {
     padding: 0.5em 0.5em 0;
 
     summary {
+        display: grid;
+        align-items: center;
         position: relative;
         font-weight: bold;
         margin: -0.5em -0.5em 0;
@@ -127,8 +139,10 @@ details {
 
         &::marker {
             color: var(--clr7);
+
             /* content:'' */
         }
+
     }
 
     &[open] {
@@ -139,6 +153,22 @@ details {
         /* box-shadow: 0 0 2px 0px #c9c9c9; */
         margin-bottom: 0.5em;
     }
+}
+
+
+.summary-container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr auto;
+    width: 100%;
+    /* justify-content: space-between; */
+    gap: 1rem;
+}
+
+.more-btn {
+    all: unset;
+    display: grid;
+    place-content: center;
 }
 </style>
 
