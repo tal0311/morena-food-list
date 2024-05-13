@@ -62,10 +62,16 @@ function onSendList() {
     console.log('onSendList', selectItems.value);
 
 
-    const CSVItems = getAsCSV(JSON.parse(JSON.stringify(selectItems.value)))
-    const blob = new Blob([CSVItems], { type: 'text/csv;charset=utf-8;' });
-    const file= URL.createObjectURL(blob);
-    shareService.shareTo(null, file, 'list.csv')
+    const csvContent = getAsCSV(JSON.parse(JSON.stringify(selectItems.value)))
+    // const blob = new Blob([CSVItems], { type: 'text/csv;charset=utf-8;' });
+    // const file = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = 'data:text/csv;charset=utf-8,' + csvContent;
+    link.download = 'list.csv';
+    link.click();
+
+    shareService.shareTo('whatsapp', csvContent, 'list.csv')
     console.log('onSendList');
 }
 

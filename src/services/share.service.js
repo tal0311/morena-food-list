@@ -5,7 +5,8 @@ export const shareService = {
 
 const defaultMsg = 'היי, רשימת הקניות שלי נראית כך: '
 function shareTo(platform = 'whatsapp', data) {
-  shareToMobile(data)
+  // shareToMobile(data)
+  shareToDesktop(platform, data)
   // utilService.isMobile() ?  : shareToDesktop(platform, data)
 }
 
@@ -15,7 +16,7 @@ function shareToDesktop(platform, data) {
   window.open(url + data, '_blank')
 }
 
-function _getPlatform(platform) {
+function _getPlatform(platform = 'whatsapp') {
   const opts = {
     whatsapp: `https://wa.me/?text=${defaultMsg}`,
     facebook: 'https://www.facebook.com/sharer/sharer.php?u=',
