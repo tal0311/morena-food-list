@@ -3,8 +3,10 @@
                 <summary>
 
                     <div class="summary-container">
-                        <span>{{ $trans(name) }}</span> <button class="more-btn" disabled
-                            v-html="$svg('more')"></button>
+                        <span>{{ $trans(name) }}</span> 
+                        <button @click.stop="onMore" class="more-btn"
+                            v-html="$svg('more')">
+                        </button>
                     </div>
 
 
@@ -17,6 +19,7 @@
 
 <script setup>
 import ItemList from '@/components/ItemList.vue'
+import { showSuccessMsg } from '@/services/event-bus.service';
 
 const props = defineProps(['labelList', 'groupList'])
 const emit = defineEmits(['selectItem', 'toggleEdit', 'updateLabel'])
@@ -26,6 +29,11 @@ function handleLabelChange($event) {
     const userInput= $event.target.value
     const name= $event.target.dataset.groupname
     emit('updateLabel', {name, userInput})
+}
+
+function onMore() {
+    console.log('more');
+    showSuccessMsg('More feature coming soon')
 }
 
 </script>
