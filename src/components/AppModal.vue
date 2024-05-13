@@ -3,7 +3,7 @@
         <div class="actions-container grid">
             <button class="secondary-btn" @click="onPrintList">{{ $trans('print') }}</button>
             <button class="secondary-btn" @click="onShowSummary">{{ $trans('summary') }}</button>
-            <button class="secondary-btn" @click="onSendList">{{ $trans('send-to-moran') }}</button>
+            <button class="secondary-btn" @click="onSendList" disabled>{{ $trans('send-to-moran') }}</button>
             <button class="secondary-btn disabled" @click="onRecipe" disabled>{{ 'Recipes (coming soon)' }}</button>
             <button class="secondary-btn" @click="closeModal">{{ $trans('back') }}</button>
         </div>
