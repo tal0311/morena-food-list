@@ -30,6 +30,8 @@ async function shareToMobile(data) {
   await navigator.share({
     title: defaultMsg,
     text: 'list: milk, bread, eggs',
+    url: 'https://www.google.com',
+    
   })
 }
 
