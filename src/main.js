@@ -21,8 +21,8 @@ app.use(svgPlugin);
 
 app.mount("#app");
 
-import { useAppStore } from "./stores/app-store";
-const appStore = useAppStore();
-window.onerror = (err) => {
-  appStore.logError(err);
-};
+// import { useAppStore } from "./stores/app-store";
+// const appStore = useAppStore();
+// window.onerror = (err) => {
+  // appStore.logError(err);
+// };

@@ -1,9 +1,11 @@
 import { storageService } from "./async-storage.service.js";
 // import { httpService } from './http.service.js'
 import { utilService } from "./util.service.js";
+import { userService } from "./user.service.js";
 
 import items from "./../data/item.json";
 const STORAGE_KEY = "item_DB";
+const LABELS_KEY = "labels_DB";
 
 export const itemService = {
   query,
@@ -12,7 +14,10 @@ export const itemService = {
   remove,
   getEmptyItem,
   prepDataForChart,
-  // getGroupsLabels,
+  getGroupsByLabels,
+  loadLabelsFromStorage,
+  updateLabel,
+  getLabels
 };
 window.itemService = itemService;
 
@@ -26,7 +31,54 @@ async function query(filterBy = {}) {
   }
 
   return items;
+  // return getGroupsByLabels(items);
+
 }
+
+
+function getGroupsByLabels(list) {
+    
+  // debugger
+  const itemMap= list.reduce((acc, item) => {
+    if (!acc[item.group]) {
+      acc[item.group] = [];
+    }
+    acc[item.group].push(item);
+    return acc;
+  }, {});
+  // console.log("acc", itemMap);
+
+  return itemMap;
+
+  //  Object.keys(list.value).map(label=>({name:label, userInput: ''}))
+}
+
+function loadLabelsFromStorage() {  } 
+
+function updateLabel(label) {
+  label = JSON.parse(JSON.stringify(label.value));
+  
+  let labels = utilService.loadFromStorage(LABELS_KEY);
+  labels= labels.map((l) => l.name === label.name ? {...label , userInput:label.userInput} : l);
+
+  utilService.saveToStorage(LABELS_KEY, labels);
+  return labels;
+
+}
+
+function getLabels(list) {
+  list = JSON.parse(JSON.stringify(list))
+  let labels = utilService.loadFromStorage(LABELS_KEY);
+  if (!labels || !labels.length) {
+    labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
+    console.log("labels", labels);
+    utilService.saveToStorage(LABELS_KEY, labels);
+  }
+  return labels;
+
+}
+
+
 function getById(itemId) {
   return storageService.get(STORAGE_KEY, itemId);
   // return httpService.get(`item/${itemId}`)

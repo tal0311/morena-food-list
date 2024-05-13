@@ -6,7 +6,7 @@
             <input type="checkbox"  :checked="item.isSelected && isSwiped" :disabled="!isSwiped">
             <span>{{ $trans(props.item.name) }}</span>
             <span>{{ props.item.icon }}</span>
-
+            
         </label>
 
     </section>
@@ -14,7 +14,7 @@
 
 <script setup>
 import Hammer from 'hammerjs';
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { computed, onMounted, ref, watchEffect } from 'vue';
 import { showSuccessMsg } from '@/services/event-bus.service';
 

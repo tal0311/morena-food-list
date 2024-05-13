@@ -1,0 +1,23 @@
+ [
+    {
+    "_id": "1",
+    "name": "Israel izraeli",
+    "age": "30",
+    "city": "Tel Aviv",
+    "labels": [],
+    "imgUrl":"@/assets/images/default-user.png",
+    "username":"israeli",
+    "password":"1234"
+ },
+ {
+    "_id": "2",
+    "name": "Ziona Levi",
+    "age": "28",
+    "city": "Jerusalem",
+    "labels": [],
+    "imgUrl":"@/assets/images/default-user.png",
+    "username":"jane",
+    "password":"1234"
+
+ }
+]

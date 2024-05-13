@@ -22,6 +22,7 @@
 </template>
 
 <script setup>
+// TODO: 'add last login date to user and refresh the local storage btn'
 import { ref, computed, watchEffect } from 'vue'
 import TheWelcome from '@/components/TheWelcome.vue'
 import { useListStore } from '@/stores/list-store'

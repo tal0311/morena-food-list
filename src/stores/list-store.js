@@ -1,32 +1,73 @@
-import { ref, computed } from "vue";
+import { ref, computed, watchEffect } from "vue";
 import { defineStore } from "pinia";
 import { itemService } from "@/services/item.service.local";
-import { showUserMsg, showErrorMsg } from "@/services/event-bus.service";
+import { showUserMsg, showErrorMsg, showSuccessMsg } from "@/services/event-bus.service";
 import { useAppStore } from "@/stores/app-store";
 
 export const useListStore = defineStore("list", () => {
   const list = ref(null);
   const selectedItems = ref([]);
   const currLang = ref("en");
+  const labels = ref(null)
 
-  const getList = computed(() => list?.value);
+  const getList = computed(() => {
+    if (list.value) {
+      return itemService.getGroupsByLabels(list.value);
+    }
+    
+  });
   const getSelectedItems = computed(() => selectedItems?.value);
   const getCurrLang = computed(() => currLang.value);
+  const getLabels= computed(() => labels.value)
+
+  // this is to wait for the list to be loaded before setting the labels from local storage or from list
+  // labels in local storage will contain all the user input for labels
+  watchEffect(() => {
+    if(list.value){
+      setLabels()
+    }
+  });
+
+  // watch(list, (newVal, oldVal)) => {
+  //   if(newVal){
+  //     setLabels()
+  //   }
+  // }
+
+  function setLabels(){
+    labels.value = itemService.getLabels(getList.value)
+  }
+
+  // labels.value = computed(() => labels?.value)
 
   async function loadList() {
     try {
-      list.value = await itemService.query();
+      const items = await itemService.query();
+      list.value = items;
+      // console.log("Loaded list", list.value);
+
     } catch (error) {
       console.debug("Failed to load list", error);
-      useAppStore().logError(error, false);
+      // useAppStore().logError(error, false);
       showErrorMsg("Failed to load list, please try again later");
 
     }
     // list.value = null
   }
 
+  // async function loadLabels() {
+  //   labels.value = await itemService.loadLabelsFromStorage()
+
+  // }
+
+  function updateLabel(label) {
+    
+    labels.value = itemService.updateLabel(label);
+    showSuccessMsg("Label updated successfully");
+  }
+
   function toggleSelect(itemId) {
-    const itemIdx = list.value.findIndex((item) => item._id === itemId);
+    const itemIdx = list?.value.findIndex((item) => item._id === itemId);
     const item = list.value[itemIdx];
     item.isSelected = !item.isSelected;
     list.value.splice(itemIdx, 1, item);
@@ -50,5 +91,8 @@ export const useListStore = defineStore("list", () => {
     getSelectedItems,
     getCurrLang,
     setLang,
+   
+    getLabels,
+    updateLabel
   };
 });

@@ -1,23 +1,14 @@
 <template>
-    <section v-if="groupList" ref="listRef" class="list-idx grid">
+
+    <!-- <pre>{{ labelList }}</pre>  -->
+    <!-- <pre>{{ groupList }}</pre>  -->
+    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
         <div id="list-container" class="list-container grid">
-            <details v-for="label, idx in labelList" :key="label" :class="`list-details ${label}`">
-                <summary>
-
-                    <div class="summary-container">
-                        <span>{{ $trans(label) }}</span> <button class="more-btn" disabled
-                            v-html="$svg('more')"></button>
-                    </div>
-
-
-                </summary>
-                <ItemList :list="groupList[label]" @selectItem="toggleSelect" />
-
-                
-            </details>
+            <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelect" @toggleEdit="toggleEdit"
+                @updateLabel="updateLabel" />
         </div>
         <footer id="footer-container" :class="['footer-container']">
-            <button class="primary-btn done" @click.stop="onDone" v-html="$svg('done')"></button>
+            <button :class="`primary-btn ${btnState}`" @click.stop="onDone" v-html="$svg(btnState)"></button>
         </footer>
         <RouterView />
         <AppModal :isModalOpen="isModalOpen" @reset-modal="isModalOpen = false" />
@@ -36,37 +27,72 @@ import { useTour } from '@/composables/useTour.js'
 import { useAppStore } from '@/stores/app-store'
 import AppLoader from '@/components/AppLoader.vue'
 
+import GroupList from '@/components/GroupList.vue'
+import { utilService } from '@/services/util.service';
+
+
 
 const listStore = useListStore()
-const labelList = ref(null)
+
 
 onBeforeMount(() => {
     listStore.loadList()
+    // listStore.loadLabels()
 })
 
-const groupList = computed(() => listStore?.getList?.reduce((acc, item) => {
-    if (!acc[item.group]) {
-        acc[item.group] = []
-    }
-    acc[item.group].push(item)
-    return acc
-}, {}))
+const groupList = computed(() => listStore?.getList)
+const labelList = computed(() => listStore?.getLabels)
 
-watchEffect(() => {
-    if (groupList.value) {
-        labelList.value = Object.keys(groupList.value)
-    }
-})
 
+
+// const labelList1 = computed(() => {
+
+
+//     if (groupList.value) {
+//         return Object.keys(groupList.value).map((name) => {
+//             return { name, userInput: '' }
+//         })
+//     }
+// })
+
+// watchEffect(() => {
+//     console.log('labelList', labelList.value);
+//     // console.log('labels',  .value);
+// })
 
 const isModalOpen = ref(false)
 function onDone() {
+    if (btnState.value === 'edit') {
+        //    console.log('save notes', currLabel.value);
+        submitLabel()
+        btnState.value = 'done'
+        return
+    }
     isModalOpen.value = !isModalOpen.value
 }
 
 function toggleSelect(id) {
+    console.log('toggleSelect', id);
     listStore.toggleSelect(id)
 }
+
+const btnState = ref('done')
+const currLabel = ref('')
+function toggleEdit(labelName) {
+    currLabel.value = labelName
+    btnState.value = 'edit'
+}
+
+
+const label = ref({ name: '', userInput: '' })
+function updateLabel(updateLabel) {
+    label.value = { ...updateLabel }
+}
+
+function submitLabel() {
+    listStore.updateLabel(label)
+}
+
 
 const route = useRoute()
 const appStore = useAppStore()
@@ -116,6 +142,13 @@ footer {
 
 .done {
     padding: 0.8rem 0.8rem;
+    /* background-color: var(--clr4); */
+}
+
+.edit {
+    padding: 0.8rem 0.8rem;
+    color: var(--bClr2);
+    background-color: var(--clr36);
 }
 
 
@@ -169,6 +202,17 @@ details {
     all: unset;
     display: grid;
     place-content: center;
+}
+
+textarea {
+    margin-block: 1rem;
+    outline: 1px solid var(--bClr1);
+    resize: none;
+    width: 100%;
+    border: none;
+    padding: 0.3rem;
+    font-family: inherit;
+    font-size: 1.5rem;
 }
 </style>
 
