@@ -5,8 +5,8 @@ export const shareService = {
 
 const defaultMsg = 'היי, רשימת הקניות שלי נראית כך: '
 function shareTo(platform = 'whatsapp', data) {
-
-  utilService.isMobile() ? shareToMobile(data) : shareToDesktop(platform, data)
+  shareToMobile(data)
+  // utilService.isMobile() ?  : shareToDesktop(platform, data)
 }
 
 function shareToDesktop(platform, data) {
@@ -28,7 +28,8 @@ function _getPlatform(platform) {
 async function shareToMobile(data) {
   await navigator.share({
     title: defaultMsg,
-    text: data,
+    text: 'title',
+    files: [data],
     url: 'https://www.google.com',
   });
 }

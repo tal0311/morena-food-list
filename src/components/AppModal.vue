@@ -62,8 +62,10 @@ function onSendList() {
     console.log('onSendList', selectItems.value);
 
 
-    const svgItems = getAsCSV(JSON.parse(JSON.stringify(selectItems.value)))
-    shareService.shareTo(null, svgItems)
+    const CSVItems = getAsCSV(JSON.parse(JSON.stringify(selectItems.value)))
+    const blob = new Blob([CSVItems], { type: 'text/csv;charset=utf-8;' });
+    const file= URL.createObjectURL(blob);
+    shareService.shareTo(null, file, 'list.csv')
     console.log('onSendList');
 }
 
