@@ -16,6 +16,7 @@ import { watchEffect, ref, computed } from 'vue';
 import { useRouter } from 'vue-router'
 import { shareService } from '@/services/share.service.js'
 import { useListStore } from '@/stores/list-store'
+import { showSuccessMsg } from '@/services/event-bus.service';
 
 const props = defineProps({
     isModalOpen: {
@@ -62,16 +63,18 @@ function onSendList() {
     console.log('onSendList', selectItems.value);
 
 
-    const csvContent = getAsCSV(JSON.parse(JSON.stringify(selectItems.value)))
-    const blob = new Blob([CSVItems], { type: 'text/csv;charset=utf-8;' });
-    const file = URL.createObjectURL(blob);
+    // const csvContent = getAsCSV(JSON.parse(JSON.stringify(selectItems.value)))
+    // const blob = new Blob([CSVItems], { type: 'text/csv;charset=utf-8;' });
+    // const file = URL.createObjectURL(blob);
 
-    const link = document.createElement('a');
-    link.href = 'data:text/csv;charset=utf-8,' + csvContent;
-    link.download = 'list.csv';
-    link.click();
+    // const link = document.createElement('a');
+    // link.href = 'data:text/csv;charset=utf-8,' + csvContent;
+    // link.download = 'list.csv';
+    // link.click();
 
-    shareService.shareTo('whatsapp', file, 'list.csv')
+    showSuccessMsg('coming soon... for now take a screenshot and send it to Moran')
+    return
+    // shareService.shareTo('whatsapp', file, 'list.csv')
     console.log('onSendList');
 }
 
