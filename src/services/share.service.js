@@ -29,7 +29,7 @@ function _getPlatform(platform) {
 async function shareToMobile(data) {
   await navigator.share({
     title: defaultMsg,
-    text: data
+    text: 'list: milk, bread, eggs',
   })
 }
 
