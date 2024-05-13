@@ -18,7 +18,7 @@ function shareToDesktop(platform, data) {
 
 function _getPlatform(platform = 'whatsapp') {
   const opts = {
-    whatsapp: `https://wa.me/?text=${defaultMsg}`,
+    whatsapp: `https://wa.me/+972524499064?text=${defaultMsg}`,
     facebook: 'https://www.facebook.com/sharer/sharer.php?u=',
     twitter: `https://twitter.com/intent/tweet?text=${defaultMsg}&url=`,
     gmail: `https://mail.google.com/mail/?view=cm&fs=1&to=&su=${defaultMsg}&body=`,
