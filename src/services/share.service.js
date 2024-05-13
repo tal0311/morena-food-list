@@ -25,14 +25,12 @@ function _getPlatform(platform) {
   }
   return opts[platform]
 }
- 
 async function shareToMobile(data) {
   await navigator.share({
     title: defaultMsg,
-    text: 'list: milk, bread, eggs',
+    text: data,
     url: 'https://www.google.com',
-    
-  })
+  });
 }
 
 // shareService.shareTo('whatsapp', 'list: milk, bread, eggs')

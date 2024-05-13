@@ -12,9 +12,10 @@
 
 <script setup>
 //TODO: convert btns to loop 
-import { watchEffect, ref } from 'vue';
+import { watchEffect, ref, computed } from 'vue';
 import { useRouter } from 'vue-router'
 import { shareService } from '@/services/share.service.js'
+import { useListStore } from '@/stores/list-store'
 
 const props = defineProps({
     isModalOpen: {
@@ -54,11 +55,28 @@ function onShowSummary(query) {
     router.push({ name: 'list-summary', query: query })
 }
 
+const listStore = useListStore()
+const selectItems = computed(() => listStore.getSelectedItems)
 function onSendList() {
     closeModal()
+    console.log('onSendList', selectItems.value);
 
-    shareService.shareTo()
+
+    const svgItems = getAsCSV(JSON.parse(JSON.stringify(selectItems.value)))
+    shareService.shareTo(null, svgItems)
     console.log('onSendList');
+}
+
+function getAsCSV(items) {
+    const [h1, h2, h3, h4, h5] = Object.keys(items[0])
+    let csvStr = `${h2},${h3},${h4}`
+    items.forEach(({ name, icon, group }) => {
+        const csvLine = `\n${name},${icon},${group}`
+        csvStr += csvLine
+    })
+
+    console.log(csvStr);
+    return csvStr
 }
 
 function slickOutSide(ev) {

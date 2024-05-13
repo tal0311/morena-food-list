@@ -185,6 +185,8 @@ function _getWindowOptionsString(options) {
     .join(',')
 }
 
+
+
 export const utilService = {
   makeId,
   makeLorem,
