@@ -72,7 +72,7 @@ function onSendList() {
     // link.download = 'list.csv';
     // link.click();
 
-    showSuccessMsg('coming soon... for now take a screenshot and send it to Moran')
+    showSuccessMsg('Coming soon... for now take a screenshot and send it to Moran')
     return
     // shareService.shareTo('whatsapp', file, 'list.csv')
     console.log('onSendList');
