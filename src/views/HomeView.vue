@@ -5,9 +5,6 @@
       <p>{{ getIcon }}</p>
     </header>
 
-
-
-
     <section class="welcome-section grid">
 
       <TheWelcome @toggleTour="toggleTour" />
