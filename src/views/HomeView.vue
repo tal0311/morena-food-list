@@ -1,7 +1,7 @@
 <template>
   <section class="home-view">
     <header>
-      <h1>Morena's list</h1>
+      <h1>Mrena's Food List</h1>
       <p>{{ getIcon }}</p>
     </header>
 
@@ -72,7 +72,7 @@ header {
   width: 100%;
   text-align: center;
   left: 0;
-  font-size: 2.8rem;
+  font-size: 2.5rem;
 }
 
 h1,
