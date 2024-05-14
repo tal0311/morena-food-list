@@ -107,7 +107,7 @@ footer {
 
 .lang-modal {
   position: absolute;
-  top: -230%;
+  top: -250%;
   border: none;
   background: var(--bClr1);
   box-shadow: 0 0 1px 0 var(--clr7);
@@ -119,6 +119,7 @@ footer {
 .lang-modal button {
   all: unset;
   padding-inline: 0.5rem;
+
 
 }
 </style>

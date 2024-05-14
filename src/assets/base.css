@@ -1,5 +1,5 @@
 html {
-   font-family: 'AL', sans-serif;
+   font-family: 'AR', sans-serif;
    letter-spacing: 1px;
 }
 
@@ -56,7 +56,7 @@ a {
 .icon {
   border: none;
   background: none;
-  box-shadow: 0 0 1px 0 var(--clr7);
+  box-shadow: 0 0 2px 0 var(--clr7);
   border-radius: 0.5rem;
 }
 
