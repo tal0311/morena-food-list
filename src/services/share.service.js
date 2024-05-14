@@ -4,10 +4,14 @@ export const shareService = {
 }
 
 const defaultMsg = 'היי, רשימת הקניות שלי נראית כך: '
-function shareTo(platform = 'whatsapp', data) {
-  shareToMobile(data)
-  // shareToDesktop(platform, data)
-  // utilService.isMobile() ?  : shareToDesktop(platform, data)
+async function shareTo(platform = 'whatsapp', data) {
+  try {
+    await shareToMobile(data)
+  } catch (error) {
+    console.log('error', error);
+    throw error
+  }
+
 }
 
 function shareToDesktop(platform, data) {
@@ -26,13 +30,21 @@ function _getPlatform(platform = 'whatsapp') {
   }
   return opts[platform]
 }
+
+
 async function shareToMobile(data) {
-  await navigator.share({
-    title: defaultMsg,
-    text: 'title',
-    files: [data],
-    url: 'https://www.google.com',
-  });
+  try {
+
+    await navigator.share({
+      title: defaultMsg,
+      text: 'title',
+      files: [data],
+      url: 'https://www.google.com',
+    });
+  } catch (error) {
+    console.error('error', error);
+    throw 'Could not share the list.'
+  }
 }
 
 // shareService.shareTo('whatsapp', 'list: milk, bread, eggs')
