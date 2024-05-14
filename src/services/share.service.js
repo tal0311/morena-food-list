@@ -38,7 +38,6 @@ async function shareToMobile(data) {
     await navigator.share({
       title: defaultMsg,
       text: 'title',
-      files: [data],
       url: 'https://www.google.com',
     });
   } catch (error) {
