@@ -5,15 +5,11 @@
 }
 
 @font-face {
-    font-family: 'AB';
+    font-family: 'AM';
     src: url('@/assets/typography/Assistant-Medium.ttf');
 }
 
 
-@font-face {
-    font-family: 'AL';
-    src: url('@/assets/typography/Assistant-Light.ttf');
-}
 
 
 
