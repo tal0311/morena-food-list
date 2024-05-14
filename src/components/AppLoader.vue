@@ -1,6 +1,6 @@
 <template>
     <div class="app-loader">
-        <div v-html="$svg('loader')"></div>
+        <div v-html="$svg('loader2')"></div>
     </div>
 </template>
 
