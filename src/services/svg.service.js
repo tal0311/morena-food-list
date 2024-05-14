@@ -70,10 +70,10 @@ const svgs = {
 </defs>
 
 <!-- Draw the static circle with animated gradient fill -->
-<circle cx="100" cy="110" r="60" stroke="url(#circleGradient)" stroke-width="8" fill="none" />
+<circle cx="100" cy="115" r="58" stroke="url(#circleGradient)" stroke-width="5" fill="none" />
 
 <!-- Draw the static triangle with animated gradient fill -->
-<polygon points="100,30 40,160 160,160" stroke="url(#triangleGradient)" stroke-width="8" fill="none" />
+<polygon points="100,30 40,160 160,160" stroke="url(#triangleGradient)" stroke-width="5" fill="none" />
 </svg>`,
 
   time:'<svg xmlns="http://www.w3.org/2000/svg" fill="#fff" height="24" viewBox="0 -960 960 960" width="24"><path d="m625.23-308.31 26.46-26.46-152.92-153.07v-190.31h-36.92v205.84l163.38 164ZM480.18-126.15q-73.39 0-138.06-27.89t-112.51-75.69q-47.84-47.81-75.65-112.29-27.81-64.48-27.81-137.8 0-73.39 27.89-138.06t75.69-112.51q47.81-47.84 112.29-75.65 64.48-27.81 137.8-27.81 73.39 0 138.06 27.89t112.51 75.69q47.84 47.8 75.65 112.29 27.81 64.48 27.81 137.8 0 73.39-27.89 138.06t-75.69 112.51q-47.8 47.84-112.29 75.65-64.48 27.81-137.8 27.81ZM480-480Zm0 316.92q131.65 0 224.29-92.63 92.63-92.64 92.63-224.29 0-131.65-92.63-224.29-92.64-92.63-224.29-92.63-131.65 0-224.29 92.63-92.63 92.64-92.63 224.29 0 131.65 92.63 224.29 92.64 92.63 224.29 92.63Z"/></svg>',
