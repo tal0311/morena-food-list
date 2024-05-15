@@ -3,6 +3,7 @@ import { ref, computed } from "vue";
 import { showErrorMsg } from "@/services/event-bus.service";
 import { reportService } from "@/services/report.service";
 
+// TODO : convert error handling to plugin
 export const useAppStore = defineStore("app", () => {
   const isTourActive = ref(false);
   const errorLogs = ref([]);
@@ -19,6 +20,7 @@ export const useAppStore = defineStore("app", () => {
       showErrorMsg("Opps, it's not you, it's us. We are working on fixing it");
     }
     errorLogs.value.push(err);
+    console.log(errorLogs.value);
   }
 
 function reportError(){

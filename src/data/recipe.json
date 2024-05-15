@@ -1,0 +1,24 @@
+[
+    {
+        "_id": "5f8f4b3b9b3b3b0017b1f3b1",
+        "title": "Salmon",
+        "description": "Salmon is a popular food. Classified as an oily fish, salmon is considered to be healthy due to the fish's high protein, high omega-3 fatty acids, and high vitamin D content.",
+        "ingredients": [
+            "salmon",
+            "salt",
+            "pepper",
+            "lemon"
+        ],
+        "products":"Salmon fillets (4) 1/2 teaspoon salt 1/2 teaspoon pepper 1 tablespoon lemon juice",
+        "instructions": [
+            "Preheat oven to 450 degrees F (230 degrees C).",
+            "Season salmon fillets with salt, pepper, and lemon juice.",
+            "Place in a baking dish and bake for 12-15 minutes."
+        ],
+        "image": "https://www.simplyrecipes.com/thmb/1Z1Z6Q1",
+        "level": "Easy",
+        "prepTime": 5,
+        "cookTime": 15
+                
+    }
+]

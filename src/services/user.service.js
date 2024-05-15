@@ -20,17 +20,22 @@ window.userService = userService;
 
 
 
-async function getLoggedInUser() {
-    let user = await storageService.query(LOGGED_USER);
+function getLoggedInUser() {
+    let user = utilService.loadFromStorage(LOGGED_USER);
+    console.log('user', user);
     return user;
 }
 
 
 
-function save(user) {
+async function save(user) {
 
     const method = (user._id) ? 'put' : 'post';
-    return storageService[method](STORAGE_KEY, user);
+     const updatedUser= await storageService[method](STORAGE_KEY, user);
+     if(updatedUser){
+         return _saveLoggedUser(updatedUser);
+
+     }
 
 }
 
@@ -79,11 +84,11 @@ function getEmptyUser() {
 
 
 function _saveLoggedUser(user) {
-   return utilService.saveToStorage(LOGGED_USER, user);
+    return utilService.saveToStorage(LOGGED_USER, user);
 }
 
 (() => {
-
+    utilService.saveToStorage(STORAGE_KEY, users);
     _saveLoggedUser(users[0]);
     // users[0]
 

@@ -3,8 +3,11 @@ import { defineStore } from "pinia";
 import { itemService } from "@/services/item.service.local";
 import { showUserMsg, showErrorMsg, showSuccessMsg } from "@/services/event-bus.service";
 import { useAppStore } from "@/stores/app-store";
-
+import { useUserStore } from "@/stores/user-store";
 export const useListStore = defineStore("list", () => {
+  const userStore= useUserStore();
+
+
   const list = ref(null);
   const selectedItems = ref([]);
   const currLang = ref("en");
@@ -73,9 +76,17 @@ export const useListStore = defineStore("list", () => {
     list.value.splice(itemIdx, 1, item);
     if (item.isSelected) {
       selectedItems.value.push(item);
+      // save list to user
     } else {
       selectedItems.value = selectedItems.value.filter((i) => i._id !== itemId);
+      // save list to user
     }
+
+    
+    userStore.updateUser('selected-items', JSON.parse(JSON.stringify(selectedItems.value)))
+
+
+    
   }
 
   function setLang(lang) {

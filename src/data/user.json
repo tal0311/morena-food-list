@@ -6,8 +6,9 @@
     "city": "Tel Aviv",
     "labels": [],
     "imgUrl":"@/assets/images/default-user.png",
-    "username":"israeli",
-    "password":"1234"
+    "username":"user1",
+    "password":"1",
+    "selected-items":[]
  },
  {
     "_id": "2",
@@ -16,8 +17,8 @@
     "city": "Jerusalem",
     "labels": [],
     "imgUrl":"@/assets/images/default-user.png",
-    "username":"jane",
-    "password":"1234"
-
+    "username":"user2",
+    "password":"2",
+    "selected-items":[]
  }
 ]

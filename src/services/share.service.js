@@ -31,13 +31,13 @@ function _getPlatform(platform = 'whatsapp') {
   return opts[platform]
 }
 
-
+// TODO: finish share ability to mobile. get inspiration from here: https://web.dev/web-share/ 
 async function shareToMobile(data) {
   try {
 
     await navigator.share({
       title: defaultMsg,
-      text: 'title',
+      text: defaultMsg + data,
       url: 'https://www.google.com',
     });
   } catch (error) {
@@ -45,5 +45,7 @@ async function shareToMobile(data) {
     throw 'Could not share the list.'
   }
 }
+
+
 
 // shareService.shareTo('whatsapp', 'list: milk, bread, eggs')
