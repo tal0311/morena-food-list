@@ -1,37 +1,87 @@
 <template>
-
-    <div>
+<div>
         <article class="recipe-preview grid">
-            <img src="./../assets/images/recipe/R-1.jpeg" alt="">
+            <img :src="url" :alt="recipe.recipe.title">
             <div class="match">
-                <span class="match-num" :style="{ color: 'lightgreen' }">97%</span>
+                <span class="match-num" :style="getStyle">Products match {{ props.recipe.percentage }} %</span>
             </div>
             <div class="info-container grid">
-                <h4>eggs and rice</h4>
+                <h4>{{ props.recipe.recipe.title }}</h4>
                 <div class="sub-info grid">
-                    <span> easy</span> <span>30 min</span>
+                    <span>{{ props.recipe.recipe.level }} </span> <span>{{ props.recipe.recipe.prepTime }}min</span>
                 </div>
             </div>
         </article>
-    </div>
-
+    </div> 
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
-const getStyle = computed(() => {
-    return {
-        backgroundImage: `url(./../assets/images/recipe/R-1.jpeg)`
+const props = defineProps({
+    recipe: {
+        type: Object,
+    
     }
 })
 
-//https://source.unsplash.com/random/800x600
+const url = computed(() => {
+    console.log(props.recipe.recipe.image);
+    return new URL(`../assets/images/${props.recipe.recipe.image}.jpeg`, import.meta.url).href;
+});
+
+
+
+const getStyle = computed(() => {
+    console.log(props.recipe.percentage);
+if (props.recipe.percentage > 90) {
+    return {
+        color: 'lightgreen'
+    };
+} else if (props.recipe.percentage > 80) {
+    return {
+        color: 'green'
+    };
+} else if (props.recipe.percentage > 70) {
+    return {
+        color: 'yellow'
+    };
+} else if (props.recipe.percentage > 60) {
+    return {
+        color: 'lightyellow'
+    };
+} else if (props.recipe.percentage > 50) {
+    return {
+        color: 'orange'
+    };
+} else if (props.recipe.percentage > 40) {
+    return {
+        color: 'darkorange'
+    };
+} else if (props.recipe.percentage > 20) {
+    return {
+        color: 'red'
+    };
+} else {
+    return {
+        color: 'gray'
+    };
+}
+
+})
+
 </script>
+
 <style scoped>
+
 .recipe-preview {
-    width: 300px;
-    height: 400px;
+
+    
+    /* padding: 2rem; */
+    box-shadow: 0 0 2px 0px var(--clr4);
+
+    width: 90vw;
+    height: 500px;
     position: relative;
     border-radius: var(--br);
     overflow: hidden;
@@ -103,4 +153,5 @@ img {
     object-fit: cover;
     z-index: -1;
 }
+
 </style>

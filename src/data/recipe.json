@@ -1,3 +1,4 @@
+
 [
     {
         "_id": "5f8f4b3b9b3b3b0017b1f3b1",
@@ -15,12 +16,13 @@
             "Season salmon fillets with salt, pepper, and lemon juice.",
             "Place in a baking dish and bake for 12-15 minutes."
         ],
-        "image": "https://www.simplyrecipes.com/thmb/1Z1Z6Q1",
+        "image": "R-1.jpeg",
         "level": "Easy",
         "prepTime": 5,
         "cookTime": 15
     },
     {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b2",
         "title": "Salmon with Tomatoes and Greens",
         "description": "Salmon baked with tomatoes and greens, a dish rich in protein, carbohydrates, fiber, vitamins, minerals, and healthy fats.",
         "ingredients": [
@@ -42,12 +44,13 @@
             "About 10-15 minutes before eating, place on the top shelf of the oven. Bake for 10-15 minutes until the fish is medium rare.",
             "Serve with lemon, alongside white rice or any other natural carbohydrate."
         ],
-        "image": "https://example.com/salmon_tomatoes_greens.jpg",
+        "image": "R-2.jpeg",
         "level": "Medium",
         "prepTime": 15,
         "cookTime": 15
     },
     {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b3",
         "title": "Chicken Thighs with Crispy Rice",
         "description": "Chicken thighs or parts cooked with crispy rice on the stovetop.",
         "ingredients": [
@@ -71,12 +74,13 @@
             "Before serving, increase the heat to give the rice at the bottom a good crisp.",
             "Serve alongside a salad with vegetables and greens."
         ],
-        "image": "https://example.com/chicken_crispy_rice.jpg",
+        "image": "R-3.jpeg",
         "level": "Medium",
         "prepTime": 20,
         "cookTime": 90
     },
     {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b4",
         "title": "Greens and Chestnuts Salad",
         "description": "A fresh and vibrant salad with greens, chestnuts, and a tangy dressing.",
         "ingredients": [
@@ -102,12 +106,13 @@
             "Pour the dressing over the salad just before serving and toss gently to maintain crispness.",
             "Serve alongside meat, fish, chicken, or even homemade hummus."
         ],
-        "image": "https://example.com/greens_chestnuts_salad.jpg",
+        "image": "R-4.jpeg",
         "level": "Easy",
         "prepTime": 15,
         "cookTime": 0
     },
     {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b5",
         "title": "Chickpea Tortillas",
         "description": "Simple and nutritious tortillas made from chickpea flour, perfect with various fillings.",
         "ingredients": [
@@ -124,12 +129,13 @@
             "Remove when the center of the tortilla is dry.",
             "Serve with scrambled eggs, avocado, and a simple vegetable salad."
         ],
-        "image": "https://example.com/chickpea_tortillas.jpg",
+        "image": "R-5.jpeg",
         "level": "Easy",
         "prepTime": 10,
         "cookTime": 10
     },
     {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b6",
         "title": "Homemade Hummus",
         "description": "Creamy and delicious homemade hummus, perfect as a dip or spread.",
         "ingredients": [
@@ -150,12 +156,13 @@
             "For extra smoothness, pass the hummus through a sieve.",
             "Serve with olive oil, lemon, chopped parsley and cilantro, alongside hard-boiled eggs or any leftover protein."
         ],
-        "image": "https://example.com/homemade_hummus.jpg",
+        "image": "R-6.jpeg",
         "level": "Medium",
         "prepTime": 20,
         "cookTime": 60
     },
     {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b7",
         "title": "Coarse Vegetable Salad",
         "description": "A robust salad with fresh vegetables, seasoned simply and deliciously.",
         "ingredients": [
@@ -174,12 +181,13 @@
             "Generously season with olive oil, za'atar, lemon juice, and salt and pepper to taste.",
             "Serve as a side dish to the main meal."
         ],
-        "image": "https://example.com/coarse_salad.jpg",
+        "image": "R-7.jpeg",
         "level": "Easy",
         "prepTime": 10,
         "cookTime": 0
     },
     {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b8",
         "title": "Chicken, Chickpea, and Vegetable Stew",
         "description": "A hearty stew with chicken, chickpeas, and a variety of vegetables.",
         "ingredients": [
@@ -203,12 +211,13 @@
             "Pour boiling water until the chicken starts to float, season with salt and pepper, and cook on low heat for 2-3 hours.",
             "Serve with white rice, mashed potatoes, or crispy baked sweet potatoes."
         ],
-        "image": "https://example.com/chicken_chickpea_stew.jpg",
+        "image": "R-8.jpeg",
         "level": "Medium",
         "prepTime": 20,
         "cookTime": 180
     },
     {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b9",
         "title": "Meat and Bone Casserole",
         "description": "A rich casserole of assorted meats and bones, slow-cooked with vegetables and spices.",
         "ingredients": [
@@ -238,7 +247,7 @@
             "Bake at high heat for 20 minutes, then reduce to 160-170 degrees C and cook for 4 hours.",
             "Serve with white rice, mashed potatoes, or roasted butternut squash."
         ],
-        "image": "https://example.com/meat_bone_casserole.jpg",
+        "image": "R-9.jpeg",
         "level": "Hard",
         "prepTime": 30,
         "cookTime": 300

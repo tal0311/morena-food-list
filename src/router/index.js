@@ -40,7 +40,7 @@ const router = createRouter({
     {
       path: "/recipe",
       name: "recipe",
-      component: () => import("@/views/RecipeView.vue"),
+      component: () => import("@/components/RecipeView.vue"),
     },
     {
       path: "/:pathMatch(.*)*",
@@ -61,13 +61,13 @@ router.beforeEach(async(to, from, next) => {
 
 
   if (to.name === "recipe") {
-    if (!listStore.getSelectedItems.length) {
-      next({ name: "list" });
-      showSuccessMsg("Please select items to view recipe");
-    } else {
-      next();
-    }
-    return
+    // if (!listStore.getSelectedItems.length) {
+    //   next({ name: "list" });
+    //   showSuccessMsg("Please select items to view recipe");
+    // } else {
+    //   next();
+    // }
+    // return
   }
 
   if (to.name === "list") {

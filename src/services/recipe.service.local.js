@@ -3,57 +3,189 @@ import { storageService } from "./async-storage.service.js";
 import { utilService } from "./util.service.js";
 import { userService } from "./user.service.js";
 
-import recipes from "./../data/recipe.json";
+import gRecipes from "./../data/recipe.json";
 
 const RECIPE_KEY = "recipe_DB";
 
-export const itemService = {
-  
-};
-window.itemService = itemService;
+export const recipeService = {
+  query,
+  getById,
+  remove,
+  save,
+  getEmptyRecipe,
+  updateLabel,
+}
 
-loadItems();
+window.recipeService = recipeService;
 
-async function query(filterBy = {}) {
-  let items = await storageService.query(RECIPE_KEY);
-  if (filterBy.txt) {
-    const regex = new RegExp(filterBy.txt, "i");
-    items = items.filter((item) => regex.test(item.txt));
+const selectedItems= [
+  {
+      "_id": "11",
+      "name": "Rice",
+      "icon": "🍚",
+      "group": "grains",
+      "readMoreURL": "https://example.com/rice-info",
+      "color": "white",
+      "isSelected": true
+  },
+  {
+      "_id": "5",
+      "name": "Salmon",
+      "icon": "🐟",
+      "group": "fish-and-seafood",
+      "readMoreURL": "https://example.com/eggs-info",
+      "color": "pink",
+      "isSelected": true
+  },
+  {
+      "_id": "192",
+      "name": "beef-ribs",
+      "icon": "🍖",
+      "group": "meat-and-poultry",
+      "readMoreURL": "",
+      "color": "red",
+      "isSelected": true
+  },
+  {
+      "_id": "193",
+      "name": "osso-buco",
+      "icon": "🍖",
+      "group": "meat-and-poultry",
+      "readMoreURL": "",
+      "color": "red",
+      "isSelected": true
+  },
+  {
+      "_id": "148",
+      "name": "pullets",
+      "icon": "🍳",
+      "group": "meat-and-poultry",
+      "readMoreURL": "",
+      "color": "yellow",
+      "isSelected": true
+  },
+  {
+      "_id": "19",
+      "name": "beef",
+      "icon": "🥩",
+      "group": "meat-and-poultry",
+      "readMoreURL": "https://example.com/beef-info",
+      "color": "red",
+      "isSelected": true
+  },
+  {
+      "_id": "8",
+      "name": "Spinach",
+      "icon": "🥬",
+      "group": "vegetable",
+      "readMoreURL": "https://example.com/spinach-info",
+      "color": "green",
+      "isSelected": true
+  },
+  {
+      "_id": "196",
+      "name": "parsley-root",
+      "icon": "🥔",
+      "group": "vegetable",
+      "readMoreURL": "",
+      "color": "white",
+      "isSelected": true
+  },
+  {
+      "_id": "195",
+      "name": "celery-root",
+      "icon": "🥔",
+      "group": "vegetable",
+      "readMoreURL": "",
+      "color": "white",
+      "isSelected": true
+  },
+  {
+      "_id": "197",
+      "name": "cilantro-root",
+      "icon": "🥔",
+      "group": "vegetable",
+      "readMoreURL": "",
+      "color": "white",
+      "isSelected": true
+  },
+  {
+      "_id": "189",
+      "name": "full-tahini",
+      "icon": "🌰",
+      "group": "spread",
+      "readMoreURL": "",
+      "color": "white",
+      "isSelected": true
+  },
+  {
+      "_id": "141",
+      "name": "tahini",
+      "icon": "🌰",
+      "group": "spread",
+      "readMoreURL": "",
+      "color": "white",
+      "isSelected": true
+  },
+  {
+      "_id": "199",
+      "name": "cocoa",
+      "icon": "🍫",
+      "group": "backing-products",
+      "readMoreURL": "",
+      "color": "brown",
+      "isSelected": true
   }
+]
 
-  return items;
-  // return getGroupsByLabels(items);
+// loadItems();
+// await query();
+async function query() {
+  let matchItems = {};
+  let recipes = gRecipes;
+  
+  recipes.forEach(recipe => {
+    recipe.ingredients.forEach(ingr => {
+      const regex = new RegExp(ingr, "i");
+      
+      selectedItems.forEach(item => {
+        if (regex.test(item.name)) {
+          if (!matchItems[recipe._id]) {
+            matchItems[recipe._id] = [ingr];
+          } else {
+            matchItems[recipe._id].push(ingr);
+          }
+        }
+      });
+    });
+  });
+ 
+  matchItems = Object.keys(matchItems).map(key => {
+    return {
+      _id: key,
+      ingredients: matchItems[key],
+      percentage: +((matchItems[key].length / selectedItems.length) * 100).toFixed(),
+      recipe: recipes.find(recipe => recipe._id === key)
+      
+    };
+  });
 
+
+
+  
+
+  return matchItems;
 }
 
 
 function getGroupsByLabels(list) {
-    
-  // debugger
-  const itemMap= list.reduce((acc, item) => {
-    if (!acc[item.group]) {
-      acc[item.group] = [];
-    }
-    acc[item.group].push(item);
-    return acc;
-  }, {});
-  // console.log("acc", itemMap);
 
-  return itemMap;
-
-  //  Object.keys(list.value).map(label=>({name:label, userInput: ''}))
 }
 
-function loadLabelsFromStorage() {  } 
+
 
 function updateLabel(label) {
-  label = JSON.parse(JSON.stringify(label.value));
-  
-  let labels = utilService.loadFromStorage(LABELS_KEY);
-  labels= labels.map((l) => l.name === label.name ? {...label , userInput:label.userInput} : l);
-
-  utilService.saveToStorage(LABELS_KEY, labels);
-  return labels;
+  console.log("label", label);
 
 }
 
@@ -86,23 +218,28 @@ async function save(item) {
     // savedItem = await httpService.put(`item/${item._id}`, item)
   } else {
     // Later, owner is set by the backend
-    const {selectedItems} = userService.getLoggedInUser();
+    const { selectedItems } = userService.getLoggedInUser();
     savedItem = await storageService.item(RECIPE_KEY, item);
     // savedItem = await httpService.item('item', item)
   }
   return savedItem;
 }
 
-function getEmptyItem(name) {
+function getEmptyRecipe() {
   return {
-    id: "",
-    name,
-    icon: "",
-    group: "",
-    readMoreURL: "https://example.com/rice-info",
-    color: "",
-    isSelected: false,
-  };
+    _id: "",
+    title: "",
+    description: "",
+    ingredients: [
+
+    ],
+    products: "",
+    instructions: [],
+    image: "",
+    level: Easy,
+    prepTime: null,
+    cookTime: null
+  }
 }
 
 
@@ -110,5 +247,5 @@ function getEmptyItem(name) {
 
 // TEST DATA
 (async () => {
-  utilService.saveToStorage(RECIPE_KEY, recipes);
+  utilService.saveToStorage(RECIPE_KEY, gRecipes);
 })();
