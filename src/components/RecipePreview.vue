@@ -1,7 +1,7 @@
 <template>
 <div>
         <article class="recipe-preview grid">
-            <img :src="url" :alt="recipe.recipe.title">
+            <img src="@/assets/images/recipe/R-1.jpeg" :alt="recipe.recipe.title">
             <div class="match">
                 <span class="match-num" :style="getStyle">Products match {{ props.recipe.percentage }} %</span>
             </div>
@@ -25,9 +25,9 @@ const props = defineProps({
     }
 })
 
-const url = computed(() => {
-  return new URL(`../assets/images/recipe/${props.recipe.recipe.image}`).href;
-});
+// const url = computed(() => {
+//   return new URL(`../assets/images/recipe/${props.recipe.recipe.image}`).href;
+// });
 
 
 
