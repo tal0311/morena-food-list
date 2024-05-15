@@ -34,36 +34,13 @@ import { utilService } from '@/services/util.service';
 
 const listStore = useListStore()
 
-
-onBeforeMount(() => {
-    listStore.loadList()
-    // listStore.loadLabels()
-})
-
 const groupList = computed(() => listStore?.getList)
 const labelList = computed(() => listStore?.getLabels)
 
 
-
-// const labelList1 = computed(() => {
-
-
-//     if (groupList.value) {
-//         return Object.keys(groupList.value).map((name) => {
-//             return { name, userInput: '' }
-//         })
-//     }
-// })
-
-// watchEffect(() => {
-//     console.log('labelList', labelList.value);
-//     // console.log('labels',  .value);
-// })
-
 const isModalOpen = ref(false)
 function onDone() {
     if (btnState.value === 'edit') {
-        //    console.log('save notes', currLabel.value);
         submitLabel()
         btnState.value = 'done'
         return

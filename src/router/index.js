@@ -4,6 +4,10 @@ import {
   createWebHashHistory,
 } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import { useUserStore } from "@/stores/user-store";
+import { useListStore } from "@/stores/list-store";
+import { useAppStore } from "@/stores/app-store";
+import { showUserMsg, showSuccessMsg } from "@/services/event-bus.service";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -47,6 +51,32 @@ const router = createRouter({
 
 // TODO:  add navigation guards
 // TODO: route for recipes
-// router.beforeEach((to, from, next) => {})
+router.beforeEach(async(to, from, next) => {
+  const userStore = useUserStore()
+  const listStore = useListStore()
+  const { logError } = useAppStore()
+  userStore.loggedUser
+
+
+
+
+  if (to.name === "recipe") {
+    if (!listStore.getSelectedItems.length) {
+      next({ name: "list" });
+      showSuccessMsg("Please select items to view recipe");
+    } else {
+      next();
+    }
+    return
+  }
+
+  if (to.name === "list") {
+    if (!listStore.getList) {
+      listStore.loadList()
+    }
+  }
+
+  next();
+})
 
 export default router;

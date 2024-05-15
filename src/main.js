@@ -12,8 +12,8 @@ import svgPlugin from "./plugins/svgPlugin";
 const app = createApp(App);
 
 // Libraries
-app.use(router);
 app.use(createPinia());
+app.use(router);
 
 // Plugins
 app.use(i18nPlugin);
