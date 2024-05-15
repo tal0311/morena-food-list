@@ -49,7 +49,7 @@ function onDone() {
 }
 
 function toggleSelect(id) {
-    console.log('toggleSelect', id);
+    
     listStore.toggleSelect(id)
 }
 

@@ -1,7 +1,7 @@
 <template>
 <div>
         <article class="recipe-preview grid">
-            <img src="@/assets/images/recipe/R-1.jpeg" :alt="recipe.recipe.title">
+            <img :src="props.recipe.recipe.image" :alt="recipe.recipe.title">
             <div class="match">
                 <span class="match-num" :style="getStyle">Products match {{ props.recipe.percentage }} %</span>
             </div>

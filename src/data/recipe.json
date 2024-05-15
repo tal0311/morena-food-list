@@ -16,7 +16,7 @@
             "Season salmon fillets with salt, pepper, and lemon juice.",
             "Place in a baking dish and bake for 12-15 minutes."
         ],
-        "image": "R-1.jpeg",
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802815/Morena%20foodlist/R-1_wsmfyj.jpg",
         "level": "Easy",
         "prepTime": 5,
         "cookTime": 15
@@ -44,7 +44,7 @@
             "About 10-15 minutes before eating, place on the top shelf of the oven. Bake for 10-15 minutes until the fish is medium rare.",
             "Serve with lemon, alongside white rice or any other natural carbohydrate."
         ],
-        "image": "R-2.jpeg",
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802815/Morena%20foodlist/R-2_p3vlx5.jpg",
         "level": "Medium",
         "prepTime": 15,
         "cookTime": 15
@@ -74,7 +74,7 @@
             "Before serving, increase the heat to give the rice at the bottom a good crisp.",
             "Serve alongside a salad with vegetables and greens."
         ],
-        "image": "R-3.jpeg",
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802818/Morena%20foodlist/R-3_lw7be7.jpg",
         "level": "Medium",
         "prepTime": 20,
         "cookTime": 90
@@ -106,7 +106,7 @@
             "Pour the dressing over the salad just before serving and toss gently to maintain crispness.",
             "Serve alongside meat, fish, chicken, or even homemade hummus."
         ],
-        "image": "R-4.jpeg",
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802816/Morena%20foodlist/R-4_vaaxtm.jpg",
         "level": "Easy",
         "prepTime": 15,
         "cookTime": 0
@@ -129,7 +129,7 @@
             "Remove when the center of the tortilla is dry.",
             "Serve with scrambled eggs, avocado, and a simple vegetable salad."
         ],
-        "image": "R-5.jpeg",
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802817/Morena%20foodlist/R-5_x4wipc.jpg",
         "level": "Easy",
         "prepTime": 10,
         "cookTime": 10
@@ -156,7 +156,7 @@
             "For extra smoothness, pass the hummus through a sieve.",
             "Serve with olive oil, lemon, chopped parsley and cilantro, alongside hard-boiled eggs or any leftover protein."
         ],
-        "image": "R-6.jpeg",
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802817/Morena%20foodlist/R-6_wdzw8f.jpg",
         "level": "Medium",
         "prepTime": 20,
         "cookTime": 60
@@ -181,7 +181,7 @@
             "Generously season with olive oil, za'atar, lemon juice, and salt and pepper to taste.",
             "Serve as a side dish to the main meal."
         ],
-        "image": "R-7.jpeg",
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802816/Morena%20foodlist/R-10_j72z3l.jpg",
         "level": "Easy",
         "prepTime": 10,
         "cookTime": 0
@@ -211,7 +211,7 @@
             "Pour boiling water until the chicken starts to float, season with salt and pepper, and cook on low heat for 2-3 hours.",
             "Serve with white rice, mashed potatoes, or crispy baked sweet potatoes."
         ],
-        "image": "R-8.jpeg",
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802817/Morena%20foodlist/R-8_qnmpla.jpg",
         "level": "Medium",
         "prepTime": 20,
         "cookTime": 180
@@ -247,7 +247,7 @@
             "Bake at high heat for 20 minutes, then reduce to 160-170 degrees C and cook for 4 hours.",
             "Serve with white rice, mashed potatoes, or roasted butternut squash."
         ],
-        "image": "R-9.jpeg",
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802816/Morena%20foodlist/R-10_j72z3l.jpg",
         "level": "Hard",
         "prepTime": 30,
         "cookTime": 300
