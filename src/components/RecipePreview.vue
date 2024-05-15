@@ -27,7 +27,7 @@ const props = defineProps({
 
 const url = computed(() => {
     // console.log(props.recipe.recipe.image);
-    return new URL(`../assets/images/recipe/${props.recipe.recipe.image}.jpeg`, import.meta.url).href;
+    return new URL(`/assets/images/recipe/${props.recipe.recipe.image}.jpeg`, import.meta.url).href;
 });
 
 
