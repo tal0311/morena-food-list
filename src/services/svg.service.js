@@ -49,7 +49,7 @@ const svgs = {
 
   loader2:`
   <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-<!-- Define gradients for animation -->
+
 <defs>
   <linearGradient id="triangleGradient">
     <stop offset="0%" stop-color="#e8e8e8">
@@ -69,10 +69,10 @@ const svgs = {
   </linearGradient>
 </defs>
 
-<!-- Draw the static circle with animated gradient fill -->
+
 <circle cx="100" cy="113" r="60" stroke="url(#circleGradient)" stroke-width="5" fill="none"></circle>
 
-<!-- Draw the static triangle with animated gradient fill -->
+
 <polygon points="100,30 40,160 160,160" stroke="url(#triangleGradient)" stroke-width="5" fill="none"></polygon>
 </svg>`,
 
