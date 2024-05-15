@@ -26,7 +26,7 @@ const props = defineProps({
 })
 
 const url = computed(() => {
-  return new URL(`../assets/images/recipe${props.recipe.recipe.image}`).href;
+  return new URL(`../assets/images/recipe/${props.recipe.recipe.image}`).href;
 });
 
 
