@@ -680,14 +680,14 @@ const gTrans = {
     he: "כיף שבאת!",
   },
   "home-action-1": {
-    en: "What to Do?",
-    es: "¿Qué hacer?",
-    he: "תראו לי מה עושים כאן",
+    en: "Learn and cook your own food",
+    es: "Aprende y cocina tu propia comida",
+    he:"ללמוד ולבשל את האוכל שלך",
   },
   "home-action-2": {
-    en: "I'm ready to start",
-    es: "Estoy listo para empezar",
-    he: "אני מוכן להתחיל",
+    he: "לרשימת הקניות שלי",
+    en: "Go to my shopping list",
+    es: "Ir a mi lista de la compra",
   },
   print: {
     en: "Print",

@@ -3,7 +3,7 @@
     <h1>{{ $trans('home-page') }}</h1>
 
     <div class="action-container grid">
-      <button class="tour-btn primary-btn disabled" disabled @click="$emit('toggleTour')">{{ $trans('home-action-1') }}</button>
+      <button class="tour-btn primary-btn" @click="navigateTo">{{ $trans('home-action-1') }}</button>
       <button class="link-btn primary-btn">
         <RouterLink to="/list">{{ $trans('home-action-2') }}</RouterLink>
       </button>
@@ -11,7 +11,17 @@
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+import router from '@/router';
+import { useRouter } from 'vue-router';
+
+function navigateTo() {
+  console.log('navigateTo');
+router.push({ name: 'recipe' })
+}
+
+
+</script>
 
 <style scoped>
 h1 {
@@ -47,10 +57,9 @@ a {
 }
 
 .action-container {
-  gap: 1rem;
+  gap: 1.2rem;
+  grid-template-rows: 50% 50%;
 }
 
-.disabled {
-  opacity: 0.5;
-}
+
 </style>

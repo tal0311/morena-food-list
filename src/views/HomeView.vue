@@ -7,7 +7,7 @@
 
     <section class="welcome-section grid">
 
-      <TheWelcome @toggleTour="toggleTour" />
+      <TheWelcome />
 
       <footer id="language-modal">
         <div v-if="isLangModalOpen" class="lang-modal grid">

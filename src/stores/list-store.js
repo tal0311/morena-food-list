@@ -83,7 +83,7 @@ export const useListStore = defineStore("list", () => {
     }
 
     
-    userStore.updateUser('selected-items', JSON.parse(JSON.stringify(selectedItems.value)))
+    userStore.updateUser('selectedItems', JSON.parse(JSON.stringify(selectedItems.value)))
 
 
     

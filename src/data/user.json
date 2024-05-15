@@ -8,7 +8,7 @@
     "imgUrl":"@/assets/images/default-user.png",
     "username":"user1",
     "password":"1",
-    "selected-items":[]
+    "selectedItems":[]
  },
  {
     "_id": "2",
@@ -19,6 +19,6 @@
     "imgUrl":"@/assets/images/default-user.png",
     "username":"user2",
     "password":"2",
-    "selected-items":[]
+    "selectedItems":[]
  }
 ]
