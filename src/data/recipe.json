@@ -6,8 +6,8 @@
         "ingredients": [
             "salmon",
             "salt",
-            "pepper",
-            "lemon"
+            "black-pepper",
+            "lemons"
         ],
         "products":"Salmon fillets (4) 1/2 teaspoon salt 1/2 teaspoon pepper 1 tablespoon lemon juice",
         "instructions": [
@@ -27,11 +27,11 @@
             "tomatoes",
             "cilantro",
             "garlic",
-            "lemon",
+            "lemons",
             "paprika",
-            "olive oil",
-            "Atlantic salt",
-            "black pepper"
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
         ],
         "products": "4 salmon fillets, 2 tomatoes or cherry tomatoes, 1 bunch cilantro, 4 cloves garlic, 1 lemon, 1 teaspoon paprika, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
         "instructions": [
@@ -51,15 +51,15 @@
         "title": "Chicken Thighs with Crispy Rice",
         "description": "Chicken thighs or parts cooked with crispy rice on the stovetop.",
         "ingredients": [
-            "chicken thighs or parts",
-            "white onions",
+            "chicken-thighs",
+            "onions",
             "celery",
-            "white rice",
+            "rice",
             "baharat",
             "paprika",
-            "olive oil",
-            "Atlantic salt",
-            "black pepper"
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
         ],
         "products": "4 chicken thighs, 2 white onions, 2 celery stalks, 1 cup white rice, 1 teaspoon baharat, 1 teaspoon paprika, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
         "instructions": [
@@ -80,18 +80,20 @@
         "title": "Greens and Chestnuts Salad",
         "description": "A fresh and vibrant salad with greens, chestnuts, and a tangy dressing.",
         "ingredients": [
-            "lettuce leaves",
-            "spinach or watercress",
-            "green onion",
-            "zucchini or squash",
+            "lettuce",
+            "spinach",
+            "watercress",
+            "green-onion",
+            "zucchini",
+            "squash",
             "chestnuts",
             "honey",
-            "lemon",
-            "orange",
-            "crushed chili",
-            "olive oil",
-            "Atlantic salt",
-            "black pepper"
+            "lemons",
+            "oranges",
+            "crushed-chili",
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
         ],
         "products": "1 head lettuce, 1 bunch spinach or watercress, 2 green onions, 1 zucchini, 1 cup chestnuts, 1 teaspoon honey, 1 lemon, 1 orange, 1 teaspoon crushed chili, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
         "instructions": [
@@ -109,8 +111,8 @@
         "title": "Chickpea Tortillas",
         "description": "Simple and nutritious tortillas made from chickpea flour, perfect with various fillings.",
         "ingredients": [
-            "chickpea flour",
-            "turmeric (optional)",
+            "chickpea-flour",
+            "turmeric",
             "salt"
         ],
         "products": "1 cup chickpea flour, 1/2 teaspoon turmeric (optional), 1/2 teaspoon salt",
@@ -131,14 +133,14 @@
         "title": "Homemade Hummus",
         "description": "Creamy and delicious homemade hummus, perfect as a dip or spread.",
         "ingredients": [
-            "frozen chickpeas",
+            "chickpeas",
             "celery",
-            "white onion",
-            "full tahini",
-            "lemon",
-            "olive oil",
-            "Atlantic salt",
-            "black pepper"
+            "onion",
+            "full-tahini",
+            "lemons",
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
         ],
         "products": "2 cups frozen chickpeas, 2 celery stalks, 1 white onion, 1/2 cup full tahini, 1 lemon, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
         "instructions": [
@@ -157,14 +159,14 @@
         "title": "Coarse Vegetable Salad",
         "description": "A robust salad with fresh vegetables, seasoned simply and deliciously.",
         "ingredients": [
-            "cucumber",
-            "tomato",
-            "red onion",
-            "green onion",
+            "cucumbers",
+            "tomatoes",
+            "red-onion",
+            "green-onion",
             "za'atar",
-            "olive oil",
-            "Atlantic salt",
-            "black pepper"
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
         ],
         "products": "2 cucumbers, 2 tomatoes, 1 red onion, 2 green onions, 1 teaspoon za'atar, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
         "instructions": [
@@ -181,17 +183,17 @@
         "title": "Chicken, Chickpea, and Vegetable Stew",
         "description": "A hearty stew with chicken, chickpeas, and a variety of vegetables.",
         "ingredients": [
-            "chicken parts (thighs/drumsticks)",
-            "white onion",
-            "fresh or frozen chickpeas",
+            "chicken-thighs",
+            "onion",
+            "chickpeas",
             "celery",
             "parsley",
             "cilantro",
             "turmeric",
             "paprika",
-            "olive oil",
-            "Atlantic salt",
-            "black pepper"
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
         ],
         "products": "4 chicken thighs, 1 white onion, 1 cup fresh or frozen chickpeas, 2 celery stalks, 1 bunch parsley, 1 bunch cilantro, 1 teaspoon turmeric, 1 teaspoon paprika, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
         "instructions": [
@@ -210,21 +212,21 @@
         "title": "Meat and Bone Casserole",
         "description": "A rich casserole of assorted meats and bones, slow-cooked with vegetables and spices.",
         "ingredients": [
-            "beef ribs",
-            "osso buco",
-            "shoulder meat",
-            "celery root",
-            "parsley root",
-            "cilantro root",
+            "beef-ribs",
+            "osso-buco",
+            "beef-shoulder",
+            "celery-root",
+            "parsley-root",
+            "cilantro-root",
             "carrots",
-            "white onions",
+            "onions",
             "celery",
             "cocoa",
             "paprika",
             "silan",
-            "olive oil",
-            "Atlantic salt",
-            "black pepper"
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
         ],
         "products": "2 lbs beef ribs, 2 osso buco pieces, 1 lb shoulder meat, 1 celery root, 2 parsley roots, 2 cilantro roots, 4 carrots, 2 white onions, 2 celery stalks, 1 teaspoon cocoa, 1 teaspoon paprika, 1 tablespoon silan, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
         "instructions": [

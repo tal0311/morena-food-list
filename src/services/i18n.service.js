@@ -547,6 +547,16 @@ const gTrans = {
     es: "Pollo",
     he: "עוף",
   },
+  'chicken-thighs': {
+    en: "Chicken Thighs",
+    es: "Muslos de pollo",
+    he: "ירך עוף",
+  },
+  celery: {
+    en: "Celery",
+    es: "Apio",
+    he: "סלרי",
+  },
   //  time
   time: {
     en: "Time",
@@ -682,7 +692,7 @@ const gTrans = {
   "home-action-1": {
     en: "Learn and cook your own food",
     es: "Aprende y cocina tu propia comida",
-    he:"ללמוד ולבשל את האוכל שלך",
+    he: "ללמוד ולבשל את האוכל שלך",
   },
   "home-action-2": {
     he: "לרשימת הקניות שלי",
@@ -831,6 +841,11 @@ const gTrans = {
     es: "Cilantro",
     he: "כוסברה",
   },
+  cilantro: {
+    en: "Cilantro",
+    es: "Cilantro",
+    he: "כוסברה",
+  },
   "atlantic-salt": {
     en: "Atlantic Salt",
     es: "Sal atlántica",
@@ -891,11 +906,7 @@ const gTrans = {
     es: "Pimienta de cayena",
     he: "פלפל קיין",
   },
-  Bharat: {
-    en: "Bharat",
-    es: "Baharat",
-    he: "בהארת",
-  },
+
   clove: {
     en: "Clove",
     es: "Clavo",
@@ -1106,11 +1117,7 @@ const gTrans = {
     es: "Jarabe de agave",
     he: "סירופ אגבה",
   },
-  bharat: {
-    en: "Bharat",
-    es: "Bharat",
-    he: "בהארת",
-  },
+
   "mct-oil": {
     en: "MCT Oil",
     es: "Aceite MCT",
@@ -1256,10 +1263,15 @@ const gTrans = {
     es: "Mostaza",
     he: "חרדל",
   },
-  tahini : {
+  tahini: {
     en: "Tahini",
     es: "Tahini",
     he: "טחינה",
+  },
+  'full-tahini': {
+    en: "Full Tahini",
+    es: "Tahini completo",
+    he: "טחינה מלאה",
   },
   sechug: {
     en: "Sechug",
@@ -1306,10 +1318,97 @@ const gTrans = {
     es: "Lentejas",
     he: "עדשים",
   },
+
+  watercress: {
+    en: "Watercress",
+    es: "Berro",
+    he: "גרגיר נחלים",
+
+  },
+  baharat: {
+    en: "Baharat",
+    es: "Baharat",
+    he: "בהארת",
+  },
+  'green-onion': {
+    en: "Green Onion",
+    es: "Cebolla verde",
+    he: "בצל ירוק",
+
+  },
+  'red-onion': {
+    en: "Red Onion",
+    es: "Cebolla roja",
+    he: "בצל סגול",
+  },
+  'crushed-chili': {
+    en: "Crushed Chili",
+    es: "Chile triturado",
+    he: "צ'ילי כתוש",
+  },
+  turmeric: {
+    en: "Turmeric",
+    es: "Cúrcuma",
+    he: "כורכום",
+
+  },
+  "za'atar": {
+    en: "Za'atar",
+    es: "Za'atar",
+    he: "זעתר",
+
+  },
+  'beef-ribs': {
+    en: "Beef Ribs",
+    es: "Costillas de res",
+    he: "צלעות בקר",
+  },
+  'osso-buco': {
+    en: "Osso Buco",
+    es: "Osso Buco",
+    he: "אוסו בוקו",
+  },
+  'beef-shoulder': {
+    en: "Beef Shoulder",
+    es: "Hombro de res",
+    he: "כתף בקר",
+  },
+  'celery-root': {
+    en: "Celery Root",
+    es: "Raíz de apio",
+    he: "שורש סלרי",
+  },
+  'parsley-root': {
+    en: "Parsley Root",
+    es: "Raíz de perejil",
+    he: "שורש פטרוזיליה",
+  },
+  'cilantro-root': {
+    en: "Cilantro Root",
+    es: "Raíz de cilantro",
+    he: "שורש כוסברה",
+  },
+  celery: {
+    en: "Celery",
+    es: "Apio",
+    he: "סלרי",
+
+  },
+  cocoa: {
+    en: "Cocoa",
+    es: "Cacao",
+    he: "קקאו",
+  },
+  'backing-products': {
+    en: "Backing Products",
+    es: "Productos de panadería",
+    he: "מוצרי אפייה",
+  },
+  
 };
 
 function doTrans(key, currLang) {
-  // console.log("key", key);
+  console.log("key", key);
   var translation = gTrans[key][currLang];
   if (!translation) return key;
   return translation;
