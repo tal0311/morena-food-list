@@ -81,9 +81,11 @@ async function onSendList() {
         const url = `${import.meta.env.VITE_PROD_URL}?share=true&ids=${idsTosShare}`;
         console.log(url);
 
+    await navigator.share({ title: 'My shopping list', text: 'Check out my shopping list', url: url })
+
         showSuccessMsg('List sent successfully ' + url)
         //    console.log(import.meta.env.VITE_PROD_URL);
-        await shareService.shareTo(url)
+        // await shareService.shareTo(url)
     } catch (error) {
         console.log(error);
         showSuccessMsg('Failed to send list')
