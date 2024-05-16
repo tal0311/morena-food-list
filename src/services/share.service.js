@@ -23,7 +23,7 @@ async function shareToMobile(url) {
     await navigator.share({
       title: defaultMsg +' title: '+ url,
       text: defaultMsg  +' text: '+ url,
-      url: 'https://developers.google.com/web',
+      url: 'https://developers.google.com/web' + url,
     });
   } catch (error) {
     console.error('error', error);
