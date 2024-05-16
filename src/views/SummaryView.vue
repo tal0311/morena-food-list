@@ -73,25 +73,25 @@ function prepDataForChart() {
     cmpKey.value++
 }
 
-function toggleSelect(id) {
-    listStore.toggleSelect(id)
+function toggleSelect({itemId}) {
+    listStore.toggleSelect(itemId)
 }
 
 // Tour logic
-const route = useRoute()
-const appStore = useAppStore()
-const isTourActive = computed(() => appStore.getIsTourActive)
+// const route = useRoute()
+// const appStore = useAppStore()
+// const isTourActive = computed(() => appStore.getIsTourActive)
 
-onMounted(() => {
-    if (isTourActive.value) {
-        useTour(route.name)
-    }
-    if (route.query.print) {
-        setTimeout(() => {
-            window.print()
-        }, 1000)
-    }
-})
+// onMounted(() => {
+//     if (isTourActive.value) {
+//         useTour(route.name)
+//     }
+//     if (route.query.print) {
+//         setTimeout(() => {
+//             window.print()
+//         }, 1000)
+//     }
+// })
 
 
 </script>

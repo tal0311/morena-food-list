@@ -39,6 +39,7 @@ function onMore() {
 }
 
 const itemsMap = ref({})
+
 function onSelect({ itemId, labelName }) {
     itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] + 1 : 1
     emit('selectItem', itemId)

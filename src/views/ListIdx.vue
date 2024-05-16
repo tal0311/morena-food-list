@@ -1,9 +1,5 @@
 <template>
-
-    <!-- <pre>{{ labelList }}</pre>  -->
-    <!-- <pre>{{ groupList }}</pre>  -->
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
-
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" :sharedIds="sharedIds" @selectItem="toggleSelect"
                 @toggleEdit="toggleEdit" @updateLabel="updateLabel" />
@@ -12,26 +8,21 @@
             <button :class="`primary-btn ${btnState}`" @click.stop="onDone" v-html="$svg(btnState)"></button>
         </footer>
         <RouterView />
-        <AppModal :isModalOpen="isModalOpen" @reset-modal="isModalOpen = false" />
+        <AppModal :isModalOpen="isModalOpen" @reset-modal="isModalOpen = false"/>
     </section>
     <AppLoader v-else />
 </template>
 
 <script setup>
-// import { showUserMsg, eventBus } from '@/services/event-bus.service';
+
 import { useRoute } from 'vue-router'
 import { ref, onBeforeMount, computed, watchEffect, onMounted } from 'vue'
 import { useListStore } from '@/stores/list-store';
-import ItemList from '@/components/ItemList.vue'
 import AppModal from '@/components/AppModal.vue'
 import { useTour } from '@/composables/useTour.js'
 import { useAppStore } from '@/stores/app-store'
 import AppLoader from '@/components/AppLoader.vue'
-
 import GroupList from '@/components/GroupList.vue'
-import { utilService } from '@/services/util.service';
-
-
 
 const route = useRoute()
 
@@ -64,7 +55,7 @@ function onDone() {
 }
 
 function toggleSelect(id) {
-
+    
     listStore.toggleSelect(id)
 }
 

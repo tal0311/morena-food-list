@@ -72,6 +72,7 @@ export const useListStore = defineStore("list", () => {
   }
 
   function toggleSelect(itemId) {
+   
     const itemIdx = list?.value.findIndex((item) => item._id === itemId);
     const item = list.value[itemIdx];
     item.isSelected = !item.isSelected;
