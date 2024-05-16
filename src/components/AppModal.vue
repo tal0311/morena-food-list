@@ -80,9 +80,9 @@ async function onSendList() {
         const url = `${import.meta.env.VITE_PROD_URL}/list?ids=${idsTosShare.join('&item=')}`;
 
 
+        showSuccessMsg('List sent successfully ' + url)
         //    console.log(import.meta.env.VITE_PROD_URL);
         await shareService.shareTo(url)
-        showSuccessMsg('List sent successfully')
     } catch (error) {
         console.log(error);
         showSuccessMsg('Failed to send list')
