@@ -22,7 +22,7 @@ window.userService = userService;
 
 function getLoggedInUser() {
     let user = utilService.loadFromStorage(LOGGED_USER);
-    console.log('user', user);
+    console.debug('user', user);
     return user;
 }
 

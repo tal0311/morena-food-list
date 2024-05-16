@@ -7,6 +7,7 @@ import HomeView from "../views/HomeView.vue";
 import { useUserStore } from "@/stores/user-store";
 import { useListStore } from "@/stores/list-store";
 import { useAppStore } from "@/stores/app-store";
+import { useRecipeStore } from "@/stores/recipe-store";
 import { showUserMsg, showSuccessMsg } from "@/services/event-bus.service";
 
 const router = createRouter({
@@ -51,9 +52,10 @@ const router = createRouter({
 
 // TODO:  add navigation guards
 // TODO: route for recipes
-router.beforeEach(async(to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
   const listStore = useListStore()
+  const recipeStore = useRecipeStore()
   const { logError } = useAppStore()
   userStore.loggedUser
 
@@ -65,6 +67,7 @@ router.beforeEach(async(to, from, next) => {
       next({ name: "list" });
       showSuccessMsg("Please select items to view recipe");
     } else {
+      recipeStore.loadMatches();
       next();
     }
     return
@@ -72,10 +75,7 @@ router.beforeEach(async(to, from, next) => {
 
   if (to.name === "list") {
     if (!listStore.getList) {
-
-      const {share, ids} = to.query
-      const idsFomShare = share ==='true' && ids? ids?.split(','):null
-      listStore.loadList(idsFomShare)
+      listStore.loadList()
     }
   }
 

@@ -55,10 +55,6 @@ window.recipeService = recipeService;
     };
   }).sort((a, b) => b.percentage - a.percentage);
 
-
-
-  
-
   return matchItems;
 }
 

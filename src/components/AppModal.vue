@@ -80,7 +80,7 @@ async function onSendList() {
         console.log(error);
         showSuccessMsg('Failed to send list')
     }
-    console.log('onSendList');
+   
 }
 
 
@@ -91,7 +91,8 @@ function slickOutSide(ev) {
     }
 }
 function onRecipe() {
-    console.log('onRecipe');
+   
+    closeModal()
     router.push({ name: 'recipe' })
 
 

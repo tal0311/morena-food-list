@@ -3,10 +3,10 @@
     <!-- <pre>{{ labelList }}</pre>  -->
     <!-- <pre>{{ groupList }}</pre>  -->
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
-        
+
         <div id="list-container" class="list-container grid">
-            <GroupList :labelList="labelList" :groupList="groupList" :sharedIds="sharedIds" @selectItem="toggleSelect" @toggleEdit="toggleEdit"
-                @updateLabel="updateLabel"  />
+            <GroupList :labelList="labelList" :groupList="groupList" :sharedIds="sharedIds" @selectItem="toggleSelect"
+                @toggleEdit="toggleEdit" @updateLabel="updateLabel" />
         </div>
         <footer id="footer-container" :class="['footer-container']">
             <button :class="`primary-btn ${btnState}`" @click.stop="onDone" v-html="$svg(btnState)"></button>
@@ -41,19 +41,16 @@ const groupList = computed(() => listStore?.getList)
 const labelList = computed(() => listStore?.getLabels)
 
 onBeforeMount(() => {
-   getDataFromRoute()
+    getDataFromRoute()
 })
 
 const sharedIds = ref(null)
 
 function getDataFromRoute() {
-    const {share , ids} = route.query
-    //   route.query.ids
-      if(share && ids){
-        // console.log('ids',ids.split(','));
+    const { share, ids } = route.query
+    if (share && ids) {
         sharedIds.value = ids.split(',')
-        console.log('sharedIds',sharedIds.value);
-      }
+    }
 }
 
 const isModalOpen = ref(false)
@@ -67,7 +64,7 @@ function onDone() {
 }
 
 function toggleSelect(id) {
-    
+
     listStore.toggleSelect(id)
 }
 
