@@ -83,17 +83,7 @@ async function onSendList() {
     console.log('onSendList');
 }
 
-function getAsCSV(items) {
-    const [h1, h2, h3, h4, h5] = Object.keys(items[0])
-    let csvStr = `${h2},${h3},${h4}`
-    items.forEach(({ name, icon, group }) => {
-        const csvLine = `\n${name},${icon},${group}`
-        csvStr += csvLine
-    })
 
-    console.log(csvStr);
-    return csvStr
-}
 
 function slickOutSide(ev) {
     if (!ev.target.classList.contains('actions-container')) {

@@ -185,6 +185,18 @@ function _getWindowOptionsString(options) {
     .join(',')
 }
 
+function getAsCSV(items) {
+  const [h1, h2, h3, h4, h5] = Object.keys(items[0])
+  let csvStr = `${h2},${h3},${h4}`
+  items.forEach(({ name, icon, group }) => {
+      const csvLine = `\n${name},${icon},${group}`
+      csvStr += csvLine
+  })
+
+  console.log(csvStr);
+  return csvStr
+}
+
 
 
 export const utilService = {
