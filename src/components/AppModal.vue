@@ -76,8 +76,13 @@ async function onSendList() {
     // showSuccessMsg('Coming soon... for now take a screenshot and send it to Moran')
     // return
     try {
-        console.log(import.meta.url+'?list='+JSON.stringify(['list','items','to','send']));
-        // await shareService.shareTo()
+       const idsTosShare= selectItems.value.map(item => item._id)
+  const url= `${import.meta.env.VITE_PROD_URL}/list-summary?ids=${idsTosShare.join('&item=')}`;
+       
+      
+  //    console.log(import.meta.env.VITE_PROD_URL);
+  await shareService.shareTo(url)
+  showSuccessMsg('List sent successfully')
     } catch (error) {
         console.log(error);
         showSuccessMsg('Failed to send list')
