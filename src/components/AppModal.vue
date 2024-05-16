@@ -82,7 +82,7 @@ async function onSendList() {
 
         showSuccessMsg('List sent successfully ' + url)
         //    console.log(import.meta.env.VITE_PROD_URL);
-        await shareService.shareTo(url)
+        // await shareService.shareTo(url)
     } catch (error) {
         console.log(error);
         showSuccessMsg('Failed to send list')
