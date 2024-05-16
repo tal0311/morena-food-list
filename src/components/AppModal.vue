@@ -64,7 +64,7 @@ function resetModal() {
 
 function slickOutSide(ev) {
     if (!ev.target.classList.contains('actions-container')) {
-        closeModal()
+        isModalOpen.value = false
     }
 }
 
