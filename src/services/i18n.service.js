@@ -709,10 +709,10 @@ const gTrans = {
     es: "Resumen",
     he: "סיכום",
   },
-  "send-to-moran": {
-    en: "Send to Morana",
-    es: "Enviar a Morana",
-    he: "שלח למורנה",
+  "share-list": {
+    en: "Sheare my list",
+    es: "Compartir mi lista",
+    he: "שתף את הרשימה שלי",
   },
   back: {
     en: "Back",

@@ -3,8 +3,8 @@
         <div class="actions-container grid">
             <button class="secondary-btn" @click="onPrintList">{{ $trans('print') }}</button>
             <button class="secondary-btn" @click="onShowSummary">{{ $trans('summary') }}</button>
-            <button class="secondary-btn" @click="onSendList" >{{ $trans('send-to-moran') }}</button>
-            <button class="secondary-btn" @click="onRecipe">{{$trans( 'home-action-1' )}}</button>
+            <button class="secondary-btn" @click="onSendList">{{ $trans('share-list') }}</button>
+            <button class="secondary-btn" @click="onRecipe">{{ $trans('home-action-1') }}</button>
             <button class="secondary-btn" @click="closeModal">{{ $trans('back') }}</button>
         </div>
     </dialog>
@@ -48,7 +48,9 @@ function closeModal() {
 }
 
 function onPrintList() {
+
     onShowSummary({ print: true })
+    closeModal()
 }
 
 function onShowSummary(query) {
@@ -62,7 +64,7 @@ async function onSendList() {
     closeModal()
     console.log('onSendList', selectItems.value);
 
-   // const csvContent = getAsCSV(JSON.parse(JSON.stringify(selectItems.value)))
+    // const csvContent = getAsCSV(JSON.parse(JSON.stringify(selectItems.value)))
     // const blob = new Blob([CSVItems], { type: 'text/csv;charset=utf-8;' });
     // const file = URL.createObjectURL(blob);
 
@@ -74,8 +76,8 @@ async function onSendList() {
     // showSuccessMsg('Coming soon... for now take a screenshot and send it to Moran')
     // return
     try {
-        
-        await shareService.shareTo()
+        console.log(import.meta.url+'?list='+JSON.stringify(['list','items','to','send']));
+        // await shareService.shareTo()
     } catch (error) {
         console.log(error);
         showSuccessMsg('Failed to send list')

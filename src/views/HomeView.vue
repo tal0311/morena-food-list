@@ -23,12 +23,12 @@
 
 <script setup>
 // TODO: 'add last login date to user and refresh the local storage btn'
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed } from 'vue'
 import TheWelcome from '@/components/TheWelcome.vue'
 import { useListStore } from '@/stores/list-store'
-import { useRoute } from 'vue-router'
 import { useAppStore } from '@/stores/app-store'
-import { useTour } from '@/composables/useTour'
+// import { useRoute } from 'vue-router'
+// import { useTour } from '@/composables/useTour'
 
 const isLangModalOpen = ref(false)
 
@@ -48,19 +48,21 @@ const getIcon = computed(() => {
 })
 
 const appStore = useAppStore()
-function toggleTour() {
-  appStore.toggleTourState()
-}
 
-const isTourActive = computed(() => appStore.getIsTourActive)
-const route = useRoute()
-watchEffect(() => {
-  if (isTourActive.value) {
-    useTour(route.name)
-    console.log('tour is active');
+// Tour logic
+// function toggleTour() {
+//   appStore.toggleTourState()
+// }
 
-  }
-})
+// const isTourActive = computed(() => appStore.getIsTourActive)
+// const route = useRoute()
+// watchEffect(() => {
+//   if (isTourActive.value) {
+//     useTour(route.name)
+//     console.log('tour is active');
+
+//   }
+// })
 
 
 </script>

@@ -10,12 +10,19 @@ import { ref, computed, onBeforeMount } from 'vue';
 import { useRecipeStore } from '@/stores/recipe-store';
 // import { useListStore } from '@/stores/list-store';
 import RecipeList from '@/components/RecipeList.vue'
+// import { useRoute } from 'vue-router';
 
 // const listStore = useListStore()
-const recipeStore = useRecipeStore()
+// const recipeStore = useRecipeStore()
 onBeforeMount(() => {
     //    console.log(listStore)
-    recipeStore.loadMatches()
+
+    // const query =useRoute().query
+    // console.log(import.meta.url + '?', query);
+    // recipeStore.loadMatches()
+    // for (const key in query) {
+    //     console.log(query[key]);
+    // } 
 })
 
 const recipes = computed(() => {

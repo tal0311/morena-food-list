@@ -12,12 +12,13 @@
 </template>
 
 <script setup>
-import router from '@/router';
+// import router from '@/router';
 import { useRouter } from 'vue-router';
 
+const router = useRouter();
 function navigateTo() {
   console.log('navigateTo');
-router.push({ name: 'recipe' })
+router.push({ name: 'recipe' , query:['some','query','params']})
 }
 
 
