@@ -5,7 +5,7 @@
             <div class="summary-container">
                 <span>{{ $trans(name) }} <span class="counter">{{ itemsMap[name] ? `(${itemsMap[name]})` : ''
                         }}</span></span>
-                <button @click.stop="onMore" class="more-btn" v-html="$svg('more')">
+                <button @click.stop="onMore(name)" class="more-btn" v-html="$svg('more')">
                 </button>
             </div>
 
@@ -20,7 +20,7 @@
 
 <script setup>
 import ItemList from '@/components/ItemList.vue'
-import { showSuccessMsg } from '@/services/event-bus.service';
+import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
 import { ref } from 'vue';
 
 const props = defineProps(['labelList', 'groupList', 'sharedIds'])
@@ -33,9 +33,10 @@ function handleLabelChange($event) {
     emit('updateLabel', { name, userInput })
 }
 
-function onMore() {
+function onMore(labelName) {
     console.log('more');
-    showSuccessMsg('More feature coming soon')
+    eventBus.emit('toggle-modal', { type: 'ModalInfo' ,info:labelName})
+    // showSuccessMsg('More feature coming soon')
 }
 
 const itemsMap = ref({})

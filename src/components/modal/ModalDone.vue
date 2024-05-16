@@ -30,7 +30,7 @@ function onShowSummary(query) {
 const listStore = useListStore()
 const selectItems = computed(() => listStore.getSelectedItems)
 async function onSendList() {
-    closeModal()
+
     if (!selectItems.value.length) {
         showSuccessMsg('Nothing to share')
         return
@@ -49,6 +49,9 @@ async function onSendList() {
         console.log(error);
         showSuccessMsg('Failed to send list')
     }
+    finally {
+        closeModal()
+    }
 
 }
 
@@ -62,10 +65,11 @@ function onRecipe() {
 
 
 }
-const emit= defineEmits(['reset-modal'])
+const emit = defineEmits(['resetModal'])
 
 function closeModal() {
-    emit('reset-modal')
+    console.log('close modal');
+    emit('resetModal')
 
 }
 </script>

@@ -8,7 +8,7 @@
             <button :class="`primary-btn ${btnState}`" @click.stop="onDone" v-html="$svg(btnState)"></button>
         </footer>
         <RouterView />
-        <AppModal :isModalOpen="isModalOpen" @reset-modal="isModalOpen = false"/>
+        <AppModal />
     </section>
     <AppLoader v-else />
 </template>
@@ -16,13 +16,14 @@
 <script setup>
 
 import { useRoute } from 'vue-router'
-import { ref, onBeforeMount, computed, watchEffect, onMounted } from 'vue'
+import { ref, onBeforeMount, computed,onUnmounted } from 'vue'
 import { useListStore } from '@/stores/list-store';
 import AppModal from '@/components/AppModal.vue'
 import { useTour } from '@/composables/useTour.js'
 import { useAppStore } from '@/stores/app-store'
 import AppLoader from '@/components/AppLoader.vue'
 import GroupList from '@/components/GroupList.vue'
+import { eventBus } from '@/services/event-bus.service';
 
 const route = useRoute()
 
@@ -44,18 +45,19 @@ function getDataFromRoute() {
     }
 }
 
-const isModalOpen = ref(false)
+let subscribe = null
 function onDone() {
     if (btnState.value === 'edit') {
         submitLabel()
         btnState.value = 'done'
         return
     }
-    isModalOpen.value = !isModalOpen.value
+    subscribe = eventBus.emit('toggle-modal', { type: 'ModalDone' })
+
 }
 
 function toggleSelect(id) {
-    
+
     listStore.toggleSelect(id)
 }
 
@@ -82,20 +84,25 @@ const appStore = useAppStore()
 const isTourActive = computed(() => appStore.getIsTourActive)
 
 // set timeout is to make sure the dom is rendered before the tour starts
-onMounted(() => {
-    setTimeout(() => {
-        if (isTourActive.value) {
-            document.querySelectorAll('details').forEach((el, idx) => {
-                if (idx === 0) {
-                    el.setAttribute('open', true)
-                }
-                useTour(route.name)
-            })
-        }
-    }, 800);
+// onMounted(() => {
+//     setTimeout(() => {
+//         if (isTourActive.value) {
+//             document.querySelectorAll('details').forEach((el, idx) => {
+//                 if (idx === 0) {
+//                     el.setAttribute('open', true)
+//                 }
+//                 useTour(route.name)
+//             })
+//         }
+//     }, 800);
+// })
+
+
+onUnmounted(() => {
+    if (subscribe) {
+        subscribe()
+    }
 })
-
-
 
 // TODO: convert all css to nested css
 </script>
