@@ -62,30 +62,20 @@ const listStore = useListStore()
 const selectItems = computed(() => listStore.getSelectedItems)
 async function onSendList() {
     closeModal()
-    console.log('onSendList', selectItems.value);
-
-    // const csvContent = getAsCSV(JSON.parse(JSON.stringify(selectItems.value)))
-    // const blob = new Blob([CSVItems], { type: 'text/csv;charset=utf-8;' });
-    // const file = URL.createObjectURL(blob);
-
-    // const link = document.createElement('a');
-    // link.href = 'data:text/csv;charset=utf-8,' + csvContent;
-    // link.download = 'list.csv';
-    // link.click();
-
-    // showSuccessMsg('Coming soon... for now take a screenshot and send it to Moran')
-    // return
+    if (!selectItems.value.length) {
+        showSuccessMsg('Nothing to share')
+        return
+    }
     try {
         let idsTosShare = selectItems.value.map(({ _id }) => _id)
-          
+
         const url = `${import.meta.env.VITE_PROD_URL}?share=true&ids=${idsTosShare}`;
-        console.log(url);
+        console.debug(url);
 
-    await navigator.share({ title: 'My shopping list', text: 'Check out my shopping list', url: url })
+        await navigator.share({ title: 'My shopping list', text: 'Check out my shopping list', url: url })
 
-        showSuccessMsg('List sent successfully ' + url)
-        //    console.log(import.meta.env.VITE_PROD_URL);
-        // await shareService.shareTo(url)
+        showSuccessMsg('List sent successfully ')
+
     } catch (error) {
         console.log(error);
         showSuccessMsg('Failed to send list')

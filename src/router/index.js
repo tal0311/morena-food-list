@@ -72,7 +72,10 @@ router.beforeEach(async(to, from, next) => {
 
   if (to.name === "list") {
     if (!listStore.getList) {
-      listStore.loadList()
+
+      const {share, ids} = to.query
+      const idsFomShare = share ==='true' && ids? ids?.split(','):null
+      listStore.loadList(idsFomShare)
     }
   }
 

@@ -13,19 +13,18 @@
 </template>
 
 <script setup>
-import Hammer from 'hammerjs';
+import Hammer, { on } from 'hammerjs';
 import { useRoute } from 'vue-router'
-import { computed, onMounted, ref, watchEffect } from 'vue';
+import { computed, onBeforeMount, onMounted, ref, watchEffect } from 'vue';
 import { showSuccessMsg } from '@/services/event-bus.service';
 
 // TODO add text area for product 
 const props = defineProps({
     item: Object,
     idx: Number,
-    isTourActive: {
-        default: true
-
-    }
+    sharedIds: Array,
+    labelName: String
+    
 })
 
 const emit = defineEmits(['selectItem'])
@@ -38,6 +37,20 @@ onMounted(() => {
     elHammer = new Hammer(previewRef.value)
     elHammer.on('swipe', handleSwipe)
 })
+
+onBeforeMount(() => {
+    handleSharedIds()
+    
+})
+
+function handleSharedIds() {
+//  
+    if (props.sharedIds && props.sharedIds.includes(props.item._id)) {
+     
+        isSwiped.value = true
+        onSelect()
+    }
+}
 
 
 function handleSwipe(ev) {
@@ -55,12 +68,10 @@ function onSelect() {
         showSuccessMsg('Swipe item and click on the checkbox to select it')
         return
     }
-    emit('selectItem', props.item._id)
+    emit('selectItem', {itemId: props.item._id, labelName: props.labelName})
 }
 
-const isFirstItem = computed(() => {
-    return props.idx.pIdx===0 && props.idx.idx === 0 ?'first':''
-})
+
 
 const route = useRoute()
 watchEffect(() => {

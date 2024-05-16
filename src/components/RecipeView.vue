@@ -13,7 +13,7 @@ import RecipeList from '@/components/RecipeList.vue'
 // import { useRoute } from 'vue-router';
 
 // const listStore = useListStore()
-// const recipeStore = useRecipeStore()
+const recipeStore = useRecipeStore()
 onBeforeMount(() => {
     //    console.log(listStore)
 

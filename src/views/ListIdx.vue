@@ -3,9 +3,10 @@
     <!-- <pre>{{ labelList }}</pre>  -->
     <!-- <pre>{{ groupList }}</pre>  -->
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
+        
         <div id="list-container" class="list-container grid">
-            <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelect" @toggleEdit="toggleEdit"
-                @updateLabel="updateLabel" />
+            <GroupList :labelList="labelList" :groupList="groupList" :sharedIds="sharedIds" @selectItem="toggleSelect" @toggleEdit="toggleEdit"
+                @updateLabel="updateLabel"  />
         </div>
         <footer id="footer-container" :class="['footer-container']">
             <button :class="`primary-btn ${btnState}`" @click.stop="onDone" v-html="$svg(btnState)"></button>
@@ -17,7 +18,7 @@
 </template>
 
 <script setup>
-import { showUserMsg, eventBus } from '@/services/event-bus.service';
+// import { showUserMsg, eventBus } from '@/services/event-bus.service';
 import { useRoute } from 'vue-router'
 import { ref, onBeforeMount, computed, watchEffect, onMounted } from 'vue'
 import { useListStore } from '@/stores/list-store';
@@ -32,11 +33,28 @@ import { utilService } from '@/services/util.service';
 
 
 
-const listStore = useListStore()
+const route = useRoute()
 
+const listStore = useListStore()
+// loading the list from the route guard
 const groupList = computed(() => listStore?.getList)
 const labelList = computed(() => listStore?.getLabels)
 
+onBeforeMount(() => {
+   getDataFromRoute()
+})
+
+const sharedIds = ref(null)
+
+function getDataFromRoute() {
+    const {share , ids} = route.query
+    //   route.query.ids
+      if(share && ids){
+        // console.log('ids',ids.split(','));
+        sharedIds.value = ids.split(',')
+        console.log('sharedIds',sharedIds.value);
+      }
+}
 
 const isModalOpen = ref(false)
 function onDone() {
@@ -71,7 +89,7 @@ function submitLabel() {
 }
 
 
-const route = useRoute()
+
 const appStore = useAppStore()
 const isTourActive = computed(() => appStore.getIsTourActive)
 

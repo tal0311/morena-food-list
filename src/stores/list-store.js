@@ -4,6 +4,7 @@ import { itemService } from "@/services/item.service.local";
 import { showUserMsg, showErrorMsg, showSuccessMsg } from "@/services/event-bus.service";
 import { useAppStore } from "@/stores/app-store";
 import { useUserStore } from "@/stores/user-store";
+
 export const useListStore = defineStore("list", () => {
   const userStore= useUserStore();
 
@@ -43,7 +44,8 @@ export const useListStore = defineStore("list", () => {
 
   // labels.value = computed(() => labels?.value)
 
-  async function loadList() {
+  async function loadList(ids) {
+    // console.log("loading list" ,ids);
     try {
       const items = await itemService.query();
       list.value = items;

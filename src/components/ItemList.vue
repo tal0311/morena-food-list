@@ -1,7 +1,8 @@
 <template>
     <section class="item-list">
         <slot></slot>
-        <ItemPreview v-for="item, idx in props.list" :item="item" :key="item._id" :isTourActive="props.isTourActive"
+        <!-- {{ sharedIds }} -->
+        <ItemPreview v-for="item, idx in props.list" :item="item" :key="item._id" :sharedIds="props.sharedIds" :labelName="props.labelName"
             @selectItem="$emit('selectItem', $event)" />
     </section>
 </template>
@@ -11,10 +12,8 @@
 import ItemPreview from '@/components/ItemPreview.vue';
 const props = defineProps({
     list: Array,
-    idx: Number,
-    isTourActive: {
-        default: true
-    }
+    labelName: String,
+    sharedIds: Array,
 })
 
 

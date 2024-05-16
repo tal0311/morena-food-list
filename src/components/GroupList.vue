@@ -1,34 +1,36 @@
 <template>
-     <details v-for="{ name, userInput }, idx in labelList" :key="name" :class="`list-details ${name}`">
-                <summary>
+    <details v-for="{ name, userInput }, idx in labelList" :key="name" :class="`list-details ${name}`">
+        <summary :class="[itemsMap[name] ? 'has-items' : '']">
 
-                    <div class="summary-container">
-                        <span>{{ $trans(name) }}</span> 
-                        <button @click.stop="onMore" class="more-btn"
-                            v-html="$svg('more')">
-                        </button>
-                    </div>
+            <div class="summary-container">
+                <span>{{ $trans(name) }} <span class="counter">{{ itemsMap[name] ? `(${itemsMap[name]})` : ''
+                        }}</span></span>
+                <button @click.stop="onMore" class="more-btn" v-html="$svg('more')">
+                </button>
+            </div>
 
 
-                </summary>
-                <ItemList :list="groupList[name]" @selectItem="$emit('selectItem', $event)" />
+        </summary>
+        <ItemList :list="groupList[name]" :labelName="name" @selectItem="onSelect" :sharedIds="sharedIds" />
 
-                <textarea @input="handleLabelChange" rows="5" :data-groupname="name"  placeholder="Add your notes here..." :value="userInput"  @focus="$emit('toggleEdit')"></textarea>
-            </details>
+        <textarea @input="handleLabelChange" rows="5" :data-groupname="name" placeholder="Add your notes here..."
+            :value="userInput" @focus="$emit('toggleEdit')"></textarea>
+    </details>
 </template>
 
 <script setup>
 import ItemList from '@/components/ItemList.vue'
 import { showSuccessMsg } from '@/services/event-bus.service';
+import { ref } from 'vue';
 
-const props = defineProps(['labelList', 'groupList'])
+const props = defineProps(['labelList', 'groupList', 'sharedIds'])
 const emit = defineEmits(['selectItem', 'toggleEdit', 'updateLabel'])
 
 function handleLabelChange($event) {
     // emit('toggleEdit', name)
-    const userInput= $event.target.value
-    const name= $event.target.dataset.groupname
-    emit('updateLabel', {name, userInput})
+    const userInput = $event.target.value
+    const name = $event.target.dataset.groupname
+    emit('updateLabel', { name, userInput })
 }
 
 function onMore() {
@@ -36,9 +38,22 @@ function onMore() {
     showSuccessMsg('More feature coming soon')
 }
 
+const itemsMap = ref({})
+function onSelect({ itemId, labelName }) {
+    itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] + 1 : 1
+    emit('selectItem', itemId)
+}
+
 </script>
 
 <style scoped>
+.counter {
+    font-size: 1.2rem;
+    color: var(--clr7);
+    margin-left: 0.5rem;
+    text-decoration: none;
+}
+
 details {
     box-shadow: 0 0 2px 0px var(--clr4);
     /* outline: 1px solid #c9c9c9; */
@@ -63,6 +78,10 @@ details {
             /* content:'' */
         }
 
+        &.has-items .counter {
+            color: var(--bClr3);
+        }
+
     }
 
     &[open] {
@@ -73,6 +92,8 @@ details {
         /* box-shadow: 0 0 2px 0px #c9c9c9; */
         margin-bottom: 0.5em;
     }
+
+
 }
 
 
@@ -91,7 +112,7 @@ details {
     place-content: center;
 }
 
-textarea{
+textarea {
     margin-block: 1rem;
     outline: 1px solid var(--bClr1);
     resize: none;
@@ -101,5 +122,4 @@ textarea{
     font-family: inherit;
     font-size: 1.5rem;
 }
-
 </style>
