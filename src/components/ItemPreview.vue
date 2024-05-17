@@ -1,20 +1,21 @@
 <template>
     <!-- <pre>{{ props.item }}</pre> -->
-    <section ref="previewRef" :class="`item-preview idx- ${isSwiped ? 'swiped' : 'disabled'}`">
+    <section ref="previewRef" :class="`item-preview grid idx- ${isSwiped ? 'swiped' : 'disabled'}`">
 
         <label class="label-container grid" :for="item._id">
             <input type="checkbox" :id="item._id" :checked="item.isSelected && isSwiped" :disabled="!isSwiped"
                 @click.stop="onSelect">
             <span>{{ $trans(props.item.name) }}</span>
-            <span>{{ props.item.icon }}</span>
-
+            
         </label>
+        <span @contextmenu.prevent="itemInfo">{{ props.item.icon }}</span>
+        <!-- <span @click.stop="itemInfo" v-html="$svg('help')"></span> -->
 
     </section>
 </template>
 
 <script setup>
-import Hammer, { on } from 'hammerjs';
+import Hammer from 'hammerjs';
 import { useRoute } from 'vue-router'
 import { computed, onBeforeMount, onMounted, ref, watchEffect } from 'vue';
 import { showSuccessMsg } from '@/services/event-bus.service';
@@ -81,16 +82,24 @@ watchEffect(() => {
     }
 })
 
-
+function itemInfo() {
+    showSuccessMsg('More info coming soon')
+}
 
 
 </script>
 
 <style scoped>
-.label-container {
+.item-preview {
     font-size: 1.5rem;
+  grid-auto-flow: column;
+    grid-template-columns: 50% 50%;
+    cursor: pointer;
+}
+.label-container {
+    /* font-size: 1.5rem; */
     grid-auto-flow: column;
-    grid-template-columns: 20px 50% 1fr;
+    grid-template-columns: 20px 50%;
     align-items: center;
     gap: 1rem;
 }
