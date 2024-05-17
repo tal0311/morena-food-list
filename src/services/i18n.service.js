@@ -1404,7 +1404,32 @@ const gTrans = {
     es: "Productos de panadería",
     he: "מוצרי אפייה",
   },
-  
+  'user-info': {
+    en: "User Info",
+    es: "Información del usuario",
+    he: "פרטי משתמש",
+  },
+  'goals-and-pref':{
+    en: "Goals and Preferences",
+    es: "Metas y preferencias",
+    he: "מטרות והעדפות",
+  },
+  'settings':{
+    en: "Settings",
+    es: "Ajustes",
+    he: "הגדרות",
+
+  },
+  'select-language':{
+    en: "Select Language",
+    es: "Seleccionar idioma",
+    he: "בחר שפה",
+  },
+  'start-shopping':{
+    en: "Back to shopping list",
+    es: "Volver a la lista de la compra",
+    he: "חזור לרשימת הקניות",
+  },
 };
 
 function doTrans(key, currLang) {

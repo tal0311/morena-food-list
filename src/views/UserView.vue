@@ -1,8 +1,8 @@
 <template>
     <section class="user-page grid">
-        <h1>Hi, {{ user.username }} 👋</h1>
+        <h1> {{ getTitle(user.username) }}  <span>👋</span></h1>
         <details>
-            <summary>User Info</summary>
+            <summary >{{ $trans('user-info') }}</summary>
             <section class="summary-container">
                 <div>
                     <input type="text" v-model="user.username">
@@ -12,7 +12,7 @@
         </details>
 
         <details>
-            <summary>Goals and preferences</summary>
+            <summary>{{ $trans('goals-and-pref') }}</summary>
             <section class="summary-container">
                 <div>
                     user lavel , goals, etc
@@ -22,7 +22,7 @@
         </details>
 
         <details>
-            <summary>settings</summary>
+            <summary>{{ $trans('settings') }}</summary>
             <section class="summary-container">
                 <div class="summary-wrapper">
                     lang, notifications, etc
@@ -33,10 +33,10 @@
                     </div>
                     <div class="lang-container grid">
                         <select name="lang" id="" v-model="user.settings.lang">
-                            <option value="">Select language</option>
+                            <option value="">{{ $trans('select-language') }}</option>
                             <option value="en">English</option>
-                            <option value="es">Spanish</option>
-                            <option value="he">Hebrew</option>
+                            <option value="es">español</option>
+                            <option value="he">עברית</option>
 
                         </select>
 
@@ -48,7 +48,7 @@
 
         <footer>
             <RouterLink to="/list" class="primary-btn">
-               <span>Start shopping</span>
+               <span>{{ $trans('start-shopping') }}</span>
             </RouterLink>
         </footer>
 
@@ -87,6 +87,12 @@ updateUser = utilService.debounce(updateUser, 1000);
 function updateUser() {
     console.log('updating user, ', user.value);
     userStore.updateLoggedUser(user.value);
+}
+
+function getTitle(username) {
+    const elBody= document.querySelector('body')
+    return elBody.dir === 'rtl' ? `שלום, ${username}` : `Hi, ${username}`; 
+
 }
 </script>
 
@@ -165,7 +171,7 @@ summary::-webkit-details-marker {
     display: none
 }
 
-summary::after {
+/* summary::after {
     content: " ►";
     color: var(--clr7);
 }
@@ -173,7 +179,7 @@ summary::after {
 details[open] summary:after {
     content: " ▼";
     color: var(--clr5);
-}
+} */
 
 
 input[type="text"] {
