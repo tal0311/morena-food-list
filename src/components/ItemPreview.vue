@@ -18,7 +18,7 @@ import { useRoute } from 'vue-router'
 import { computed, onBeforeMount, onMounted, ref, watchEffect } from 'vue';
 import { showSuccessMsg } from '@/services/event-bus.service';
 
-// TODO add text area for product 
+
 const props = defineProps({
     item: Object,
     idx: Number,

@@ -19,6 +19,11 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: "/user",
+      name: "user",
+      component: () => import("@/views/UserView.vue"),
+    },
+    {
       path: "/list",
       name: "list",
       // route level code-splitting
@@ -50,8 +55,7 @@ const router = createRouter({
   ],
 });
 
-// TODO:  add navigation guards
-// TODO: route for recipes
+
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
   const listStore = useListStore()
