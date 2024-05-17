@@ -9,6 +9,7 @@ import router from "./router";
 import i18nPlugin from "./plugins/i18nPlugin";
 import svgPlugin from "./plugins/svgPlugin";
 
+
 const app = createApp(App);
 
 // Libraries
@@ -16,6 +17,9 @@ app.use(createPinia());
 app.use(router);
 
 // Plugins
+
+
+
 app.use(i18nPlugin);
 app.use(svgPlugin);
 

@@ -36,8 +36,8 @@
                             <option value="">Select language</option>
                             <option value="en">English</option>
                             <option value="es">Spanish</option>
-                            <option value="fr">French</option>
-                            <option value="de">German</option>
+                            <option value="he">Hebrew</option>
+
                         </select>
 
                     </div>
@@ -46,12 +46,17 @@
             </section>
         </details>
 
+        <footer>
+            <RouterLink to="/list" class="primary-btn">
+               <span>Start shopping</span>
+            </RouterLink>
+        </footer>
 
     </section>
 </template>
 
 <script setup>
-import { ref, watch, watchEffect, onBeforeMount, onUpdated } from 'vue'
+import { ref, onBeforeMount, onUpdated } from 'vue'
 import { utilService } from '@/services/util.service';
 import { useUserStore } from '@/stores/user-store'
 import { userService } from '@/services/user.service';
@@ -68,11 +73,11 @@ const userStore = useUserStore();
 
 onBeforeMount(() => {
     user.value = userService.getLoggedInUser();
-  
+
 })
 
 onUpdated(() => {
-     updateUser();
+    updateUser();
 })
 
 
@@ -90,6 +95,16 @@ function updateUser() {
     font-size: 1.5rem;
     gap: 1rem;
     width: 100%;
+}
+
+footer {
+  
+    span{
+        padding-block: 0.5em;
+        font-size: 1.2rem;
+    
+    }
+
 }
 
 

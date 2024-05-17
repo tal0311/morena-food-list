@@ -11,7 +11,7 @@ export const useListStore = defineStore("list", () => {
 
   const list = ref(null);
   const selectedItems = ref([]);
-  const currLang = ref("en");
+  // const currLang = ref("en");
   const labels = ref(null)
 
   const getList = computed(() => {
@@ -21,7 +21,7 @@ export const useListStore = defineStore("list", () => {
 
   });
   const getSelectedItems = computed(() => selectedItems?.value);
-  const getCurrLang = computed(() => currLang.value);
+
   const getLabels = computed(() => labels.value)
 
   // this is to wait for the list to be loaded before setting the labels from local storage or from list
@@ -32,11 +32,7 @@ export const useListStore = defineStore("list", () => {
     }
   });
 
-  // watch(list, (newVal, oldVal)) => {
-  //   if(newVal){
-  //     setLabels()
-  //   }
-  // }
+
 
   function setLabels() {
     labels.value = itemService.getLabels(getList.value)
@@ -60,10 +56,7 @@ export const useListStore = defineStore("list", () => {
     // list.value = null
   }
 
-  // async function loadLabels() {
-  //   labels.value = await itemService.loadLabelsFromStorage()
 
-  // }
 
   function updateLabel(label) {
 
@@ -84,21 +77,13 @@ export const useListStore = defineStore("list", () => {
     userStore.updateUser('selectedItems', JSON.parse(JSON.stringify(selectedItems.value)))
   }
 
-  function setLang(lang) {
-    const langOptions = ["en", "he", "es"];
-    currLang.value = langOptions.includes(lang) ? lang : "en";
-    document.body.setAttribute("dir", currLang.value === "he" ? "rtl" : "ltr");
-  }
 
   return {
     loadList,
     getList,
     toggleSelect,
     getSelectedItems,
-    getCurrLang,
-    setLang,
-
-    getLabels,
+     getLabels,
     updateLabel
   };
 });

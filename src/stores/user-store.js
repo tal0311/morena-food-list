@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { ref, computed, watchEffect } from "vue";
 import { showErrorMsg } from "@/services/event-bus.service";
 import { reportService } from "@/services/report.service";
 import { useListStore} from "@/stores/list-store";
@@ -10,10 +10,12 @@ import { userService } from "@/services/user.service";
 export const useUserStore = defineStore("user", () => {
   const appStore = useAppStore();
 
+  const currLang = ref("en");
   const loggedUser = ref(null);
  
 
   const getUser = computed(() => loggedUser.value);
+  const getCurrLang = computed(() => currLang.value);
 
  function loadUser(){
     loggedUser.value = userService.getLoggedInUser();
@@ -25,6 +27,12 @@ export const useUserStore = defineStore("user", () => {
   async function signup(credentials) {}
 
   async function logout() {}
+
+  watchEffect(() => {
+    if (loggedUser.value) {
+     setLang(loggedUser.value.settings.lang);
+    }
+  })
 
 async function updateLoggedUser(user) {
     loggedUser.value = { ...loggedUser.value ,...user };
@@ -43,11 +51,21 @@ async function updateLoggedUser(user) {
   }
     
   }
+
+  function setLang(lang) {
+    console.log("setting lang", lang);
+    const langOptions = ["en", "he", "es"];
+    currLang.value = langOptions.includes(lang) ? lang : "en";
+    document.body.setAttribute("dir", currLang.value === "he" ? "rtl" : "ltr");
+  }
+
   return {
   loggedUser,
   updateUser,
   getUser,
   loadUser,
   updateLoggedUser,
+  setLang,
+  getCurrLang
   }
 })
