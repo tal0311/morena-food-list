@@ -38,6 +38,7 @@ a {
 
 
 .secondary-btn {
+  font-size: 1rem;
   border: none;
   background-color: var(--bClr2);
   outline: 1px solid var(--bClr3);
