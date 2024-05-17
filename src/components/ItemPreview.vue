@@ -2,11 +2,12 @@
     <!-- <pre>{{ props.item }}</pre> -->
     <section ref="previewRef" :class="`item-preview idx- ${isSwiped ? 'swiped' : 'disabled'}`">
 
-        <label class="label-container grid"  @click.stop="onSelect">
-            <input type="checkbox"  :checked="item.isSelected && isSwiped" :disabled="!isSwiped">
+        <label class="label-container grid" :for="item._id">
+            <input type="checkbox" :id="item._id" :checked="item.isSelected && isSwiped" :disabled="!isSwiped"
+                @click.stop="onSelect">
             <span>{{ $trans(props.item.name) }}</span>
             <span>{{ props.item.icon }}</span>
-            
+
         </label>
 
     </section>
@@ -24,7 +25,7 @@ const props = defineProps({
     idx: Number,
     sharedIds: Array,
     labelName: String
-    
+
 })
 
 const emit = defineEmits(['selectItem'])
@@ -40,13 +41,13 @@ onMounted(() => {
 
 onBeforeMount(() => {
     handleSharedIds()
-    
+
 })
 
 function handleSharedIds() {
-//  
+    //  
     if (props.sharedIds && props.sharedIds.includes(props.item._id)) {
-     
+
         isSwiped.value = true
         onSelect()
     }
@@ -68,7 +69,7 @@ function onSelect() {
         showSuccessMsg('Swipe item and click on the checkbox to select it')
         return
     }
-    emit('selectItem', {itemId: props.item._id, labelName: props.labelName})
+    emit('selectItem', { item: props.item, labelName: props.labelName })
 }
 
 

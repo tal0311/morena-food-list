@@ -41,9 +41,14 @@ function onMore(labelName) {
 
 const itemsMap = ref({})
 
-function onSelect({ itemId, labelName }) {
-    itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] + 1 : 1
-    emit('selectItem', itemId)
+function onSelect({ item, labelName }) {
+    if (!item.isSelected) {
+        itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] + 1 : 1
+    } else {
+        itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] - 1 : 0
+    }
+   
+    emit('selectItem', item._id)
 }
 
 </script>

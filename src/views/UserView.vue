@@ -41,9 +41,9 @@
                        
 
 
-                        <label for="notifications ">{{ $trans('notifications') }}</label>
+                        <label for="notifications">{{ $trans('notifications') }}</label>
                         <!-- <input type="checkbox" > -->
-                        <input type="checkbox" v-model="user.settings.notifications" class="switch">
+                        <input type="checkbox" name="notifications" v-model="user.settings.notifications" class="switch">
                     </div>
                     <div class="lang-container grid">
                         <select name="lang" id="" v-model="user.settings.lang">
