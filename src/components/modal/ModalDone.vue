@@ -1,11 +1,9 @@
 <template>
     <div class="actions-container grid">
-        <button class="secondary-btn" @click="onPrintList">{{ $trans('print') }}</button>
-        <button class="secondary-btn" @click="onShowSummary">{{ $trans('summary') }}</button>
-        <button class="secondary-btn" @click="onSendList">{{ $trans('share-list') }}</button>
-        <button class="secondary-btn" @click="onRecipe">{{ $trans('home-action-1') }}</button>
-        <button class="secondary-btn" @click="closeModal">{{ $trans('back') }}</button>
+        <button v-for="btn in btns" class="secondary-btn" 
+        @click="btn.action">{{ $trans(btn.name) }}</button>
     </div>
+
 </template>
 
 <script setup>
@@ -13,6 +11,30 @@ import { watchEffect, ref, computed } from 'vue';
 import { useRouter } from 'vue-router'
 import { useListStore } from '@/stores/list-store'
 import { showSuccessMsg } from '@/services/event-bus.service';
+
+
+const btns = [
+    {
+        name: 'print',
+        action: onPrintList
+    },
+    {
+        name: 'summary',
+        action: onShowSummary
+    },
+    {
+        name: 'share-list',
+        action: onSendList
+    },
+    {
+        name: 'home-action-1',
+        action: onRecipe
+    },
+    {
+        name: 'back',
+        action: closeModal
+    }
+]
 
 const router = useRouter()
 
@@ -68,7 +90,7 @@ function onRecipe() {
 const emit = defineEmits(['resetModal'])
 
 function closeModal() {
-    console.log('close modal');
+    console.debug('close modal');
     emit('resetModal')
 
 }
@@ -91,8 +113,5 @@ dialog.blur-bg {
     gap: 1rem;
 }
 
-.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
+
 </style>

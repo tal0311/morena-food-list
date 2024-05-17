@@ -1,11 +1,11 @@
 <template>
     <dialog ref="dialogRef" @click="slickOutSide" class="blur-bg">
-        <component :is="modalTYpe" @resetModal="resetModal" :info="modalInfo" />
+        <component :is="modalTYpe" @resetModal="resetModal" :info="modalInfo && modalInfo" />
     </dialog>
 </template>
 
 <script setup>
-//TODO: convert btns to loop 
+
 import { watchEffect, ref, computed, shallowRef, onBeforeMount } from 'vue';
 import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
 import ModalDone from '@/components/modal/ModalDone.vue';
@@ -23,7 +23,7 @@ onBeforeMount(() => {
 })
 
 function setModal({ type, info }) {
-    console.log(type, info);
+    console.debug(type, info);
     isModalOpen.value = !isModalOpen.value
 
     switch (type) {
@@ -38,7 +38,7 @@ function setModal({ type, info }) {
 }
 
 watchEffect(() => {
-    console.log(isModalOpen.value);
+    console.debug(isModalOpen.value);
     if (!dialogRef.value) return
     if (isModalOpen.value) {
         openModal()
