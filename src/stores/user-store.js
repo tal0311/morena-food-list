@@ -53,7 +53,7 @@ async function updateLoggedUser(user) {
   }
 
   function setLang(lang) {
-    console.log("setting lang", lang);
+    console.debug("setting lang", lang);
     const langOptions = ["en", "he", "es"];
     currLang.value = langOptions.includes(lang) ? lang : "en";
     document.body.setAttribute("dir", currLang.value === "he" ? "rtl" : "ltr");

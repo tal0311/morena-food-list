@@ -1430,6 +1430,36 @@ const gTrans = {
     es: "Volver a la lista de la compra",
     he: "חזור לרשימת הקניות",
   },
+  'notifications':{
+    en: "Notifications",
+    es: "Notificaciones",
+    he: "התראות",
+  },
+  'level':{
+    en: "Level",
+    es: "Nivel",
+    he: "רמה",
+  },
+  'beginner':{
+    en: "Beginner",
+    es: "Principiante",
+    he: "מתחיל",
+  },
+  'intermediate':{
+    en: "Intermediate",
+    es: "Intermedio",
+    he: "בינוני",
+  },
+  'advanced':{
+    en: "Advanced",
+    es: "Avanzado",
+    he: "מתקדם",
+  },
+  'goals':{
+    en: "Goals",
+    es: "Metas",
+    he: "מטרות",
+  },
 };
 
 function doTrans(key, currLang) {

@@ -128,7 +128,7 @@ function getDomainName(url) {
 }
 
 const debounce = (func, wait) => {
-  console.log('debounce');
+  console.debug('debounce');
   let timeout
   return (...args) => {
     const later = () => {

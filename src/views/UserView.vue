@@ -1,8 +1,8 @@
 <template>
     <section class="user-page grid">
-        <h1> {{ getTitle(user.username) }}  <span>👋</span></h1>
+        <h1> {{ getTitle(user.username) }} <span>👋</span></h1>
         <details>
-            <summary >{{ $trans('user-info') }}</summary>
+            <summary>{{ $trans('user-info') }}</summary>
             <section class="summary-container">
                 <div>
                     <input type="text" v-model="user.username">
@@ -14,9 +14,19 @@
         <details>
             <summary>{{ $trans('goals-and-pref') }}</summary>
             <section class="summary-container">
-                <div>
-                    user lavel , goals, etc
-                </div>
+                <label for="level">{{ $trans('level') }}</label>
+                    <div class="level-container grid">
+                        
+                            <select name="level" id="" v-model.number="user.level">
+                                <option value="0" selected>{{ $trans('level') }}</option>
+                                <option value="1">{{ $trans('beginner') }}</option>
+                                <option value="2">{{ $trans('intermediate') }}</option>
+                                <option value="3">{{ $trans('advanced') }}</option>
+
+                            </select>
+
+                        </div>
+                
 
             </section>
         </details>
@@ -25,9 +35,13 @@
             <summary>{{ $trans('settings') }}</summary>
             <section class="summary-container">
                 <div class="summary-wrapper">
-                    lang, notifications, etc
+
+
                     <div class="notify-container grid">
-                        <label for="notifications ">Notifications</label>
+                       
+
+
+                        <label for="notifications ">{{ $trans('notifications') }}</label>
                         <!-- <input type="checkbox" > -->
                         <input type="checkbox" v-model="user.settings.notifications" class="switch">
                     </div>
@@ -48,7 +62,7 @@
 
         <footer>
             <RouterLink to="/list" class="primary-btn">
-               <span>{{ $trans('start-shopping') }}</span>
+                <span>{{ $trans('start-shopping') }}</span>
             </RouterLink>
         </footer>
 
@@ -60,7 +74,7 @@ import { ref, onBeforeMount, onUpdated } from 'vue'
 import { utilService } from '@/services/util.service';
 import { useUserStore } from '@/stores/user-store'
 import { userService } from '@/services/user.service';
-import { on } from 'hammerjs';
+import {showSuccessMsg ,eventBus } from '@/services/event-bus.service';
 
 
 
@@ -77,7 +91,7 @@ onBeforeMount(() => {
 })
 
 onUpdated(() => {
-    updateUser();
+    updateUser()
 })
 
 
@@ -87,11 +101,12 @@ updateUser = utilService.debounce(updateUser, 1000);
 function updateUser() {
     console.log('updating user, ', user.value);
     userStore.updateLoggedUser(user.value);
+    showSuccessMsg('User updated successfully');
 }
 
 function getTitle(username) {
-    const elBody= document.querySelector('body')
-    return elBody.dir === 'rtl' ? `שלום, ${username}` : `Hi, ${username}`; 
+    const elBody = document.querySelector('body')
+    return elBody.dir === 'rtl' ? `שלום, ${username}` : `Hi, ${username}`;
 
 }
 </script>
@@ -104,11 +119,11 @@ function getTitle(username) {
 }
 
 footer {
-  
-    span{
+
+    span {
         padding-block: 0.5em;
         font-size: 1.2rem;
-    
+
     }
 
 }
@@ -198,7 +213,7 @@ input[type="text"] {
     }
 }
 
-.notify-container {
+.notify-container{
     grid-auto-flow: column;
     justify-content: space-between;
     align-items: center;
@@ -209,7 +224,7 @@ input[type="text"] {
     gap: 1.2rem;
 }
 
-.lang-container {
+.lang-container, .level-container  {
     select {
         padding: 0.5em;
         font-size: 1rem;
