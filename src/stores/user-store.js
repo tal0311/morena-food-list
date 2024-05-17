@@ -15,11 +15,9 @@ export const useUserStore = defineStore("user", () => {
 
   const getUser = computed(() => loggedUser.value);
 
-function loadUser(){
+ function loadUser(){
     loggedUser.value = userService.getLoggedInUser();
 
-    
-  
  }
 
  async function login(credentials) {}
@@ -27,6 +25,11 @@ function loadUser(){
   async function signup(credentials) {}
 
   async function logout() {}
+
+async function updateLoggedUser(user) {
+    loggedUser.value = { ...loggedUser.value ,...user };
+     await userService.save(loggedUser.value);
+  }
 
   async function updateUser(key, value) {
     
@@ -44,6 +47,7 @@ function loadUser(){
   loggedUser,
   updateUser,
   getUser,
-  loadUser
+  loadUser,
+  updateLoggedUser,
   }
 })

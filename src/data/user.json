@@ -1,24 +1,60 @@
- [
-    {
-    "_id": "1",
-    "name": "Israel izraeli",
-    "age": "30",
-    "city": "Tel Aviv",
-    "labels": [],
-    "imgUrl":"@/assets/images/default-user.png",
-    "username":"user1",
-    "password":"1",
-    "selectedItems":[]
- },
- {
-    "_id": "2",
-    "name": "Ziona Levi",
-    "age": "28",
-    "city": "Jerusalem",
-    "labels": [],
-    "imgUrl":"@/assets/images/default-user.png",
-    "username":"user2",
-    "password":"2",
-    "selectedItems":[]
- }
+[
+   
+   {
+      "_id": "5f8f1b3b7f3b9b0017f3b9b0",
+      "username": "User1",
+      "email": "user1@example.com",
+      "password": "password1",
+      "goals": [],
+      "settings": {
+         "lang": "en",
+         "notifications": true
+      },
+      "level": 1,
+      "points": 0,
+      "achievements": [],
+      "selectedItems": [],
+      "imgUrl": "",
+      "age": 25,
+      "city": "New York",
+      "labels": []
+   },
+   {
+      "_id": "5f8f1b3b7f3b9b0017f3b9b1",
+      "username": "User2",
+      "email": "user2@example.com",
+      "password": "password2",
+      "goals": [],
+      "settings": {
+         "lang": "en",
+         "notifications": true
+      },
+      "level": 1,
+      "points": 0,
+      "achievements": [],
+      "selectedItems": [],
+      "imgUrl": "",
+      "age": 30,
+      "city": "London",
+      "labels": []
+   },
+   {
+      "_id": "5f8f1b3b7f3b9b0017f3b9b2",
+      "username": "User3",
+      "email": "user3@example.com",
+      "password": "password3",
+      "goals": [],
+      "settings": {
+         "lang": "en",
+         "notifications": true
+      },
+      "level": 1,
+      "points": 0,
+      "achievements": [],
+      "selectedItems": [],
+      "imgUrl": "",
+      "age": 40,
+      "city": "Paris",
+      "labels": []
+   }
 ]

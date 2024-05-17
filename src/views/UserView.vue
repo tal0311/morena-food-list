@@ -32,14 +32,14 @@
                         <input type="checkbox" v-model="user.settings.notifications" class="switch">
                     </div>
                     <div class="lang-container grid">
-                        <select name="" id="">
+                        <select name="lang" id="" v-model="user.settings.lang">
                             <option value="">Select language</option>
                             <option value="en">English</option>
                             <option value="es">Spanish</option>
                             <option value="fr">French</option>
                             <option value="de">German</option>
                         </select>
-                    
+
                     </div>
                 </div>
 
@@ -51,24 +51,38 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-const user = ref({
-    username: 'Guest',
-    email: "",
-    password: "",
-    goals: [],
-    settings: {
-        lang: "en",
-        notifications: true
-    },
-    level: 1,
-    points: 0,
-    achievements: []
+import { ref, watch, watchEffect, onBeforeMount, onUpdated } from 'vue'
+import { utilService } from '@/services/util.service';
+import { useUserStore } from '@/stores/user-store'
+import { userService } from '@/services/user.service';
+import { on } from 'hammerjs';
 
 
+
+
+
+const user = ref(null);
+const userStore = useUserStore();
+
+
+
+onBeforeMount(() => {
+    user.value = userService.getLoggedInUser();
+  
 })
 
+onUpdated(() => {
+     updateUser();
+})
+
+
+
+updateUser = utilService.debounce(updateUser, 1000);
+
+function updateUser() {
+    console.log('updating user, ', user.value);
+    userStore.updateLoggedUser(user.value);
+}
 </script>
 
 <style scoped>
@@ -163,32 +177,33 @@ input[type="text"] {
     }
 }
 
-.notify-container{
+.notify-container {
     grid-auto-flow: column;
     justify-content: space-between;
     align-items: center;
 }
 
-.summary-wrapper{
+.summary-wrapper {
     display: grid;
     gap: 1.2rem;
 }
 
-.lang-container{
-    select{
+.lang-container {
+    select {
         padding: 0.5em;
         font-size: 1rem;
         border: 1px solid var(--bClr1);
         background-color: var(--bClr2);
         /* border-bottom: 1px solid var(--bClr3); */
         font-size: 1.2rem;
-        
-        &:focus{
+
+        &:focus {
             outline: 1px solid var(--bClr5);
             border-radius: 2px;
             border: none;
         }
-        option{
+
+        option {
             font-size: 1.2rem;
             width: 100%;
         }
@@ -198,41 +213,45 @@ input[type="text"] {
 
 
 .switch {
-  -webkit-appearance: none;
-  position: relative;
-  border-radius: 100vh;
-  width: 2.5rem;
-  height: 1.5rem;
-  border: solid 1px var(--bClr5);
-  background: var(--bClr5);
-  overflow: hidden;
-  transition: all .1s ease-out;
+    -webkit-appearance: none;
+    position: relative;
+    border-radius: 100vh;
+    width: 2.5rem;
+    height: 1.5rem;
+    border: solid 1px var(--bClr5);
+    background: var(--bClr5);
+    overflow: hidden;
+    transition: all .1s ease-out;
 }
+
 .switch:checked {
-  background: var(--bClr1);
-  border: solid 1px var(--bClr1);
+    background: var(--bClr1);
+    border: solid 1px var(--bClr1);
 }
+
 .switch:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.2);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
 }
+
 .switch:after {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50%;
-  background: #fff;
-  transition: all .1s ease-out;
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    background: #fff;
+    transition: all .1s ease-out;
 }
+
 .switch:checked:after {
-  left: 1rem;
+    left: 1rem;
 }
 </style>
