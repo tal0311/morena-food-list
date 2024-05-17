@@ -1,5 +1,5 @@
 <template>
-    <dialog ref="userMsgRef" :class="`user-msg ${msgType}`">
+    <dialog ref="userMsgRef" :class="`user-msg ${msgType}`" @click="clickOutSide">
         <div class="msg-container">
             <span>{{ userMsg }}</span>
         </div>
@@ -51,6 +51,13 @@ function onReport() {
     appStore.reportError()
     closeModal()
 
+}
+
+
+function clickOutSide(ev) {
+    if (!ev.target.classList.contains('msg-container')) {
+       closeModal()
+    }
 }
 </script>
 

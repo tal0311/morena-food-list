@@ -2,9 +2,9 @@
     <!-- <pre>{{ props.item }}</pre> -->
     <section ref="previewRef" :class="`item-preview grid idx- ${isSwiped ? 'swiped' : 'disabled'}`">
 
-        <label class="label-container grid" :for="item._id">
+        <label class="label-container grid" :for="item._id"  >
             <input type="checkbox" :id="item._id" :checked="item.isSelected && isSwiped" :disabled="!isSwiped"
-                @click.stop="onSelect">
+            @click.stop="onSelect"   >
             <span>{{ $trans(props.item.name) }}</span>
             
         </label>
@@ -38,6 +38,7 @@ let elHammer = null
 onMounted(() => {
     elHammer = new Hammer(previewRef.value)
     elHammer.on('swipe', handleSwipe)
+    showSuccessMsg('Swipe item and click on the checkbox to select it')
 })
 
 onBeforeMount(() => {
@@ -56,6 +57,7 @@ function handleSharedIds() {
 
 
 function handleSwipe(ev) {
+   
     if (ev.type === 'swipe') {
         isSwiped.value = !isSwiped.value
         if (props.item.isSelected) {
@@ -66,6 +68,7 @@ function handleSwipe(ev) {
 
 
 function onSelect() {
+    console.log('select');
     if (!isSwiped.value) {
         showSuccessMsg('Swipe item and click on the checkbox to select it')
         return

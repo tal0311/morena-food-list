@@ -1,5 +1,5 @@
 <template>
-    <dialog ref="dialogRef" @click="slickOutSide" class="blur-bg">
+    <dialog ref="dialogRef" @click="clickOutSide" class="blur-bg">
         <component :is="modalTYpe" @resetModal="resetModal" :info="modalInfo && modalInfo" />
     </dialog>
 </template>
@@ -62,7 +62,7 @@ function resetModal() {
     isModalOpen.value = false
 }
 
-function slickOutSide(ev) {
+function clickOutSide(ev) {
     if (!ev.target.classList.contains('actions-container')) {
         isModalOpen.value = false
     }
