@@ -17,7 +17,8 @@
       "imgUrl": "",
       "age": 25,
       "city": "New York",
-      "labels": []
+      "labels": [],
+      "history":[]
    },
    {
       "_id": "5f8f1b3b7f3b9b0017f3b9b1",
@@ -36,7 +37,25 @@
       "imgUrl": "",
       "age": 30,
       "city": "London",
-      "labels": []
+      "labels": [],
+      "history":[
+         {
+             "url": "https://tal0311.github.io/morena-food-list/#/list?share=true&ids=1,4,80,75",
+             "date": "5/18/2024"
+         },
+         {
+             "url": "https://tal0311.github.io/morena-food-list/#/list?share=true&ids=2,4,12,15",
+             "date": "5/18/2024"
+         },
+         {
+             "url": "https://tal0311.github.io/morena-food-list/#/list?share=true&ids=1,4,19,15",
+             "date": "5/18/2024"
+         },
+         {
+             "url": "https://tal0311.github.io/morena-food-list/#/list?share=true&ids=1,4,10,15",
+             "date": "5/18/2024"
+         }
+     ]
    },
    {
       "_id": "5f8f1b3b7f3b9b0017f3b9b2",
@@ -55,6 +74,7 @@
       "imgUrl": "",
       "age": 40,
       "city": "Paris",
-      "labels": []
+      "labels": [],
+      "history":[]
    }
 ]

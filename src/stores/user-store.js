@@ -40,16 +40,22 @@ async function updateLoggedUser(user) {
   }
 
   async function updateUser(key, value) {
-    
-  try {
   
-    loggedUser.value[key] = value;
+  try {
+
+      loggedUser.value[key] = value;
     await userService.save(loggedUser.value);
   } catch (error) {
     appStore.logError(`[error: failed to update user with selected items] - ${error}`, true);
     
   }
     
+  }
+
+  function addHistory(Log){
+    const history = loggedUser.value.history;
+    history.push(Log);
+    updateUser("history", history);
   }
 
   function setLang(lang) {
@@ -66,6 +72,7 @@ async function updateLoggedUser(user) {
   loadUser,
   updateLoggedUser,
   setLang,
-  getCurrLang
+  getCurrLang,
+  addHistory
   }
 })

@@ -30,14 +30,12 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, computed, watch, onMounted } from 'vue'
+import { ref, onBeforeMount, computed, watch } from 'vue'
 import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
 import DashBoard from '@/components/DashBoard.vue'
 import { itemService } from '@/services/item.service.local.js'
-import { useRoute } from 'vue-router'
-import { useAppStore } from '@/stores/app-store'
-import { useTour } from '@/composables/useTour.js'
+
 
 // TODO: fix chart labels and data to human readable
 const listStore = useListStore()

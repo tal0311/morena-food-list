@@ -70,13 +70,24 @@ function signup(credentials) {
 
 function getEmptyUser() {
     return {
-        id_: utilService.makeId(),
-        name,
-        age,
-        city,
+        
+        username: "",
+        email: "",
+        password: "",
+        goals: [],
+        settings: {
+            lang: "",
+            notifications: false
+        },
+        level: null,
+        points: 0,
+        achievements: [],
+        selectedItems: [],
+        imgUrl: "",
+        age: null,
+        city: "",
         labels: [],
-        imgUrl: "@/assets/images/default-user.png",
-        password: "1234"
+        history: []
     }
 }
 
@@ -89,7 +100,7 @@ function _saveLoggedUser(user) {
 
 (() => {
     utilService.saveToStorage(STORAGE_KEY, users);
-    _saveLoggedUser(users[0]);
+    _saveLoggedUser(users[1]);
     // users[0]
 
 })()

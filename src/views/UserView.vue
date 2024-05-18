@@ -60,6 +60,21 @@
             </section>
         </details>
 
+        <details>
+            <summary>History</summary>
+            <section class="history-container">
+                <ul v-if="user.history.length">
+                    <li v-for="history in user.history" :key="history.id">
+                        <span>{{ history.date }}</span> | 
+                        <RouterLink :to="history.url">
+                            <span>visit</span>
+                        </RouterLink>
+                    </li>
+                </ul>
+                <p v-else>No history at the moment</p>
+            </section>
+        </details>
+
         <footer>
             <RouterLink to="/list" class="primary-btn">
                 <span>{{ $trans('start-shopping') }}</span>

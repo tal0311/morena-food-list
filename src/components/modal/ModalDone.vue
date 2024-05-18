@@ -10,6 +10,7 @@ import { watchEffect, ref, computed } from 'vue';
 import { useRouter } from 'vue-router'
 import { useListStore } from '@/stores/list-store'
 import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
+import { useUserStore } from '@/stores/user-store';
 
 const emit = defineEmits(['resetModal'])
 const btns = [
@@ -28,6 +29,10 @@ const btns = [
     {
         name: 'home-action-1',
         action: onRecipe
+    },
+    {
+        name: 'save-history',
+        action: saveHistory
     },
     {
         name: 'back',
@@ -75,6 +80,25 @@ async function onSendList() {
         closeModal()
     }
 
+}
+
+
+const userStore = useUserStore()
+function saveHistory() {
+    let idsTosShare = selectItems.value.map(({ _id }) => _id)
+    console.debug('save history', idsTosShare);
+    const url = `${import.meta.env.VITE_PROD_URL}?share=true&ids=${idsTosShare}`;
+    console.debug(url);
+
+    const history={
+        url : url,
+        date: new Date().toLocaleDateString()
+    }
+
+    userStore.addHistory(history)
+    showSuccessMsg('History saved successfully')
+    // closeModal()
+   
 }
 
 

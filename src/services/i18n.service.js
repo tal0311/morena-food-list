@@ -1460,6 +1460,11 @@ const gTrans = {
     es: "Metas",
     he: "מטרות",
   },
+  'save-history':{
+    en: "Save List",
+    es: "Guardar Lista",
+    he: "שמור רשימה",
+  }
 };
 
 function doTrans(key, currLang) {
