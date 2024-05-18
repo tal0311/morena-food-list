@@ -61,17 +61,17 @@
         </details>
 
         <details>
-            <summary>History</summary>
+            <summary>{{ $trans('history') }}</summary>
             <section class="history-container">
                 <ul v-if="user.history.length" class="history-list clean-list grid">
                     <li v-for="history in user.history" :key="history.id" class="grid grid-dir-col">
                         <span>{{ history.date }}</span>  
                         <RouterLink :to="`/list?${history.url}`">
-                            <span class="secondary-btn">Restore</span>
+                            <span class="secondary-btn">{{ $trans('restore') }}</span>
                         </RouterLink>
                     </li>
                 </ul>
-                <p v-else>No history at the moment</p>
+                <p v-else>{{ $trans('no-history') }}</p>
             </section>
         </details>
 
@@ -134,7 +134,7 @@ function getTitle(username) {
 
 }
 .secondary-btn{
-    padding: 0.2rem;
+    padding: 0.2rem 0.8rem;
 }
 .user-page {
     font-size: 1.5rem;

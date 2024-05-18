@@ -1460,10 +1460,25 @@ const gTrans = {
     es: "Metas",
     he: "מטרות",
   },
+  history: {
+    en: "History",
+    es: "Historial",
+    he: "היסטוריה",
+  },
   'save-history':{
     en: "Save List",
     es: "Guardar Lista",
     he: "שמור רשימה",
+  },
+  restore: {
+    en: "Restore",
+    es: "Restaurar",
+    he: "שחזר",
+  },
+  'no-history':{
+    en: "No history at the moment",
+    es: "No hay historial en este momento",
+    he: "אין היסטוריה כרגע",
   }
 };
 

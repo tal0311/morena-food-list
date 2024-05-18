@@ -87,7 +87,7 @@ const userStore = useUserStore()
 function saveHistory() {
     let idsTosShare = selectItems.value.map(({ _id }) => _id)
     console.debug('save history', idsTosShare);
-    const url = `${import.meta.env.VITE_PROD_URL}?share=true&ids=${idsTosShare}`;
+    const url = `share=true&ids=${idsTosShare}`;
     console.debug(url);
 
     const history={
