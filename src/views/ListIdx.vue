@@ -1,5 +1,5 @@
 <template>
-    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
+    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid"  >
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" :sharedIds="sharedIds" @selectItem="toggleSelect"
                 @toggleEdit="toggleEdit" @updateLabel="updateLabel" />
@@ -7,16 +7,16 @@
         <footer id="footer-container" :class="['footer-container']">
             <button :class="`primary-btn ${btnState}`" @click.stop="onDone" v-html="$svg(btnState)"></button>
         </footer>
-        <RouterView />
         <AppModal />
     </section>
     <AppLoader v-else />
+    <RouterView />
 </template>
 
 <script setup>
 
 import { useRoute } from 'vue-router'
-import { ref, onBeforeMount, computed,onUnmounted } from 'vue'
+import { ref, onBeforeMount, computed, onUnmounted, onMounted, watch, onUpdated } from 'vue'
 import { useListStore } from '@/stores/list-store';
 import AppModal from '@/components/AppModal.vue'
 import { useTour } from '@/composables/useTour.js'
@@ -24,6 +24,8 @@ import { useAppStore } from '@/stores/app-store'
 import AppLoader from '@/components/AppLoader.vue'
 import GroupList from '@/components/GroupList.vue'
 import { eventBus } from '@/services/event-bus.service';
+import { showSuccessMsg } from '@/services/event-bus.service';
+import { on } from 'hammerjs';
 
 const route = useRoute()
 
@@ -32,13 +34,35 @@ const listStore = useListStore()
 const groupList = computed(() => listStore?.getList)
 const labelList = computed(() => listStore?.getLabels)
 
-onBeforeMount(() => {
+onBeforeMount(async () => {
+    await listStore.loadList()
     getDataFromRoute()
 })
+
+onMounted(() => {
+    showSuccessMsg('Swipe item and click on the checkbox to select it')
+})
+
+
+onUpdated(() => {
+    console.log('updated');
+    // console.log('updated');
+    // console.log(route.query);
+    // getDataFromRoute()
+    // listStore.loadList()
+    // counter.value++
+    // updateCounter()
+})
+
+
+
+const counter = ref(0)
 
 const sharedIds = ref(null)
 
 function getDataFromRoute() {
+    // console.log(route.query);
+
     const { share, ids } = route.query
     if (share && ids) {
         sharedIds.value = ids.split(',')

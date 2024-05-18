@@ -38,7 +38,7 @@ let elHammer = null
 onMounted(() => {
     elHammer = new Hammer(previewRef.value)
     elHammer.on('swipe', handleSwipe)
-    showSuccessMsg('Swipe item and click on the checkbox to select it')
+    // 
 })
 
 onBeforeMount(() => {
@@ -58,6 +58,7 @@ function handleSharedIds() {
 
 function handleSwipe(ev) {
    
+    console.log('swipe');
     if (ev.type === 'swipe') {
         isSwiped.value = !isSwiped.value
         if (props.item.isSelected) {
