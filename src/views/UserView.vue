@@ -63,11 +63,11 @@
         <details>
             <summary>History</summary>
             <section class="history-container">
-                <ul v-if="user.history.length">
-                    <li v-for="history in user.history" :key="history.id">
-                        <span>{{ history.date }}</span> | 
+                <ul v-if="user.history.length" class="history-list clean-list grid">
+                    <li v-for="history in user.history" :key="history.id" class="grid grid-dir-col">
+                        <span>{{ history.date }}</span>  
                         <RouterLink :to="`/list?${history.url}`">
-                            <span>visit</span>
+                            <span class="secondary-btn">Restore</span>
                         </RouterLink>
                     </li>
                 </ul>
@@ -127,6 +127,15 @@ function getTitle(username) {
 </script>
 
 <style scoped>
+
+.history-list{
+    gap: 0.5rem;
+    padding: 0.5rem;
+
+}
+.secondary-btn{
+    padding: 0.2rem;
+}
 .user-page {
     font-size: 1.5rem;
     gap: 1rem;
