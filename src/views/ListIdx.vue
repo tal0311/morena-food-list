@@ -4,7 +4,7 @@
             <GroupList :labelList="labelList" :groupList="groupList" :sharedIds="sharedIds" @selectItem="toggleSelect"
                 @toggleEdit="toggleEdit" @updateLabel="updateLabel" />
         </div>
-        <footer id="footer-container" :class="['footer-container']">
+        <footer id="footer-container" :class="['footer-container', isHistoryMode?'blur-bg':'']">
 
             <button v-if="!isHistoryMode" :class="`primary-btn ${btnState}`" @click.stop="onDone"
                 v-html="$svg(btnState)"></button>
@@ -83,7 +83,7 @@ function onSelectHistory() {
             }
            
         }
-        console.log(query);
+        
         router.push({ name: 'list', query })
         isHistoryMode.value = false
         showSuccessMsg('History restored')
@@ -126,7 +126,7 @@ function submitLabel() {
 
 
 const appStore = useAppStore()
-const isTourActive = computed(() => appStore.getIsTourActive)
+// const isTourActive = computed(() => appStore.getIsTourActive)
 
 // set timeout is to make sure the dom is rendered before the tour starts
 // onMounted(() => {
@@ -173,6 +173,14 @@ footer {
     place-content: center;
     transform: translateX(-50%);
     transition: translate 0.2s;
+    width: 100%;
+    /* background-color: aquamarine; */
+
+    &.blur-bg {
+        bottom: 4rem;
+        padding: 1rem;
+        /* background-color: var(--bClr2); */
+    }
 }
 
 .done {
