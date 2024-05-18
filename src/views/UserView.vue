@@ -66,7 +66,7 @@
                 <ul v-if="user.history.length">
                     <li v-for="history in user.history" :key="history.id">
                         <span>{{ history.date }}</span> | 
-                        <RouterLink :to="history.url">
+                        <RouterLink :to="`/list?${history.url}`">
                             <span>visit</span>
                         </RouterLink>
                     </li>
