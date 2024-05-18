@@ -25,7 +25,7 @@ import AppLoader from '@/components/AppLoader.vue'
 import GroupList from '@/components/GroupList.vue'
 import { eventBus } from '@/services/event-bus.service';
 import { showSuccessMsg } from '@/services/event-bus.service';
-import { on } from 'hammerjs';
+
 
 const route = useRoute()
 
@@ -35,25 +35,13 @@ const groupList = computed(() => listStore?.getList)
 const labelList = computed(() => listStore?.getLabels)
 
 onBeforeMount(async () => {
-    await listStore.loadList()
+    
     getDataFromRoute()
 })
 
 onMounted(() => {
     showSuccessMsg('Swipe item and click on the checkbox to select it')
 })
-
-
-onUpdated(() => {
-    console.log('updated');
-    // console.log('updated');
-    // console.log(route.query);
-    // getDataFromRoute()
-    // listStore.loadList()
-    // counter.value++
-    // updateCounter()
-})
-
 
 
 const counter = ref(0)

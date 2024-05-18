@@ -69,7 +69,7 @@ function handleSwipe(ev) {
 
 
 function onSelect() {
-    console.log('select');
+    // console.log('select');
     if (!isSwiped.value) {
         showSuccessMsg('Swipe item and click on the checkbox to select it')
         return
