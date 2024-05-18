@@ -1,6 +1,6 @@
 <template>
-    <dialog ref="dialogRef" @click="clickOutSide" class="blur-bg">
-        <component :is="modalTYpe" @resetModal="resetModal" :info="modalInfo && modalInfo" />
+    <dialog ref="dialogRef" @click="clickOutSide" class="app-modal blur-bg">
+        <component :is="modalTYpe" @resetModal="isModalOpen=false" :info="modalInfo && modalInfo" />
     </dialog>
 </template>
 
@@ -10,6 +10,7 @@ import { watchEffect, ref, computed, shallowRef, onBeforeMount } from 'vue';
 import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
 import ModalDone from '@/components/modal/ModalDone.vue';
 import ModalInfo from '@/components/modal/ModalInfo.vue';
+import ModalSummary from '@/components/modal/ModalSummary.vue';
 
 
 const dialogRef = ref(null)
@@ -24,12 +25,16 @@ onBeforeMount(() => {
 
 function setModal({ type, info }) {
     console.debug(type, info);
-    isModalOpen.value = !isModalOpen.value
+    isModalOpen.value = true
+    // debugger
 
     switch (type) {
         case 'ModalInfo':
             modalTYpe.value = ModalInfo
             modalInfo.value = info
+            break;
+        case 'ModalSummary':
+            modalTYpe.value = ModalSummary
             break;
         default:
             modalTYpe.value = ModalDone
@@ -63,7 +68,7 @@ function resetModal() {
 }
 
 function clickOutSide(ev) {
-    if (!ev.target.classList.contains('actions-container')) {
+    if (ev.target.classList.contains('app-modal')) {
         isModalOpen.value = false
     }
 }

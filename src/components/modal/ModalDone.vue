@@ -1,7 +1,6 @@
 <template>
     <div class="actions-container grid">
-        <button v-for="btn in btns" class="secondary-btn" 
-        @click="btn.action">{{ $trans(btn.name) }}</button>
+        <button v-for="btn in btns" class="secondary-btn" @click="btn.action">{{ $trans(btn.name) }}</button>
     </div>
 
 </template>
@@ -10,9 +9,9 @@
 import { watchEffect, ref, computed } from 'vue';
 import { useRouter } from 'vue-router'
 import { useListStore } from '@/stores/list-store'
-import { showSuccessMsg } from '@/services/event-bus.service';
+import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
 
-
+const emit = defineEmits(['resetModal'])
 const btns = [
     {
         name: 'print',
@@ -45,6 +44,10 @@ function onPrintList() {
 }
 
 function onShowSummary(query) {
+    // setTimeout(() => {
+    //     console.debug('show summary');
+    //     eventBus.emit('toggle-modal', { type: 'ModalSummary', info: query })
+    // }, 200);
     closeModal()
     router.push({ name: 'list-summary', query: query })
 }
@@ -59,12 +62,9 @@ async function onSendList() {
     }
     try {
         let idsTosShare = selectItems.value.map(({ _id }) => _id)
-
         const url = `${import.meta.env.VITE_PROD_URL}?share=true&ids=${idsTosShare}`;
         console.debug(url);
-
         await navigator.share({ title: 'My shopping list', text: 'Check out my shopping list', url: url })
-
         showSuccessMsg('List sent successfully ')
 
     } catch (error) {
@@ -81,13 +81,12 @@ async function onSendList() {
 
 
 function onRecipe() {
-
     closeModal()
     router.push({ name: 'recipe' })
 
 
 }
-const emit = defineEmits(['resetModal'])
+
 
 function closeModal() {
     console.debug('close modal');
@@ -112,6 +111,4 @@ dialog.blur-bg {
 .actions-container {
     gap: 1rem;
 }
-
-
 </style>

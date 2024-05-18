@@ -1,5 +1,5 @@
 <template>
-    <section class="summary-view grid blur-bg">
+    <section class="summary-modal grid ">
         <div id="list-container">
             <ItemList v-if="selectItems.length" :list="selectItems" @selectItem="toggleSelect">
                 <h3>{{ $trans('list-results') }}</h3>
@@ -73,9 +73,8 @@ function prepDataForChart() {
     cmpKey.value++
 }
 
-function toggleSelect({item}) {
-    // console.log('itemId', itemId);
-    listStore.toggleSelect(item._id)
+function toggleSelect({itemId}) {
+    listStore.toggleSelect(itemId)
 }
 
 // Tour logic
@@ -94,6 +93,13 @@ function toggleSelect({item}) {
 //     }
 // })
 
+
+const props = defineProps(['info'])
+const emit = defineEmits(['closeModal'])
+
+function closeModal() {
+    emit('closeModal')
+}
 
 </script>
 
