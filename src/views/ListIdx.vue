@@ -1,11 +1,20 @@
 <template>
-    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid"  >
+    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" :sharedIds="sharedIds" @selectItem="toggleSelect"
                 @toggleEdit="toggleEdit" @updateLabel="updateLabel" />
         </div>
         <footer id="footer-container" :class="['footer-container']">
-            <button :class="`primary-btn ${btnState}`" @click.stop="onDone" v-html="$svg(btnState)"></button>
+
+            <button v-if="!isHistoryMode" :class="`primary-btn ${btnState}`" @click.stop="onDone"
+                v-html="$svg(btnState)"></button>
+            <section v-else class="history-actions grid grid-dir-col">
+                <button class="primary-btn" @click="onSelectHistory">Continue</button>
+                <RouterLink to="/user">
+                    <button class="primary-btn">Back</button>
+                </RouterLink>
+            </section>
+
         </footer>
         <AppModal />
     </section>
@@ -15,7 +24,7 @@
 
 <script setup>
 
-import { useRoute } from 'vue-router'
+import { useRoute , useRouter} from 'vue-router'
 import { ref, onBeforeMount, computed, onUnmounted, onMounted, watch, onUpdated } from 'vue'
 import { useListStore } from '@/stores/list-store';
 import AppModal from '@/components/AppModal.vue'
@@ -28,6 +37,7 @@ import { showSuccessMsg } from '@/services/event-bus.service';
 
 
 const route = useRoute()
+const router = useRouter()
 
 const listStore = useListStore()
 // loading the list from the route guard
@@ -35,25 +45,48 @@ const groupList = computed(() => listStore?.getList)
 const labelList = computed(() => listStore?.getLabels)
 
 onBeforeMount(async () => {
-    
+
     getDataFromRoute()
 })
 
 onMounted(() => {
-    showSuccessMsg('Swipe item and click on the checkbox to select it')
+    const msg = isHistoryMode.value
+        ? 'To continue from this history click continue'
+        : 'Swipe item and click on the checkbox to select it'
+    showSuccessMsg(msg)
 })
 
 
-const counter = ref(0)
+// const counter = ref(0)
 
 const sharedIds = ref(null)
-
+const isHistoryMode = ref(false)
 function getDataFromRoute() {
     // console.log(route.query);
 
-    const { share, ids } = route.query
+    const { share, ids, history } = route.query
     if (share && ids) {
         sharedIds.value = ids.split(',')
+    }
+    if (history) {
+        isHistoryMode.value = true
+    }
+}
+function onSelectHistory() {
+    console.log(route.query);
+    const { history } = route.query
+    if (history) {
+    const query={}
+        for (const key in route.query) {
+            if (key !== 'history') {
+                query[key] = route.query[key]
+            }
+           
+        }
+        console.log(query);
+        router.push({ name: 'list', query })
+        isHistoryMode.value = false
+        showSuccessMsg('History restored')
     }
 }
 
@@ -215,6 +248,21 @@ textarea {
     padding: 0.3rem;
     font-family: inherit;
     font-size: 1.5rem;
+}
+
+.history-actions {
+    /* background-color: aqua; */
+    width: 100%;
+
+    grid-auto-columns: 1fr 1fr;
+    gap: 1rem;
+
+    button {
+        padding: 0.8rem 0.8rem;
+        width: 40vw;
+
+
+    }
 }
 </style>
 
