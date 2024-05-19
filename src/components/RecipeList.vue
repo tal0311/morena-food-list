@@ -1,6 +1,7 @@
 <template>
 
     <section class="recipe-list grid">
+        {{ props.recipes }}
         <RecipePreview v-for="recipe in props.recipes" :key="recipe.id" :recipe="recipe" />
     </section>
 

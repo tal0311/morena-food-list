@@ -11,13 +11,6 @@
 
       <footer id="language-modal">
         <RouterLink to="/user" class="icon" v-html="$svg('account')"></RouterLink>
-        <!-- <button class="icon" v-html="$svg('account')"></button> -->
-        <!-- <div v-if="isLangModalOpen" class="lang-modal grid">
-          <button class="" @click="setLang('en')">English</button>
-          <button @click="setLang('es')">Español</button>
-          <button @click="setLang('he')">עברית</button>
-        </div>
-        <button @click="toggleLangMOdal" class="icon" v-html="$svg('translate')"></button> -->
       </footer>
     </section>
   </section>

@@ -67,14 +67,14 @@ router.beforeEach(async (to, from, next) => {
 
 
   if (to.name === "recipe") {
-    if (!listStore.getSelectedItems.length) {
-      next({ name: "list" });
-      showSuccessMsg("Please select items to view recipe");
+    if (to.query.inspiration) {
+      // next({ name: "list" });
+      showSuccessMsg("Select a recipe to add products to the list");
     } else {
       recipeStore.loadMatches();
-      next();
+    
     }
-    return
+    
   }
 
   if (to.name === "list") {

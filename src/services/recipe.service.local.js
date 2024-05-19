@@ -15,6 +15,7 @@ export const recipeService = {
   save,
   getEmptyRecipe,
   updateLabel,
+  getRecipes,
 }
 
 window.recipeService = recipeService;
@@ -47,15 +48,23 @@ window.recipeService = recipeService;
  
   matchItems = Object.keys(matchItems).map(key => {
     return {
-      _id: key,
+      ...recipes.find(recipe => recipe._id === key),
       ingredients: matchItems[key],
-      percentage: +((matchItems[key].length / selectedItems.length) * 100).toFixed(),
-      recipe: recipes.find(recipe => recipe._id === key)
-      
-    };
-  }).sort((a, b) => b.percentage - a.percentage);
+      percentage: +((matchItems[key].length / selectedItems.length) * 100).toFixed()
+    
+    }
+   }).sort((a, b) => b.percentage - a.percentage);
 
+  console.log(matchItems);
   return matchItems;
+}
+
+async function getRecipes(){
+  const list = await storageService.query(RECIPE_KEY)
+  console.log("list", list);
+  return list;
+
+
 }
 
 

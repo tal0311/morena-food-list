@@ -3,10 +3,9 @@
     
 
     <pre>{{ props.recipe }}</pre>
-        <article class="recipe-preview grid">
+        <article class="recipe-preview grid" >
             <img :src="props.recipe.image" :alt="props.recipe.title">
             <div class="match">
-                <span class="match-num" :style="getStyle">Products match {{ props.recipe.percentage }} %</span>
             </div>
             <div class="info-container grid">
                 <h4>{{ props.recipe.title }}</h4>
@@ -15,6 +14,12 @@
                 </div>
             </div>
         </article>
+        <details>
+            <summary>Ingredients</summary>
+            <ul>
+                <li v-for="ingredient in props.recipe.ingredients" :key="ingredient.id">{{ ingredient.name }}</li>
+            </ul>
+        </details>
     </div> 
 </template>
 

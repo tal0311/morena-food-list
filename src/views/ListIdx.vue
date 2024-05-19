@@ -4,7 +4,7 @@
             <GroupList :labelList="labelList" :groupList="groupList" :sharedIds="sharedIds" @selectItem="toggleSelect"
                 @toggleEdit="toggleEdit" @updateLabel="updateLabel" />
         </div>
-        <footer id="footer-container" :class="['footer-container', isHistoryMode?'blur-bg':'']">
+        <footer id="footer-container" :class="['footer-container', isHistoryMode ? 'blur-bg' : '']">
 
             <button v-if="!isHistoryMode" :class="`primary-btn ${btnState}`" @click.stop="onDone"
                 v-html="$svg(btnState)"></button>
@@ -24,11 +24,10 @@
 
 <script setup>
 
-import { useRoute , useRouter} from 'vue-router'
-import { ref, onBeforeMount, computed, onUnmounted, onMounted, watch, onUpdated } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { ref, onBeforeMount, computed, onUnmounted, onMounted} from 'vue'
 import { useListStore } from '@/stores/list-store';
 import AppModal from '@/components/AppModal.vue'
-import { useTour } from '@/composables/useTour.js'
 import { useAppStore } from '@/stores/app-store'
 import AppLoader from '@/components/AppLoader.vue'
 import GroupList from '@/components/GroupList.vue'
@@ -76,14 +75,14 @@ function onSelectHistory() {
     console.log(route.query);
     const { history } = route.query
     if (history) {
-    const query={}
+        const query = {}
         for (const key in route.query) {
             if (key !== 'history') {
                 query[key] = route.query[key]
             }
-           
+
         }
-        
+
         router.push({ name: 'list', query })
         isHistoryMode.value = false
         showSuccessMsg('History restored')
