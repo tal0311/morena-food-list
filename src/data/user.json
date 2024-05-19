@@ -1,5 +1,4 @@
 [
-   
    {
       "_id": "5f8f1b3b7f3b9b0017f3b9b0",
       "username": "User1",
@@ -8,7 +7,12 @@
       "goals": [],
       "settings": {
          "lang": "he",
-         "notifications": true
+         "notifications": true,
+         "isVegan": true,
+         "isVegetarian": false,
+         "isGlutenFree": false,
+         "isLactoseFree": false,
+         "isKosher": false
       },
       "level": 1,
       "points": 0,
@@ -18,8 +22,8 @@
       "age": 25,
       "city": "New York",
       "labels": [],
-      "history":[],
-      "personalTxt":""
+      "history": [],
+      "personalTxt": ""
    },
    {
       "_id": "5f8f1b3b7f3b9b0017f3b9b1",
@@ -29,7 +33,12 @@
       "goals": [],
       "settings": {
          "lang": "en",
-         "notifications": true
+         "notifications": true,
+         "isVegan": true,
+         "isVegetarian": false,
+         "isGlutenFree": false,
+         "isLactoseFree": false,
+         "isKosher": false
       },
       "level": 1,
       "points": 0,
@@ -39,25 +48,25 @@
       "age": 30,
       "city": "London",
       "labels": [],
-      "history":[
+      "history": [
          {
-             "url": "share=true&history=true&ids=1,4,80,75",
-             "date": "5/18/2024"
+            "url": "share=true&history=true&ids=1,4,80,75",
+            "date": "5/18/2024"
          },
          {
-             "url": "share=true&history=true&ids=2,4,12,15",
-             "date": "5/18/2024"
+            "url": "share=true&history=true&ids=2,4,12,15",
+            "date": "5/18/2024"
          },
          {
-             "url": "share=true&history=true&ids=1,4,19,15",
-             "date": "5/18/2024"
+            "url": "share=true&history=true&ids=1,4,19,15",
+            "date": "5/18/2024"
          },
          {
-             "url": "share=true&history=true&ids=1,4,10,15",
-             "date": "5/18/2024"
+            "url": "share=true&history=true&ids=1,4,10,15",
+            "date": "5/18/2024"
          }
-     ],
-     "personalTxt":"Demo text for user 2 profile."
+      ],
+      "personalTxt": "Demo text for user 2 profile."
    },
    {
       "_id": "5f8f1b3b7f3b9b0017f3b9b2",
@@ -67,7 +76,12 @@
       "goals": [],
       "settings": {
          "lang": "en",
-         "notifications": true
+         "notifications": true,
+         "isVegan": false,
+         "isVegetarian": false,
+         "isGlutenFree": false,
+         "isLactoseFree": false,
+         "isKosher": true
       },
       "level": 1,
       "points": 0,
@@ -77,7 +91,7 @@
       "age": 40,
       "city": "Paris",
       "labels": [],
-      "history":[],
-      "personalTxt":""
+      "history": [],
+      "personalTxt": ""
    }
 ]

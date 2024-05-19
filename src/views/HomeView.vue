@@ -77,6 +77,10 @@ p {
   margin: 0;
 
 }
+h1{
+  font-size: 2.5rem;
+
+}
 
 section {
   display: grid;

@@ -105,21 +105,14 @@ function saveHistory() {
    
 }
 
-
-
-
 function onRecipe() {
     closeModal()
     router.push({ name: 'recipe' })
-
-
 }
-
 
 function closeModal() {
     console.debug('close modal');
     emit('resetModal')
-
 }
 </script>
 

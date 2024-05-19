@@ -1,5 +1,6 @@
 <template>
     <section class="user-page grid">
+        <!-- <pre>{{ user }}</pre> -->
         <h1> {{ getTitle(user.username) }} <span>👋</span></h1>
         <details>
             <summary>{{ $trans('user-info') }}</summary>
@@ -15,18 +16,18 @@
             <summary>{{ $trans('goals-and-pref') }}</summary>
             <section class="summary-container">
                 <label for="level">{{ $trans('level') }}</label>
-                    <div class="level-container grid">
-                        
-                            <select name="level" id="" v-model.number="user.level">
-                                <option value="0" selected>{{ $trans('level') }}</option>
-                                <option value="1">{{ $trans('beginner') }}</option>
-                                <option value="2">{{ $trans('intermediate') }}</option>
-                                <option value="3">{{ $trans('advanced') }}</option>
+                <div class="level-container grid">
 
-                            </select>
+                    <select name="level" id="" v-model.number="user.level">
+                        <option value="0" selected>{{ $trans('level') }}</option>
+                        <option value="1">{{ $trans('beginner') }}</option>
+                        <option value="2">{{ $trans('intermediate') }}</option>
+                        <option value="3">{{ $trans('advanced') }}</option>
 
-                        </div>
-                
+                    </select>
+
+                </div>
+
 
             </section>
         </details>
@@ -38,14 +39,16 @@
 
 
                     <div class="notify-container grid">
-                       
+
 
 
                         <label for="notifications">{{ $trans('notifications') }}</label>
                         <!-- <input type="checkbox" > -->
-                        <input type="checkbox" name="notifications" v-model="user.settings.notifications" class="switch">
+                        <input type="checkbox" name="notifications" v-model="user.settings.notifications"
+                            class="switch">
                     </div>
                     <div class="lang-container grid">
+                        <label class="language-label" for="lang">{{ $trans('select-language') }}</label>
                         <select name="lang" id="" v-model="user.settings.lang">
                             <option value="">{{ $trans('select-language') }}</option>
                             <option value="en">English</option>
@@ -55,6 +58,29 @@
                         </select>
 
                     </div>
+                    <section class="preferences grid">
+                        <label for="vegan">
+                            Vegan
+                            <input type="checkbox" name="diet"  v-model="user.settings.isVegan">
+                        </label>
+                        <label for="vegetarian">
+                            Vegetarian
+                            <input type="checkbox" name="diet"  v-model="user.settings.isVegetarian">
+                        </label>
+                        <label for="glutenFree">
+                            Gluten Free
+                            <input type="checkbox" name="diet"  v-model="user.settings.isGlutenFree">
+                        </label>
+                        <label for="lactoseFree">
+                            Lactose Free
+                            <input type="checkbox" name="diet"  v-model="user.settings.isLactoseFree">
+                        </label>
+                        <label for="kosher">
+                            Kosher
+                            <input type="checkbox" name="diet" v-model="user.settings.isKosher">
+                        </label>
+                    </section>
+
                 </div>
 
             </section>
@@ -65,7 +91,7 @@
             <section class="history-container">
                 <ul v-if="user.history.length" class="history-list clean-list grid">
                     <li v-for="history in user.history" :key="history.id" class="grid grid-dir-col">
-                        <span>{{ history.date }}</span>  
+                        <span>{{ history.date }}</span>
                         <RouterLink :to="`/list?${history.url}`">
                             <span class="secondary-btn">{{ $trans('restore') }}</span>
                         </RouterLink>
@@ -77,8 +103,9 @@
         <details>
             <summary>{{ $trans('personal-notes') }}</summary>
             <section class="notes-container">
-                <textarea name="" v-model="user.personalTxt" placeholder="Notes from here will show in your list"></textarea>
-              
+                <textarea name="" v-model="user.personalTxt"
+                    placeholder="Notes from here will show in your list"></textarea>
+
             </section>
         </details>
 
@@ -96,7 +123,7 @@ import { ref, onBeforeMount, onUpdated } from 'vue'
 import { utilService } from '@/services/util.service';
 import { useUserStore } from '@/stores/user-store'
 import { userService } from '@/services/user.service';
-import {showSuccessMsg ,eventBus } from '@/services/event-bus.service';
+import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
 
 
 
@@ -134,15 +161,16 @@ function getTitle(username) {
 </script>
 
 <style scoped>
-
-.history-list{
+.history-list {
     gap: 0.5rem;
     padding: 0.5rem;
 
 }
-.secondary-btn{
+
+.secondary-btn {
     padding: 0.2rem 0.8rem;
 }
+
 .user-page {
     font-size: 1.5rem;
     gap: 1rem;
@@ -244,7 +272,7 @@ input[type="text"] {
     }
 }
 
-.notify-container{
+.notify-container {
     grid-auto-flow: column;
     justify-content: space-between;
     align-items: center;
@@ -255,7 +283,8 @@ input[type="text"] {
     gap: 1.2rem;
 }
 
-.lang-container, .level-container  {
+.lang-container,
+.level-container {
     select {
         padding: 0.5em;
         font-size: 1rem;
@@ -331,5 +360,15 @@ textarea {
     padding: 0.3rem;
     font-family: inherit;
     font-size: 1.5rem;
+}
+.preferences label{
+    margin-inline-start: 3rem;
+    grid-template-columns: 50% 50%;
+    display: grid;
+    grid-auto-flow: column;
+    accent-color: var(--bClr3);
+}
+.language-label{
+    margin-block: 0.5rem;
 }
 </style>
