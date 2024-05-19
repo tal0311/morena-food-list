@@ -1583,33 +1583,38 @@ const gTrans = {
     en: "Cleaning Sponges",
     es: "Esponjas de limpieza",
     he: "ספוגי ניקוי",
-    },
-  'scrubbing-brush':{
+  },
+  'scrubbing-brush': {
     en: "Scrubbing Brush",
     es: "Cepillo de fregar",
     he: "מברשת ניקוי",
   },
-  'floor-cleaner':{
+  'floor-cleaner': {
     en: "Floor Cleaner",
     es: "Limpiador de suelos",
     he: " נוזל לניקוי רצפה",
   },
-  'sponges':{
+  'sponges': {
     en: "Sponges",
     es: "Esponjas",
     he: "ספוגים",
   },
-  'disinfectant-wipes':{
+  'disinfectant-wipes': {
     en: "Disinfectant Wipes",
     es: "Toallitas desinfectantes",
     he: "מגבונים לחיטוי",
-  
+
   },
-  'cleaning-items':{
+  'cleaning-items': {
     en: "Cleaning Items",
     es: "Artículos de limpieza",
     he: "ציוד ניקיון",
-  
+
+  },
+  'personal-notes': {
+    en: "Personal Notes",
+    es: "Notas personales",
+    he: "הערות אישיות",
   }
 };
 

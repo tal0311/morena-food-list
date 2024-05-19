@@ -87,7 +87,8 @@ function getEmptyUser() {
         age: null,
         city: "",
         labels: [],
-        history: []
+        history: [],
+        personalTxt:""
     }
 }
 

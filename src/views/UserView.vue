@@ -74,6 +74,13 @@
                 <p v-else>{{ $trans('no-history') }}</p>
             </section>
         </details>
+        <details>
+            <summary>{{ $trans('personal-notes') }}</summary>
+            <section class="notes-container">
+                <textarea name="" v-model="user.personalTxt" placeholder="Notes from here will show in your list"></textarea>
+              
+            </section>
+        </details>
 
         <footer>
             <RouterLink to="/list" class="primary-btn">
@@ -313,5 +320,16 @@ input[type="text"] {
 
 .switch:checked:after {
     left: 1rem;
+}
+
+textarea {
+    /* margin-block: 1rem; */
+    outline: 1px solid var(--bClr1);
+    resize: none;
+    width: 100%;
+    border: none;
+    padding: 0.3rem;
+    font-family: inherit;
+    font-size: 1.5rem;
 }
 </style>

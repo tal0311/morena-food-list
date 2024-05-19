@@ -3,6 +3,13 @@
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" :sharedIds="sharedIds" @selectItem="toggleSelect"
                 @toggleEdit="toggleEdit" @updateLabel="updateLabel" />
+            <details>
+                <summary>{{ $trans('personal-notes') }}</summary>
+                <section class="notes-container">
+                    <p>{{ user.personalTxt }}</p>
+
+                </section>
+            </details>
         </div>
         <footer id="footer-container" :class="['footer-container', isHistoryMode ? 'blur-bg' : '']">
 
@@ -25,7 +32,7 @@
 <script setup>
 
 import { useRoute, useRouter } from 'vue-router'
-import { ref, onBeforeMount, computed, onUnmounted, onMounted} from 'vue'
+import { ref, onBeforeMount, computed, onUnmounted, onMounted } from 'vue'
 import { useListStore } from '@/stores/list-store';
 import AppModal from '@/components/AppModal.vue'
 import { useAppStore } from '@/stores/app-store'
@@ -33,15 +40,18 @@ import AppLoader from '@/components/AppLoader.vue'
 import GroupList from '@/components/GroupList.vue'
 import { eventBus } from '@/services/event-bus.service';
 import { showSuccessMsg } from '@/services/event-bus.service';
+import { useUserStore } from '@/stores/user-store';
 
 
 const route = useRoute()
 const router = useRouter()
 
 const listStore = useListStore()
+const userStore = useUserStore()
 // loading the list from the route guard
 const groupList = computed(() => listStore?.getList)
 const labelList = computed(() => listStore?.getLabels)
+const user = computed(() => userStore.getUser)
 
 onBeforeMount(async () => {
 
@@ -271,6 +281,23 @@ textarea {
 
     }
 }
+
+.notes-container{
+    /* padding:0 0.5rem; */
+    border: 1px solid var(--bClr1);
+    border-radius: 2px;
+    font-size: 1.5rem;
+    font-family: inherit;
+    color: var(--clr7);
+    p{
+        margin: 0;
+        padding: 0.5rem;
+    }
+    
+}
+
+
+
 </style>
 
 <!-- height: 80vh;
