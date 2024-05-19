@@ -15,12 +15,13 @@
 </template>
 
 <script setup>
-import { ref, computed, onBeforeMount, watchEffect } from 'vue';
+import { ref, computed, onBeforeMount, watchEffect, onMounted } from 'vue';
 import { useRecipeStore } from '@/stores/recipe-store';
 import { useRoute, useRouter } from 'vue-router';
 import RecipeList from '@/components/RecipeList.vue'
 import { recipeService } from '@/services/recipe.service.local';
 import { useListStore } from '@/stores/list-store';
+import { showSuccessMsg } from '@/services/event-bus.service';
 // import InspPreview from '@/components/InspPreview.vue'
 const recipeStore = useRecipeStore()
 const route = useRoute()
@@ -29,6 +30,12 @@ const inspiration = ref(null)
 onBeforeMount(() => {
     if (route.query.inspiration) {
         loadRecipes()
+    }
+})
+
+onMounted(() => {
+    if (route.query.inspiration) {
+        showSuccessMsg("Select a recipe to add products to the list");
     }
 })
 

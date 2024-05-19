@@ -1409,53 +1409,53 @@ const gTrans = {
     es: "Información del usuario",
     he: "פרטי משתמש",
   },
-  'goals-and-pref':{
+  'goals-and-pref': {
     en: "Goals and Preferences",
     es: "Metas y preferencias",
     he: "מטרות והעדפות",
   },
-  'settings':{
+  'settings': {
     en: "Settings",
     es: "Ajustes",
     he: "הגדרות",
 
   },
-  'select-language':{
+  'select-language': {
     en: "Select Language",
     es: "Seleccionar idioma",
     he: "בחר שפה",
   },
-  'start-shopping':{
+  'start-shopping': {
     en: "Back to shopping list",
     es: "Volver a la lista de la compra",
     he: "חזור לרשימת הקניות",
   },
-  'notifications':{
+  'notifications': {
     en: "Notifications",
     es: "Notificaciones",
     he: "התראות",
   },
-  'level':{
+  'level': {
     en: "Level",
     es: "Nivel",
     he: "רמה",
   },
-  'beginner':{
+  'beginner': {
     en: "Beginner",
     es: "Principiante",
     he: "מתחיל",
   },
-  'intermediate':{
+  'intermediate': {
     en: "Intermediate",
     es: "Intermedio",
     he: "בינוני",
   },
-  'advanced':{
+  'advanced': {
     en: "Advanced",
     es: "Avanzado",
     he: "מתקדם",
   },
-  'goals':{
+  'goals': {
     en: "Goals",
     es: "Metas",
     he: "מטרות",
@@ -1465,7 +1465,7 @@ const gTrans = {
     es: "Historial",
     he: "היסטוריה",
   },
-  'save-history':{
+  'save-history': {
     en: "Save List",
     es: "Guardar Lista",
     he: "שמור רשימה",
@@ -1475,10 +1475,15 @@ const gTrans = {
     es: "Restaurar",
     he: "שחזר",
   },
-  'no-history':{
+  'no-history': {
     en: "No history at the moment",
     es: "No hay historial en este momento",
     he: "אין היסטוריה כרגע",
+  },
+  'eat-this-week': {
+    en: "What to Eat this week",
+    es: "Qué comer esta semana",
+    he: "מה לאכול השבוע",
   }
 };
 
