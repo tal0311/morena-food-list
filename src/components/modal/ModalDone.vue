@@ -85,6 +85,10 @@ async function onSendList() {
 
 const userStore = useUserStore()
 function saveHistory() {
+    if (!selectItems.value.length) {
+        showSuccessMsg('Select items to save history')
+        return
+    }
     let idsTosShare = selectItems.value.map(({ _id }) => _id)
     console.debug('save history', idsTosShare);
     const url = `share=true&ids=${idsTosShare}`;

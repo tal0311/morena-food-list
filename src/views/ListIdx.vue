@@ -283,7 +283,6 @@ textarea {
 }
 
 .notes-container{
-    /* padding:0 0.5rem; */
     border: 1px solid var(--bClr1);
     border-radius: 2px;
     font-size: 1.5rem;
