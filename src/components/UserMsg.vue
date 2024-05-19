@@ -33,7 +33,7 @@ onBeforeMount(() => {
         if (txt.length > 60) {
             delay = 6000
         }
-        console.log('show-msg', txt, type);
+        // console.log('show-msg', txt, type);
         setTimeout(() => {
             closeModal()
         }, delay)
@@ -63,7 +63,7 @@ function clickOutSide(ev) {
 
 <style scoped>
 .user-msg {
-    
+    font-size: x-large;
     text-align: center;
     border: none;
     padding: 0.8rem;

@@ -16,6 +16,7 @@ body {
 
 dialog {
   background: var(--clr10);
+  border: none;
 }
 
 a {

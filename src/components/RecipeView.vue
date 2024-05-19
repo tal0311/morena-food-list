@@ -5,9 +5,9 @@
         <RecipeList v-else="inspiration && inspiration.length" :recipes="inspiration" :is="'inspiration'"
             @addToList="addToList" />
 
-        <footer v-if="listFromRecipes.length">
+        <footer v-if="listFromRecipes.length" class="blur-bg">
 
-            <button @click="goToList">Go To List</button>
+            <button class="primary-btn" @click="goToList">Go To List</button>
 
         </footer>
 
@@ -24,9 +24,6 @@ import { useListStore } from '@/stores/list-store';
 // import InspPreview from '@/components/InspPreview.vue'
 const recipeStore = useRecipeStore()
 const route = useRoute()
-
-
-
 const inspiration = ref(null)
 
 onBeforeMount(() => {
@@ -51,7 +48,9 @@ async function addToList(id) {
     // console.log('add to list', id);
     const items = await recipeService.getProductsFromRecipe(id)
     if (items.length) {
-        listFromRecipes.value = Array.from(new Set([...JSON.parse(JSON.stringify(listFromRecipes.value)), ...items]))
+        listFromRecipes.value = Array.from(new Set(
+            [...JSON.parse(JSON.stringify(listFromRecipes.value)), ...items]
+        ))
     }
 
 
@@ -59,7 +58,7 @@ async function addToList(id) {
 
 const router = useRouter()
 function goToList() {
-    console.log('go to list');
+    // console.log('go to list');
 
     router.push({
         name: 'list', query:
@@ -71,25 +70,21 @@ function goToList() {
 }
 
 
-watchEffect(() => {
-    if (listFromRecipes.value) {
-        console.log('listFromRecipes', listFromRecipes.value);
-
-    }
-})
-
-
 </script>
 <style scoped>
 footer {
     position: fixed;
-    bottom: 3rem;
+    bottom: 5rem;
     left: 50%;
     display: grid;
     place-content: center;
     transform: translateX(-50%);
     transition: translate 0.2s;
     width: 100%;
+
+    button {
+        padding: 1rem;
+    }
 
 }
 </style>
