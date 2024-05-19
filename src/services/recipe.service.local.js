@@ -2,6 +2,7 @@ import { storageService } from "./async-storage.service.js";
 // import { httpService } from './http.service.js'
 import { utilService } from "./util.service.js";
 import { userService } from "./user.service.js";
+import { itemService } from "./item.service.local.js";
 
 
 import gRecipes from "./../data/recipe.json";
@@ -16,6 +17,7 @@ export const recipeService = {
   getEmptyRecipe,
   updateLabel,
   getRecipes,
+  getProductsFromRecipe
 }
 
 window.recipeService = recipeService;
@@ -24,16 +26,16 @@ window.recipeService = recipeService;
 
 // loadItems();
 // await query();
- function query() {
-  const {selectedItems} = userService.getLoggedInUser();
- 
+function query() {
+  const { selectedItems } = userService.getLoggedInUser();
+
   let matchItems = {};
   let recipes = gRecipes;
-  
+
   recipes.forEach(recipe => {
     recipe.ingredients.forEach(ingr => {
       const regex = new RegExp(ingr, "i");
-      
+
       selectedItems.forEach(item => {
         if (regex.test(item.name)) {
           if (!matchItems[recipe._id]) {
@@ -45,21 +47,21 @@ window.recipeService = recipeService;
       });
     });
   });
- 
+
   matchItems = Object.keys(matchItems).map(key => {
     return {
       ...recipes.find(recipe => recipe._id === key),
       ingredients: matchItems[key],
       percentage: +((matchItems[key].length / selectedItems.length) * 100).toFixed()
-    
+
     }
-   }).sort((a, b) => b.percentage - a.percentage);
+  }).sort((a, b) => b.percentage - a.percentage);
 
   console.log(matchItems);
   return matchItems;
 }
 
-async function getRecipes(){
+async function getRecipes() {
   const list = await storageService.query(RECIPE_KEY)
   console.log("list", list);
   return list;
@@ -68,8 +70,37 @@ async function getRecipes(){
 }
 
 
-function getGroupsByLabels(list) {
+async function getProductsFromRecipe(recipeId) {
+  const recipe = gRecipes.find(recipe => recipe._id === recipeId);
 
+  // console.log("recipe", recipe);
+  let items = await itemService.query();
+
+  
+  let itemsList= []
+
+  // for (let i = 0; i < recipe.ingredients.length; i++) {
+  //   const ingr = recipe.ingredients[i];
+  //   const regex = new RegExp(ingr, "i");
+  //   if
+  //   itemsList = items.filter(item => {
+  //     return regex.test(item.name);
+  //   });
+  // }
+
+  recipe.ingredients.forEach(ingr => {
+    console.log("ingr", ingr);
+    const regex = new RegExp(ingr, "i");
+     items.forEach(item => {
+      // console.log("item", item);
+       if (regex.test(item.name)) {
+         itemsList.push(item);
+       }
+    });
+    
+  });
+  console.log("items", itemsList);
+return itemsList;
 }
 
 

@@ -1,12 +1,14 @@
 <template>
-<div>
-    
+    <section>
 
-    <pre>{{ props.recipe }}</pre>
-        <article class="recipe-preview grid">
+
+        <article class="recipe-preview grid" @click="isOpen = !isOpen">
             <img :src="props.recipe.image" :alt="props.recipe.title">
-            <div class="match">
+            <div v-if="props.is === 'match'" class="match">
                 <span class="match-num" :style="getStyle">Products match {{ props.recipe.percentage }} %</span>
+            </div>
+            <div v-else class="match add" @click.stop="addToList">
+                {{ btnStatus }}
             </div>
             <div class="info-container grid">
                 <h4>{{ props.recipe.title }}</h4>
@@ -15,70 +17,98 @@
                 </div>
             </div>
         </article>
-    </div> 
+
+        <section v-if="isOpen">
+
+            <ul>
+                <li v-for="step in props.recipe.instructions" :key="step">
+                    {{ step }}
+                </li>
+            </ul>
+
+        </section>
+
+
+    </section>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
     recipe: {
         type: Object,
-    
+
+    },
+    is: {
+        type: String
     }
 })
+
+
+const btnStatus = ref('Add to list');
+const isOpen = ref(false);
 
 // const url = computed(() => {
 //   return new URL(`../assets/images/recipe/${props.recipe.recipe.image}`).href;
 // });
 
 
+const emit = defineEmits(['addToList']);
+function addToList() {
+    console.log('add to list');
+    if (btnStatus.value === 'Added') return;
+    btnStatus.value = 'Added';
+    emit('addToList', props.recipe._id);
+
+
+}
+
 
 const getStyle = computed(() => {
     console.log(props.recipe.percentage);
-if (props.recipe.percentage > 90) {
-    return {
-        color: 'lightgreen'
-    };
-} else if (props.recipe.percentage > 80) {
-    return {
-        color: 'green'
-    };
-} else if (props.recipe.percentage > 70) {
-    return {
-        color: 'yellow'
-    };
-} else if (props.recipe.percentage > 60) {
-    return {
-        color: 'lightyellow'
-    };
-} else if (props.recipe.percentage > 50) {
-    return {
-        color: 'orange'
-    };
-} else if (props.recipe.percentage > 40) {
-    return {
-        color: 'darkorange'
-    };
-} else if (props.recipe.percentage > 20) {
-    return {
-        color: 'red'
-    };
-} else {
-    return {
-        color: 'gray'
-    };
-}
+    if (props.recipe.percentage > 90) {
+        return {
+            color: 'lightgreen'
+        };
+    } else if (props.recipe.percentage > 80) {
+        return {
+            color: 'green'
+        };
+    } else if (props.recipe.percentage > 70) {
+        return {
+            color: 'yellow'
+        };
+    } else if (props.recipe.percentage > 60) {
+        return {
+            color: 'lightyellow'
+        };
+    } else if (props.recipe.percentage > 50) {
+        return {
+            color: 'orange'
+        };
+    } else if (props.recipe.percentage > 40) {
+        return {
+            color: 'darkorange'
+        };
+    } else if (props.recipe.percentage > 20) {
+        return {
+            color: 'red'
+        };
+    } else {
+        return {
+            color: 'gray'
+        };
+    }
 
 })
 
 </script>
 
 <style scoped>
-
 .recipe-preview {
 
-    
+
     /* padding: 2rem; */
     box-shadow: 0 0 2px 0px var(--clr4);
 
@@ -103,7 +133,7 @@ if (props.recipe.percentage > 90) {
 
     align-items: center;
 
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.601) 0%, rgba(47, 47, 47, 0.327) 30%, rgba(64, 64, 64, 0.099) 100%)   ;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.601) 0%, rgba(47, 47, 47, 0.327) 30%, rgba(64, 64, 64, 0.099) 100%);
 }
 
 .match {
@@ -114,6 +144,12 @@ if (props.recipe.percentage > 90) {
     color: var(--bClr2);
     border-radius: var(--br);
     width: fit-content;
+
+    &.add {
+        background-color: var(--clr39);
+        color: var(--bClr4);
+        /* box-shadow: 0 0 2px 0px var(--clr4); */
+    }
 }
 
 .match-num {
@@ -125,7 +161,7 @@ if (props.recipe.percentage > 90) {
     grid-area: info;
     border: none;
     padding: 0.6rem;
-   
+
     color: var(--bClr2);
     border-radius: var(--br);
     display: grid;
@@ -155,5 +191,4 @@ img {
     object-fit: cover;
     z-index: -1;
 }
-
 </style>
