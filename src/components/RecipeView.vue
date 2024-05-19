@@ -5,10 +5,10 @@
         <RecipeList v-else="inspiration && inspiration.length" :recipes="inspiration" :is="'inspiration'"
             @addToList="addToList" />
 
-        <footer v-if="listFromRecipes.length>0">
-            <RouterLink to="/list" class="icon" >
-               <button>Go To List</button>
-            </RouterLink>
+        <footer v-if="listFromRecipes.length">
+
+            <button @click="goToList">Go To List</button>
+
         </footer>
 
     </section>
@@ -17,7 +17,7 @@
 <script setup>
 import { ref, computed, onBeforeMount, watchEffect } from 'vue';
 import { useRecipeStore } from '@/stores/recipe-store';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import RecipeList from '@/components/RecipeList.vue'
 import { recipeService } from '@/services/recipe.service.local';
 import { useListStore } from '@/stores/list-store';
@@ -51,22 +51,45 @@ async function addToList(id) {
     // console.log('add to list', id);
     const items = await recipeService.getProductsFromRecipe(id)
     if (items.length) {
-        listFromRecipes.value=Array.from( new Set( [...JSON.parse(JSON.stringify(listFromRecipes.value)) ,...items]))
+        listFromRecipes.value = Array.from(new Set([...JSON.parse(JSON.stringify(listFromRecipes.value)), ...items]))
     }
 
 
 }
 
+const router = useRouter()
+function goToList() {
+    console.log('go to list');
 
+    router.push({
+        name: 'list', query:
+        {
+            share: true,
+            ids: listFromRecipes.value.map(item => item._id).join(',')
+        }
+    })
+}
 
 
 watchEffect(() => {
     if (listFromRecipes.value) {
         console.log('listFromRecipes', listFromRecipes.value);
-       
+
     }
 })
 
 
 </script>
-<style scoped></style>
+<style scoped>
+footer {
+    position: fixed;
+    bottom: 3rem;
+    left: 50%;
+    display: grid;
+    place-content: center;
+    transform: translateX(-50%);
+    transition: translate 0.2s;
+    width: 100%;
+
+}
+</style>
