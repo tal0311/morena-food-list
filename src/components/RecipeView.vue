@@ -6,9 +6,7 @@
             @addToList="addToList" />
 
         <footer v-if="listFromRecipes.length" class="blur-bg">
-
             <button class="primary-btn" @click="goToList">Go To List</button>
-
         </footer>
 
     </section>

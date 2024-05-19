@@ -1484,11 +1484,137 @@ const gTrans = {
     en: "What to Eat this week",
     es: "Qué comer esta semana",
     he: "מה לאכול השבוע",
+  },
+  'dish-soap': {
+
+    en: "Dish Soap",
+    es: "Jabón para platos",
+    he: "סבון כלים",
+  },
+  'dishwasher-soap': {
+
+    en: "Dishwasher Soap",
+    es: "Jabón para lavavajillas",
+    he: "סבון למדיח",
+  },
+  'laundry-soap': {
+
+    en: "Laundry Soap",
+    es: "Jabón para la ropa",
+    he: "סבון כביסה",
+  },
+  'shampoo': {
+
+    en: "Shampoo",
+    es: "Champú",
+    he: "שמפו",
+  },
+  'toilet-paper': {
+
+    en: "Toilet Paper",
+    es: "Papel higiénico",
+    he: "נייר טואלט",
+  },
+  'bleach': {
+
+    en: "Bleach",
+    es: "Lejía",
+    he: "אקונומיקה",
+
+  },
+
+  'toothpaste': {
+
+    en: "Toothpaste",
+    es: "Pasta de dientes",
+    he: "משחת שיניים",
+  },
+  'deodorant': {
+    en: "Deodorant",
+    es: "Desodorante",
+    he: "דאודורנט",
+  },
+  'shaving-cream': {
+    en: "Shaving Cream",
+    es: "Crema de afeitar",
+    he: "קרם גילוח",
+  },
+  'shaving-razor': {
+    en: "Shaving Razor",
+    es: "Maquinilla de afeitar",
+    he: "תער גילוח",
+  },
+  'paper-towels': {
+    en: "Paper Towels",
+    es: "Papel de cocina",
+    he: "מגבות נייר",
+  },
+  'window-cleaner': {
+    en: "Window Cleaner",
+    es: "Limpiador de ventanas",
+    he: "ניקוי חלונות",
+  },
+  'all-purpose-cleaner': {
+    en: "All Purpose Cleaner",
+    es: "Limpiador multiusos",
+    he: "ניקוי כללי",
+  },
+  'mop': {
+    en: "Mop",
+    es: "Fregona",
+    he: "סמרטוט רצפה",
+  },
+  'broom': {
+    en: "Broom",
+    es: "Escoba",
+    he: "מטאטא",
+  },
+  dustpan: {
+    en: "Dustpan",
+    es: "Recogedor",
+    he: "יאה",
+  },
+  'trash-bags': {
+    en: "Trash Bags",
+    es: "Bolsas de basura",
+    he: "שקיות זבל",
+  },
+  'cleaning-sponges': {
+    en: "Cleaning Sponges",
+    es: "Esponjas de limpieza",
+    he: "ספוגי ניקוי",
+    },
+  'scrubbing-brush':{
+    en: "Scrubbing Brush",
+    es: "Cepillo de fregar",
+    he: "מברשת ניקוי",
+  },
+  'floor-cleaner':{
+    en: "Floor Cleaner",
+    es: "Limpiador de suelos",
+    he: " נוזל לניקוי רצפה",
+  },
+  'sponges':{
+    en: "Sponges",
+    es: "Esponjas",
+    he: "ספוגים",
+  },
+  'disinfectant-wipes':{
+    en: "Disinfectant Wipes",
+    es: "Toallitas desinfectantes",
+    he: "מגבונים לחיטוי",
+  
+  },
+  'cleaning-items':{
+    en: "Cleaning Items",
+    es: "Artículos de limpieza",
+    he: "ציוד ניקיון",
+  
   }
 };
 
 function doTrans(key, currLang) {
-  // console.log("key", key);
+  console.log("key", key);
   var translation = gTrans[key][currLang];
   if (!translation) return key;
   return translation;

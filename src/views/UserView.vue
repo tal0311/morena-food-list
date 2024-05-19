@@ -93,7 +93,7 @@ import {showSuccessMsg ,eventBus } from '@/services/event-bus.service';
 
 
 
-
+//TODO: add personal notes to user that will show in the group list
 
 const user = ref(null);
 const userStore = useUserStore();

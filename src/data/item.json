@@ -676,7 +676,7 @@
   },
   {
     "_id": "101",
-    "name": "Baharat",
+    "name": "baharat",
     "icon": "🌿",
     "group": "spices-and-seasonings",
     "readMoreURL": "",
@@ -1575,6 +1575,140 @@
     "color": "brown",
     "isSelected": false
   
+  },
+
+  {
+    "_id": "200",
+    "name": "dish-soap",
+    "icon": "🧼",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "201",
+    "name": "dishwasher-soap",
+    "icon": "🧼",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+
+  },
+  {
+    "_id": "202",
+    "name": "laundry-soap",
+    "icon": "🧼",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+
+  },
+  {
+    "_id": "203",
+    "name": "toilet-paper",
+    "icon": "🧻",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "204",
+    "name": "bleach",
+    "icon": "🧼",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "205",
+    "name": "paper-towels",
+    "icon": "🧻",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+
+  },
+  {
+    "_id": "206",
+    "name": "window-cleaner",
+    "icon": "🧴",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "207",
+    "name": "mop",
+    "icon": "🧹",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "208",
+    "name": "broom",
+    "icon": "🧹",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "209",
+    "name": "dustpan",
+    "icon": "🧹",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "210",
+    "name": "scrubbing-brush",
+    "icon": "🪥",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  
+  {
+    "_id": "212",
+    "name": "floor-cleaner",
+    "icon": "🧴",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "213",
+    "name": "sponges",
+    "icon": "🧽",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  
+  {
+    "_id": "215",
+    "name": "disinfectant-wipes",
+    "icon": "🧴",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
   }
+  
+
 
 ]
