@@ -7,7 +7,7 @@
                 <summary>{{ $trans('personal-notes') }}</summary>
                 <section class="notes-container">
                     <p>{{ user.personalTxt }}</p>
-
+                    
                 </section>
             </details>
         </div>
@@ -132,25 +132,7 @@ function submitLabel() {
     listStore.updateLabel(label)
 }
 
-
-
 const appStore = useAppStore()
-// const isTourActive = computed(() => appStore.getIsTourActive)
-
-// set timeout is to make sure the dom is rendered before the tour starts
-// onMounted(() => {
-//     setTimeout(() => {
-//         if (isTourActive.value) {
-//             document.querySelectorAll('details').forEach((el, idx) => {
-//                 if (idx === 0) {
-//                     el.setAttribute('open', true)
-//                 }
-//                 useTour(route.name)
-//             })
-//         }
-//     }, 800);
-// })
-
 
 onUnmounted(() => {
     if (subscribe) {
@@ -282,21 +264,19 @@ textarea {
     }
 }
 
-.notes-container{
+.notes-container {
     border: 1px solid var(--bClr1);
     border-radius: 2px;
     font-size: 1.5rem;
     font-family: inherit;
     color: var(--clr7);
-    p{
+
+    p {
         margin: 0;
         padding: 0.5rem;
     }
-    
+
 }
-
-
-
 </style>
 
 <!-- height: 80vh;

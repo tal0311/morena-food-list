@@ -9,7 +9,7 @@
          "lang": "he",
          "notifications": true,
          "isVegan": true,
-         "isVegetarian": false,
+         "isVegetarian": true,
          "isGlutenFree": false,
          "isLactoseFree": false,
          "isKosher": false
