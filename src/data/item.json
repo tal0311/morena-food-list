@@ -39,7 +39,7 @@
     "_id": "5",
     "name": "Salmon",
     "icon": "🐟",
-    "group": "fish-and-seafood",
+    "group": "fish",
     "readMoreURL": "https://example.com/eggs-info",
     "color": "pink",
     "isSelected": false
@@ -417,7 +417,7 @@
     "_id": "68",
     "name": "shrimp",
     "icon": "🍤",
-    "group": "fish-and-seafood",
+    "group": "seafood",
     "readMoreURL": "https://example.com/shrimp-info",
     "color": "pink",
     "isSelected": false
@@ -426,7 +426,7 @@
     "_id": "69",
     "name": "scallops",
     "icon": "🐚",
-    "group": "fish-and-seafood",
+    "group": "seafood",
     "readMoreURL": "https://example.com/scallops-info",
     "color": "white",
     "isSelected": false
@@ -435,7 +435,7 @@
     "_id": "70",
     "name": "lobster",
     "icon": "🦞",
-    "group": "fish-and-seafood",
+    "group": "seafood",
     "readMoreURL": "https://example.com/lobster-info",
     "color": "red",
     "isSelected": false
@@ -444,7 +444,7 @@
     "_id": "71",
     "name": "crab",
     "icon": "🦀",
-    "group": "fish-and-seafood",
+    "group": "seafood",
     "readMoreURL": "https://example.com/crab-info",
     "color": "various",
     "isSelected": false
@@ -453,7 +453,7 @@
     "_id": "72",
     "name": "trout",
     "icon": "🐟",
-    "group": "fish-and-seafood",
+    "group": "fish",
     "readMoreURL": "https://example.com/trout-info",
     "color": "pink",
     "isSelected": false
@@ -462,7 +462,7 @@
     "_id": "73",
     "name": "mussels",
     "icon": "🐚",
-    "group": "fish-and-seafood",
+    "group": "seafood",
     "readMoreURL": "https://example.com/mussels-info",
     "color": "black",
     "isSelected": false
@@ -471,7 +471,7 @@
     "_id": "74",
     "name": "oysters",
     "icon": "🐚",
-    "group": "fish-and-seafood",
+    "group": "seafood",
     "readMoreURL": "https://example.com/oysters-info",
     "color": "white",
     "isSelected": false
@@ -480,7 +480,7 @@
     "_id": "75",
     "name": "sardines",
     "icon": "🐟",
-    "group": "fish-and-seafood",
+    "group": "fish",
     "readMoreURL": "https://example.com/sardines-info",
     "color": "silver",
     "isSelected": false
@@ -741,7 +741,7 @@
     "_id": "108",
     "name": "salmon-eggs",
     "icon": "🐟",
-    "group": "fish-and-seafood",
+    "group": "fish",
     "readMoreURL": "",
     "color": "pink",
     "isSelected": false
@@ -750,7 +750,7 @@
     "_id": "109",
     "name": "tuna-stake",
     "icon": "🐟",
-    "group": "fish-and-seafood",
+    "group": "fish",
     "readMoreURL": "",
     "color": "pink",
     "isSelected": false
@@ -759,7 +759,7 @@
     "_id": "110",
     "name": "herring",
     "icon": "🐟",
-    "group": "fish-and-seafood",
+    "group": "fish",
     "readMoreURL": "",
     "color": "pink",
     "isSelected": false
@@ -768,7 +768,7 @@
     "_id": "111",
     "name": "caviar",
     "icon": "🐟",
-    "group": "fish-and-seafood",
+    "group": "seafood",
     "readMoreURL": "",
     "color": "black",
     "isSelected": false

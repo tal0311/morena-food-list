@@ -65,6 +65,16 @@ const gTrans = {
     es: "Pescado y mariscos",
     he: "דגים ומאכלי ים",
   },
+  'fish':{
+    en: "Fish",
+    es: "Pescado",
+    he: "דגים",
+  },
+  'seafood':{
+    en: "Seafood",
+    es: "Mariscos",
+    he: "מאכלי ים",
+  },
   apples: {
     en: "Apple",
     es: "Manzana",

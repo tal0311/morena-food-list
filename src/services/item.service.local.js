@@ -15,7 +15,7 @@ export const itemService = {
   getEmptyItem,
   prepDataForChart,
   getGroupsByLabels,
-  
+
   updateLabel,
   getLabels
 };
@@ -28,14 +28,25 @@ async function query(filterBy = {}) {
   console.log("query", loggedUser.settings);
   let items = await storageService.query(STORAGE_KEY);
   const { isVegetarian, isVegan, isLactoseFree, isKosher, isGlutenFree } = loggedUser.settings;
-// debugger
+  // debugger
   if (isVegetarian) {
-    const vegItems = ['meat-and-poultry', 'fish-and-seafood']
+    const vegItems = ['meat-and-poultry', 'fish', 'seafood']
     items = items.filter((item) => !vegItems.includes(item.group));
   }
   if (isVegan) {
-    const veganItems = ['dairy', 'meat-and-poultry', 'fish-and-seafood']
+    const veganItems = ['dairy', 'meat-and-poultry', 'fish', 'seafood']
     items = items.filter((item) => !veganItems.includes(item.group));
+  }
+
+  if (isLactoseFree) {
+    items = items.filter((item) => item.group !== 'dairy');
+  }
+  if (isKosher) {
+    items = items.filter((item) => item.group !== 'seafood');
+  }
+
+  if (isGlutenFree) {
+    items = items.filter((item) => item.group !== 'bread');
   }
 
   if (filterBy.txt) {
@@ -72,8 +83,8 @@ function updateLabel(label) {
   label = JSON.parse(JSON.stringify(label.value));
 
   const user = userService.getLoggedInUser();
-  
-  user.labels =user.labels.map((l) => l.name === label.name ? { ...label, userInput: label.userInput } : l);
+
+  user.labels = user.labels.map((l) => l.name === label.name ? { ...label, userInput: label.userInput } : l);
 
   userService.save(user);
   return user.labels
@@ -86,14 +97,14 @@ function getLabels(list) {
   list = JSON.parse(JSON.stringify(list))
   const user = userService.getLoggedInUser();
 
- 
-   const labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
-    // console.log("labels", labels);
-    // utilService.saveToStorage(LABELS_KEY, labels);
-    // }
-    user.labels = labels;
-    userService.save(user);
-    return labels;
+
+  const labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
+  // console.log("labels", labels);
+  // utilService.saveToStorage(LABELS_KEY, labels);
+  // }
+  user.labels = labels;
+  userService.save(user);
+  return labels;
 }
 
 
