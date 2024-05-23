@@ -9,6 +9,7 @@ import { userService } from "@/services/user.service";
 
 export const useUserStore = defineStore("user", () => {
   const appStore = useAppStore();
+  const listStore = useListStore();
 
   const currLang = ref("en");
   const loggedUser = ref(null);
@@ -37,6 +38,9 @@ export const useUserStore = defineStore("user", () => {
 async function updateLoggedUser(user) {
     loggedUser.value = { ...loggedUser.value ,...user };
      await userService.save(loggedUser.value);
+    //  await listStore.loadList();
+
+     
   }
 
   async function updateUser(key, value) {

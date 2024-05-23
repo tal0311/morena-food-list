@@ -79,9 +79,9 @@ router.beforeEach(async (to, from, next) => {
  
 
   if (to.name === "list") {
-    if (!listStore.getList) {
-      listStore.loadList()
-    }
+    
+    listStore.loadList()
+   
   }
 
   next();

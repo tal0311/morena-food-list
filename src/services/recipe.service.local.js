@@ -110,17 +110,18 @@ function updateLabel(label) {
 
 }
 
-function getLabels(list) {
-  list = JSON.parse(JSON.stringify(list))
-  let labels = utilService.loadFromStorage(LABELS_KEY);
-  if (!labels || !labels.length) {
-    labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
-    console.log("labels", labels);
-    utilService.saveToStorage(LABELS_KEY, labels);
-  }
-  return labels;
+// BUG: labels are not saved to storage
+// function getLabels(list) {
+//   list = JSON.parse(JSON.stringify(list))
+//   let labels = utilService.loadFromStorage(LABELS_KEY);
+//   if (!labels || !labels.length) {
+//     labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
+//     console.log("labels", labels);
+//     utilService.saveToStorage(LABELS_KEY, labels);
+//   }
+//   return labels;
 
-}
+// }
 
 
 function getById(itemId) {

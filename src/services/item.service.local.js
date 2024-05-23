@@ -15,7 +15,7 @@ export const itemService = {
   getEmptyItem,
   prepDataForChart,
   getGroupsByLabels,
-  loadLabelsFromStorage,
+  
   updateLabel,
   getLabels
 };
@@ -25,10 +25,10 @@ loadItems();
 
 async function query(filterBy = {}) {
   const loggedUser = userService.getLoggedInUser();
-  console.log("loggedUser", loggedUser);
+  console.log("query", loggedUser.settings);
   let items = await storageService.query(STORAGE_KEY);
   const { isVegetarian, isVegan, isLactoseFree, isKosher, isGlutenFree } = loggedUser.settings;
-
+// debugger
   if (isVegetarian) {
     const vegItems = ['meat-and-poultry', 'fish-and-seafood']
     items = items.filter((item) => !vegItems.includes(item.group));
@@ -37,11 +37,6 @@ async function query(filterBy = {}) {
     const veganItems = ['dairy', 'meat-and-poultry', 'fish-and-seafood']
     items = items.filter((item) => !veganItems.includes(item.group));
   }
-
-
-
-
-
 
   if (filterBy.txt) {
     const regex = new RegExp(filterBy.txt, "i");
@@ -71,29 +66,34 @@ function getGroupsByLabels(list) {
   //  Object.keys(list.value).map(label=>({name:label, userInput: ''}))
 }
 
-function loadLabelsFromStorage() { }
+
 
 function updateLabel(label) {
   label = JSON.parse(JSON.stringify(label.value));
 
-  let labels = utilService.loadFromStorage(LABELS_KEY);
-  labels = labels.map((l) => l.name === label.name ? { ...label, userInput: label.userInput } : l);
+  const user = userService.getLoggedInUser();
+  
+  user.labels =user.labels.map((l) => l.name === label.name ? { ...label, userInput: label.userInput } : l);
 
-  utilService.saveToStorage(LABELS_KEY, labels);
-  return labels;
+  userService.save(user);
+  return user.labels
 
 }
 
+// BUG: set labels on list load
 function getLabels(list) {
+  // this is for recipes 
   list = JSON.parse(JSON.stringify(list))
-  // let labels = utilService.loadFromStorage(LABELS_KEY);
-  // if (!labels || !labels.length) {
-  const labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
-  // console.log("labels", labels);
-  // utilService.saveToStorage(LABELS_KEY, labels);
-  // }
-  return labels;
+  const user = userService.getLoggedInUser();
 
+ 
+   const labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
+    // console.log("labels", labels);
+    // utilService.saveToStorage(LABELS_KEY, labels);
+    // }
+    user.labels = labels;
+    userService.save(user);
+    return labels;
 }
 
 
@@ -164,6 +164,6 @@ async function loadItems() {
 }
 
 // TEST DATA
-(async () => {
+(() => {
   utilService.saveToStorage(STORAGE_KEY, items);
 })();
