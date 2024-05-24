@@ -1,7 +1,7 @@
 <template>
     <section class="user-page grid">
         <!-- <pre>{{ user }}</pre> -->
-        <!-- <UserPreview :user="user" /> -->
+        <UserPreview :user="user" />
         <h1> {{ getTitle(user.username) }} <span>👋</span></h1>
         <details>
             <summary>{{ $trans('user-info') }}</summary>
