@@ -49,6 +49,11 @@ const router = createRouter({
       component: () => import("@/components/RecipeView.vue"),
     },
     {
+      path: "/login",
+      name: "login",
+      component: () => import("@/views/LoginView.vue"),
+    },
+    {
       path: "/:pathMatch(.*)*",
       redirect: "/error",
     },
@@ -61,8 +66,14 @@ router.beforeEach(async (to, from, next) => {
   const listStore = useListStore()
   const recipeStore = useRecipeStore()
   const { logError } = useAppStore()
-  userStore.loggedUser
+  
 
+  if (to.name === "home") {
+    if (!userStore.loggedUser) {
+      next({ name: "login" });
+    }
+
+  }
 
 
 

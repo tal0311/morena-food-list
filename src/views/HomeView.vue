@@ -12,30 +12,24 @@
       <footer id="language-modal">
         <RouterLink to="/user" class="icon" v-html="$svg('account')"></RouterLink>
       </footer>
+     <section >
+      <!-- <GoogleLogin :callback="callback" prompt auto-login/> -->
+     </section>
     </section>
+
   </section>
 </template>
 
 <script setup>
+
 // TODO: 'add last login date to user and refresh the local storage btn'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watchEffect } from 'vue'
+// import vue3GoogleLogin from 'vue3-google-login'
 import TheWelcome from '@/components/TheWelcome.vue'
 import { useListStore } from '@/stores/list-store'
 import { useAppStore } from '@/stores/app-store'
 // import { useRoute } from 'vue-router'
 // import { useTour } from '@/composables/useTour'
-
-const isLangModalOpen = ref(false)
-
-function toggleLangMOdal() {
-  isLangModalOpen.value = !isLangModalOpen.value
-}
-
-const listStore = useListStore()
-function setLang(lang) {
-  toggleLangMOdal()
-  listStore.setLang(lang)
-}
 
 const getIcon = computed(() => {
   const icons = ["✅", "🥬", "🥦", "🥒", "🥑", "🫒", "🍅", "🍄", "🍑", "🍌", "🍇", "☕", "🥛", "🥩", "🧀", "🥚", "🥝", "🍉", "🍎", "🥭", "🍍", "🍌", "🍋", "🍊", "🍒", "🍓", "🫐", "🫑", "🌽", "🍆", "🫒", "🍅"];

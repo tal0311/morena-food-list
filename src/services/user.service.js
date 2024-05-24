@@ -101,7 +101,7 @@ function _saveLoggedUser(user) {
 
 (() => {
     utilService.saveToStorage(STORAGE_KEY, users);
-    _saveLoggedUser(users[1]);
+    // _saveLoggedUser(users[1]);
     // users[0]
 
 })()

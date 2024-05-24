@@ -21,7 +21,7 @@ export const itemService = {
 };
 window.itemService = itemService;
 
-loadItems();
+// loadItems();
 
 async function query(filterBy = {}) {
   const loggedUser = userService.getLoggedInUser();
@@ -159,20 +159,20 @@ function prepDataForChart(list) {
   return itemsMap;
 }
 
-async function loadItems() {
-  let items = utilService.loadFromStorage(STORAGE_KEY);
-  if (!items || !items.length) {
-    try {
-      const res = await fetch(import.meta.env.VITE_DATA_URL);
-      items = await res.json();
+// async function loadItems() {
+//   let items = utilService.loadFromStorage(STORAGE_KEY);
+//   if (!items || !items.length) {
+//     try {
+//       const res = await fetch(import.meta.env.VITE_DATA_URL);
+//       items = await res.json();
 
-      utilService.saveToStorage(STORAGE_KEY, items);
-      console.debug("Loaded and saved items", items);
-    } catch (error) {
-      console.debug("Failed to load items", error);
-    }
-  }
-}
+//       utilService.saveToStorage(STORAGE_KEY, items);
+//       console.debug("Loaded and saved items", items);
+//     } catch (error) {
+//       console.debug("Failed to load items", error);
+//     }
+//   }
+// }
 
 // TEST DATA
 (() => {
