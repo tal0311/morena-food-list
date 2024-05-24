@@ -1,6 +1,9 @@
 <template>
     <section class="user-page grid">
         <!-- <pre>{{ user }}</pre> -->
+        <div class="user-preview">
+            <img :src="user.imgUrl"/>
+        </div>
         <h1> {{ getTitle(user.username) }} <span>👋</span></h1>
         <details>
             <summary>{{ $trans('user-info') }}</summary>

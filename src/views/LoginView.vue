@@ -16,9 +16,12 @@
 import { ref, computed, onMounted, watchEffect } from 'vue'
 import { decodeCredential } from 'vue3-google-login'
 import { useUserStore } from '@/stores/user-store';
+import { useRouter } from 'vue-router';
 
 
+const userStore = useUserStore()
 const userCredFromGoogle = ref(null)
+const  router = useRouter()
 
 function callback(response) {
     if (response.error) {
@@ -29,8 +32,22 @@ function callback(response) {
 
 }
 
+async function login(type,credential) {
+    try {
+        
+       await userStore.login(type,credential)
+        router.push('/user')
+    } catch (error) {
+        console.log('error', error)
+        login('guest')
+        
+    }
+}
+
 function getCredFromGoogle({ credential }) {
-    return userCredFromGoogle.value = decodeCredential(credential)
+    userCredFromGoogle.value = decodeCredential(credential)
+    userCredFromGoogle.value.jwt= credential
+    login('google', userCredFromGoogle.value)
 }
 
 watchEffect(() => {
@@ -86,7 +103,7 @@ watchEffect(() => {
 }
 
 /* override google styling */
-.nsm7Bb-HzV7m-LgbsSe{
+div[role="button"]{
    height: 42px;
     border: 1px solid #7c94bb;
     border-radius: 8px;

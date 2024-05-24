@@ -12,6 +12,7 @@ export const userService = {
     login,
     getLoggedInUser,
     signup,
+    getGuestUser
 
 
 }
@@ -31,11 +32,11 @@ function getLoggedInUser() {
 async function save(user) {
 
     const method = (user._id) ? 'put' : 'post';
-     const updatedUser= await storageService[method](STORAGE_KEY, user);
-     if(updatedUser){
-         return _saveLoggedUser(updatedUser);
+    const updatedUser = await storageService[method](STORAGE_KEY, user);
+    if (updatedUser) {
+        return _saveLoggedUser(updatedUser);
 
-     }
+    }
 
 }
 
@@ -46,15 +47,33 @@ function removeUser(userId) {
 
 
 
-function login(credentials) {
-    const user = storageService.query(STORAGE_KEY);
-    if (user.email === credentials.email && user.password === credentials.password) {
-        _saveLoggedUser(user);
-        return user;
-
-    } else {
-        throw new Error('Invalid credentials');
+function login(loginType,credentials) {
+    debugger
+    if(loginType === 'guest'){
+        const guestUser = getGuestUser();
+        _saveLoggedUser(guestUser);
+        return guestUser;
     }
+    if(loginType === 'google'){
+
+        // console.log('credentials',credentials);
+        const user= getEmptyUser();
+        user.username = credentials.name;
+        user.email = credentials.email;
+        user.imgUrl = credentials.picture;
+        user.jwt = credentials.jwt;
+        save(user);
+        return _saveLoggedUser(user);
+        
+    }
+    const user = storageService.query(STORAGE_KEY, credentials);
+    // const user = storageService.query(STORAGE_KEY);
+
+    _saveLoggedUser(user);
+    return user;
+
+
+
 }
 
 function signup(credentials) {
@@ -70,16 +89,21 @@ function signup(credentials) {
 
 function getEmptyUser() {
     return {
-        
+
         username: "",
         email: "",
         password: "",
         goals: [],
         settings: {
-            lang: "",
-            notifications: false
+            "lang": "he",
+            "notifications": true,
+            "isVegan": false,
+            "isVegetarian": false,
+            "isGlutenFree": false,
+            "isLactoseFree": false,
+            "isKosher": false
         },
-        level: null,
+        level:1,
         points: 0,
         achievements: [],
         selectedItems: [],
@@ -88,11 +112,38 @@ function getEmptyUser() {
         city: "",
         labels: [],
         history: [],
-        personalTxt:""
+        personalTxt: ""
     }
 }
 
+function getGuestUser() {
+    return {
 
+        "username": "Guest",
+        "email": "user1@example.com",
+        // "password": "password1",
+        "goals": [],
+        "settings": {
+            "lang": "he",
+            "notifications": true,
+            "isVegan": false,
+            "isVegetarian": false,
+            "isGlutenFree": false,
+            "isLactoseFree": false,
+            "isKosher": false
+        },
+        "level": 1,
+        "points": 0,
+        "achievements": [],
+        "selectedItems": [],
+        "imgUrl": "https://ui-avatars.com/api/?name=Guest%user&rounded=true",
+        "age": null,
+        "city": "Israel", //get location from useragent
+        "labels": [],
+        "history": [],
+        "personalTxt": ""
+    }
+}
 
 
 function _saveLoggedUser(user) {

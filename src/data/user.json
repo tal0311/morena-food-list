@@ -1,5 +1,33 @@
 [
    {
+      "username": "Tal Amit",
+      "email": "tal.amit0311@gmail.com",
+      "password": "",
+      "goals": [],
+      "settings": {
+          "lang": "he",
+          "notifications": true,
+          "isVegan": false,
+          "isVegetarian": false,
+          "isGlutenFree": false,
+          "isLactoseFree": false,
+          "isKosher": false
+      },
+      "level": null,
+      "points": 0,
+      "achievements": [],
+      "selectedItems": [],
+      "imgUrl": "https://lh3.googleusercontent.com/a/ACg8ocLTQdHl9NRJc9pFi27CqnmkOJTBC6namN9PpUVf88gmpnKr2sFy=s96-c",
+      "age": null,
+      "city": "",
+      "labels": [],
+      "history": [],
+      "personalTxt": "",
+      "jwt": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjY3MTk2NzgzNTFhNWZhZWRjMmU3MDI3NGJiZWE2MmRhMmE4YzRhMTIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIxMDEwNDM1MTI0MDE4LTU3cDIzazQ5dnY2dTlrNHVmbGZhcHBuc212cDQ3MWk1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMTAxMDQzNTEyNDAxOC01N3AyM2s0OXZ2NnU5azR1ZmxmYXBwbnNtdnA0NzFpNS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExNjU0OTk3NDcxNzk1NjI2NzU4NCIsImVtYWlsIjoidGFsLmFtaXQwMzExQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYmYiOjE3MTY1NjA0ODMsIm5hbWUiOiJUYWwgQW1pdCIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NMVFFkSGw5TlJKYzlwRmkyN0Nxbm1rT0pUQkM2bmFtTjlQcFVWZjg4Z21wbktyMnNGeT1zOTYtYyIsImdpdmVuX25hbWUiOiJUYWwiLCJmYW1pbHlfbmFtZSI6IkFtaXQiLCJpYXQiOjE3MTY1NjA3ODMsImV4cCI6MTcxNjU2NDM4MywianRpIjoiODRlM2EwMTFjNGM5NWRlZjg1YjMzMzEyNTJlNDYwZTcyNTM4YmEwOCJ9.YeXh6h6ZJFuE76RQTILh1USUMoW_zmagRNmnumuWBRF5JNpuC2uaFjpRLSA9ZAEeyyvcJvDIZBLYMn17fNZ-0FXfCs3VsIrOPK7LdWIEY_a8pD3bWDNwmPH883rEsQ6kua-GRrqVLhEurJh-_gZphD3kMLYYwf1iTWKXEs_fsLR1UsPVWyfTd26ydd2NDhZONWxPVfUAaIKlZiDf60ODmS5ZIJdq_vMtoOing5sp7fIthNzf6Xi1WdoLRXeO3FNcZB81pgn26mBCwfNjBphH6YZY7e28reLt8QtHBphYEMw41ZrIDxSRXJu6HWYZPWglX5p6Hj5XY6Ivs-mUYjf3Lw",
+      "_id": "XUsqN"
+  }
+   ,
+   {
       "_id": "5f8f1b3b7f3b9b0017f3b9b0",
       "username": "User1",
       "email": "user1@example.com",
