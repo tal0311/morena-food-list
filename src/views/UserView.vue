@@ -1,9 +1,7 @@
 <template>
     <section class="user-page grid">
         <!-- <pre>{{ user }}</pre> -->
-        <div class="user-preview">
-            <img :src="user.imgUrl"/>
-        </div>
+        <UserPreview :user="user" />
         <h1> {{ getTitle(user.username) }} <span>👋</span></h1>
         <details>
             <summary>{{ $trans('user-info') }}</summary>
@@ -127,6 +125,7 @@ import { utilService } from '@/services/util.service';
 import { useUserStore } from '@/stores/user-store'
 import { userService } from '@/services/user.service';
 import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
+import UserPreview from '@/components/UserPreview.vue'
 
 
 
@@ -178,6 +177,7 @@ function getTitle(username) {
     font-size: 1.5rem;
     gap: 1rem;
     width: 100%;
+    /* padding-block: 1rem; */
 }
 
 footer {
