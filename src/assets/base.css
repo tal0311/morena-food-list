@@ -6,6 +6,7 @@ html {
 body {
   color: var(--bClr4);
   margin: 0;
+  overflow-x: hidden;
 }
 
 * {
