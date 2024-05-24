@@ -9,7 +9,7 @@
 
       <TheWelcome />
 
-      <footer id="language-modal">
+      <footer id="language-modal" @contextmenu="resetStorage">
         <RouterLink to="/user" class="icon" v-html="$svg('account')"></RouterLink>
       </footer>
      <section >
@@ -36,7 +36,10 @@ const getIcon = computed(() => {
   return icons[Math.floor(Math.random() * icons.length)];
 })
 
-const appStore = useAppStore()
+function resetStorage() {
+  localStorage.clear()
+  location.reload()
+}
 
 // Tour logic
 // function toggleTour() {
