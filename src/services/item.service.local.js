@@ -25,7 +25,7 @@ window.itemService = itemService;
 
 async function query(filterBy = {}) {
   const loggedUser = userService.getLoggedInUser();
-  console.log("query", loggedUser.settings);
+  // console.log("query", loggedUser.settings);
   let items = await storageService.query(STORAGE_KEY);
   const { isVegetarian, isVegan, isLactoseFree, isKosher, isGlutenFree } = loggedUser.settings;
   // debugger

@@ -27,6 +27,7 @@ export const useUserStore = defineStore("user", () => {
     try {
       
       await userService.login(loginType, credentials);
+      loadUser();
       return 
     } catch (error) {
       console.log("error", error);

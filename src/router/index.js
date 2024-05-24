@@ -61,22 +61,25 @@ const router = createRouter({
 });
 
 
+const routeHistory = []
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
   const listStore = useListStore()
   const recipeStore = useRecipeStore()
   const { logError } = useAppStore()
   
+  routeHistory.push({ to, from ,user: userStore.loggedUser})
 
+  // this is to make sure that the user is logged in before entering the home page
   if (to.name === "home") {
     if (!userStore.loggedUser) {
       next({ name: "login" });
+      return
     }
 
   }
 
-
-
+  // this is to determine to load the matches or not
   if (to.name === "recipe") {
     if (!to.query.inspiration) {
       // next({ name: "list" });
@@ -87,14 +90,14 @@ router.beforeEach(async (to, from, next) => {
     
   }
 
- 
-
-  if (to.name === "list") {
-    
+  // this to load the list when the user enters the list page
+   if (to.name === "list") {
+    // userStore.loadList()
     listStore.loadList()
    
   }
 
+  // default to the next route
   next();
 })
 

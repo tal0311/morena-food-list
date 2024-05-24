@@ -1,4 +1,4 @@
-import users from './../data/user.json';
+import gUsers from './../data/user.json';
 import { storageService } from './async-storage.service.js';
 import { utilService } from './util.service';
 const STORAGE_KEY = 'user_DB';
@@ -16,6 +16,8 @@ export const userService = {
 
 
 }
+
+createUsers()
 window.userService = userService;
 
 
@@ -47,24 +49,25 @@ function removeUser(userId) {
 
 
 
-function login(loginType,credentials) {
+function login(loginType, credentials) {
     debugger
-    if(loginType === 'guest'){
+    if (loginType === 'guest') {
         const guestUser = getGuestUser();
         _saveLoggedUser(guestUser);
         return guestUser;
     }
-    if(loginType === 'google'){
+    if (loginType === 'google') {
 
         // console.log('credentials',credentials);
-        const user= getEmptyUser();
+        const user = getEmptyUser();
         user.username = credentials.name;
         user.email = credentials.email;
         user.imgUrl = credentials.picture;
         user.jwt = credentials.jwt;
-        save(user);
+        // save(user);
+
         return _saveLoggedUser(user);
-        
+
     }
     const user = storageService.query(STORAGE_KEY, credentials);
     // const user = storageService.query(STORAGE_KEY);
@@ -103,7 +106,7 @@ function getEmptyUser() {
             "isLactoseFree": false,
             "isKosher": false
         },
-        level:1,
+        level: 1,
         points: 0,
         achievements: [],
         selectedItems: [],
@@ -150,9 +153,13 @@ function _saveLoggedUser(user) {
     return utilService.saveToStorage(LOGGED_USER, user);
 }
 
-(() => {
-    utilService.saveToStorage(STORAGE_KEY, users);
-    // _saveLoggedUser(users[1]);
-    // users[0]
+function createUsers() {
+    let users = utilService.loadFromStorage(STORAGE_KEY);
+    if (!users || !users.length) {
+        users = gUsers
+        utilService.saveToStorage(STORAGE_KEY, users);
+    }
 
-})()
+    return users;
+}
+
