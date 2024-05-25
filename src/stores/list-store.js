@@ -4,6 +4,7 @@ import { itemService } from "@/services/item.service.local";
 import { showUserMsg, showErrorMsg, showSuccessMsg } from "@/services/event-bus.service";
 import { useAppStore } from "@/stores/app-store";
 import { useUserStore } from "@/stores/user-store";
+import { userService } from "@/services/user.service";
 
 export const useListStore = defineStore("list", () => {
   const userStore = useUserStore();
@@ -16,7 +17,7 @@ export const useListStore = defineStore("list", () => {
 
   const getList = computed(() => {
     if (list.value) {
-    
+
       return itemService.getGroupsByLabels(list.value);
     }
 
@@ -33,10 +34,11 @@ export const useListStore = defineStore("list", () => {
     }
   });
 
+  // const user =computed(()=>)
 
-
-  function setLabels() {
-    labels.value = itemService.getLabels(getList.value)
+  async function setLabels() {
+    // console.log('set labels user:', );
+    labels.value = await itemService.getLabels(getList.value, userStore.getUser);
   }
 
 
@@ -54,17 +56,15 @@ export const useListStore = defineStore("list", () => {
 
   }
 
-
+  const user = computed(() => userStore.getUser)
   function setItemsFromShearedList(itemsIds) {
-    // console.log('setItemsFromShearedList', itemsIds);
-    const userItems = userStore.getUser.selectedItems;
-
+    const userItems = user.value.selectedItems;
     list.value.map((item) => {
       if (itemsIds.includes(item._id)) {
-        // console.debug('item', item);
-
         item.isSelected = true;
-        // selectedItems.value.push(item);
+        if (userItems.find((i) => i._id === item._id)) {
+          return item;
+        }
         userItems.push(item);
       }
       return item;

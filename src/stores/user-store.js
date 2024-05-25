@@ -11,7 +11,7 @@ export const useUserStore = defineStore("user", () => {
   const appStore = useAppStore();
   const listStore = useListStore();
 
-   const currLang = ref("en");
+  const currLang = ref("en");
   const loggedUser = ref(null);
 
   const getUser = computed(() => loggedUser.value);
@@ -19,14 +19,12 @@ export const useUserStore = defineStore("user", () => {
 
   function loadUser() {
     loggedUser.value = userService.getLoggedInUser();
-
   }
 
   async function login(loginType, credentials) {
     try {
-
-      await userService.login(loginType, credentials);
-      loadUser();
+      loggedUser.value = await userService.login(loginType, credentials);
+      // console.log('UST login:', loggedUser.value);
       return
     } catch (error) {
       console.error("error", error);
@@ -45,9 +43,9 @@ export const useUserStore = defineStore("user", () => {
   })
 
   async function updateLoggedUser(user) {
-    loggedUser.value = { ...loggedUser.value, ...user };
-    await userService.save(loggedUser.value);
-    //  await listStore.loadList();
+    const userToUpdate = { ...loggedUser.value, ...user };
+    loggedUser.value = await userService.save(userToUpdate);
+  
 
 
   }
@@ -55,10 +53,15 @@ export const useUserStore = defineStore("user", () => {
   async function updateUser(key, value) {
 
     try {
-      console.log('selectedItems:', key, value);
-      loggedUser.value[key] = value;
-      await userService.save(loggedUser.value);
+    
+
+    
+      loggedUser.value = { ...loggedUser.value, [key]: value };
+      userService.save(loggedUser.value);
+      
+
     } catch (error) {
+      console.log(error);
       appStore.logError(`[error: failed to update user with selected items] - ${error}`, true);
 
     }
@@ -72,7 +75,7 @@ export const useUserStore = defineStore("user", () => {
   }
 
   function setLang(lang) {
-    console.debug("setting lang", lang);
+    // console.debug("setting lang", lang);
     const langOptions = ["en", "he", "es"];
     currLang.value = langOptions.includes(lang) ? lang : "en";
     document.body.setAttribute("dir", currLang.value === "he" ? "rtl" : "ltr");

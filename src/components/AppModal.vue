@@ -24,7 +24,7 @@ onBeforeMount(() => {
 })
 
 function setModal({ type, info }) {
-    console.debug(type, info);
+    // console.debug(type, info);
     isModalOpen.value = true
     // debugger
 
@@ -43,7 +43,7 @@ function setModal({ type, info }) {
 }
 
 watchEffect(() => {
-    console.debug(isModalOpen.value);
+    // console.debug(isModalOpen.value);
     if (!dialogRef.value) return
     if (isModalOpen.value) {
         openModal()

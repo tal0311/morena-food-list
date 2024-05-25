@@ -5,16 +5,14 @@ const STORAGE_KEY = 'user_DB';
 const LOGGED_USER = 'loggedUser';
 
 export const userService = {
-
     save,
     getEmptyUser,
     removeUser,
     login,
     getLoggedInUser,
     signup,
-    getGuestUser
-
-
+    getGuestUser,
+    // updateUser
 }
 
 createUsers()
@@ -25,18 +23,33 @@ window.userService = userService;
 
 function getLoggedInUser() {
     let user = utilService.loadFromStorage(LOGGED_USER);
-    console.debug('user', user);
+    // console.log("♠️ ~ getLoggedInUser ~ user:", new Error().stack, user)
+
     return user;
 }
+
+// async function updateUser(key, value) {
+//     let user = getLoggedInUser();
+//     user[key] = value;
+
+//     return await save(user);
+//     // return storageService.put(STORAGE_KEY, user);
+// }
 
 
 
 async function save(user) {
-       const method = (user._id) ? 'put' : 'post';
+    // const err = new Error();
+    // console.log(new Error().stack);
+    // user = JSON.parse(JSON.stringify(user))
+
+    const method = (user._id) ? 'put' : 'post';
     const updatedUser = await storageService[method](STORAGE_KEY, user);
     // console.log('updatedUser', updatedUser);
     if (updatedUser) {
-        return _saveLoggedUser(updatedUser);
+        // console.log('user saved or updated', updatedUser);
+        _saveLoggedUser(updatedUser);
+        return updatedUser;
 
     }
 
@@ -49,33 +62,23 @@ function removeUser(userId) {
 
 
 
-function login(loginType, credentials) {
-    debugger
+async function login(loginType, credentials) {
+    
     if (loginType === 'guest') {
-        const guestUser = getGuestUser();
-        _saveLoggedUser(guestUser);
-        return guestUser;
+        let guestUser = getGuestUser();
+        return await save(guestUser)
+
     }
     if (loginType === 'google') {
+        let user = getEmptyUser();
+        user.username = credentials.name
+        user.email = credentials.email
+        user.imgUrl = credentials.picture
+        user.jwt = credentials.jwt
+        return await save(user)
 
-        const user = getEmptyUser();
-        user.username = credentials.name;
-        user.email = credentials.email;
-        user.imgUrl = credentials.picture;
-        user.jwt = credentials.jwt;
-        // save(user);
-
-        return _saveLoggedUser(user);
 
     }
-    const user = storageService.query(STORAGE_KEY, credentials);
-    // const user = storageService.query(STORAGE_KEY);
-
-    _saveLoggedUser(user);
-    return user;
-
-
-
 }
 
 function signup(credentials) {
@@ -149,7 +152,8 @@ function getGuestUser() {
 
 
 function _saveLoggedUser(user) {
-    return utilService.saveToStorage(LOGGED_USER, user);
+    utilService.saveToStorage(LOGGED_USER, user);
+    return user;
 }
 
 function createUsers() {

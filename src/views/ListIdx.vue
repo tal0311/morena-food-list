@@ -55,7 +55,11 @@ const user = computed(() => userStore.getUser)
 
 onBeforeMount(() => {
     getDataFromRoute()
+    // loadList()
 })
+async function loadList(){
+    // await listStore.loadList()
+}
 
 onMounted(() => {
     const msg = isHistoryMode.value
@@ -73,7 +77,7 @@ function getDataFromRoute() {
 
     const { share, ids, history } = route.query
     if (share && ids) {
-        console.log('shared list', ids);
+        // console.log('shared list', ids);
         sharedIds.value = ids.split(',')
        
         

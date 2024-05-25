@@ -36,7 +36,7 @@ async function login(type,credential) {
     try {
         
        await userStore.login(type,credential)
-        router.push('/user')
+        router.push('/')
     } catch (error) {
         console.error('error', error)
         login('guest')

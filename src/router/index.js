@@ -95,8 +95,8 @@ router.beforeEach(async (to, from, next) => {
 
   // this to load the list when the user enters the list page
   if (to.name === "list") {
-    // userStore.loadList()
     await listStore.loadList()
+    
 
   }
 

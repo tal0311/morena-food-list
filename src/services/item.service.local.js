@@ -25,6 +25,7 @@ window.itemService = itemService;
 
 async function query(filterBy = {}) {
   const loggedUser = userService.getLoggedInUser();
+  // console.log('query');
   let items = await storageService.query(STORAGE_KEY);
   const { isVegetarian, isVegan, isLactoseFree, isKosher, isGlutenFree } = loggedUser.settings;
   if (isVegetarian) {
@@ -81,24 +82,21 @@ function updateLabel(label) {
 
   user.labels = user.labels.map((l) => l.name === label.name ? { ...label, userInput: label.userInput } : l);
 
+  console.log('updateLabel', user);
   userService.save(user);
   return user.labels
-
+  
 }
 
 // BUG: set labels on list load
-function getLabels(list) {
-  // this is for recipes 
+async function getLabels(list , user) {
+  user= JSON.parse(JSON.stringify(user))
   list = JSON.parse(JSON.stringify(list))
-  const user = userService.getLoggedInUser();
-
-
-  const labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
-  // utilService.saveToStorage(LABELS_KEY, labels);
-  // }
-  user.labels = labels;
-  userService.save(user);
-  return labels;
+  // const user= userService.getLoggedInUser();
+  user.labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
+  // console.log('user.labels', user);
+  await userService.save(user);
+  return user.labels;
 }
 
 
@@ -116,11 +114,7 @@ async function save(item) {
   if (item._id) {
     savedItem = await storageService.put(STORAGE_KEY, item);
     // savedItem = await httpService.put(`item/${item._id}`, item)
-  } else {
-    // Later, owner is set by the backend
-    item.owner = userService.getLoggedInUser();
-    savedItem = await storageService.item(STORAGE_KEY, item);
-    // savedItem = await httpService.item('item', item)
+
   }
   return savedItem;
 }
