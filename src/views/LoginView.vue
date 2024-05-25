@@ -7,7 +7,7 @@
             <span class="sep"></span> <span class="or">OR</span> <span class="sep"></span>
         </div>
         <!-- <GoogleLogin :callback="callback" prompt auto-login /> -->
-        <GoogleLogin :callback="callback" />
+        <GoogleLogin :callback="callback" prompt auto-login/>
     </section>
 
 </template>
