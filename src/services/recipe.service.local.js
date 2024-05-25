@@ -15,7 +15,7 @@ export const recipeService = {
   remove,
   save,
   getEmptyRecipe,
-  updateLabel,
+  
   getRecipes,
   getProductsFromRecipe
 }
@@ -57,13 +57,11 @@ function query() {
     }
   }).sort((a, b) => b.percentage - a.percentage);
 
-  console.log(matchItems);
   return matchItems;
 }
 
 async function getRecipes() {
   const list = await storageService.query(RECIPE_KEY)
-  console.log("list", list);
   return list;
 
 
@@ -73,7 +71,6 @@ async function getRecipes() {
 async function getProductsFromRecipe(recipeId) {
   const recipe = gRecipes.find(recipe => recipe._id === recipeId);
 
-  // console.log("recipe", recipe);
   let items = await itemService.query();
 
   
@@ -89,40 +86,16 @@ async function getProductsFromRecipe(recipeId) {
   // }
 
   recipe.ingredients.forEach(ingr => {
-    console.log("ingr", ingr);
     const regex = new RegExp(ingr, "i");
      items.forEach(item => {
-      // console.log("item", item);
        if (regex.test(item.name)) {
          itemsList.push(item);
        }
     });
     
   });
-  console.log("items", itemsList);
 return itemsList;
 }
-
-
-
-function updateLabel(label) {
-  console.log("label", label);
-
-}
-
-// BUG: labels are not saved to storage
-// function getLabels(list) {
-//   list = JSON.parse(JSON.stringify(list))
-//   let labels = utilService.loadFromStorage(LABELS_KEY);
-//   if (!labels || !labels.length) {
-//     labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
-//     console.log("labels", labels);
-//     utilService.saveToStorage(LABELS_KEY, labels);
-//   }
-//   return labels;
-
-// }
-
 
 function getById(itemId) {
   return storageService.get(RECIPE_KEY, itemId);

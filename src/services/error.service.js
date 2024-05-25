@@ -22,7 +22,6 @@ function logError(err, routeHistory) {
     return
   }
   logs.push(errorToLog)
-  console.log(logs)
   console.info('%cError', _getStyles(), errorToLog)
 }
 

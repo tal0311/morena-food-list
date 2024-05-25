@@ -306,9 +306,7 @@ const info = {
 
 export const moreInfoService = {
     getInfoByLabel: (label, currLang) => {
-        console.log('label', label, 'currLang', currLang);
 
-        console.log(info[label]['he']);
         return info[label][currLang];
     }
 }

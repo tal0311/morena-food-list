@@ -34,9 +34,8 @@ function handleLabelChange($event) {
 }
 
 function onMore(labelName) {
-    console.log('more');
+
     eventBus.emit('toggle-modal', { type: 'ModalInfo' ,info:labelName})
-    // showSuccessMsg('More feature coming soon')
 }
 
 const itemsMap = ref({})

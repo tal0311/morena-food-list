@@ -15,7 +15,6 @@ export const useRecipeStore = defineStore("recipe", () => {
 
 
      function loadMatches() {
-        console.log('loadMatches');
         matchRecipes.value=  recipeService.query()
     }
 

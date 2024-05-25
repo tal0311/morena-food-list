@@ -34,7 +34,7 @@ function loadUser() {
 
     userStore.loadUser()
   } catch (error) {
-    console.log('no logged user/ route use user page ', error);
+    console.error('no logged user/ route use user page ', error);
   }
 }
 

@@ -1629,7 +1629,7 @@ const gTrans = {
 };
 
 function doTrans(key, currLang) {
-  // console.log("key", key);
+  // console.debug("key", key);
   var translation = gTrans[key][currLang];
   if (!translation) return key;
   return translation;

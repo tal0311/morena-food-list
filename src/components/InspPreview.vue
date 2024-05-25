@@ -40,7 +40,7 @@ const props = defineProps({
 
 
 const getStyle = computed(() => {
-    console.log(props.recipe.percentage);
+    
 if (props.recipe.percentage > 90) {
     return {
         color: 'lightgreen'

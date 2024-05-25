@@ -38,14 +38,11 @@ export const useListStore = defineStore("list", () => {
     labels.value = itemService.getLabels(getList.value)
   }
 
-  // labels.value = computed(() => labels?.value)
 
-  async function loadList(ids) {
-    // console.log("loading list" ,ids);
+  async function loadList() {
     try {
       const items = await itemService.query();
       list.value = items;
-      // console.log("Loaded list", list.value);
 
     } catch (error) {
       console.debug("Failed to load list", error);
@@ -65,7 +62,6 @@ export const useListStore = defineStore("list", () => {
   }
 
   function toggleSelect(itemId) {
-    // console.log("toggleSelect", itemId);
     const itemIdx = list?.value.findIndex((item) => item._id === itemId);
     const item = list.value[itemIdx];
     item.isSelected = !item.isSelected;

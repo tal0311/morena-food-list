@@ -56,7 +56,7 @@ const isOpen = ref(false);
 
 const emit = defineEmits(['addToList']);
 function addToList() {
-    console.log('add to list');
+    
     if (btnStatus.value === 'Added') return;
     btnStatus.value = 'Added';
     emit('addToList', props.recipe._id);
@@ -66,7 +66,7 @@ function addToList() {
 
 
 const getStyle = computed(() => {
-    console.log(props.recipe.percentage);
+    
     if (props.recipe.percentage > 90) {
         return {
             color: 'lightgreen'

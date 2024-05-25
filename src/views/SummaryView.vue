@@ -72,25 +72,8 @@ function prepDataForChart() {
 }
 
 function toggleSelect({item}) {
-    // console.log('itemId', itemId);
     listStore.toggleSelect(item._id)
 }
-
-// Tour logic
-// const route = useRoute()
-// const appStore = useAppStore()
-// const isTourActive = computed(() => appStore.getIsTourActive)
-
-// onMounted(() => {
-//     if (isTourActive.value) {
-//         useTour(route.name)
-//     }
-//     if (route.query.print) {
-//         setTimeout(() => {
-//             window.print()
-//         }, 1000)
-//     }
-// })
 
 
 </script>

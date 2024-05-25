@@ -26,9 +26,6 @@ const router = createRouter({
     {
       path: "/list",
       name: "list",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import("@/views/ListIdx.vue"),
       children: [
         {
@@ -67,8 +64,8 @@ router.beforeEach(async (to, from, next) => {
   const listStore = useListStore()
   const recipeStore = useRecipeStore()
   const { logError } = useAppStore()
-  
-  routeHistory.push({ to, from ,user: userStore.loggedUser})
+
+  routeHistory.push({ to, from, user: userStore.loggedUser })
 
   // this is to make sure that the user is logged in before entering the home page
   if (to.name === "home") {
@@ -85,16 +82,16 @@ router.beforeEach(async (to, from, next) => {
       // next({ name: "list" });
       // listStore.loadList()
       recipeStore.loadMatches();
-     
-    } 
-    
+
+    }
+
   }
 
   // this to load the list when the user enters the list page
-   if (to.name === "list") {
+  if (to.name === "list") {
     // userStore.loadList()
     listStore.loadList()
-   
+
   }
 
   // default to the next route

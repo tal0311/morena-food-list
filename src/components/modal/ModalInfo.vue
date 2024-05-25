@@ -22,7 +22,6 @@ watchEffect(() => {
     if (props.info) {
          
         infoForDisplay.value= moreInfoService.getInfoByLabel(props.info,currLang.value)
-        console.log(infoForDisplay.value);
     }
 })
 </script>

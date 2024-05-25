@@ -58,7 +58,6 @@ function login(loginType, credentials) {
     }
     if (loginType === 'google') {
 
-        // console.log('credentials',credentials);
         const user = getEmptyUser();
         user.username = credentials.name;
         user.email = credentials.email;

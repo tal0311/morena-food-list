@@ -2,11 +2,11 @@
     <!-- <pre>{{ props.item }}</pre> -->
     <section ref="previewRef" :class="`item-preview grid idx- ${isSwiped ? 'swiped' : 'disabled'}`">
 
-        <label class="label-container grid" :for="item._id"  >
+        <label class="label-container grid" :for="item._id">
             <input type="checkbox" :id="item._id" :checked="item.isSelected && isSwiped" :disabled="!isSwiped"
-            @click.stop="onSelect"   >
+                @click.stop="onSelect">
             <span>{{ $trans(props.item.name) }}</span>
-            
+
         </label>
         <span @contextmenu.prevent="itemInfo">{{ props.item.icon }}</span>
         <!-- <span @click.stop="itemInfo" v-html="$svg('help')"></span> -->
@@ -38,7 +38,7 @@ let elHammer = null
 onMounted(() => {
     elHammer = new Hammer(previewRef.value)
     elHammer.on('swipe', handleSwipe)
-    
+
 })
 
 onBeforeMount(() => {
@@ -47,7 +47,7 @@ onBeforeMount(() => {
 })
 
 function handleSharedIds() {
-    
+
     if (props.sharedIds && props.sharedIds.includes(props.item._id)) {
 
         isSwiped.value = true
@@ -57,8 +57,8 @@ function handleSharedIds() {
 
 
 function handleSwipe(ev) {
-   
-    // console.log('swipe');
+
+
     if (ev.type === 'swipe') {
         isSwiped.value = !isSwiped.value
         if (props.item.isSelected) {
@@ -69,7 +69,7 @@ function handleSwipe(ev) {
 
 
 function onSelect() {
-    // console.log('select');
+
     if (!isSwiped.value) {
         showSuccessMsg('Swipe item and click on the checkbox to select it')
         return
@@ -96,10 +96,11 @@ function itemInfo() {
 <style scoped>
 .item-preview {
     font-size: 1.5rem;
-  grid-auto-flow: column;
+    grid-auto-flow: column;
     grid-template-columns: 50% 50%;
     cursor: pointer;
 }
+
 .label-container {
     /* font-size: 1.5rem; */
     grid-auto-flow: column;

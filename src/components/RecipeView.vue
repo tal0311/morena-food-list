@@ -39,18 +39,15 @@ onMounted(() => {
 
 async function loadRecipes() {
     inspiration.value = await recipeService.getRecipes()
-    // console.log('inspiration', inspiration.value);
 }
 
 const recipes = computed(() => {
-    // console.log(recipeStore.getMatchRecipes);
     return recipeStore.getMatchRecipes
 })
 
 
 const listFromRecipes = ref([])
 async function addToList(id) {
-    // console.log('add to list', id);
     const items = await recipeService.getProductsFromRecipe(id)
     if (items.length) {
         listFromRecipes.value = Array.from(new Set(
@@ -63,7 +60,6 @@ async function addToList(id) {
 
 const router = useRouter()
 function goToList() {
-    // console.log('go to list');
 
     router.push({
         name: 'list', query:

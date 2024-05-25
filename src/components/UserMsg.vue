@@ -33,7 +33,6 @@ onBeforeMount(() => {
         if (txt.length > 60) {
             delay = 6000
         }
-        // console.log('show-msg', txt, type);
         setTimeout(() => {
             closeModal()
         }, delay)
@@ -47,7 +46,6 @@ function closeModal() {
 
 const appStore = useAppStore()
 function onReport() {
-    console.log('onReport');
     appStore.reportError()
     closeModal()
 

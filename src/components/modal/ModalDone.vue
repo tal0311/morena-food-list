@@ -73,7 +73,6 @@ async function onSendList() {
         showSuccessMsg('List sent successfully ')
 
     } catch (error) {
-        console.log(error);
         showSuccessMsg('Failed to send list')
     }
     finally {

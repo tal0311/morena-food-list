@@ -150,7 +150,6 @@ onUpdated(() => {
 updateUser = utilService.debounce(updateUser, 1000);
 
 function updateUser() {
-    console.log('updating user, ', user.value);
     userStore.updateLoggedUser(user.value);
     showSuccessMsg('User updated successfully');
 }

@@ -8,7 +8,7 @@ async function shareTo(platform = 'whatsapp', url) {
   try {
     await shareToMobile(url)
   } catch (error) {
-    console.log('error', error);
+    console.error('error', error);
     throw error
   }
 

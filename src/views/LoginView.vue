@@ -25,7 +25,7 @@ const  router = useRouter()
 
 function callback(response) {
     if (response.error) {
-        console.log('error', response.error)
+        console.error('error', response.error)
     } else {
         getCredFromGoogle(response)
     }
@@ -38,7 +38,7 @@ async function login(type,credential) {
        await userStore.login(type,credential)
         router.push('/user')
     } catch (error) {
-        console.log('error', error)
+        console.error('error', error)
         login('guest')
         
     }
@@ -50,22 +50,15 @@ function getCredFromGoogle({ credential }) {
     login('google', userCredFromGoogle.value)
 }
 
-watchEffect(() => {
-    if (userCredFromGoogle.value) {
-        // console.log('userCredFromGoogle', userCredFromGoogle.value)
-    }
-})
 
 </script>
 
 <style scoped>
 .login-view {
-
     gap: 1.5rem;
     border: 1px solid var(--bClr1);
     padding: 2.5rem 0;
     border-radius: var(--br);
-
     h1 {
         font-size: 2rem;
         margin: 0;
@@ -103,10 +96,18 @@ watchEffect(() => {
 }
 
 /* override google styling */
-div[role="button"]{
-   height: 42px;
-    border: 1px solid #7c94bb;
-    border-radius: 8px;
 
-}
+
+    #container {
+        background-color: lightblue;
+        div[role="button"]{
+
+            height: 42px;
+            border: 1px solid #7c94bb;
+            border-radius: 8px;
+        }
+        
+    }
+
+
 </style>

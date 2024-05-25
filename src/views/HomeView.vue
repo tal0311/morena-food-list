@@ -41,20 +41,6 @@ function resetStorage() {
   location.reload()
 }
 
-// Tour logic
-// function toggleTour() {
-//   appStore.toggleTourState()
-// }
-
-// const isTourActive = computed(() => appStore.getIsTourActive)
-// const route = useRoute()
-// watchEffect(() => {
-//   if (isTourActive.value) {
-//     useTour(route.name)
-//     console.log('tour is active');
-
-//   }
-// })
 
 
 </script>

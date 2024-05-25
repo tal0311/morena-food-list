@@ -71,7 +71,6 @@ onMounted(() => {
 const sharedIds = ref(null)
 const isHistoryMode = ref(false)
 function getDataFromRoute() {
-    // console.log(route.query);
 
     const { share, ids, history } = route.query
     if (share && ids) {
@@ -82,7 +81,6 @@ function getDataFromRoute() {
     }
 }
 function onSelectHistory() {
-    console.log(route.query);
     const { history } = route.query
     if (history) {
         const query = {}

@@ -194,7 +194,6 @@ function getAsCSV(items) {
       csvStr += csvLine
   })
 
-  console.log(csvStr);
   return csvStr
 }
 

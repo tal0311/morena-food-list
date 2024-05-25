@@ -25,10 +25,8 @@ window.itemService = itemService;
 
 async function query(filterBy = {}) {
   const loggedUser = userService.getLoggedInUser();
-  // console.log("query", loggedUser.settings);
   let items = await storageService.query(STORAGE_KEY);
   const { isVegetarian, isVegan, isLactoseFree, isKosher, isGlutenFree } = loggedUser.settings;
-  // debugger
   if (isVegetarian) {
     const vegItems = ['meat-and-poultry', 'fish', 'seafood']
     items = items.filter((item) => !vegItems.includes(item.group));
@@ -62,7 +60,6 @@ async function query(filterBy = {}) {
 
 function getGroupsByLabels(list) {
 
-  // debugger
   const itemMap = list.reduce((acc, item) => {
     if (!acc[item.group]) {
       acc[item.group] = [];
@@ -70,11 +67,9 @@ function getGroupsByLabels(list) {
     acc[item.group].push(item);
     return acc;
   }, {});
-  // console.log("acc", itemMap);
 
   return itemMap;
 
-  //  Object.keys(list.value).map(label=>({name:label, userInput: ''}))
 }
 
 
@@ -99,7 +94,6 @@ function getLabels(list) {
 
 
   const labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
-  // console.log("labels", labels);
   // utilService.saveToStorage(LABELS_KEY, labels);
   // }
   user.labels = labels;
