@@ -1,13 +1,13 @@
 <template>
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
         <div id="list-container" class="list-container grid">
-            <GroupList :labelList="labelList" :groupList="groupList" :sharedIds="sharedIds" @selectItem="toggleSelect"
-                @toggleEdit="toggleEdit" @updateLabel="updateLabel" />
+            <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelect" @toggleEdit="toggleEdit"
+                @updateLabel="updateLabel" />
             <details>
                 <summary>{{ $trans('personal-notes') }}</summary>
                 <section class="notes-container">
                     <p>{{ user.personalTxt }}</p>
-                    
+
                 </section>
             </details>
         </div>
@@ -32,7 +32,7 @@
 <script setup>
 
 import { useRoute, useRouter } from 'vue-router'
-import { ref, onBeforeMount, computed, onUnmounted, onMounted } from 'vue'
+import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect } from 'vue'
 import { useListStore } from '@/stores/list-store';
 import AppModal from '@/components/AppModal.vue'
 import { useAppStore } from '@/stores/app-store'
@@ -53,8 +53,7 @@ const groupList = computed(() => listStore?.getList)
 const labelList = computed(() => listStore?.getLabels)
 const user = computed(() => userStore.getUser)
 
-onBeforeMount(async () => {
-
+onBeforeMount(() => {
     getDataFromRoute()
 })
 
@@ -75,11 +74,20 @@ function getDataFromRoute() {
     const { share, ids, history } = route.query
     if (share && ids) {
         sharedIds.value = ids.split(',')
+
     }
     if (history) {
         isHistoryMode.value = true
     }
 }
+
+watchEffect(() => {
+    if (groupList.value && sharedIds.value) {
+        listStore.setItemsFromShearedList(sharedIds.value)
+        // console.log(sharedIds.value);
+        // listStore.setSharedIds(sharedIds.value)
+    }
+})
 function onSelectHistory() {
     const { history } = route.query
     if (history) {
@@ -109,7 +117,6 @@ function onDone() {
 }
 
 function toggleSelect(id) {
-
     listStore.toggleSelect(id)
 }
 

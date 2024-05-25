@@ -28,6 +28,7 @@ window.recipeService = recipeService;
 // await query();
 function query() {
   const { selectedItems } = userService.getLoggedInUser();
+  // debugger
 
   let matchItems = {};
   let recipes = gRecipes;

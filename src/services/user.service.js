@@ -32,9 +32,9 @@ function getLoggedInUser() {
 
 
 async function save(user) {
-
-    const method = (user._id) ? 'put' : 'post';
+       const method = (user._id) ? 'put' : 'post';
     const updatedUser = await storageService[method](STORAGE_KEY, user);
+    // console.log('updatedUser', updatedUser);
     if (updatedUser) {
         return _saveLoggedUser(updatedUser);
 

@@ -24,12 +24,11 @@ import { showSuccessMsg } from '@/services/event-bus.service';
 const props = defineProps({
     item: Object,
     idx: Number,
-    sharedIds: Array,
     labelName: String
 
 })
 
-const emit = defineEmits(['selectItem'])
+const emit = defineEmits(['selectItem', 'shearSelectItem'])
 
 const previewRef = ref(null)
 const isSwiped = ref(false)
@@ -47,18 +46,15 @@ onBeforeMount(() => {
 })
 
 function handleSharedIds() {
-
-    if (props.sharedIds && props.sharedIds.includes(props.item._id)) {
-
+    if (props.item.isSelected) {
         isSwiped.value = true
-        onSelect()
+        emit('selectItem', { item: props.item, labelName: props.labelName, isShared: true })
+
     }
 }
 
 
 function handleSwipe(ev) {
-
-
     if (ev.type === 'swipe') {
         isSwiped.value = !isSwiped.value
         if (props.item.isSelected) {

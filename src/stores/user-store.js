@@ -23,12 +23,12 @@ export const useUserStore = defineStore("user", () => {
 
   }
 
-   async function login(loginType, credentials){
+  async function login(loginType, credentials) {
     try {
-      
+
       await userService.login(loginType, credentials);
       loadUser();
-      return 
+      return
     } catch (error) {
       console.error("error", error);
     }
@@ -56,7 +56,6 @@ export const useUserStore = defineStore("user", () => {
   async function updateUser(key, value) {
 
     try {
-
       loggedUser.value[key] = value;
       await userService.save(loggedUser.value);
     } catch (error) {

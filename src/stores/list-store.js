@@ -50,10 +50,23 @@ export const useListStore = defineStore("list", () => {
       showErrorMsg("Failed to load list, please try again later");
 
     }
-    // list.value = null
+    
   }
 
 
+  function setItemsFromShearedList(itemsIds) {
+    const userItems = userStore.getUser.selectedItems;
+
+    itemsIds.forEach((itemId) => {
+      const item = list?.value.find((i) => i._id === itemId);
+      if (!userItems.find((i) => i._id === itemId)) {
+        item.isSelected = true;
+        userItems.push(item);
+        selectedItems.value.push(item);
+      }
+    })
+    userStore.updateUser("selectedItems", userItems);
+  }
 
   function updateLabel(label) {
 
@@ -62,6 +75,7 @@ export const useListStore = defineStore("list", () => {
   }
 
   function toggleSelect(itemId) {
+    console.log('toggle select', itemId);
     const itemIdx = list?.value.findIndex((item) => item._id === itemId);
     const item = list.value[itemIdx];
     item.isSelected = !item.isSelected;
@@ -80,7 +94,8 @@ export const useListStore = defineStore("list", () => {
     getList,
     toggleSelect,
     getSelectedItems,
-     getLabels,
-    updateLabel
+    getLabels,
+    updateLabel,
+    setItemsFromShearedList
   };
 });

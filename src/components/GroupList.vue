@@ -11,7 +11,7 @@
 
 
         </summary>
-        <ItemList :list="groupList[name]" :labelName="name" @selectItem="onSelect" :sharedIds="sharedIds" />
+        <ItemList :list="groupList[name]" :labelName="name" @selectItem="onSelect" />
 
         <textarea @input="handleLabelChange" rows="5" :data-groupname="name" placeholder="Add your notes here..."
             :value="userInput" @focus="$emit('toggleEdit')"></textarea>
@@ -23,7 +23,7 @@ import ItemList from '@/components/ItemList.vue'
 import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
 import { ref } from 'vue';
 
-const props = defineProps(['labelList', 'groupList', 'sharedIds'])
+const props = defineProps(['labelList', 'groupList' ])
 const emit = defineEmits(['selectItem', 'toggleEdit', 'updateLabel'])
 
 function handleLabelChange($event) {
@@ -35,19 +35,26 @@ function handleLabelChange($event) {
 
 function onMore(labelName) {
 
-    eventBus.emit('toggle-modal', { type: 'ModalInfo' ,info:labelName})
+    eventBus.emit('toggle-modal', { type: 'ModalInfo', info: labelName })
 }
 
 const itemsMap = ref({})
 
-function onSelect({ item, labelName }) {
+function onSelect({ item, labelName, isShared }) {
+
     if (!item.isSelected) {
         itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] + 1 : 1
+    } else if (item.isSelected && isShared) {
+        itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] + 1 : 1
+
     } else {
+        console.log();
         itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] - 1 : 0
     }
-   
-    emit('selectItem', item._id)
+
+    if (!isShared) {
+        emit('selectItem', item._id)
+    }
 }
 
 </script>
