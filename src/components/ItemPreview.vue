@@ -46,6 +46,7 @@ onBeforeMount(() => {
 })
 
 function handleSharedIds() {
+
     if (props.item.isSelected) {
         isSwiped.value = true
         emit('selectItem', { item: props.item, labelName: props.labelName, isShared: true })

@@ -16,6 +16,7 @@ export const useListStore = defineStore("list", () => {
 
   const getList = computed(() => {
     if (list.value) {
+    
       return itemService.getGroupsByLabels(list.value);
     }
 
@@ -50,20 +51,23 @@ export const useListStore = defineStore("list", () => {
       showErrorMsg("Failed to load list, please try again later");
 
     }
-    
+
   }
 
 
   function setItemsFromShearedList(itemsIds) {
+    // console.log('setItemsFromShearedList', itemsIds);
     const userItems = userStore.getUser.selectedItems;
 
-    itemsIds.forEach((itemId) => {
-      const item = list?.value.find((i) => i._id === itemId);
-      if (!userItems.find((i) => i._id === itemId)) {
+    list.value.map((item) => {
+      if (itemsIds.includes(item._id)) {
+        // console.debug('item', item);
+
         item.isSelected = true;
-        userItems.push(item);
         selectedItems.value.push(item);
       }
+      return item;
+
     })
     userStore.updateUser("selectedItems", userItems);
   }

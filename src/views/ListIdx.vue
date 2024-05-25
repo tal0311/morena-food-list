@@ -84,8 +84,6 @@ function getDataFromRoute() {
 watchEffect(() => {
     if (groupList.value && sharedIds.value) {
         listStore.setItemsFromShearedList(sharedIds.value)
-        // console.log(sharedIds.value);
-        // listStore.setSharedIds(sharedIds.value)
     }
 })
 function onSelectHistory() {
