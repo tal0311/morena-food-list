@@ -36,6 +36,11 @@ const router = createRouter({
       ],
     },
     {
+      path: "/debug",
+      name: "debug",
+      component: () => import("@/views/DebugView.vue"),
+    },
+    {
       path: "/error",
       name: "error-admin",
       component: () => import("@/views/ErrorView.vue"),
@@ -54,6 +59,7 @@ const router = createRouter({
       path: "/:pathMatch(.*)*",
       redirect: "/error",
     },
+
   ],
 });
 

@@ -1625,6 +1625,11 @@ const gTrans = {
     en: "Personal Notes",
     es: "Notas personales",
     he: "הערות אישיות",
+  },
+  debug:{
+    en: "Debug",
+    es: "Depurar",
+    he: "ניפוי שגיאות",
   }
 };
 

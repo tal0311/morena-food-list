@@ -37,6 +37,10 @@ const btns = [
     {
         name: 'back',
         action: closeModal
+    },
+    {
+        name: 'debug',
+        action: onDebug
     }
 ]
 
@@ -45,6 +49,12 @@ const router = useRouter()
 function onPrintList() {
 
     onShowSummary({ print: true })
+    closeModal()
+}
+
+function onDebug() {
+    console.debug('debug');
+    router.push({ name: 'debug' })
     closeModal()
 }
 

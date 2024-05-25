@@ -11,9 +11,8 @@ export const useUserStore = defineStore("user", () => {
   const appStore = useAppStore();
   const listStore = useListStore();
 
-  const currLang = ref("en");
+   const currLang = ref("en");
   const loggedUser = ref(null);
-
 
   const getUser = computed(() => loggedUser.value);
   const getCurrLang = computed(() => currLang.value);
