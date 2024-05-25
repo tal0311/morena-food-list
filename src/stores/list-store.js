@@ -64,7 +64,8 @@ export const useListStore = defineStore("list", () => {
         // console.debug('item', item);
 
         item.isSelected = true;
-        selectedItems.value.push(item);
+        // selectedItems.value.push(item);
+        userItems.push(item);
       }
       return item;
 

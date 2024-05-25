@@ -73,8 +73,10 @@ function getDataFromRoute() {
 
     const { share, ids, history } = route.query
     if (share && ids) {
+        console.log('shared list', ids);
         sharedIds.value = ids.split(',')
-
+       
+        
     }
     if (history) {
         isHistoryMode.value = true

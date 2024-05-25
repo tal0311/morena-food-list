@@ -55,6 +55,7 @@ export const useUserStore = defineStore("user", () => {
   async function updateUser(key, value) {
 
     try {
+      console.log('selectedItems:', key, value);
       loggedUser.value[key] = value;
       await userService.save(loggedUser.value);
     } catch (error) {
