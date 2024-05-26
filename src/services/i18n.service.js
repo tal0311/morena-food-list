@@ -1630,11 +1630,44 @@ const gTrans = {
     en: "Debug",
     es: "Depurar",
     he: "ניפוי שגיאות",
+  },
+  'food-inspiration':{
+    en: "Food Inspiration",
+    es: "Inspiración de comida",
+    he: "השראה לאוכל",
+  
+  },
+  'go-to-list':{
+    en: "Go to list",
+    es: "Ir a la lista",
+    he: "עבור לרשימה",
+  },
+  'vegan':{
+    en: "Vegan",
+    es: "Vegan",
+    he: "טבעוני",
+  }, 'vegetarian':{
+    en: "Vegeterian",
+    es: "Vegetariano",
+    he: "צמחוני",
+  }, 'gluten-free':{
+    en: "Gluten Free",
+    es: "Sin gluten",
+    he: "ללא גלוטן",
+  }, 'lactose-free':{
+    en: "Lactuse Free",
+    es: "Sin lactosa",
+    he: "ללא לקטוז",
+  }, 'kosher':{
+    en: "Kosher",
+    es: "Kosher",
+    he: "כשר",
   }
+  
 };
 
 function doTrans(key, currLang) {
-  // console.debug("key", key);
+  console.debug("key", key);
   var translation = gTrans[key][currLang];
   if (!translation) return key;
   return translation;

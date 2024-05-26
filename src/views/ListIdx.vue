@@ -18,7 +18,7 @@
             <section v-else class="history-actions grid grid-dir-col">
                 <button class="primary-btn" @click="onSelectHistory">Continue</button>
                 <RouterLink to="/user">
-                    <button class="primary-btn">Back</button>
+                    <button class="primary-btn">{{ $trans('back') }}</button>
                 </RouterLink>
             </section>
 

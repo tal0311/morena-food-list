@@ -1,7 +1,6 @@
 <template>
     <section class="user-page grid">
-        <!-- <pre>{{ user }}</pre> -->
-        <UserPreview :user="user" />
+            <UserPreview :user="user" />
         <h1> {{ getTitle(user.username) }} <span>👋</span></h1>
         <details>
             <summary>{{ $trans('user-info') }}</summary>
@@ -9,7 +8,6 @@
                 <div>
                     <input type="text" v-model="user.username">
                 </div>
-
             </section>
         </details>
 
@@ -37,14 +35,8 @@
             <summary>{{ $trans('settings') }}</summary>
             <section class="summary-container">
                 <div class="summary-wrapper">
-
-
                     <div class="notify-container grid">
-
-
-
                         <label for="notifications">{{ $trans('notifications') }}</label>
-                        <!-- <input type="checkbox" > -->
                         <input type="checkbox" name="notifications" v-model="user.settings.notifications"
                             class="switch">
                     </div>
@@ -55,30 +47,13 @@
                             <option value="en">English</option>
                             <option value="es">español</option>
                             <option value="he">עברית</option>
-
                         </select>
 
                     </div>
                     <section class="preferences grid">
-                        <label for="vegan">
-                            Vegan
-                            <input type="checkbox" name="diet"  v-model="user.settings.isVegan">
-                        </label>
-                        <label for="vegetarian">
-                            Vegetarian
-                            <input type="checkbox" name="diet"  v-model="user.settings.isVegetarian">
-                        </label>
-                        <label for="glutenFree">
-                            Gluten Free
-                            <input type="checkbox" name="diet"  v-model="user.settings.isGlutenFree">
-                        </label>
-                        <label for="lactoseFree">
-                            Lactose Free
-                            <input type="checkbox" name="diet"  v-model="user.settings.isLactoseFree">
-                        </label>
-                        <label for="kosher">
-                            Kosher
-                            <input type="checkbox" name="diet" v-model="user.settings.isKosher">
+                        <label v-for="diet in diets" :for="diet.label">
+                            {{ $trans(diet.label) }}
+                            <input type="checkbox" name="diet" :id="diet.label" v-model="user.settings[diet.value]">
                         </label>
                     </section>
 
@@ -135,6 +110,14 @@ const user = ref(null);
 const userStore = useUserStore();
 
 
+const diets = [
+    { name: 'vegan', label: 'vegan', value: 'isVegan' },
+    { name: 'vegetarian', label: 'vegetarian', value: 'isVegetarian' },
+    { name: 'glutenFree', label: 'gluten-free', value: 'isGlutenFree' },
+    { name: 'lactoseFree', label: 'lactose-free', value: 'isLactoseFree' },
+    { name: 'kosher', label: 'kosher', value: 'isKosher' }
+
+]
 
 onBeforeMount(() => {
     user.value = userService.getLoggedInUser();
@@ -363,14 +346,16 @@ textarea {
     font-family: inherit;
     font-size: 1.5rem;
 }
-.preferences label{
+
+.preferences label {
     margin-inline-start: 3rem;
     grid-template-columns: 50% 50%;
     display: grid;
     grid-auto-flow: column;
     accent-color: var(--bClr3);
 }
-.language-label{
+
+.language-label {
     margin-block: 0.5rem;
 }
 </style>

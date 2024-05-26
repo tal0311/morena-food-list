@@ -1,12 +1,12 @@
 <template>
     <section class="recipe-view">
-        <h2>Food inspiration</h2>
+        <h2>{{ $trans('food-inspiration') }}</h2>
         <RecipeList v-if="recipes && recipes.length" :recipes="recipes" :is="'match'" />
         <RecipeList v-else="inspiration && inspiration.length" :recipes="inspiration" :is="'inspiration'"
             @addToList="addToList" />
 
         <footer v-if="listFromRecipes.length" class="blur-bg">
-            <button class="primary-btn" @click="goToList">Go To List</button>
+            <button class="primary-btn" @click="goToList">{{ $trans('go-to-list') }}</button>
         </footer>
 
     </section>
