@@ -88,13 +88,11 @@ function updateLabel(label) {
   
 }
 
-// BUG: set labels on list load
+
 async function getLabels(list , user) {
   user= JSON.parse(JSON.stringify(user))
   list = JSON.parse(JSON.stringify(list))
-  // const user= userService.getLoggedInUser();
   user.labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
-  // console.log('user.labels', user);
   await userService.save(user);
   return user.labels;
 }
