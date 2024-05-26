@@ -7,7 +7,7 @@ import { reportService } from "@/services/report.service";
 export const useAppStore = defineStore("app", () => {
   const isTourActive = ref(false);
   const errorLogs = ref([]);
-  //   TODO : move language to app store
+  
 
   const getIsTourActive = computed(() => isTourActive.value);
 
