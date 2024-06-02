@@ -9,6 +9,7 @@ import { useListStore } from "@/stores/list-store";
 import { useAppStore } from "@/stores/app-store";
 import { useRecipeStore } from "@/stores/recipe-store";
 import { showUserMsg, showSuccessMsg } from "@/services/event-bus.service";
+import { userService } from "@/services/user.service";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -51,6 +52,10 @@ const router = createRouter({
       component: () => import("@/components/RecipeView.vue"),
     },
     {
+      path: '/test',
+      component: () => import("@/views/TestView.vue")
+    },
+    {
       path: "/login",
       name: "login",
       component: () => import("@/views/LoginView.vue"),
@@ -67,6 +72,7 @@ const router = createRouter({
 const routeHistory = []
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
+
   const listStore = useListStore()
   const recipeStore = useRecipeStore()
   const { logError } = useAppStore()
@@ -96,8 +102,19 @@ router.beforeEach(async (to, from, next) => {
   // this to load the list when the user enters the list page
   if (to.name === "list") {
     await listStore.loadList()
-    
 
+
+  }
+  if(to.name ==='list-summary'){
+   
+    console.log(userStore.loggedUser.selectedItems);
+    if(!userStore.loggedUser.selectedItems.length){
+      showSuccessMsg('Please select some items to see the summary')
+      // to.meta = userStore.loggedUser.selectedItems
+      next({name:'list'})
+      return
+    }
+    
   }
 
   // default to the next route

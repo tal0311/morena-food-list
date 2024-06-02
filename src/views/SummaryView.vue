@@ -1,7 +1,7 @@
 <template>
     <section class="summary-view grid blur-bg">
         <div id="list-container">
-            <ItemList v-if="selectItems.length" :list="selectItems" @selectItem="toggleSelect">
+            <ItemList v-if="selectItems" :list="selectItems" @selectItem="toggleSelect">
                 <h3>{{ $trans('list-results') }}</h3>
             </ItemList>
             <section v-else class="no-items grid">
@@ -31,20 +31,22 @@
 
 <script setup>
 import { ref, onBeforeMount, computed, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
 import DashBoard from '@/components/DashBoard.vue'
 import { itemService } from '@/services/item.service.local.js'
+import { useUserStore } from '@/stores/user-store';
 
 
 // TODO: fix chart labels and data to human readable
 const listStore = useListStore()
-
+const userStore = useUserStore()
 let chartData = ref(null)
 let labels = ref(null)
 
 const cmpKey = ref(0)
-const selectItems = computed(() => listStore.getSelectedItems)
+const selectItems = computed(() => userStore.getSelectedItems)
 
 watch(selectItems, (newVal, oldVal) => {
     if (oldVal !== newVal) {
@@ -58,11 +60,13 @@ watch(selectItems, (newVal, oldVal) => {
 
 
 
-onBeforeMount(() => {
-    prepDataForChart()
-})
+// onBeforeMount(() => {
+//     prepDataForChart()
+// })
 
 function prepDataForChart() {
+    if (!selectItems.value) return
+
     const data = itemService.prepDataForChart(JSON.parse(JSON.stringify(selectItems.value)))
     if (!Object.keys(data).length === 0) return
     chartData.value = Object.values(data)
@@ -71,7 +75,7 @@ function prepDataForChart() {
     cmpKey.value++
 }
 
-function toggleSelect({item}) {
+function toggleSelect({ item }) {
     listStore.toggleSelect(item._id)
 }
 

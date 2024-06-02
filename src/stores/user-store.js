@@ -16,6 +16,7 @@ export const useUserStore = defineStore("user", () => {
 
   const getUser = computed(() => loggedUser.value);
   const getCurrLang = computed(() => currLang.value);
+  const getSelectedItems = computed(()=> loggedUser.value.selectedItems)
 
   function loadUser() {
     loggedUser.value = userService.getLoggedInUser();
@@ -90,6 +91,7 @@ export const useUserStore = defineStore("user", () => {
     setLang,
     getCurrLang,
     addHistory,
-    login
+    login,
+    getSelectedItems
   }
 })
