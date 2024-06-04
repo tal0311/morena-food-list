@@ -13,6 +13,7 @@ import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
 import { useUserStore } from '@/stores/user-store';
 
 const emit = defineEmits(['resetModal'])
+const userStore = useUserStore()
 const btns = [
     {
         name: 'print',
@@ -67,8 +68,8 @@ function onShowSummary(query) {
     router.push({ name: 'list-summary', query: query })
 }
 
-const listStore = useListStore()
-const selectItems = computed(() => listStore.getSelectedItems)
+
+const selectItems = computed(() => userStore.getSelectedItems)
 async function onSendList() {
 
     if (!selectItems.value.length) {
@@ -92,7 +93,7 @@ async function onSendList() {
 }
 
 
-const userStore = useUserStore()
+
 function saveHistory() {
     if (!selectItems.value.length) {
         showSuccessMsg('Select items to save history')

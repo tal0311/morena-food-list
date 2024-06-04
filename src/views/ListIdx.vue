@@ -34,13 +34,22 @@
 import { useRoute, useRouter } from 'vue-router'
 import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect } from 'vue'
 import { useListStore } from '@/stores/list-store';
-import AppModal from '@/components/AppModal.vue'
+
 import { useAppStore } from '@/stores/app-store'
-import AppLoader from '@/components/AppLoader.vue'
-import GroupList from '@/components/GroupList.vue'
+
 import { eventBus } from '@/services/event-bus.service';
 import { showSuccessMsg } from '@/services/event-bus.service';
 import { useUserStore } from '@/stores/user-store';
+
+
+import GroupList from '@/components/GroupList.vue';
+import AppLoader from '@/components/AppLoader.vue';
+import AppModal from '@/components/AppModal.vue';
+
+
+
+
+
 
 
 const route = useRoute()
@@ -57,7 +66,7 @@ onBeforeMount(() => {
     getDataFromRoute()
     // loadList()
 })
-async function loadList(){
+async function loadList() {
     // await listStore.loadList()
 }
 
@@ -75,12 +84,13 @@ const sharedIds = ref(null)
 const isHistoryMode = ref(false)
 function getDataFromRoute() {
 
-    const { share, ids, history } = route.query
+    const { share, ids, history, edit } = route.query
     if (share && ids) {
         // console.log('shared list', ids);
         sharedIds.value = ids.split(',')
-       
-        
+    }
+    if (edit === 'true') {
+        setEditMode()
     }
     if (history) {
         isHistoryMode.value = true
@@ -129,6 +139,11 @@ const currLabel = ref('')
 function toggleEdit(labelName) {
     currLabel.value = labelName
     btnState.value = 'edit'
+}
+
+function setEditMode() {
+    console.log('edit state');
+    btnState.value = 'list-edit'
 }
 
 
