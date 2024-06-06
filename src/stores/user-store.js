@@ -9,7 +9,7 @@ import { userService } from "@/services/user.service";
 
 export const useUserStore = defineStore("user", () => {
   const appStore = useAppStore();
-  const listStore = useListStore();
+  const listStore = userService.getLoggedInUser();
 
   const currLang = ref("en");
   const loggedUser = ref(null);
@@ -19,7 +19,7 @@ export const useUserStore = defineStore("user", () => {
   const getSelectedItems = computed(()=> loggedUser.value.selectedItems)
 
   function loadUser() {
-    loggedUser.value = userService.getLoggedInUser();
+    // loggedUser.value = userService.getLoggedInUser();
   }
 
   async function login(loginType, credentials) {
