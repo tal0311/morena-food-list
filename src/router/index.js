@@ -1,6 +1,5 @@
 import {
   createRouter,
-  createWebHistory,
   createWebHashHistory,
 } from "vue-router";
 import HomeView from "../views/HomeView.vue";
@@ -72,6 +71,9 @@ const router = createRouter({
 const routeHistory = []
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
+  const loggedUser = userStore.loggedUser
+
+
 
   const listStore = useListStore()
   const recipeStore = useRecipeStore()
@@ -79,13 +81,17 @@ router.beforeEach(async (to, from, next) => {
 
   routeHistory.push({ to, from, user: userStore.loggedUser })
 
+
+
+
+  if (!loggedUser) {
+    console.log('no user')
+    next({ name: 'login' })
+    return
+  }
   // this is to make sure that the user is logged in before entering the home page
   if (to.name === "home") {
-    if (!userStore.loggedUser) {
-      next({ name: "login" });
-      return
-    }
-
+    console.log('home');
   }
 
   // this is to determine to load the matches or not
@@ -105,16 +111,16 @@ router.beforeEach(async (to, from, next) => {
 
 
   }
-  if(to.name ==='list-summary'){
-   
+  if (to.name === 'list-summary') {
+
     console.log(userStore.loggedUser.selectedItems);
-    if(!userStore.loggedUser.selectedItems.length){
+    if (!userStore.loggedUser.selectedItems.length) {
       showSuccessMsg('Please select some items to see the summary')
       // to.meta = userStore.loggedUser.selectedItems
-      next({name:'list'})
+      next({ name: 'list' })
       return
     }
-    
+
   }
 
   // default to the next route

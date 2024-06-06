@@ -74,6 +74,7 @@ function clickOutSide(ev) {
     background: #ffff;
     border: 1px solid var(--clr12);
     color: var(--clr12);
+
 }
 
 .user-msg.error .msg-container {
@@ -83,4 +84,8 @@ function clickOutSide(ev) {
 .user-msg::backdrop {
     background: none !important;
 }
+.error-btn{
+    padding: 0.5rem 0.8rem;
+}
+
 </style>

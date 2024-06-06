@@ -2,25 +2,21 @@ import { defineStore } from "pinia";
 import { ref, computed, watchEffect } from "vue";
 import { showErrorMsg } from "@/services/event-bus.service";
 import { reportService } from "@/services/report.service";
-import { useListStore } from "@/stores/list-store";
 import { useAppStore } from "@/stores/app-store";
 import { userService } from "@/services/user.service";
 
 
 export const useUserStore = defineStore("user", () => {
   const appStore = useAppStore();
-  const listStore = userService.getLoggedInUser();
+
 
   const currLang = ref("en");
-  const loggedUser = ref(null);
+  const loggedUser = ref(userService.getLoggedInUser());
 
   const getUser = computed(() => loggedUser.value);
   const getCurrLang = computed(() => currLang.value);
-  const getSelectedItems = computed(()=> loggedUser.value.selectedItems)
+  const getSelectedItems = computed(() => loggedUser.value.selectedItems)
 
-  function loadUser() {
-    // loggedUser.value = userService.getLoggedInUser();
-  }
 
   async function login(loginType, credentials) {
     try {
@@ -46,7 +42,7 @@ export const useUserStore = defineStore("user", () => {
   async function updateLoggedUser(user) {
     const userToUpdate = { ...loggedUser.value, ...user };
     loggedUser.value = await userService.save(userToUpdate);
-  
+
 
 
   }
@@ -54,12 +50,12 @@ export const useUserStore = defineStore("user", () => {
   async function updateUser(key, value) {
 
     try {
-    
 
-    
+
+
       loggedUser.value = { ...loggedUser.value, [key]: value };
       userService.save(loggedUser.value);
-      
+
 
     } catch (error) {
       console.log(error);
@@ -86,7 +82,6 @@ export const useUserStore = defineStore("user", () => {
     loggedUser,
     updateUser,
     getUser,
-    loadUser,
     updateLoggedUser,
     setLang,
     getCurrLang,

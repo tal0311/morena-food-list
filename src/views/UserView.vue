@@ -68,7 +68,7 @@
                 <ul v-if="user.history.length" class="history-list clean-list grid">
                     <li v-for="history in user.history" :key="history.id" class="grid grid-dir-col">
                         <span>{{ history.date }}</span>
-                        <RouterLink :to="`/list?${history.url}`">
+                        <RouterLink :to="`/list?${history.url}&history=true`">
                             <span class="secondary-btn">{{ $trans('restore') }}</span>
                         </RouterLink>
                     </li>
