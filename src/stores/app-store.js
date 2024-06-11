@@ -7,8 +7,9 @@ import { reportService } from "@/services/report.service";
 export const useAppStore = defineStore("app", () => {
   const isTourActive = ref(false);
   const errorLogs = ref([]);
-  
+  const isListShared = ref(false);
 
+  const getListStatus = computed(() => isListShared.value);
   const getIsTourActive = computed(() => isTourActive.value);
 
   function toggleTourState() {
@@ -16,20 +17,28 @@ export const useAppStore = defineStore("app", () => {
   }
 
   function logError(err, isShowError = true) {
-    if (isShowError){
+    if (isShowError) {
       showErrorMsg("Opps, it's not you, it's us. We are working on fixing it");
     }
     errorLogs.value.push(err);
   }
 
-function reportError(){
-  reportService.sendEmail(errorLogs.value);
-}
+  function reportError() {
+    reportService.sendEmail(errorLogs.value);
+  }
+
+  function setSharedList(isShared) {
+    isListShared.value = isShared;
+  }
+
+
 
   return {
     getIsTourActive,
     toggleTourState,
     logError,
-    reportError
+    reportError,
+    setSharedList,
+    getListStatus
   }
 })

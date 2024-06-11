@@ -1,5 +1,6 @@
 <template>
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
+        {{ isShearedList }}
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelect" @toggleEdit="toggleEdit"
                 @updateLabel="updateLabel" />
@@ -66,35 +67,26 @@ onBeforeMount(() => {
     getDataFromRoute()
     // loadList()
 })
-async function loadList() {
-    // await listStore.loadList()
-}
 
 onMounted(() => {
-    const msg = isHistoryMode.value
-        ? 'To continue from this history click continue'
-        : 'Swipe item and click on the checkbox to select it'
+    const msg = 'Swipe item and click on the checkbox to select it'
     showSuccessMsg(msg)
 })
 
-
-// const counter = ref(0)
-
 const sharedIds = ref(null)
-const isHistoryMode = ref(false)
+const isShearedList = computed(() => appStore.getListStatus)
 function getDataFromRoute() {
 
-    const { share, ids, history, edit } = route.query
-    if (share && ids) {
+    const { share, ids} = route.query
+    if (ids) {
         // console.log('shared list', ids);
         sharedIds.value = ids.split(',')
     }
-    if (edit === 'true') {
-        setEditMode()
+    if(share){
+        appStore.setSharedList(true)
+
     }
-    if (history) {
-        isHistoryMode.value = true
-    }
+     
 }
 
 watchEffect(() => {

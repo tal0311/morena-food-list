@@ -8,7 +8,6 @@
 <script setup>
 import { watchEffect, ref, computed } from 'vue';
 import { useRouter } from 'vue-router'
-import { useListStore } from '@/stores/list-store'
 import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
 import { useUserStore } from '@/stores/user-store';
 
@@ -101,7 +100,7 @@ function saveHistory() {
     }
     let idsTosShare = selectItems.value.map(({ _id }) => _id)
     console.debug('save history', idsTosShare);
-    const url = `share=true&ids=${idsTosShare}`;
+    const url = `&ids=${idsTosShare}`;
     console.debug(url);
 
     const history={
@@ -110,7 +109,7 @@ function saveHistory() {
     }
 
     userStore.addHistory(history)
-    showSuccessMsg('History saved successfully')
+    showSuccessMsg('History saved successfully, watch it in the user page')
     // closeModal()
    
 }

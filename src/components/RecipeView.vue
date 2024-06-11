@@ -67,7 +67,8 @@ function goToList() {
         name: 'list', query:
         {
             share: true,
-            ids: listFromRecipes.value.map(item => item._id).join(',')
+            ids: listFromRecipes.value.map(item => item._id).join(','),
+            history: true
         }
     })
 }
