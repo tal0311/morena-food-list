@@ -1,5 +1,6 @@
 <template>
     <section class="user-page grid">
+        <!-- <pre>{{ user }}</pre> -->
             <UserPreview :user="user" />
         <h1> {{ getTitle(user.username) }} <span>👋</span></h1>
         <details>
