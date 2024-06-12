@@ -23,15 +23,15 @@
         </div>
 
         <footer>
-            <button class="secondary-btn" @click="$router.push({ name: 'list' })">{{ $trans('back') }}</button>
+            <button class="secondary-btn" @click="onBack">{{ $trans('back') }}</button>
         </footer>
 
     </section>
 </template>
 
 <script setup>
-import { ref, onBeforeMount, computed, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onBeforeMount, computed, watch, watchEffect } from 'vue'
+import { useRoute , useRouter} from 'vue-router'
 import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
 import DashBoard from '@/components/DashBoard.vue'
@@ -77,6 +77,35 @@ function prepDataForChart() {
 
 function toggleSelect({ item }) {
     listStore.toggleSelect(item._id)
+}
+
+const route = useRoute()
+const router = useRouter()
+
+watchEffect(() => {
+    const { print } = route.query;
+    console.log('print', print);
+    if (print === 'true') {
+        setTimeout(() => {
+            window.print()
+        }, 500)
+    }
+})
+
+
+function onBack() {
+    
+    const query = {}
+
+    for (const key in route.query) {
+        if (key !== 'print') {
+            query[key] = route.query[key]
+        }
+
+    }
+
+    console.log('query', query);
+    router.push({ name: 'list', query:query})
 }
 
 

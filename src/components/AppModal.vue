@@ -10,7 +10,7 @@ import { watchEffect, ref, computed, shallowRef, onBeforeMount } from 'vue';
 import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
 import ModalDone from '@/components/modal/ModalDone.vue';
 import ModalInfo from '@/components/modal/ModalInfo.vue';
-import ModalSummary from '@/components/modal/ModalSummary.vue';
+
 
 
 const dialogRef = ref(null)
@@ -33,8 +33,8 @@ function setModal({ type, info }) {
             modalTYpe.value = ModalInfo
             modalInfo.value = info
             break;
-        case 'ModalSummary':
-            modalTYpe.value = ModalSummary
+        case 'ModalHistory':
+            modalTYpe.value = ModalHistory
             break;
         default:
             modalTYpe.value = ModalDone

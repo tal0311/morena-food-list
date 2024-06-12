@@ -69,7 +69,6 @@ onMounted(() => {
 })
 
 const sharedIds = ref(null)
-const isShearedList = computed(() => appStore.getListStatus)
 function getDataFromRoute() {
 
     const {history ,share, ids} = route.query

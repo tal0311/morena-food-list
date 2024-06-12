@@ -7,7 +7,7 @@
 
 <script setup>
 import { watchEffect, ref, computed } from 'vue';
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
 import { useUserStore } from '@/stores/user-store';
 
@@ -38,13 +38,14 @@ const btns = [
         name: 'back',
         action: closeModal
     },
-    {
-        name: 'debug',
-        action: onDebug
-    }
+    // {
+    //     name: 'debug',
+    //     action: onDebug
+    // }
 ]
 
 const router = useRouter()
+const route = useRoute()
 
 function onPrintList() {
 
@@ -54,17 +55,15 @@ function onPrintList() {
 
 function onDebug() {
     console.debug('debug');
-    router.push({ name: 'debug' })
+    router.push({ name: 'debug' , query:route.query })
     closeModal()
 }
 
-function onShowSummary(query) {
-    // setTimeout(() => {
-    //     console.debug('show summary');
-    //     eventBus.emit('toggle-modal', { type: 'ModalSummary', info: query })
-    // }, 200);
+function onShowSummary({ print=false } ) {
+  
     closeModal()
-    router.push({ name: 'list-summary', query: query })
+    const query = { ...route.query, print }
+    router.push({ name: 'list-summary', query:query })
 }
 
 
