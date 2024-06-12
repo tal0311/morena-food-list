@@ -84,7 +84,7 @@ router.beforeEach(async (to, from, next) => {
 
 
   if (!loggedUser && to.name !== 'login') {
-    console.log('no user')
+    showSuccessMsg('Please login to continue')
     next({ name: 'login' })
     return
   }
@@ -108,14 +108,12 @@ router.beforeEach(async (to, from, next) => {
 
   // this to load the list when the user enters the list page
   if (to.name === "list") {
-   
+
     listStore.loadList()
 
 
   }
   if (to.name === 'list-summary') {
-
-    console.log(userStore.loggedUser.selectedItems);
     if (!userStore.loggedUser.selectedItems.length) {
       showSuccessMsg('Please select some items to see the summary')
       // to.meta = userStore.loggedUser.selectedItems

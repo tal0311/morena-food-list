@@ -1662,6 +1662,17 @@ const gTrans = {
     en: "Kosher",
     es: "Kosher",
     he: "כשר",
+  },
+  'hm-action1':{
+    en: "Continue shopping",
+    es: "Continuar",
+    he: "המשך",
+  },
+  'hm-action2':{
+    en: "Back to history list",
+    es: "Volver a la lista de historial",
+    he: "חזור ההיסטוריה",
+  
   }
   
 };

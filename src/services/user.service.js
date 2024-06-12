@@ -23,8 +23,6 @@ window.userService = userService;
 
 function getLoggedInUser() {
     let user = utilService.loadFromStorage(LOGGED_USER);
-    // console.log("♠️ ~ getLoggedInUser ~ user:", new Error().stack, user)
-
     return user;
 }
 
@@ -40,14 +38,13 @@ function getLoggedInUser() {
 
 async function save(user) {
     // const err = new Error();
-    // console.log(new Error().stack);
+
     // user = JSON.parse(JSON.stringify(user))
 
     const method = (user._id) ? 'put' : 'post';
     const updatedUser = await storageService[method](STORAGE_KEY, user);
-    // console.log('updatedUser', updatedUser);
+
     if (updatedUser) {
-        // console.log('user saved or updated', updatedUser);
         _saveLoggedUser(updatedUser);
         return updatedUser;
 
@@ -63,7 +60,7 @@ function removeUser(userId) {
 
 
 async function login(loginType, credentials) {
-    
+
     if (loginType === 'guest') {
         let guestUser = getGuestUser();
         return await save(guestUser)

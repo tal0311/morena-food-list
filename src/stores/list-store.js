@@ -37,7 +37,6 @@ export const useListStore = defineStore("list", () => {
   // const user =computed(()=>)
 
   async function setLabels() {
-    // console.log('set labels user:', );
     labels.value = await itemService.getLabels(getList.value, userStore.getUser);
   }
 
@@ -80,7 +79,7 @@ export const useListStore = defineStore("list", () => {
   }
 
   function toggleSelect(itemId) {
-    console.log('toggle select', itemId);
+
     const itemIdx = list?.value.findIndex((item) => item._id === itemId);
     const item = list.value[itemIdx];
     item.isSelected = !item.isSelected;

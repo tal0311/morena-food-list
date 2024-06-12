@@ -1,15 +1,16 @@
 <template>
     <dialog ref="dialogRef" @click="clickOutSide" class="app-modal blur-bg">
-        <component :is="modalTYpe" @resetModal="isModalOpen=false" :info="modalInfo && modalInfo" />
+        <component :is="modalTYpe" @resetModal="isModalOpen = false" :info="modalInfo && modalInfo" />
     </dialog>
 </template>
 
 <script setup>
 
-import { watchEffect, ref, computed, shallowRef, onBeforeMount } from 'vue';
+import { watchEffect, ref, computed, shallowRef, onBeforeMount , onUnmounted} from 'vue';
 import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
 import ModalDone from '@/components/modal/ModalDone.vue';
 import ModalInfo from '@/components/modal/ModalInfo.vue';
+import ModalHistory from '@/components/modal/ModalHistory.vue';
 
 
 
@@ -19,12 +20,14 @@ const modalTYpe = shallowRef(null)
 
 const modalInfo = ref(null)
 
+const subscription = []
 onBeforeMount(() => {
-    eventBus.on('toggle-modal', setModal)
+    // to handle multiple subscriptions
+    subscription[0] = eventBus.on('toggle-modal', setModal)
 })
 
 function setModal({ type, info }) {
-    // console.debug(type, info);
+    console.debug(type, info);
     isModalOpen.value = true
     // debugger
 
@@ -34,6 +37,7 @@ function setModal({ type, info }) {
             modalInfo.value = info
             break;
         case 'ModalHistory':
+            // console.log(type);
             modalTYpe.value = ModalHistory
             break;
         default:
@@ -75,6 +79,7 @@ function clickOutSide(ev) {
 
 
 
+
 </script>
 
 
@@ -84,16 +89,17 @@ button {
 }
 
 dialog.blur-bg {
-    /* width: 60%; */
+    width: 70%;
     border: none;
     padding: 1rem;
     border-radius: var(--br);
     max-height: 80vh;
 
 }
+
 dialog.blur-bg::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
-   
+
 }
 
 .actions-container {

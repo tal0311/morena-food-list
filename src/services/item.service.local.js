@@ -26,7 +26,7 @@ window.itemService = itemService;
 
 async function query(filterBy = {}) {
   const loggedUser = userService.getLoggedInUser();
-  // console.log('query');
+
   let items = await storageService.query(STORAGE_KEY);
   const { isVegetarian, isVegan, isLactoseFree, isKosher, isGlutenFree } = loggedUser.settings;
   if (isVegetarian) {
@@ -83,7 +83,7 @@ function updateLabel(label) {
 
   user.labels = user.labels.map((l) => l.name === label.name ? { ...label, userInput: label.userInput } : l);
 
-  console.log('updateLabel', user);
+  
   userService.save(user);
   return user.labels
   

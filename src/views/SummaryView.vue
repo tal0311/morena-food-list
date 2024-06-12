@@ -84,7 +84,7 @@ const router = useRouter()
 
 watchEffect(() => {
     const { print } = route.query;
-    console.log('print', print);
+
     if (print === 'true') {
         setTimeout(() => {
             window.print()
@@ -104,7 +104,7 @@ function onBack() {
 
     }
 
-    console.log('query', query);
+    
     router.push({ name: 'list', query:query})
 }
 
