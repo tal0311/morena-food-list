@@ -1,6 +1,6 @@
 <template>
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
-        {{ isShearedList }}
+        
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelect" @toggleEdit="toggleEdit"
                 @updateLabel="updateLabel" />
@@ -47,12 +47,6 @@ import GroupList from '@/components/GroupList.vue';
 import AppLoader from '@/components/AppLoader.vue';
 import AppModal from '@/components/AppModal.vue';
 
-
-
-
-
-
-
 const route = useRoute()
 const router = useRouter()
 
@@ -62,6 +56,7 @@ const userStore = useUserStore()
 const groupList = computed(() => listStore?.getList)
 const labelList = computed(() => listStore?.getLabels)
 const user = computed(() => userStore.getUser)
+const isHistoryMode =ref(false)
 
 onBeforeMount(() => {
     getDataFromRoute()
@@ -77,7 +72,7 @@ const sharedIds = ref(null)
 const isShearedList = computed(() => appStore.getListStatus)
 function getDataFromRoute() {
 
-    const { share, ids} = route.query
+    const {history ,share, ids} = route.query
     if (ids) {
         // console.log('shared list', ids);
         sharedIds.value = ids.split(',')
@@ -85,6 +80,9 @@ function getDataFromRoute() {
     if(share){
         appStore.setSharedList(true)
 
+    }
+    if(history){
+        isHistoryMode.value = true
     }
      
 }
@@ -94,7 +92,10 @@ watchEffect(() => {
         listStore.setItemsFromShearedList(sharedIds.value)
     }
 })
+
+// change to modal history instead of 2 btns
 function onSelectHistory() {
+    
     const { history } = route.query
     if (history) {
         const query = {}
