@@ -28,7 +28,7 @@ window.recipeService = recipeService;
 // await query();
 function query() {
   const { selectedItems } = userService.getLoggedInUser();
-  // console.log("♠️ ~ query ~ selectedItems:", selectedItems)
+
   // debugger
 
   let matchItems = {};

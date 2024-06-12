@@ -23,7 +23,7 @@ import ItemList from '@/components/ItemList.vue'
 import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
 import { ref } from 'vue';
 
-const props = defineProps(['labelList', 'groupList' ])
+const props = defineProps(['labelList', 'groupList'])
 const emit = defineEmits(['selectItem', 'toggleEdit', 'updateLabel'])
 
 function handleLabelChange($event) {
@@ -48,7 +48,6 @@ function onSelect({ item, labelName, isShared }) {
         itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] + 1 : 1
 
     } else {
-        console.log();
         itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] - 1 : 0
     }
 

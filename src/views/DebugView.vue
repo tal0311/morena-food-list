@@ -25,6 +25,6 @@ const userStore = useUserStore();
 
 onMounted(() => {
     console.log('mounted', listStore.getList);
-    // console.log('store', .state);
+    
 })
 </script>

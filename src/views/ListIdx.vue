@@ -1,5 +1,6 @@
 <template>
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
+
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelect" @toggleEdit="toggleEdit"
                 @updateLabel="updateLabel" />
@@ -11,17 +12,8 @@
                 </section>
             </details>
         </div>
-        <footer id="footer-container" :class="['footer-container', isHistoryMode ? 'blur-bg' : '']">
-
-            <button v-if="!isHistoryMode" :class="`primary-btn ${btnState}`" @click.stop="onDone"
-                v-html="$svg(btnState)"></button>
-            <section v-else class="history-actions grid grid-dir-col">
-                <button class="primary-btn" @click="onSelectHistory">Continue</button>
-                <RouterLink to="/user">
-                    <button class="primary-btn">{{ $trans('back') }}</button>
-                </RouterLink>
-            </section>
-
+        <footer id="footer-container" :class="['footer-container']">
+            <button :class="`primary-btn ${btnState}`" @click.stop="mainAction" v-html="$svg(btnState)"></button>
         </footer>
         <AppModal />
     </section>
@@ -34,14 +26,17 @@
 import { useRoute, useRouter } from 'vue-router'
 import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect } from 'vue'
 import { useListStore } from '@/stores/list-store';
-import AppModal from '@/components/AppModal.vue'
+
 import { useAppStore } from '@/stores/app-store'
-import AppLoader from '@/components/AppLoader.vue'
-import GroupList from '@/components/GroupList.vue'
+
 import { eventBus } from '@/services/event-bus.service';
 import { showSuccessMsg } from '@/services/event-bus.service';
 import { useUserStore } from '@/stores/user-store';
 
+
+import GroupList from '@/components/GroupList.vue';
+import AppLoader from '@/components/AppLoader.vue';
+import AppModal from '@/components/AppModal.vue';
 
 const route = useRoute()
 const router = useRouter()
@@ -53,38 +48,38 @@ const groupList = computed(() => listStore?.getList)
 const labelList = computed(() => listStore?.getLabels)
 const user = computed(() => userStore.getUser)
 
+
+
+const subscriptions =[]
 onBeforeMount(() => {
     getDataFromRoute()
+    subscriptions[0] = eventBus.on('restore-history', () => {
+       btnState.value = 'done'
+    })
+
     // loadList()
 })
-async function loadList(){
-    // await listStore.loadList()
-}
 
 onMounted(() => {
-    const msg = isHistoryMode.value
-        ? 'To continue from this history click continue'
-        : 'Swipe item and click on the checkbox to select it'
+    const msg = 'Swipe item and click on the checkbox to select it'
     showSuccessMsg(msg)
 })
 
-
-// const counter = ref(0)
-
 const sharedIds = ref(null)
-const isHistoryMode = ref(false)
 function getDataFromRoute() {
 
-    const { share, ids, history } = route.query
-    if (share && ids) {
-        // console.log('shared list', ids);
+    const { history, share, ids } = route.query
+    if (ids) {
         sharedIds.value = ids.split(',')
-       
-        
+    }
+    if (share) {
+        appStore.setSharedList(true)
     }
     if (history) {
-        isHistoryMode.value = true
+        btnState.value = 'history'
+
     }
+
 }
 
 watchEffect(() => {
@@ -92,31 +87,21 @@ watchEffect(() => {
         listStore.setItemsFromShearedList(sharedIds.value)
     }
 })
-function onSelectHistory() {
-    const { history } = route.query
-    if (history) {
-        const query = {}
-        for (const key in route.query) {
-            if (key !== 'history') {
-                query[key] = route.query[key]
-            }
 
-        }
+// change to modal history instead of 2 btns
 
-        router.push({ name: 'list', query })
-        isHistoryMode.value = false
-        showSuccessMsg('History restored')
-    }
-}
 
-let subscribe = null
-function onDone() {
+
+function mainAction() {
     if (btnState.value === 'edit') {
         submitLabel()
         btnState.value = 'done'
         return
     }
-    subscribe = eventBus.emit('toggle-modal', { type: 'ModalDone' })
+
+    const modalType = btnState.value === 'history' ? 'ModalHistory' : 'ModalDone'
+    
+    eventBus.emit('toggle-modal', { type: modalType })
 
 }
 
@@ -129,6 +114,11 @@ const currLabel = ref('')
 function toggleEdit(labelName) {
     currLabel.value = labelName
     btnState.value = 'edit'
+}
+
+function setEditMode() {
+    
+    btnState.value = 'list-edit'
 }
 
 
@@ -144,9 +134,7 @@ function submitLabel() {
 const appStore = useAppStore()
 
 onUnmounted(() => {
-    if (subscribe) {
-        subscribe()
-    }
+    subscriptions.forEach(sub => sub())
 })
 
 // TODO: convert all css to nested css
@@ -183,6 +171,7 @@ footer {
     }
 }
 
+/* TODO:refactor btn-state */
 .done {
     padding: 0.8rem 0.8rem;
     /* background-color: var(--clr4); */
@@ -192,6 +181,12 @@ footer {
     padding: 0.8rem 0.8rem;
     color: var(--bClr2);
     background-color: var(--clr36);
+}
+
+.history {
+    padding: 0.8rem 0.8rem;
+    background-color: var(--clr11);
+
 }
 
 

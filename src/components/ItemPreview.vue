@@ -1,6 +1,6 @@
 <template>
-    <!-- <pre>{{ props.item }}</pre> -->
-    <section ref="previewRef" :class="`item-preview grid idx- ${isSwiped ? 'swiped' : 'disabled'}`">
+    <!-- <pre></pre> -->
+    <section ref="previewRef" :class="`item-preview grid ${isSwiped ? 'swiped' : 'disabled'} ${sharedItem&& 'shared'} `">
 
         <label class="label-container grid" :for="item._id">
             <input type="checkbox" :id="item._id" :checked="item.isSelected && isSwiped" :disabled="!isSwiped"
@@ -28,6 +28,8 @@ const props = defineProps({
 
 })
 
+
+
 const emit = defineEmits(['selectItem', 'shearSelectItem'])
 
 const previewRef = ref(null)
@@ -37,13 +39,17 @@ let elHammer = null
 onMounted(() => {
     elHammer = new Hammer(previewRef.value)
     elHammer.on('swipe', handleSwipe)
-
+    
 })
 
 onBeforeMount(() => {
     handleSharedIds()
-
+    
+    
 })
+
+
+const route = useRoute()
 
 function handleSharedIds() {
 
@@ -76,10 +82,19 @@ function onSelect() {
 
 
 
-const route = useRoute()
+const sharedItem = ref(false)
+
 watchEffect(() => {
+
+    if(route.query.ids){
+        if(route.query.ids.split(',').includes(props.item._id)){
+            console.log('shared item', props.item._id);
+            sharedItem.value = true
+        }
+    }
+
     if (route.name === 'list-summary') {
-        isSwiped.value = true
+        // isSwiped.value = true
     }
 })
 
@@ -96,6 +111,12 @@ function itemInfo() {
     grid-auto-flow: column;
     grid-template-columns: 50% 50%;
     cursor: pointer;
+
+    &.shared input[type="checkbox"] {
+        accent-color: var(--bClr5);
+
+        
+    }
 }
 
 .label-container {

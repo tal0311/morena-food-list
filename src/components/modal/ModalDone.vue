@@ -7,12 +7,12 @@
 
 <script setup>
 import { watchEffect, ref, computed } from 'vue';
-import { useRouter } from 'vue-router'
-import { useListStore } from '@/stores/list-store'
+import { useRouter, useRoute } from 'vue-router'
 import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
 import { useUserStore } from '@/stores/user-store';
 
 const emit = defineEmits(['resetModal'])
+const userStore = useUserStore()
 const btns = [
     {
         name: 'print',
@@ -38,13 +38,14 @@ const btns = [
         name: 'back',
         action: closeModal
     },
-    {
-        name: 'debug',
-        action: onDebug
-    }
+    // {
+    //     name: 'debug',
+    //     action: onDebug
+    // }
 ]
 
 const router = useRouter()
+const route = useRoute()
 
 function onPrintList() {
 
@@ -54,21 +55,19 @@ function onPrintList() {
 
 function onDebug() {
     console.debug('debug');
-    router.push({ name: 'debug' })
+    router.push({ name: 'debug' , query:route.query })
     closeModal()
 }
 
-function onShowSummary(query) {
-    // setTimeout(() => {
-    //     console.debug('show summary');
-    //     eventBus.emit('toggle-modal', { type: 'ModalSummary', info: query })
-    // }, 200);
+function onShowSummary({ print=false } ) {
+  
     closeModal()
-    router.push({ name: 'list-summary', query: query })
+    const query = { ...route.query, print }
+    router.push({ name: 'list-summary', query:query })
 }
 
-const listStore = useListStore()
-const selectItems = computed(() => listStore.getSelectedItems)
+
+const selectItems = computed(() => userStore.getSelectedItems)
 async function onSendList() {
 
     if (!selectItems.value.length) {
@@ -92,7 +91,7 @@ async function onSendList() {
 }
 
 
-const userStore = useUserStore()
+
 function saveHistory() {
     if (!selectItems.value.length) {
         showSuccessMsg('Select items to save history')
@@ -100,7 +99,7 @@ function saveHistory() {
     }
     let idsTosShare = selectItems.value.map(({ _id }) => _id)
     console.debug('save history', idsTosShare);
-    const url = `share=true&ids=${idsTosShare}`;
+    const url = `&ids=${idsTosShare}`;
     console.debug(url);
 
     const history={
@@ -109,7 +108,7 @@ function saveHistory() {
     }
 
     userStore.addHistory(history)
-    showSuccessMsg('History saved successfully')
+    showSuccessMsg('History saved successfully, watch it in the user page')
     // closeModal()
    
 }
