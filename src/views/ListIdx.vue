@@ -2,7 +2,7 @@
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
 
         <div id="list-container" class="list-container grid">
-            <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelect" @toggleEdit="toggleEdit"
+            <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelectItem" @toggleEdit="toggleEdit"
                 @updateLabel="updateLabel" />
             <details>
                 <summary>{{ $trans('personal-notes') }}</summary>
@@ -51,7 +51,10 @@ const user = computed(() => userStore.getUser)
 
 
 const subscriptions =[]
-onBeforeMount(() => {
+onBeforeMount(async () => {
+    // debugger
+    await loadItems()
+    
     getDataFromRoute()
     subscriptions[0] = eventBus.on('restore-history', () => {
        btnState.value = 'done'
@@ -65,12 +68,20 @@ onMounted(() => {
     showSuccessMsg(msg)
 })
 
-const sharedIds = ref(null)
+async function loadItems(){
+    await listStore.loadList()
+}
+
+// const sharedIds = ref(null)
 function getDataFromRoute() {
 
     const { history, share, ids } = route.query
     if (ids) {
-        sharedIds.value = ids.split(',')
+        // sharedIds.value = 
+        const idsFromRoute =ids.split(',')
+        console.log(idsFromRoute);
+        listStore.setItemsFromShearedList(idsFromRoute)
+
     }
     if (share) {
         appStore.setSharedList(true)
@@ -82,11 +93,7 @@ function getDataFromRoute() {
 
 }
 
-watchEffect(() => {
-    if (groupList.value && sharedIds.value) {
-        listStore.setItemsFromShearedList(sharedIds.value)
-    }
-})
+
 
 // change to modal history instead of 2 btns
 
@@ -105,7 +112,7 @@ function mainAction() {
 
 }
 
-function toggleSelect(id) {
+function toggleSelectItem(id) {
     listStore.toggleSelect(id)
 }
 

@@ -88,7 +88,7 @@ watchEffect(() => {
 
     if(route.query.ids){
         if(route.query.ids.split(',').includes(props.item._id)){
-            console.log('shared item', props.item._id);
+            // console.log('shared item', props.item._id);
             sharedItem.value = true
         }
     }

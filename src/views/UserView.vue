@@ -156,7 +156,7 @@ function getTitle(username) {
     font-size: 1.5rem;
     gap: 1rem;
     width: 100%;
-    /* padding-block: 1rem; */
+    padding-block: 5rem;
 }
 
 footer {

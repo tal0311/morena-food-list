@@ -15,7 +15,10 @@ export const useUserStore = defineStore("user", () => {
 
   const getUser = computed(() => loggedUser.value);
   const getCurrLang = computed(() => currLang.value);
-  const getSelectedItems = computed(() => loggedUser.value.selectedItems)
+  const getSelectedItems = computed(() => {
+    console.log("getting selected items from store");
+    return loggedUser.value.selectedItems;
+  })
 
 
   async function login(loginType, credentials) {
@@ -35,6 +38,7 @@ export const useUserStore = defineStore("user", () => {
 
   watchEffect(() => {
     if (loggedUser.value) {
+
       setLang(loggedUser.value.settings.lang);
     }
   })
@@ -49,13 +53,15 @@ export const useUserStore = defineStore("user", () => {
 
   async function updateUser(key, value) {
 
+    // console.trace()
+    console.log("updating user in store");
+
     try {
-
-
-
       loggedUser.value = { ...loggedUser.value, [key]: value };
-      userService.save(loggedUser.value);
-
+      const user = await userService.save(loggedUser.value);
+      console.log('user after', user);
+      loggedUser.value = user
+      console.log('after updated user', loggedUser.value);
 
     } catch (error) {
       console.log(error);

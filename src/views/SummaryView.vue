@@ -65,17 +65,20 @@ watch(selectItems, (newVal, oldVal) => {
 // })
 
 function prepDataForChart() {
-    if (!selectItems.value) return
+    // if (!selectItems.value) return
 
-    const data = itemService.prepDataForChart(JSON.parse(JSON.stringify(selectItems.value)))
-    if (!Object.keys(data).length === 0) return
-    chartData.value = Object.values(data)
-    labels.value = Object.keys(data)
-    // this is for forcing the chart component to render when data changes
-    cmpKey.value++
+    console.log(selectItems.value);
+
+    // const data = itemService.prepDataForChart(JSON.parse(JSON.stringify(selectItems.value)))
+    // if (!Object.keys(data).length === 0) return
+    // chartData.value = Object.values(data)
+    // labels.value = Object.keys(data)
+    // // this is for forcing the chart component to render when data changes
+    // cmpKey.value++
 }
 
 function toggleSelect({ item }) {
+    console.log('summary');
     listStore.toggleSelect(item._id)
 }
 
@@ -90,6 +93,13 @@ watchEffect(() => {
             window.print()
         }, 500)
     }
+})
+
+watchEffect(()=>{
+    // if (selectItems.value) {
+    // // console.log('selectItems', selectItems.value);
+    // }
+
 })
 
 

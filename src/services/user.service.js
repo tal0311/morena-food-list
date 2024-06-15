@@ -38,6 +38,7 @@ function getLoggedInUser() {
 
 async function save(user) {
     // const err = new Error();
+    // console.trace()
 
     // user = JSON.parse(JSON.stringify(user))
 
@@ -45,6 +46,7 @@ async function save(user) {
     const updatedUser = await storageService[method](STORAGE_KEY, user);
 
     if (updatedUser) {
+        console.log('updatedUser', updatedUser);
         _saveLoggedUser(updatedUser);
         return updatedUser;
 

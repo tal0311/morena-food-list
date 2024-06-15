@@ -76,7 +76,7 @@ function getGroupsByLabels(list) {
 
 
 
-function updateLabel(label) {
+async function updateLabel(label) {
   label = JSON.parse(JSON.stringify(label.value));
 
   const user = userService.getLoggedInUser();
@@ -84,7 +84,7 @@ function updateLabel(label) {
   user.labels = user.labels.map((l) => l.name === label.name ? { ...label, userInput: label.userInput } : l);
 
   
-  userService.save(user);
+   userService.save(user);
   return user.labels
   
 }

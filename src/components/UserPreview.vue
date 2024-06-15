@@ -1,6 +1,6 @@
 <template>
     <div class="user-preview grid">
-            <!-- <pre>{{ props.user }}</pre> -->
+            <!-- <pre>{{ props.user.imgUrl }}</pre> -->
             <img v-if="!isImageError" :src="props.user.imgUrl" :alt="props.user.fullname" @error="isImageError=true">
             <div class="user-initials" v-else >{{userInitials }}</div>
         </div>
