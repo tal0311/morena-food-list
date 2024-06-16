@@ -6,7 +6,7 @@
 
 <script setup>
 
-import { watchEffect, ref, computed, shallowRef, onBeforeMount , onUnmounted} from 'vue';
+import { watchEffect, ref, computed, shallowRef, onBeforeMount, onUnmounted } from 'vue';
 import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
 import ModalDone from '@/components/modal/ModalDone.vue';
 import ModalInfo from '@/components/modal/ModalInfo.vue';
@@ -37,7 +37,6 @@ function setModal({ type, info }) {
             modalInfo.value = info
             break;
         case 'ModalHistory':
-            // console.log(type);
             modalTYpe.value = ModalHistory
             break;
         default:

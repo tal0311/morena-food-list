@@ -1,7 +1,9 @@
 <template>
+
     <section class="summary-view grid blur-bg">
+        <!-- <pre>{{ selectItems }}</pre> -->
         <div id="list-container">
-            <ItemList v-if="selectItems" :list="selectItems" @selectItem="toggleSelect">
+            <ItemList v-if="selectItems" :list="selectItems" @selectItem="toggleSelectItem">
                 <h3>{{ $trans('list-results') }}</h3>
             </ItemList>
             <section v-else class="no-items grid">
@@ -31,7 +33,7 @@
 
 <script setup>
 import { ref, onBeforeMount, computed, watch, watchEffect } from 'vue'
-import { useRoute , useRouter} from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
 import DashBoard from '@/components/DashBoard.vue'
@@ -48,38 +50,29 @@ let labels = ref(null)
 const cmpKey = ref(0)
 const selectItems = computed(() => userStore.getSelectedItems)
 
-watch(selectItems, (newVal, oldVal) => {
-    if (oldVal !== newVal) {
+watchEffect(() => {
+    if (selectItems.value) {
         prepDataForChart()
-        return
     }
-},
-    { deep: true },
-    { immediate: true }
-)
+
+})
 
 
-
-// onBeforeMount(() => {
-//     prepDataForChart()
-// })
 
 function prepDataForChart() {
-    // if (!selectItems.value) return
-
-    console.log(selectItems.value);
-
-    // const data = itemService.prepDataForChart(JSON.parse(JSON.stringify(selectItems.value)))
-    // if (!Object.keys(data).length === 0) return
-    // chartData.value = Object.values(data)
-    // labels.value = Object.keys(data)
-    // // this is for forcing the chart component to render when data changes
-    // cmpKey.value++
+    const data = itemService.prepDataForChart(selectItems.value)
+    if (!Object.keys(data).length === 0) return
+    chartData.value = Object.values(data)
+    labels.value = Object.keys(data)
+    // this is for forcing the chart component to render when data changes
+    cmpKey.value++
 }
 
-function toggleSelect({ item }) {
-    console.log('summary');
-    listStore.toggleSelect(item._id)
+
+
+function toggleSelectItem({ item }) {
+      listStore.toggleSelect(item._id)
+    // userStore.toggleSelectItem(item)
 }
 
 const route = useRoute()
@@ -95,16 +88,9 @@ watchEffect(() => {
     }
 })
 
-watchEffect(()=>{
-    // if (selectItems.value) {
-    // // console.log('selectItems', selectItems.value);
-    // }
-
-})
-
 
 function onBack() {
-    
+
     const query = {}
 
     for (const key in route.query) {
@@ -114,8 +100,8 @@ function onBack() {
 
     }
 
-    
-    router.push({ name: 'list', query:query})
+
+    router.push({ name: 'list', query: query })
 }
 
 

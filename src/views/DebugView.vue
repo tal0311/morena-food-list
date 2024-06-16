@@ -1,15 +1,15 @@
 <template>
     <div class="debug-container">
         <h1>User</h1>
-       <pre>{{ userStore.loggedUser }}</pre>
-       <hr>
+        <pre>{{ userStore.loggedUser }}</pre>
+        <hr>
         <h1>App</h1>
         <pre>{{ appStore.errorLogs }}</pre>
         <hr>
         <h1>List</h1>
         <hr>
-        <pre>{{ listStore.list}}</pre>
-        <pre>{{ listStore.getLabels}}</pre>
+        <pre>{{ listStore.list }}</pre>
+        <pre>{{ listStore.getLabels }}</pre>
     </div>
 </template>
 
@@ -23,8 +23,4 @@ const listStore = useListStore();
 const appStore = useAppStore();
 const userStore = useUserStore();
 
-onMounted(() => {
-    console.log('mounted', listStore.getList);
-    
-})
 </script>

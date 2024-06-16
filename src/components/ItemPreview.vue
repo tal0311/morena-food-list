@@ -1,10 +1,11 @@
 <template>
-    <!-- <pre></pre> -->
-    <section ref="previewRef" :class="`item-preview grid ${isSwiped ? 'swiped' : 'disabled'} ${sharedItem&& 'shared'} `">
+    <!-- <pre>{{ props.item }}</pre> -->
+    <section ref="previewRef"
+        :class="`item-preview grid ${isSwiped ? 'swiped' : 'disabled'} ${sharedItem && 'shared'} `">
 
-        <label class="label-container grid" :for="item._id">
-            <input type="checkbox" :id="item._id" :checked="item.isSelected && isSwiped" :disabled="!isSwiped"
-                @click.stop="onSelect">
+        <label class="label-container grid" :for="props.item._id">
+            <input type="checkbox" :id="props.item._id" :checked="props.item.isSelected && isSwiped"
+                :disabled="!isSwiped" @click.stop="onSelect">
             <span>{{ $trans(props.item.name) }}</span>
 
         </label>
@@ -36,22 +37,33 @@ const previewRef = ref(null)
 const isSwiped = ref(false)
 let elHammer = null
 
+const route = useRoute()
 onMounted(() => {
-    elHammer = new Hammer(previewRef.value)
-    elHammer.on('swipe', handleSwipe)
-    
+    if (route.name === 'list') {
+        // isSwiped.value = true
+        elHammer = new Hammer(previewRef.value)
+        elHammer.on('swipe', handleSwipe)
+    }
+
 })
 
 onBeforeMount(() => {
-    handleSharedIds()
-    
-    
+    if (route.name === 'list' && route.query.share) {
+        handleSharedIds()
+        // isSwiped.value = true
+
+    }
+    if (route.name === 'list-summary') {
+        isSwiped.value = true
+    }
+
+
 })
 
 
-const route = useRoute()
 
 function handleSharedIds() {
+    console.debug('handling shared ids');
 
     if (props.item.isSelected) {
         isSwiped.value = true
@@ -86,9 +98,8 @@ const sharedItem = ref(false)
 
 watchEffect(() => {
 
-    if(route.query.ids){
-        if(route.query.ids.split(',').includes(props.item._id)){
-            // console.log('shared item', props.item._id);
+    if (route.query.ids) {
+        if (route.query.ids.split(',').includes(props.item._id)) {
             sharedItem.value = true
         }
     }
@@ -115,7 +126,7 @@ function itemInfo() {
     &.shared input[type="checkbox"] {
         accent-color: var(--bClr5);
 
-        
+
     }
 }
 

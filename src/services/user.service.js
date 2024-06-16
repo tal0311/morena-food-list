@@ -165,3 +165,7 @@ function createUsers() {
     return users;
 }
 
+(async () => {
+//    _saveLoggedUser(gUsers[0])
+})()
+

@@ -13,8 +13,18 @@
 
 import { ref, onBeforeMount } from 'vue';
 import UserMsg from '@/components/UserMsg.vue'
+import { useUserStore } from './stores/user-store';
 
+const userStore = useUserStore();
+onBeforeMount(() => {
+  console.log('App is mounted');
+
+  userStore.loadUser();
+  
+})
 </script>
+
+
 
 
 <style scoped>
