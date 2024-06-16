@@ -12,9 +12,8 @@
       <footer id="language-modal" @contextmenu.prevent="resetStorage">
         <RouterLink to="/user" class="icon" v-html="$svg('account')"></RouterLink>
       </footer>
-     <section >
-      <!-- <GoogleLogin :callback="callback" prompt auto-login/> -->
-     </section>
+      <section>
+      </section>
     </section>
 
   </section>
@@ -23,7 +22,7 @@
 <script setup>
 
 // TODO: add last login date to user and refresh the local storage btn
-import { ref, computed, onMounted, watchEffect } from 'vue'
+import { computed } from 'vue'
 import TheWelcome from '@/components/TheWelcome.vue'
 
 const getIcon = computed(() => {
@@ -55,7 +54,8 @@ p {
   margin: 0;
 
 }
-h1{
+
+h1 {
   font-size: 2.5rem;
 
 }

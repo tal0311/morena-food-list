@@ -1,5 +1,5 @@
 <template>
-    <dialog ref="dialogRef" @click="clickOutSide" class="app-modal blur-bg">
+    <dialog ref="dialogRef" @click="clickOutSide" :class="`app-modal blur-bg ${modalClass}`">
         <component :is="modalTYpe" @resetModal="isModalOpen = false" :info="modalInfo && modalInfo" />
     </dialog>
 </template>
@@ -19,7 +19,7 @@ const isModalOpen = ref(false)
 const modalTYpe = shallowRef(null)
 
 const modalInfo = ref(null)
-
+const modalClass = ref(null)
 const subscription = []
 onBeforeMount(() => {
     // to handle multiple subscriptions
@@ -29,12 +29,16 @@ onBeforeMount(() => {
 function setModal({ type, info }) {
     console.debug(type, info);
     isModalOpen.value = true
+
+    modalClass.value = type
+    
     // debugger
 
     switch (type) {
         case 'ModalInfo':
             modalTYpe.value = ModalInfo
             modalInfo.value = info
+            
             break;
         case 'ModalHistory':
             modalTYpe.value = ModalHistory
@@ -88,12 +92,17 @@ button {
 }
 
 dialog.blur-bg {
-    width: 70%;
     border: none;
     padding: 1rem;
     border-radius: var(--br);
     max-height: 80vh;
+    
+      
+}
 
+dialog.blur-bg:not(.ModalInfo) {
+    width: 70%;
+ 
 }
 
 dialog.blur-bg::backdrop {

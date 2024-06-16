@@ -49,6 +49,11 @@ export const useUserStore = defineStore("user", () => {
   //   }
   // })
 
+  // function clearSelectedItems(){
+  //   loggedUser.value.selectedItems = [];
+  //   userService.save(loggedUser.value);
+  // }
+
   async function updateLoggedUser(user) {
     const userToUpdate = { ...loggedUser.value, ...user };
     loggedUser.value = await userService.save(userToUpdate);

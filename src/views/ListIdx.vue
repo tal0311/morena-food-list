@@ -13,7 +13,9 @@
             </details>
         </div>
         <footer id="footer-container" :class="['footer-container']">
-            <button :class="`primary-btn ${btnState}`" @click.stop="mainAction" v-html="$svg(btnState)"></button>
+            <div @contextmenu.prevent="clearItems">
+                <button :class="`primary-btn ${btnState}`" @click.stop="mainAction" v-html="$svg(btnState)"></button>
+            </div>
         </footer>
         <AppModal />
     </section>
@@ -22,7 +24,10 @@
 </template>
 
 <script setup>
-
+// TODO: able to edit personal notes
+// TODO: clear user selected items when the user leaves the page
+// TODO: DND to change the order of the groups
+// TODO: add a button to clear all the selected items add clear items progress bar
 import { useRoute, useRouter } from 'vue-router'
 import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect } from 'vue'
 import { useListStore } from '@/stores/list-store';
@@ -76,7 +81,7 @@ async function loadItems() {
 function getDataFromRoute() {
 
     const { history, share, ids } = route.query
-    debugger
+
     if (ids) {
         const idsFromRoute = ids.split(',')
         listStore.setItemsFromShearedList(idsFromRoute)
@@ -109,6 +114,16 @@ function mainAction() {
 
     eventBus.emit('toggle-modal', { type: modalType })
 
+}
+
+function clearItems() {
+    console.debug('clear items');
+    if (btnState.value === 'done') {
+        userStore.updateUserItems([])
+        showSuccessMsg('Items cleared')
+        router.push({ name: 'list' })
+        return
+    }
 }
 
 function toggleSelectItem(id) {

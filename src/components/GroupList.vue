@@ -34,7 +34,6 @@ function handleLabelChange($event) {
 }
 
 function onMore(labelName) {
-
     eventBus.emit('toggle-modal', { type: 'ModalInfo', info: labelName })
 }
 
