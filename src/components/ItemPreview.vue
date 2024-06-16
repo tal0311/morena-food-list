@@ -48,7 +48,7 @@ onMounted(() => {
 })
 
 onBeforeMount(() => {
-    if (route.name === 'list' && route.query.share) {
+    if (route.name === 'list' && (route.query.share || route.query.history)) {
         handleSharedIds()
         // isSwiped.value = true
 
@@ -98,7 +98,7 @@ const sharedItem = ref(false)
 
 watchEffect(() => {
 
-    if (route.query.ids) {
+    if (route.query.ids&&route.query.share) {
         if (route.query.ids.split(',').includes(props.item._id)) {
             sharedItem.value = true
         }

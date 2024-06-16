@@ -52,6 +52,7 @@ export const useListStore = defineStore("list", () => {
   
     list.value = list.value.map((item) => {
       if (itemsIds.includes(item._id)) {
+        console.log("item selected", item);
         item.isSelected = true;
         if (userItems.find((i) => i._id === item._id)) {
           return item;

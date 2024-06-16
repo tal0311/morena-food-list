@@ -76,6 +76,7 @@ async function loadItems() {
 function getDataFromRoute() {
 
     const { history, share, ids } = route.query
+    debugger
     if (ids) {
         const idsFromRoute = ids.split(',')
         listStore.setItemsFromShearedList(idsFromRoute)
