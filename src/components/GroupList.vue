@@ -21,7 +21,7 @@
 <script setup>
 import ItemList from '@/components/ItemList.vue'
 import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
-import { ref } from 'vue';
+import { ref , watchEffect} from 'vue';
 
 const props = defineProps(['labelList', 'groupList'])
 const emit = defineEmits(['selectItem', 'toggleEdit', 'updateLabel'])
@@ -30,6 +30,8 @@ function handleLabelChange($event) {
     // emit('toggleEdit', name)
     const userInput = $event.target.value
     const name = $event.target.dataset.groupname
+
+    // console.log({ name, userInput });
     emit('updateLabel', { name, userInput })
 }
 
@@ -54,6 +56,7 @@ function onSelect({ item, labelName, isShared }) {
         emit('selectItem', item._id)
     }
 }
+
 
 </script>
 

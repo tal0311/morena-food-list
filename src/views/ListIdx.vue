@@ -3,11 +3,11 @@
 
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelectItem"
-                @toggleEdit="toggleEdit" @updateLabel="updateLabel" />
+                @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel" :isItemsReset="isItemsReset" :key="cmpKey" />
             <details>
                 <summary>{{ $trans('personal-notes') }}</summary>
                 <section class="notes-container">
-                    <p>{{ user.personalTxt }}</p>
+                    <textarea @focus="changeBtnState('edit')">{{ user.personalTxt || 'No entries' }}</textarea>
 
                 </section>
             </details>
@@ -55,6 +55,7 @@ const user = computed(() => userStore.getUser)
 
 
 
+const appStore = useAppStore()
 const subscriptions = []
 onBeforeMount(async () => {
     // debugger
@@ -62,7 +63,7 @@ onBeforeMount(async () => {
 
     getDataFromRoute()
     subscriptions[0] = eventBus.on('restore-history', () => {
-        btnState.value = 'done'
+        changeBtnState('done')
     })
 
     // loadList()
@@ -91,7 +92,7 @@ function getDataFromRoute() {
         appStore.setSharedList(true)
     }
     if (history) {
-        btnState.value = 'history'
+        changeBtnState('history')
 
     }
 
@@ -99,29 +100,17 @@ function getDataFromRoute() {
 
 
 
-// change to modal history instead of 2 btns
-
-
-
-function mainAction() {
-    if (btnState.value === 'edit') {
-        submitLabel()
-        btnState.value = 'done'
-        return
-    }
-
-    const modalType = btnState.value === 'history' ? 'ModalHistory' : 'ModalDone'
-
-    eventBus.emit('toggle-modal', { type: modalType })
-
-}
-
-function clearItems() {
+const cmpKey = ref(0)
+async function clearItems() {
     console.debug('clear items');
     if (btnState.value === 'done') {
-        userStore.updateUserItems([])
+        // debugger
+
+        listStore.clearItems()
+        router.push({ name: 'list', query: {} })
+        // location.reload()
         showSuccessMsg('Items cleared')
-        router.push({ name: 'list' })
+        cmpKey.value++
         return
     }
 }
@@ -130,20 +119,30 @@ function toggleSelectItem(id) {
     listStore.toggleSelect(id)
 }
 
+// changing the state of the button for the main action icon
 const btnState = ref('done')
-const currLabel = ref('')
-function toggleEdit(labelName) {
-    currLabel.value = labelName
-    btnState.value = 'edit'
-}
-
-function setEditMode() {
-
-    btnState.value = 'list-edit'
-}
-
-
 const label = ref({ name: '', userInput: '' })
+
+function mainAction() {
+
+    if (btnState.value === 'edit') {
+        submitLabel()
+        changeBtnState('done')
+        
+    }
+
+    const modalType = btnState.value === 'history' ? 'ModalHistory' : 'ModalDone'
+
+    eventBus.emit('toggle-modal', { type: modalType })
+
+}
+
+
+function changeBtnState(val) {
+    btnState.value = val
+}
+
+
 function updateLabel(updateLabel) {
     label.value = { ...updateLabel }
 }
@@ -152,7 +151,7 @@ function submitLabel() {
     listStore.updateLabel(label)
 }
 
-const appStore = useAppStore()
+
 
 onUnmounted(() => {
     subscriptions.forEach(sub => sub())
@@ -290,11 +289,15 @@ textarea {
 }
 
 .notes-container {
-    border: 1px solid var(--bClr1);
-    border-radius: 2px;
-    font-size: 1.5rem;
-    font-family: inherit;
-    color: var(--clr7);
+
+    textarea {
+
+        border: 1px solid var(--bClr1);
+        border-radius: 2px;
+        font-size: 1.5rem;
+        font-family: inherit;
+        color: var(--clr7);
+    }
 
     p {
         margin: 0;

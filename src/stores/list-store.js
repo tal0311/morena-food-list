@@ -95,6 +95,20 @@ export const useListStore = defineStore("list", () => {
     // );
   }
 
+  async function clearItems() {
+    // debugger
+    list.value = list.value.map((item) => {
+      item.isSelected = false;
+      return item;
+    });
+    
+     userStore.updateUser("selectedItems", []);
+    //  const user= userService.getLoggedInUser();
+    //   user.selectedItems = [];
+    //  await userService.save(user);
+
+  }
+
   return {
     loadList,
     getList,
@@ -103,5 +117,6 @@ export const useListStore = defineStore("list", () => {
     getLabels,
     updateLabel,
     setItemsFromShearedList,
+    clearItems
   };
 });

@@ -19,6 +19,9 @@ export const useUserStore = defineStore("user", () => {
    
     return loggedUser.value.selectedItems;
   })
+  watchEffect(() => {
+    console.log("loggedUser", loggedUser.value);
+  });
 
 
   async function login(loginType, credentials) {
@@ -43,25 +46,16 @@ export const useUserStore = defineStore("user", () => {
     if (!loggedUser.value) return;
     setLang(loggedUser.value.settings.lang);
   }
-  // watchEffect(() => {
-  //   if (loggedUser.value) {
-
-  //   }
-  // })
-
-  // function clearSelectedItems(){
-  //   loggedUser.value.selectedItems = [];
-  //   userService.save(loggedUser.value);
-  // }
 
   async function updateLoggedUser(user) {
     const userToUpdate = { ...loggedUser.value, ...user };
     loggedUser.value = await userService.save(userToUpdate);
   }
 
-  function updateUserItems(items) {
+  async function updateUserItems(items) {
     loggedUser.value.selectedItems = items;
-    userService.save(loggedUser.value);
+    console.log('loggedUser.value', loggedUser.value);
+    loggedUser.value= await userService.save(loggedUser.value);
   }
 
   async function updateUser(key, value) {
@@ -70,13 +64,15 @@ export const useUserStore = defineStore("user", () => {
     console.log(`updating user ${key} in store`, value);
 
     try {
-      loggedUser.value = { ...loggedUser.value, [key]: value };
+
+      
+      loggedUser.value = { ...JSON.parse(JSON.stringify(loggedUser.value)), [key]: value };
       const user = await userService.save(loggedUser.value);
-      // console.log('user after', user);
-      loggedUser.value = user
+      console.log('user after', user);
+      // loggedUser.value = user
       
       if(key === 'settings') {
-        setLang(value.lang);
+        setLang(value);
       }
       
 
