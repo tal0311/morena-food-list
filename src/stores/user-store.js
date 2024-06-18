@@ -54,7 +54,7 @@ export const useUserStore = defineStore("user", () => {
 
   async function updateUserItems(items) {
     loggedUser.value.selectedItems = items;
-    console.log('loggedUser.value', loggedUser.value);
+    // console.log('loggedUser.value', loggedUser.value);
     loggedUser.value= await userService.save(loggedUser.value);
   }
 
@@ -108,6 +108,8 @@ export const useUserStore = defineStore("user", () => {
     login,
     getSelectedItems,
     loadUser,
-    updateUserItems
+    updateUserItems,
+
+
   }
 })

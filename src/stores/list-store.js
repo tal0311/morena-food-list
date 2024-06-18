@@ -49,10 +49,9 @@ export const useListStore = defineStore("list", () => {
   function setItemsFromShearedList(itemsIds) {
     const user = userStore.loggedUser;
     const userItems = user.selectedItems;
-  
+
     list.value = list.value.map((item) => {
       if (itemsIds.includes(item._id)) {
-        // console.log("item selected", item);
         item.isSelected = true;
         if (userItems.find((i) => i._id === item._id)) {
           return item;
@@ -61,33 +60,35 @@ export const useListStore = defineStore("list", () => {
       }
       return item;
     });
-    // userStore.updateUser("selectedItems", userItems);
+  
     userStore.updateUserItems(userItems);
   }
-  
-  function updateLabel(label) {
-    labels.value = itemService.updateLabel(label);
+
+  async function updateLabel(label) {
+    // debugger
+    labels.value = await itemService.updateLabel(label);
+    console.log("labels", labels.value);
+    
     showSuccessMsg("Label updated successfully");
   }
-  
+
   function toggleSelect(itemId) {
     // debugger;
-    console.trace()
+    console.trace();
     const itemIdx = list?.value.findIndex((item) => item._id === itemId);
     const item = list.value[itemIdx];
     item.isSelected = !item.isSelected;
 
     list.value.splice(itemIdx, 1, item);
-    
+
     let { selectedItems } = userStore.loggedUser;
-  
+
     if (item.isSelected) {
       selectedItems.push(item);
     } else {
       selectedItems = selectedItems.filter((i) => i._id !== itemId);
     }
-    
-   
+
     userStore.updateUserItems(selectedItems);
     // userStore.updateUser(
     //   "selectedItems",
@@ -101,12 +102,11 @@ export const useListStore = defineStore("list", () => {
       item.isSelected = false;
       return item;
     });
-    
-     userStore.updateUser("selectedItems", []);
+
+    userStore.updateUser("selectedItems", []);
     //  const user= userService.getLoggedInUser();
     //   user.selectedItems = [];
     //  await userService.save(user);
-
   }
 
   return {
@@ -117,6 +117,6 @@ export const useListStore = defineStore("list", () => {
     getLabels,
     updateLabel,
     setItemsFromShearedList,
-    clearItems
+    clearItems,
   };
 });

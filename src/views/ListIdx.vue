@@ -128,6 +128,7 @@ function mainAction() {
     if (btnState.value === 'edit') {
         submitLabel()
         changeBtnState('done')
+        return
         
     }
 
@@ -144,11 +145,12 @@ function changeBtnState(val) {
 
 
 function updateLabel(updateLabel) {
+    console.log('updateLabel', updateLabel);
     label.value = { ...updateLabel }
 }
 
 function submitLabel() {
-    listStore.updateLabel(label)
+    listStore.updateLabel(label.value)
 }
 
 

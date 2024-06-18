@@ -77,7 +77,7 @@ function getGroupsByLabels(list) {
 
 
 async function updateLabel(label) {
-  label = JSON.parse(JSON.stringify(label.value));
+  label = JSON.parse(JSON.stringify(label));
 
   const user = userService.getLoggedInUser();
 
@@ -85,14 +85,17 @@ async function updateLabel(label) {
 
   
    userService.save(user);
+  //  console.log('user', user.labels);
   return user.labels
   
 }
 
-
+// Move to backend
 async function getLabels(list , user) {
   user= JSON.parse(JSON.stringify(user))
   list = JSON.parse(JSON.stringify(list))
+  // this is to prevent the labels history from being deleted from the user object
+  if (user.labels) return user.labels;
   user.labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
   await userService.save(user);
   return user.labels;
