@@ -16,7 +16,7 @@ export const useUserStore = defineStore("user", () => {
   const getUser = computed(() => loggedUser.value);
   const getCurrLang = computed(() => currLang.value);
   const getSelectedItems = computed(() => {
-    console.log("getting selected items from store");
+    // console.log("getting selected items from store");
     return loggedUser.value.selectedItems;
   })
 
@@ -54,14 +54,14 @@ export const useUserStore = defineStore("user", () => {
   async function updateUser(key, value) {
 
     // console.trace()
-    console.log("updating user in store");
+    // console.log("updating user in store");
 
     try {
       loggedUser.value = { ...loggedUser.value, [key]: value };
       const user = await userService.save(loggedUser.value);
-      console.log('user after', user);
+      // console.log('user after', user);
       loggedUser.value = user
-      console.log('after updated user', loggedUser.value);
+      // console.log('after updated user', loggedUser.value);
 
     } catch (error) {
       console.log(error);

@@ -63,7 +63,7 @@ export const useListStore = defineStore("list", () => {
 
     const user =userStore.loggedUser
     const userItems = user.selectedItems;
-      console.log('shared list');
+      // console.log('shared list');
      list.value= list.value.map((item) => {
         if (itemsIds.includes(item._id)) {
           item.isSelected = true;
@@ -89,18 +89,18 @@ export const useListStore = defineStore("list", () => {
     const itemIdx = list?.value.findIndex((item) => item._id === itemId);
     const item = list.value[itemIdx];
     item.isSelected = !item.isSelected;
-    console.log(item);
+    // console.log(item);
     list.value.splice(itemIdx, 1, item);
 
     let {selectedItems} = userStore.loggedUser
-    console.log('items',selectedItems);
+    // console.log('items',selectedItems);
     if (item.isSelected) {
       selectedItems.push(item);
     } else {
       selectedItems = selectedItems.filter((i) => i._id !== itemId);
     }
 
-    console.log('after selected', selectedItems);
+    // console.log('after selected', selectedItems);
     userStore.updateUser('selectedItems', JSON.parse(JSON.stringify(selectedItems)))
   }
 

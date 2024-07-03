@@ -23,6 +23,7 @@
 
 <script setup>
 
+
 import { useRoute, useRouter } from 'vue-router'
 import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect } from 'vue'
 import { useListStore } from '@/stores/list-store';
@@ -79,7 +80,7 @@ function getDataFromRoute() {
     if (ids) {
         // sharedIds.value = 
         const idsFromRoute =ids.split(',')
-        console.log(idsFromRoute);
+        // console.log(idsFromRoute);
         listStore.setItemsFromShearedList(idsFromRoute)
 
     }

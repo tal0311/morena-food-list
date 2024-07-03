@@ -24,7 +24,7 @@ const appStore = useAppStore();
 const userStore = useUserStore();
 
 onMounted(() => {
-    console.log('mounted', listStore.getList);
+    // console.log('mounted', listStore.getList);
     
 })
 </script>

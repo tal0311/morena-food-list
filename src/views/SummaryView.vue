@@ -67,7 +67,7 @@ watch(selectItems, (newVal, oldVal) => {
 function prepDataForChart() {
     // if (!selectItems.value) return
 
-    console.log(selectItems.value);
+    // console.log(selectItems.value);
 
     // const data = itemService.prepDataForChart(JSON.parse(JSON.stringify(selectItems.value)))
     // if (!Object.keys(data).length === 0) return
@@ -78,7 +78,7 @@ function prepDataForChart() {
 }
 
 function toggleSelect({ item }) {
-    console.log('summary');
+    // console.log('summary');
     listStore.toggleSelect(item._id)
 }
 
