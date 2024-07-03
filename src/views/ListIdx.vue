@@ -3,7 +3,7 @@
 
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelectItem"
-                @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel" :isItemsReset="isItemsReset" :key="cmpKey" />
+                @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel"  :key="cmpKey" />
             <details>
                 <summary>{{ $trans('personal-notes') }}</summary>
                 <section class="notes-container">
