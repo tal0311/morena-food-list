@@ -30,21 +30,29 @@ const previewRef = ref(null)
 const isSwiped = ref(false)
 let elHammer = null
 
+const route = useRoute()
 onMounted(() => {
 
 
 })
 
 onBeforeMount(() => {
-    handleSharedIds()
+    if (route.name === 'list' && (route.query.share || route.query.history)) {
+        handleSharedIds()
+        // isSwiped.value = true
+
+    }
+    if (route.name === 'list-summary') {
+        isSwiped.value = true
+    }
 
 
 })
 
 
-const route = useRoute()
 
 function handleSharedIds() {
+    console.debug('handling shared ids');
 
     if (props.item.isSelected) {
         isSwiped.value = true
@@ -83,9 +91,8 @@ const sharedItem = ref(false)
 
 watchEffect(() => {
 
-    if (route.query.ids) {
+    if (route.query.ids&&route.query.share) {
         if (route.query.ids.split(',').includes(props.item._id)) {
-            // console.log('shared item', props.item._id);
             sharedItem.value = true
         }
     }
@@ -120,7 +127,7 @@ function itemInfo() {
     &.shared input[type="checkbox"] {
         accent-color: var(--bClr5);
 
-
+        
     }
 
     &.swiped {

@@ -9,12 +9,11 @@
 
       <TheWelcome />
 
-      <footer id="language-modal" @contextmenu="resetStorage">
+      <footer id="language-modal" @contextmenu.prevent="resetStorage">
         <RouterLink to="/user" class="icon" v-html="$svg('account')"></RouterLink>
       </footer>
-     <section >
-      <!-- <GoogleLogin :callback="callback" prompt auto-login/> -->
-     </section>
+      <section>
+      </section>
     </section>
 
   </section>
@@ -22,14 +21,9 @@
 
 <script setup>
 
-// TODO: 'add last login date to user and refresh the local storage btn'
-import { ref, computed, onMounted, watchEffect } from 'vue'
-// import vue3GoogleLogin from 'vue3-google-login'
+// TODO: add last login date to user and refresh the local storage btn
+import { computed } from 'vue'
 import TheWelcome from '@/components/TheWelcome.vue'
-import { useListStore } from '@/stores/list-store'
-import { useAppStore } from '@/stores/app-store'
-// import { useRoute } from 'vue-router'
-// import { useTour } from '@/composables/useTour'
 
 const getIcon = computed(() => {
   const icons = ["✅", "🥬", "🥦", "🥒", "🥑", "🫒", "🍅", "🍄", "🍑", "🍌", "🍇", "☕", "🥛", "🥩", "🧀", "🥚", "🥝", "🍉", "🍎", "🥭", "🍍", "🍌", "🍋", "🍊", "🍒", "🍓", "🫐", "🫑", "🌽", "🍆", "🫒", "🍅"];
@@ -60,7 +54,8 @@ p {
   margin: 0;
 
 }
-h1{
+
+h1 {
   font-size: 2.5rem;
 
 }

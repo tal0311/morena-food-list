@@ -26,16 +26,6 @@ function getLoggedInUser() {
     return user;
 }
 
-// async function updateUser(key, value) {
-//     let user = getLoggedInUser();
-//     user[key] = value;
-
-//     return await save(user);
-//     // return storageService.put(STORAGE_KEY, user);
-// }
-
-
-
 async function save(user) {
     // const err = new Error();
     // console.trace()
@@ -164,4 +154,8 @@ function createUsers() {
 
     return users;
 }
+
+(async () => {
+//    _saveLoggedUser(gUsers[0])
+})()
 

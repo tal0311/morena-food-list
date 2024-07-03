@@ -1,7 +1,7 @@
 <template>
     <section class="user-page grid">
         <!-- <pre>{{ user }}</pre> -->
-            <UserPreview :user="user" />
+        <UserPreview :user="user" />
         <h1> {{ getTitle(user.username) }} <span>👋</span></h1>
         <details>
             <summary>{{ $trans('user-info') }}</summary>
@@ -64,7 +64,11 @@
         </details>
 
         <details>
-            <summary>{{ $trans('history') }}</summary>
+            <summary>
+                <div>{{ $trans('history') }}
+                    <small class="counter">({{ historyCounter }})</small>
+                </div>
+            </summary>
             <section class="history-container">
                 <ul v-if="user.history.length" class="history-list clean-list grid">
                     <li v-for="history in user.history" :key="history.id" class="grid grid-dir-col">
@@ -96,7 +100,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, onUpdated } from 'vue'
+import { ref, onBeforeMount, onUpdated, computed } from 'vue'
 import { utilService } from '@/services/util.service';
 import { useUserStore } from '@/stores/user-store'
 import { userService } from '@/services/user.service';
@@ -140,6 +144,8 @@ function getTitle(username) {
     return elBody.dir === 'rtl' ? `שלום, ${username}` : `Hi, ${username}`;
 
 }
+
+const historyCounter = computed(() => user.value.history.length ? user.value.history.length : 'No history');
 </script>
 
 <style scoped>
@@ -213,6 +219,7 @@ details {
     &[open] summary {
         /* box-shadow: 0 0 2px 0px #c9c9c9; */
         margin-bottom: 0.5em;
+       
     }
 
 
@@ -222,21 +229,14 @@ details {
 details>summary {
 
     list-style: none;
+    .counter {
+            color: var(--bClr3);
+        }
 }
 
 summary::-webkit-details-marker {
     display: none
 }
-
-/* summary::after {
-    content: " ►";
-    color: var(--clr7);
-}
-
-details[open] summary:after {
-    content: " ▼";
-    color: var(--clr5);
-} */
 
 
 input[type="text"] {

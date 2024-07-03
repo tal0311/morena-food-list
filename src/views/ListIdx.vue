@@ -2,18 +2,20 @@
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
 
         <div id="list-container" class="list-container grid">
-            <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelectItem" @toggleEdit="toggleEdit"
-                @updateLabel="updateLabel" />
+            <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelectItem"
+                @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel" :isItemsReset="isItemsReset" :key="cmpKey" />
             <details>
                 <summary>{{ $trans('personal-notes') }}</summary>
                 <section class="notes-container">
-                    <p>{{ user.personalTxt }}</p>
+                    <textarea @focus="changeBtnState('edit')">{{ user.personalTxt || 'No entries' }}</textarea>
 
                 </section>
             </details>
         </div>
         <footer id="footer-container" :class="['footer-container']">
-            <button :class="`primary-btn ${btnState}`" @click.stop="mainAction" v-html="$svg(btnState)"></button>
+            <div @contextmenu.prevent="clearItems">
+                <button :class="`primary-btn ${btnState}`" @click.stop="mainAction" v-html="$svg(btnState)"></button>
+            </div>
         </footer>
         <AppModal />
     </section>
@@ -22,8 +24,10 @@
 </template>
 
 <script setup>
-
-
+// TODO: able to edit personal notes
+// TODO: clear user selected items when the user leaves the page
+// TODO: DND to change the order of the groups
+// TODO: add a button to clear all the selected items add clear items progress bar
 import { useRoute, useRouter } from 'vue-router'
 import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect } from 'vue'
 import { useListStore } from '@/stores/list-store';
@@ -51,14 +55,15 @@ const user = computed(() => userStore.getUser)
 
 
 
-const subscriptions =[]
+const appStore = useAppStore()
+const subscriptions = []
 onBeforeMount(async () => {
     // debugger
     await loadItems()
-    
+
     getDataFromRoute()
     subscriptions[0] = eventBus.on('restore-history', () => {
-       btnState.value = 'done'
+        changeBtnState('done')
     })
 
     // loadList()
@@ -69,7 +74,7 @@ onMounted(() => {
     showSuccessMsg(msg)
 })
 
-async function loadItems(){
+async function loadItems() {
     await listStore.loadList()
 }
 
@@ -77,18 +82,17 @@ async function loadItems(){
 function getDataFromRoute() {
 
     const { history, share, ids } = route.query
-    if (ids) {
-        // sharedIds.value = 
-        const idsFromRoute =ids.split(',')
-        // console.log(idsFromRoute);
-        listStore.setItemsFromShearedList(idsFromRoute)
 
+    if (ids) {
+        const idsFromRoute = ids.split(',')
+        listStore.setItemsFromShearedList(idsFromRoute)
     }
     if (share) {
+        // update the store to share the list mode
         appStore.setSharedList(true)
     }
     if (history) {
-        btnState.value = 'history'
+        changeBtnState('history')
 
     }
 
@@ -96,50 +100,60 @@ function getDataFromRoute() {
 
 
 
-// change to modal history instead of 2 btns
+const cmpKey = ref(0)
+async function clearItems() {
+    console.debug('clear items');
+    if (btnState.value === 'done') {
+        // debugger
 
-
-
-function mainAction() {
-    if (btnState.value === 'edit') {
-        submitLabel()
-        btnState.value = 'done'
+        listStore.clearItems()
+        router.push({ name: 'list', query: {} })
+        // location.reload()
+        showSuccessMsg('Items cleared')
+        cmpKey.value++
         return
     }
-
-    const modalType = btnState.value === 'history' ? 'ModalHistory' : 'ModalDone'
-    
-    eventBus.emit('toggle-modal', { type: modalType })
-
 }
 
 function toggleSelectItem(id) {
     listStore.toggleSelect(id)
 }
 
+// changing the state of the button for the main action icon
 const btnState = ref('done')
-const currLabel = ref('')
-function toggleEdit(labelName) {
-    currLabel.value = labelName
-    btnState.value = 'edit'
-}
-
-function setEditMode() {
-    
-    btnState.value = 'list-edit'
-}
-
-
 const label = ref({ name: '', userInput: '' })
+
+function mainAction() {
+
+    if (btnState.value === 'edit') {
+        submitLabel()
+        changeBtnState('done')
+        return
+        
+    }
+
+    const modalType = btnState.value === 'history' ? 'ModalHistory' : 'ModalDone'
+
+    eventBus.emit('toggle-modal', { type: modalType })
+
+}
+
+
+function changeBtnState(val) {
+    btnState.value = val
+}
+
+
 function updateLabel(updateLabel) {
+    console.log('updateLabel', updateLabel);
     label.value = { ...updateLabel }
 }
 
 function submitLabel() {
-    listStore.updateLabel(label)
+    listStore.updateLabel(label.value)
 }
 
-const appStore = useAppStore()
+
 
 onUnmounted(() => {
     subscriptions.forEach(sub => sub())
@@ -277,11 +291,15 @@ textarea {
 }
 
 .notes-container {
-    border: 1px solid var(--bClr1);
-    border-radius: 2px;
-    font-size: 1.5rem;
-    font-family: inherit;
-    color: var(--clr7);
+
+    textarea {
+
+        border: 1px solid var(--bClr1);
+        border-radius: 2px;
+        font-size: 1.5rem;
+        font-family: inherit;
+        color: var(--clr7);
+    }
 
     p {
         margin: 0;

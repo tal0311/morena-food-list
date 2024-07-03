@@ -11,20 +11,25 @@ export const useUserStore = defineStore("user", () => {
 
 
   const currLang = ref("en");
-  const loggedUser = ref(userService.getLoggedInUser());
+  const loggedUser = ref(null);
 
   const getUser = computed(() => loggedUser.value);
   const getCurrLang = computed(() => currLang.value);
   const getSelectedItems = computed(() => {
-    // console.log("getting selected items from store");
+   
     return loggedUser.value.selectedItems;
   })
+  watchEffect(() => {
+    console.log("loggedUser", loggedUser.value);
+  });
 
 
   async function login(loginType, credentials) {
     try {
       loggedUser.value = await userService.login(loginType, credentials);
-      // console.log('UST login:', loggedUser.value);
+      if(!loggedUser.value) return
+      setLang(loggedUser.value.settings.lang);
+     
       return
     } catch (error) {
       console.error("error", error);
@@ -36,19 +41,21 @@ export const useUserStore = defineStore("user", () => {
 
   async function logout() { }
 
-  watchEffect(() => {
-    if (loggedUser.value) {
-
-      setLang(loggedUser.value.settings.lang);
-    }
-  })
+  function loadUser() {
+    loggedUser.value = userService.getLoggedInUser();
+    if (!loggedUser.value) return;
+    setLang(loggedUser.value.settings.lang);
+  }
 
   async function updateLoggedUser(user) {
     const userToUpdate = { ...loggedUser.value, ...user };
     loggedUser.value = await userService.save(userToUpdate);
+  }
 
-
-
+  async function updateUserItems(items) {
+    loggedUser.value.selectedItems = items;
+    // console.log('loggedUser.value', loggedUser.value);
+    loggedUser.value= await userService.save(loggedUser.value);
   }
 
   async function updateUser(key, value) {
@@ -57,14 +64,20 @@ export const useUserStore = defineStore("user", () => {
     // console.log("updating user in store");
 
     try {
-      loggedUser.value = { ...loggedUser.value, [key]: value };
+
+      
+      loggedUser.value = { ...JSON.parse(JSON.stringify(loggedUser.value)), [key]: value };
       const user = await userService.save(loggedUser.value);
-      // console.log('user after', user);
-      loggedUser.value = user
-      // console.log('after updated user', loggedUser.value);
+      console.log('user after', user);
+      // loggedUser.value = user
+      
+      if(key === 'settings') {
+        setLang(value);
+      }
+      
 
     } catch (error) {
-      console.log(error);
+      console.error(error);
       appStore.logError(`[error: failed to update user with selected items] - ${error}`, true);
 
     }
@@ -93,6 +106,10 @@ export const useUserStore = defineStore("user", () => {
     getCurrLang,
     addHistory,
     login,
-    getSelectedItems
+    getSelectedItems,
+    loadUser,
+    updateUserItems,
+
+
   }
 })
