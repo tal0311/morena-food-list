@@ -122,6 +122,7 @@ const diets = [
 
 onBeforeMount(() => {
     user.value = userService.getLoggedInUser();
+    console.log('user', user.value);
 
 })
 

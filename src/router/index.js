@@ -91,7 +91,7 @@ router.beforeEach(async (to, from, next) => {
 
   // this is to make sure that the user is logged in before entering the home page
   if (to.name === "*") {
-    console.log('home');
+    // console.log('home');
 
   }
 

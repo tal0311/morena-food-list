@@ -60,8 +60,8 @@ export const useUserStore = defineStore("user", () => {
 
   async function updateUser(key, value) {
 
-    
-    console.log(`updating user ${key} in store`, value);
+    // console.trace()
+    // console.log("updating user in store");
 
     try {
 

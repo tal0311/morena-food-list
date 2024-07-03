@@ -89,11 +89,8 @@ export const useListStore = defineStore("list", () => {
       selectedItems = selectedItems.filter((i) => i._id !== itemId);
     }
 
-    userStore.updateUserItems(selectedItems);
-    // userStore.updateUser(
-    //   "selectedItems",
-    //   JSON.parse(JSON.stringify(selectedItems))
-    // );
+    // console.log('after selected', selectedItems);
+    userStore.updateUser('selectedItems', JSON.parse(JSON.stringify(selectedItems)))
   }
 
   async function clearItems() {
