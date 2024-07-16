@@ -36,8 +36,9 @@ async function save(user) {
     const updatedUser = await storageService[method](STORAGE_KEY, user);
 
     if (updatedUser) {
-        console.log('updatedUser', updatedUser);
+        // console.log('updatedUser', updatedUser);
         _saveLoggedUser(updatedUser);
+        
         return updatedUser;
 
     }

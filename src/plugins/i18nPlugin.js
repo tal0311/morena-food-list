@@ -8,6 +8,7 @@ export default {
     // inject a globally available $translate() method
     const userStore = useUserStore();
     app.config.globalProperties.$trans = (key) => {
+      if (!key) return ;
       key = key.toLowerCase()
       const lang = userStore.getCurrLang;
       return i18Service.doTrans(key, lang);

@@ -5,6 +5,8 @@ import { userService } from "./user.service.js";
 
 
 import items from "./../data/item.json";
+
+
 const STORAGE_KEY = "item_DB";
 const LABELS_KEY = "labels_DB";
 
@@ -18,7 +20,7 @@ export const itemService = {
   getGroupsByLabels,
 
   updateLabel,
-  getLabels
+  setLabels
 };
 window.itemService = itemService;
 
@@ -27,35 +29,59 @@ window.itemService = itemService;
 async function query(filterBy = {}) {
   const loggedUser = userService.getLoggedInUser();
 
-  let items = await storageService.query(STORAGE_KEY);
-  const { isVegetarian, isVegan, isLactoseFree, isKosher, isGlutenFree } = loggedUser.settings;
-  if (isVegetarian) {
-    const vegItems = ['meat-and-poultry', 'fish', 'seafood']
-    items = items.filter((item) => !vegItems.includes(item.group));
-  }
-  if (isVegan) {
-    const veganItems = ['dairy', 'meat-and-poultry', 'fish', 'seafood']
-    items = items.filter((item) => !veganItems.includes(item.group));
-  }
+  let items = await fetch('https://cdn.jsdelivr.net/gh/tal0311/food-list-data@main/item.json')
+    .then(response => response.json())
 
-  if (isLactoseFree) {
-    items = items.filter((item) => item.group !== 'dairy');
-  }
-  if (isKosher) {
-    items = items.filter((item) => item.group !== 'seafood');
-  }
+   const randomItems = []
+  // console.log('items', items.length);
 
-  if (isGlutenFree) {
-    items = items.filter((item) => item.group !== 'bread');
-  }
+  // for (let i = 0; i < 10; i++) {
+  //   randomItems.push(items[Math.floor(Math.random() * items.length-1)]._id)
 
-  if (filterBy.txt) {
-    const regex = new RegExp(filterBy.txt, "i");
-    items = items.filter((item) => regex.test(item.txt));
-  }
+  // }
+  // console.log('randomItems', randomItems);
 
-  return items;
-  // return getGroupsByLabels(items);
+    // console.log('items', items);
+    
+  // const { isVegetarian, isVegan, isLactoseFree, isKosher, isGlutenFree } = loggedUser.settings;
+  
+  // filtering by text as needed
+
+
+const itemsByLabels= getGroupsByLabels(items)
+
+await setLabels(itemsByLabels);
+
+// filter labels by user settings
+
+return itemsByLabels;
+
+  // if (isVegetarian) {
+  //   const vegItems = ['meat-and-poultry', 'fish', 'seafood']
+  //   items = items.filter((item) => !vegItems.includes(item.group));
+  // }
+  // if (isVegan) {
+  //   const veganItems = ['dairy', 'meat-and-poultry', 'fish', 'seafood']
+  //   items = items.filter((item) => !veganItems.includes(item.group));
+  // }
+
+  // if (isLactoseFree) {
+  //   items = items.filter((item) => item.group !== 'dairy');
+  // }
+  // if (isKosher) {
+  //   items = items.filter((item) => item.group !== 'seafood');
+  // }
+
+  // if (isGlutenFree) {
+  //   items = items.filter((item) => item.group !== 'bread');
+  // }
+
+  // if (filterBy.txt) {
+  //   const regex = new RegExp(filterBy.txt, "i");
+  //   items = items.filter((item) => regex.test(item.txt));
+  // }
+
+  // return items;
 
 }
 
@@ -91,14 +117,13 @@ async function updateLabel(label) {
 }
 
 // Move to backend
-async function getLabels(list , user) {
-  user= JSON.parse(JSON.stringify(user))
-  list = JSON.parse(JSON.stringify(list))
-  // this is to prevent the labels history from being deleted from the user object
-  if (user.labels) return user.labels;
+async function setLabels(list) {
+  
+  const user = userService.getLoggedInUser();
+ 
   user.labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
   await userService.save(user);
-  return user.labels;
+  
 }
 
 
@@ -165,6 +190,6 @@ function prepDataForChart(list) {
 // }
 
 // TEST DATA
-(() => {
-  utilService.saveToStorage(STORAGE_KEY, items);
-})();
+// (() => {
+//   utilService.saveToStorage(STORAGE_KEY, items);
+// })();

@@ -70,10 +70,11 @@
                 </div>
             </summary>
             <section class="history-container">
-                <ul v-if="user.history.length" class="history-list clean-list grid">
-                    <li v-for="history in user.history" :key="history.id" class="grid grid-dir-col">
-                        <span>{{ history.date }}</span>
-                        <RouterLink :to="`/list?${history.url}&history=true`">
+                <ul v-if="history" class="history-list clean-list grid">
+                    <li v-for="list in history" :key="history.id" class="grid grid-dir-col">
+                        <small>{{ formatDate(list.createdAt) }}</small>
+                        <small>{{ list.title }}</small>
+                        <RouterLink :to="`/list?listId=${list._id}&history=true`">
                             <span class="secondary-btn">{{ $trans('restore') }}</span>
                         </RouterLink>
                     </li>
@@ -105,6 +106,7 @@ import { utilService } from '@/services/util.service';
 import { useUserStore } from '@/stores/user-store'
 import { userService } from '@/services/user.service';
 import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
+import { useListStore } from '@/stores/list-store';
 import UserPreview from '@/components/UserPreview.vue'
 
 const user = ref(null);
@@ -120,9 +122,13 @@ const diets = [
 
 ]
 
-onBeforeMount(() => {
+const listStore = useListStore();
+const history = computed(() => listStore.userLists)
+
+onBeforeMount(async () => {
     user.value = userService.getLoggedInUser();
     console.log('user', user.value);
+    await listStore.loadLists()
 
 })
 
@@ -144,14 +150,35 @@ function getTitle(username) {
     return elBody.dir === 'rtl' ? `שלום, ${username}` : `Hi, ${username}`;
 
 }
+function formatDate(date) {
+    return new Date(date).toLocaleDateString('he-IL');
+};
 
-const historyCounter = computed(() => user.value.history.length ? user.value.history.length : 'No history');
+const historyCounter = computed(() => history?.value?.length || 'No history');
 </script>
 
 <style scoped>
 .history-list {
     gap: 0.5rem;
     padding: 0.5rem;
+
+    li {
+        /* justify-content: space-between; */
+        grid-template-columns: min-content 1fr min-content;
+        align-items: center;
+        gap: 0.5rem;
+
+        small {
+            font-size: 1rem;
+
+            &:last-of-type {
+                /* font-size: 1.2rem; */
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
 
 }
 
@@ -219,7 +246,7 @@ details {
     &[open] summary {
         /* box-shadow: 0 0 2px 0px #c9c9c9; */
         margin-bottom: 0.5em;
-       
+
     }
 
 
@@ -229,9 +256,10 @@ details {
 details>summary {
 
     list-style: none;
+
     .counter {
-            color: var(--bClr3);
-        }
+        color: var(--bClr3);
+    }
 }
 
 summary::-webkit-details-marker {

@@ -1,4 +1,5 @@
 <template>
+     <!-- {{ labelList || 'No entries' }} -->
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
 
         <div id="list-container" class="list-container grid">
@@ -49,10 +50,17 @@ const router = useRouter()
 const listStore = useListStore()
 const userStore = useUserStore()
 // loading the list from the route guard
-const groupList = computed(() => listStore?.getList)
-const labelList = computed(() => listStore?.getLabels)
+const groupList = computed(() => listStore?.getItemList)
+const labelList = ref(null)
+
 const user = computed(() => userStore.getUser)
 
+watchEffect(() => {
+    // console.log('groupList', user.value);
+    if(!user.value) return
+    labelList.value = user.value.labels
+    console.log('labelList', labelList.value);
+})
 
 
 const appStore = useAppStore()
@@ -75,13 +83,13 @@ onMounted(() => {
 })
 
 async function loadItems() {
-    await listStore.loadList()
+    await listStore.loadItems()
 }
 
 // const sharedIds = ref(null)
 function getDataFromRoute() {
 
-    const { history, share, ids } = route.query
+    const { history, share, ids, listId } = route.query
 
     if (ids) {
         const idsFromRoute = ids.split(',')
@@ -92,6 +100,8 @@ function getDataFromRoute() {
         appStore.setSharedList(true)
     }
     if (history) {
+        console.log( listId)
+        listStore.setCurrList(listId)
         changeBtnState('history')
 
     }
@@ -115,8 +125,9 @@ async function clearItems() {
     }
 }
 
-function toggleSelectItem(id) {
-    listStore.toggleSelect(id)
+function toggleSelectItem($event) {
+    
+    listStore.toggleSelect($event)
 }
 
 // changing the state of the button for the main action icon

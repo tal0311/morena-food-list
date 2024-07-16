@@ -1677,8 +1677,9 @@ const gTrans = {
   
 };
 
-function doTrans(key, currLang) {
+function doTrans(key, currLang='he') {
   // console.debug("key", key);
+  // return
   var translation = gTrans[key][currLang];
   if (!translation) return key;
   return translation;
