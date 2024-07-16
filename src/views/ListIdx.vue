@@ -59,7 +59,7 @@ watchEffect(() => {
     // console.log('groupList', user.value);
     if(!user.value) return
     labelList.value = user.value.labels
-    console.log('labelList', labelList.value);
+    // console.log('labelList', labelList.value);
 })
 
 

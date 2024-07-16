@@ -127,7 +127,7 @@ const history = computed(() => listStore.userLists)
 
 onBeforeMount(async () => {
     user.value = userService.getLoggedInUser();
-    console.log('user', user.value);
+    // console.log('user', user.value);
     await listStore.loadLists()
 
 })

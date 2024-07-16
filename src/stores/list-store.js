@@ -22,7 +22,7 @@ export const useListStore = defineStore("list", () => {
   const getCurrList = computed(() => currList.value);
 
   const getItemList = computed(() => {
-    console.log('listByLabels', listByLabels.value);
+    // console.log('listByLabels', listByLabels.value);
     return listByLabels.value;
   });
 
@@ -90,7 +90,7 @@ export const useListStore = defineStore("list", () => {
   }
 
   function toggleSelect({labelName, itemId}) {
-    console.log('toggleSelect', labelName, itemId);
+    // console.log('toggleSelect', labelName, itemId);
     listByLabels.value[labelName].map(item => {
       if (item._id === itemId) {
         item.isSelected = !item.isSelected;
@@ -98,7 +98,7 @@ export const useListStore = defineStore("list", () => {
       return item;
     })
 
-    console.log('listByLabels', listByLabels.value[labelName]);
+    // console.log('listByLabels', listByLabels.value[labelName]);
    
     // const item = list.find((i) => i._id === itemId);
 

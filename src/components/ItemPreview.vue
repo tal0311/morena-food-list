@@ -66,7 +66,7 @@ watchEffect(() => {
 
 
 function handleSharedIds() {
-    console.debug('handling shared ids');
+    // console.debug('handling shared ids');
     isSwiped.value = true
     emit('selectItem', { item: props.item, labelName: props.labelName, isShared: true })
 

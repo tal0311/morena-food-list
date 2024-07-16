@@ -49,7 +49,7 @@ function getCount(label) {
 }
 
 function onSelect({ item, labelName, isShared }) {
-    console.log(labelName, isShared);
+    // console.log(labelName, isShared);
     emit('selectItem', { labelName, itemId: item._id })
 
 }
