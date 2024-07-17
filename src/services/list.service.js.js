@@ -18,13 +18,13 @@ export const listService = {
 };
 window.listService = listService;
 
-// loadItems();
+
 
 async function query(filterBy = {}) {
   const loggedUser = userService.getLoggedInUser();
   let lists = await storageService.query(STORAGE_KEY);
   lists = lists.filter(list => list.owner.id === loggedUser._id)
-  // console.log('lists', lists);
+  
   return lists;
 }
 
