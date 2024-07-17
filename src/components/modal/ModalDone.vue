@@ -71,17 +71,17 @@ function onShowSummary() {
 
 
 
-const selectItems = computed(() => listStore.getCurrList.items)
+const selectItems = computed(() => listStore.getCurrList)
 async function onSendList() {
 
 
-    if (!selectItems.value.length) {
+    if (!selectItems.value.items.length) {
         showSuccessMsg('Nothing to share')
         return
     }
     try {
-        debugger
-        let idsTosShare = selectItems.value.join(',')
+        // debugger
+        let idsTosShare = selectItems.value.items.join(',')
         const url = `${import.meta.env.VITE_PROD_URL}?share=true&ids=${idsTosShare}`;
 
         await navigator.share({ title: 'My shopping list', text: 'Check out my shopping list', url: url })
@@ -99,24 +99,25 @@ async function onSendList() {
 
 
 async function saveHistory() {
-    if (!selectItems.value.length) {
+    
+
+    console.log('selectItems.value', selectItems.value);
+    if (!selectItems.value.items.length) {
         showSuccessMsg('Select items to save history')
         return
     }
-    let idsTosShare = selectItems.value
-    console.debug('save history', idsTosShare);
-    const url = `&ids=${idsTosShare}`;
-    console.debug(url);
+   
+    console.log('selectItems.value', selectItems.value.items);
+    if (selectItems.value._id) {
+        await listService.save(selectItems.value)
+        
+        showSuccessMsg('List updated successfully')
+        return
 
-
-
+    }
     const title = prompt('set a title you\'r new list') || 'untitled list'
-    //
     const listToSave = listService.getEmptyList(title)
-    listToSave.items = JSON.parse(JSON.stringify(selectItems.value))
-
-    await listService.save(listToSave)
-
+    listToSave.items = JSON.parse(JSON.stringify(selectItems.value.items))
     showSuccessMsg('History saved successfully, watch it in the user page')
     // closeModal()
 

@@ -48,32 +48,9 @@ onBeforeMount(() => {
 })
 
 const listStore = useListStore()
-watchEffect(() => {
-
-    if (route.name === 'list') {
-
-        if (listStore?.getCurrList?.items.includes(props.item._id)) {
-            // console.log('item is selected' , props.item._id);
-            handleSharedIds()
-
-        }
-    }
-
-
-
-})
-
-
-
-function handleSharedIds() {
-    // console.debug('handling shared ids');
-    isSwiped.value = true
-    emit('selectItem', { item: props.item, labelName: props.labelName, isShared: true })
-
-
-}
 
 function onSelect() {
+    console.log('selecting item', props.item);
     emit('selectItem', { item: props.item, labelName: props.labelName })
 }
 
@@ -89,9 +66,7 @@ watchEffect(() => {
         }
     }
 
-    if (route.name === 'list-summary') {
-        // isSwiped.value = true
-    }
+   
 })
 
 function itemInfo() {
@@ -146,7 +121,6 @@ input[type="checkbox"] {
 
 
 .disabled {
-
     opacity: 0.5;
 }
 </style>

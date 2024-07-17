@@ -20,12 +20,13 @@ export const useListStore = defineStore("list", () => {
   const listByLabels = ref(null);
 
   const getCurrList = computed(() => currList.value);
+
   const getListForSummary = computed(() => Object.values(listByLabels.value)
     .flatMap(item => item)
     .filter(item => currList.value.items.includes(item._id)));
 
   const getItemList = computed(() => {
-    // console.log('listByLabels', listByLabels.value);
+    console.log('listByLabels', listByLabels.value);
     return listByLabels.value;
   });
 
@@ -34,26 +35,10 @@ export const useListStore = defineStore("list", () => {
     return lists?.value;
   });
 
+  watchEffect(() => {
+    if(currList.value) console.log('currList', currList.value.items);
+  });
 
-  // const selectedItems = ref([]);
-  // const currLang = ref("en");
-
-
-  // const getList = computed(() => {
-  //   if (list.value) {
-  //     return itemService.getGroupsByLabels(list.value);
-  //   }
-  // });
-  // const getSelectedItems = computed(() => selectedItems?.value);
-
-
-
-  // async function setLabels() {
-  //   labels.value = await itemService.getLabels(
-  //     getList.value,
-  //     userStore.getUser
-  //   );
-  // }
 
   async function loadItems() {
     try {
@@ -66,28 +51,28 @@ export const useListStore = defineStore("list", () => {
     }
   }
 
-  function setItemsFromShearedList(itemsIds) {
-    const user = userStore.loggedUser;
-    const userItems = user.selectedItems;
+  // function setItemsFromShearedList(itemsIds) {
+  //   const user = userStore.loggedUser;
+  //   const userItems = user.selectedItems;
 
-    listByLabels.value = listByLabels.value.map((item) => {
-      if (itemsIds.includes(item._id)) {
-        item.isSelected = true;
-        if (userItems.find((i) => i._id === item._id)) {
-          return item;
-        }
-        userItems.push(item);
-      }
-      return item;
-    });
+  //   listByLabels.value = listByLabels.value.map((item) => {
+  //     if (itemsIds.includes(item._id)) {
+  //       item.isSelected = true;
+  //       if (userItems.find((i) => i._id === item._id)) {
+  //         return item;
+  //       }
+  //       userItems.push(item);
+  //     }
+  //     return item;
+  //   });
 
-    userStore.updateUserItems(userItems);
-  }
+  //   userStore.updateUserItems(userItems);
+  // }
 
   async function updateLabel(label) {
     // debugger
     await itemService.updateLabel(label);
-    
+
 
     showSuccessMsg("Label updated successfully");
   }
@@ -101,18 +86,45 @@ export const useListStore = defineStore("list", () => {
       return item;
     })
 
-
-  }
-
-
-  function clearItems() {
+      // console.log(currList.value);
     // debugger
-    listByLabels.value.items = []
+    // if (!currList.value) currList.value = listService.getEmptyList();
+
+    if (currList.value.items.includes(itemId)) {
+      currList.value.items = currList.value.items.filter((id) => id !== itemId);
+      // console.log('currList inclouds', currList.value);
+
+    } else {
+      currList.value.items.push(itemId);
+    }
+
+
+
+    // console.log('currList', currList.value);
 
   }
 
-  function setCurrList(listId) {
-    currList.value = lists.value.find((list) => list._id === listId);
+
+  async function clearItems() {
+    // debugger
+    currList.value.items = []
+    await loadItems();
+
+  }
+
+  function setCurrList(list) {
+    currList.value = list;
+    const listItems= currList.value.items
+
+    for (const key in listByLabels.value) {
+      listByLabels.value[key].map(item => {
+        if (listItems.includes(item._id)) {
+          item.isSelected = true;
+        }
+        return item;
+      });
+    }
+   
   }
 
   async function loadLists() {
@@ -134,7 +146,7 @@ export const useListStore = defineStore("list", () => {
     // getSelectedItems,
     // getLabels,
     updateLabel,
-    setItemsFromShearedList,
+    // setItemsFromShearedList,
     clearItems,
     loadLists,
     userLists,

@@ -24,7 +24,7 @@ const router = createRouter({
       component: () => import("@/views/UserView.vue"),
     },
     {
-      path: "/list",
+      path: "/list/:listId?",
       name: "list",
       component: () => import("@/views/ListIdx.vue"),
       children: [

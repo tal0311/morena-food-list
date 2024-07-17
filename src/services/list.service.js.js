@@ -68,5 +68,13 @@ function getEmptyList(title = "רשימה חדשה") {
 
 // TEST DATA
 (() => {
-  utilService.saveToStorage(STORAGE_KEY, lists);
+  utilService.saveToStorage(STORAGE_KEY, lists.map(list => {
+    return {
+      ...list,
+      owner:{
+        ...list.owner,
+        id: userService.getLoggedInUser()._id
+      }
+    }
+  }));
 })();

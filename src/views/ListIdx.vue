@@ -1,6 +1,6 @@
 <template>
     <!-- {{ groupList }} -->
-    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
+    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid" :key="cmpKey">
 
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelectItem"
@@ -30,7 +30,7 @@
 // TODO: DND to change the order of the groups
 // TODO: add a button to clear all the selected items add clear items progress bar
 import { useRoute, useRouter } from 'vue-router'
-import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect, onUpdated} from 'vue'
+import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect, onUpdated } from 'vue'
 import { useListStore } from '@/stores/list-store';
 
 import { useAppStore } from '@/stores/app-store'
@@ -43,6 +43,7 @@ import { useUserStore } from '@/stores/user-store';
 import GroupList from '@/components/GroupList.vue';
 import AppLoader from '@/components/AppLoader.vue';
 import AppModal from '@/components/AppModal.vue';
+import { listService } from '@/services/list.service.js';
 
 const route = useRoute()
 const router = useRouter()
@@ -50,7 +51,10 @@ const router = useRouter()
 const listStore = useListStore()
 const userStore = useUserStore()
 // loading the list from the route guard
-const groupList = computed(() => listStore?.getItemList)
+const groupList = computed(() => {
+    console.log(listStore?.getItemList);
+    return listStore?.getItemList
+})
 const labelList = ref(null)
 
 const user = computed(() => userStore.getUser)
@@ -64,13 +68,15 @@ watchEffect(() => {
 
 const appStore = useAppStore()
 const subscriptions = []
+const cmpKey = ref(0)
 onBeforeMount(async () => {
     // debugger
     await loadItems()
 
-    getDataFromRoute()
+    await getDataFromRoute()
     subscriptions[0] = eventBus.on('restore-history', () => {
-        loadItems()
+        // await loadItems()
+        cmpKey.value++
         changeBtnState('done')
 
     })
@@ -84,10 +90,11 @@ async function loadItems() {
 }
 
 // const sharedIds = ref(null)
-function getDataFromRoute() {
+async function getDataFromRoute() {
 
     // debugger
-    const { history, share, ids, listId } = route.query
+    const { share, ids } = route.query
+    const { listId } = route.params
 
     if (ids) {
         // const idsFromRoute = ids.split(',')
@@ -95,19 +102,19 @@ function getDataFromRoute() {
     }
     if (share) {
         // update the store to share the list mode
-        appStore.setSharedList(true)
+        // appStore.setSharedList(true)
     }
 
-    if (listId && history) {
-        listStore.setCurrList(listId)
-        changeBtnState('history')
-    }
-    if (listId && !history) {
-        listStore.setCurrList(listId)
-        changeBtnState('done')
+    if (listId) {
+        await loadList(listId)
     }
 
 
+}
+
+async function loadList(listId) {
+    const list= await listService.getById(listId)
+    listStore.setCurrList(list)
 }
 
 
@@ -127,6 +134,7 @@ async function clearItems() {
 }
 
 function toggleSelectItem($event) {
+    // console.trace()
 
     listStore.toggleSelect($event)
 }
@@ -143,6 +151,8 @@ function mainAction() {
         return
 
     }
+
+
 
     const modalType = btnState.value === 'history' ? 'ModalHistory' : 'ModalDone'
 

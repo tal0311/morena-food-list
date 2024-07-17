@@ -1,6 +1,6 @@
 [
     {
-        "_id":"l-101",
+        "_id":"2zVa1",
         "title":"my list for shabt",
         "owner": {
             "id": "xQbnt",
@@ -8,6 +8,7 @@
             "username": "Tal Amit"
         },
         "items": [
+            "1",
             "14",
             "169",
             "22",
