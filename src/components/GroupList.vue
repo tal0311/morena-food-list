@@ -1,10 +1,11 @@
 <template>
+    <!-- {{ labelList }} -->
+    <!-- {{ groupList }} -->
     <details v-for="{ name, userInput }, idx in labelList" :key="name" :class="`list-details ${name}`">
-        <summary :class="[itemsMap[name] ? 'has-items' : '']">
+        <summary >
 
             <div class="summary-container">
-                <span>{{ $trans(name) }} <span class="counter">{{ itemsMap[name] ? `(${itemsMap[name]})` : ''
-                        }}</span></span>
+                <span>{{ $trans(name) }} <span class="counter">{{getCount(name)}}</span></span>
                 <button @click.stop="onMore(name)" class="more-btn" v-html="$svg('more')">
                 </button>
             </div>
@@ -21,7 +22,7 @@
 <script setup>
 import ItemList from '@/components/ItemList.vue'
 import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
-import { ref , watchEffect} from 'vue';
+import { reactive, ref, shallowRef, watch, watchEffect } from 'vue';
 
 const props = defineProps(['labelList', 'groupList'])
 const emit = defineEmits(['selectItem', 'toggleEdit', 'updateLabel'])
@@ -39,22 +40,17 @@ function onMore(labelName) {
     eventBus.emit('toggle-modal', { type: 'ModalInfo', info: labelName })
 }
 
-const itemsMap = ref({})
 
-function onSelect({ item, labelName, isShared }) {
 
-    if (!item.isSelected) {
-        itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] + 1 : 1
-    } else if (item.isSelected && isShared) {
-        itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] + 1 : 1
+function getCount(label) {
 
-    } else {
-        itemsMap.value[labelName] = itemsMap.value[labelName] ? itemsMap.value[labelName] - 1 : 0
-    }
+    const count= props.groupList[label].filter(item => item.isSelected).length
+    return count? `(${count})` : ''
+}
 
-    if (!isShared) {
-        emit('selectItem', item._id)
-    }
+function onSelect({ item, labelName }) {
+    emit('selectItem', { labelName, itemId: item._id })
+
 }
 
 
@@ -63,7 +59,7 @@ function onSelect({ item, labelName, isShared }) {
 <style scoped>
 .counter {
     font-size: 1.2rem;
-    color: var(--clr7);
+    color: var(--bClr3);
     margin-left: 0.5rem;
     text-decoration: none;
 }

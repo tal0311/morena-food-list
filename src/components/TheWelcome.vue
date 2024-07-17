@@ -3,7 +3,7 @@
     <h1>{{ $trans('home-page') }}</h1>
 
     <div class="action-container grid">
-      <button class="tour-btn primary-btn" @click="navigateTo">{{ $trans('eat-this-week') }}</button>
+      <button class="tour-btn primary-btn" @click="navigateTo">{{ $trans('food-ideas') }}</button>
       <button class="link-btn primary-btn">
         <RouterLink to="/list">{{ $trans('home-action-2') }}</RouterLink>
       </button>

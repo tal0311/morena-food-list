@@ -1,7 +1,7 @@
 <template>
 
     <section class="summary-view grid blur-bg">
-        <!-- <pre>{{ selectItems }}</pre> -->
+
         <div id="list-container">
             <ItemList v-if="selectItems" :list="selectItems" @selectItem="toggleSelectItem">
                 <h3>{{ $trans('list-results') }}</h3>
@@ -41,27 +41,26 @@ import { itemService } from '@/services/item.service.local.js'
 import { useUserStore } from '@/stores/user-store';
 
 
+
 // TODO: fix chart labels and data to human readable
 const listStore = useListStore()
-const userStore = useUserStore()
+
 let chartData = ref(null)
 let labels = ref(null)
 
 const cmpKey = ref(0)
-const selectItems = computed(() => userStore.getSelectedItems)
+const selectItems = computed(() => listStore.getListForSummary)
 
 watchEffect(() => {
     if (selectItems.value) {
         prepDataForChart()
     }
-
 })
-
-
 
 function prepDataForChart() {
     const data = itemService.prepDataForChart(selectItems.value)
-    if (!Object.keys(data).length === 0) return
+    // if (!Object.keys(data).length === 0) return
+    // console.log(data);
     chartData.value = Object.values(data)
     labels.value = Object.keys(data)
     // this is for forcing the chart component to render when data changes
@@ -69,39 +68,22 @@ function prepDataForChart() {
 }
 
 
-
 function toggleSelectItem({ item }) {
-      listStore.toggleSelect(item._id)
-    // userStore.toggleSelectItem(item)
+    listStore.toggleSelect({ labelName: item.group, itemId: item._id })
+
 }
 
 const route = useRoute()
 const router = useRouter()
 
-watchEffect(() => {
-    const { print } = route.query;
-
-    if (print === 'true') {
-        setTimeout(() => {
-            window.print()
-        }, 500)
-    }
-})
-
-
 function onBack() {
-
     const query = {}
-
     for (const key in route.query) {
         if (key !== 'print') {
             query[key] = route.query[key]
         }
-
     }
-
-
-    router.push({ name: 'list', query: query })
+    router.push({ name: 'list', params: route.params, query: query })
 }
 
 
@@ -110,8 +92,7 @@ function onBack() {
 <style scoped>
 .summary-view {
     position: fixed;
-    width: 80vw;
-    /* background-color: white; */
+    width: 95vw;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);

@@ -20,7 +20,7 @@ export const useUserStore = defineStore("user", () => {
     return loggedUser.value.selectedItems;
   })
   watchEffect(() => {
-    console.log("loggedUser", loggedUser.value);
+    // console.log("loggedUser", loggedUser.value);
   });
 
 

@@ -10,14 +10,17 @@ import { watchEffect, ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
 import { useUserStore } from '@/stores/user-store';
+import { useListStore } from '@/stores/list-store';
+import { listService } from '@/services/list.service.js';
 
 const emit = defineEmits(['resetModal'])
 const userStore = useUserStore()
+const listStore = useListStore()
 const btns = [
-    {
-        name: 'print',
-        action: onPrintList
-    },
+    // {
+    //     name: 'print',
+    //     action: onPrintList
+    // },
     {
         name: 'summary',
         action: onShowSummary
@@ -26,18 +29,18 @@ const btns = [
         name: 'share-list',
         action: onSendList
     },
-    {
-        name: 'home-action-1',
-        action: onRecipe
-    },
+    // {
+    //     name: 'home-action-1',
+    //     action: onRecipe
+    // },
     {
         name: 'save-history',
         action: saveHistory
     },
-    {
-        name: 'back',
-        action: closeModal
-    },
+    // {
+    //     name: 'back',
+    //     action: closeModal
+    // },
     // {
     //     name: 'debug',
     //     action: onDebug
@@ -55,29 +58,32 @@ function onPrintList() {
 
 function onDebug() {
     console.debug('debug');
-    router.push({ name: 'debug' , query:route.query })
+    router.push({ name: 'debug', query: route.query })
     closeModal()
 }
 
-function onShowSummary({ print=false } ) {
-  
+function onShowSummary() {
+
     closeModal()
-    const query = { ...route.query, print }
-    router.push({ name: 'list-summary', query:query })
+
+    router.push({ name: 'list-summary', query: { ...route.query } })
 }
 
 
-const selectItems = computed(() => userStore.getSelectedItems)
+
+const selectItems = computed(() => listStore.getCurrList)
 async function onSendList() {
 
-    if (!selectItems.value.length) {
+
+    if (!selectItems.value.items.length) {
         showSuccessMsg('Nothing to share')
         return
     }
     try {
-        let idsTosShare = selectItems.value.map(({ _id }) => _id)
+        // debugger
+        let idsTosShare = selectItems.value.items.join(',')
         const url = `${import.meta.env.VITE_PROD_URL}?share=true&ids=${idsTosShare}`;
-        console.debug(url);
+
         await navigator.share({ title: 'My shopping list', text: 'Check out my shopping list', url: url })
         showSuccessMsg('List sent successfully ')
 
@@ -92,25 +98,29 @@ async function onSendList() {
 
 
 
-function saveHistory() {
-    if (!selectItems.value.length) {
+async function saveHistory() {
+    
+
+    console.log('selectItems.value', selectItems.value);
+    if (!selectItems.value.items.length) {
         showSuccessMsg('Select items to save history')
         return
     }
-    let idsTosShare = selectItems.value.map(({ _id }) => _id)
-    console.debug('save history', idsTosShare);
-    const url = `&ids=${idsTosShare}`;
-    console.debug(url);
+   
+    console.log('selectItems.value', selectItems.value.items);
+    if (selectItems.value._id) {
+        await listService.save(selectItems.value)
+        
+        showSuccessMsg('List updated successfully')
+        return
 
-    const history={
-        url : url,
-        date: new Date().toLocaleDateString()
     }
-
-    userStore.addHistory(history)
+    const title = prompt('set a title you\'r new list') || 'untitled list'
+    const listToSave = listService.getEmptyList(title)
+    listToSave.items = JSON.parse(JSON.stringify(selectItems.value.items))
     showSuccessMsg('History saved successfully, watch it in the user page')
     // closeModal()
-   
+
 }
 
 function onRecipe() {

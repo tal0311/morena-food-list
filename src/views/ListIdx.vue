@@ -1,9 +1,10 @@
 <template>
-    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
+    <!-- {{ groupList }} -->
+    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid" :key="cmpKey">
 
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelectItem"
-                @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel"  :key="cmpKey" />
+                @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel" />
             <details>
                 <summary>{{ $trans('personal-notes') }}</summary>
                 <section class="notes-container">
@@ -29,7 +30,7 @@
 // TODO: DND to change the order of the groups
 // TODO: add a button to clear all the selected items add clear items progress bar
 import { useRoute, useRouter } from 'vue-router'
-import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect } from 'vue'
+import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect, onUpdated } from 'vue'
 import { useListStore } from '@/stores/list-store';
 
 import { useAppStore } from '@/stores/app-store'
@@ -42,6 +43,7 @@ import { useUserStore } from '@/stores/user-store';
 import GroupList from '@/components/GroupList.vue';
 import AppLoader from '@/components/AppLoader.vue';
 import AppModal from '@/components/AppModal.vue';
+import { listService } from '@/services/list.service.js';
 
 const route = useRoute()
 const router = useRouter()
@@ -49,58 +51,75 @@ const router = useRouter()
 const listStore = useListStore()
 const userStore = useUserStore()
 // loading the list from the route guard
-const groupList = computed(() => listStore?.getList)
-const labelList = computed(() => listStore?.getLabels)
+const groupList = computed(() => {
+    console.log(listStore?.getItemList);
+    return listStore?.getItemList
+})
+const labelList = ref(null)
+
 const user = computed(() => userStore.getUser)
 
+watchEffect(() => {
+    if (!user.value) return
+    // console.log(user.value);
+    labelList.value = user.value.labels
 
+})
 
 const appStore = useAppStore()
 const subscriptions = []
+const cmpKey = ref(0)
 onBeforeMount(async () => {
     // debugger
     await loadItems()
 
-    getDataFromRoute()
+    await getDataFromRoute()
     subscriptions[0] = eventBus.on('restore-history', () => {
+        // await loadItems()
+        cmpKey.value++
         changeBtnState('done')
+
     })
 
     // loadList()
 })
 
-onMounted(() => {
-    const msg = 'Swipe item and click on the checkbox to select it'
-    showSuccessMsg(msg)
-})
 
 async function loadItems() {
-    await listStore.loadList()
+    await listStore.loadItems()
 }
 
 // const sharedIds = ref(null)
-function getDataFromRoute() {
+async function getDataFromRoute() {
 
-    const { history, share, ids } = route.query
+    // debugger
+    const { share, ids } = route.query
+    const { listId } = route.params
 
     if (ids) {
-        const idsFromRoute = ids.split(',')
-        listStore.setItemsFromShearedList(idsFromRoute)
+        // const idsFromRoute = ids.split(',')
+        // listStore.setItemsFromShearedList(idsFromRoute)
     }
     if (share) {
         // update the store to share the list mode
-        appStore.setSharedList(true)
-    }
-    if (history) {
-        changeBtnState('history')
-
+        // appStore.setSharedList(true)
     }
 
+    if (listId) {
+        await loadList(listId)
+    }
+
+
+}
+
+async function loadList(listId) {
+    const list= await listService.getById(listId)
+    listStore.setCurrList(list)
 }
 
 
 
-const cmpKey = ref(0)
+
 async function clearItems() {
     console.debug('clear items');
     if (btnState.value === 'done') {
@@ -110,13 +129,14 @@ async function clearItems() {
         router.push({ name: 'list', query: {} })
         // location.reload()
         showSuccessMsg('Items cleared')
-        cmpKey.value++
         return
     }
 }
 
-function toggleSelectItem(id) {
-    listStore.toggleSelect(id)
+function toggleSelectItem($event) {
+    // console.trace()
+
+    listStore.toggleSelect($event)
 }
 
 // changing the state of the button for the main action icon
@@ -129,8 +149,10 @@ function mainAction() {
         submitLabel()
         changeBtnState('done')
         return
-        
+
     }
+
+
 
     const modalType = btnState.value === 'history' ? 'ModalHistory' : 'ModalDone'
 

@@ -1,0 +1,49 @@
+[
+    {
+        "_id":"2zVa1",
+        "title":"my list for shabt",
+        "owner": {
+            "id": "xQbnt",
+            "imgUrl": "https://lh3.googleusercontent.com/a/ACg8ocLTQdHl9NRJc9pFi27CqnmkOJTBC6namN9PpUVf88gmpnKr2sFy=s96-c",
+            "username": "Tal Amit"
+        },
+        "items": [
+            "1",
+            "14",
+            "169",
+            "22",
+            "69",
+            "148",
+            "203",
+            "69",
+            "108",
+            "184",
+            "91"
+        ],
+        "createdAt":1721042327091,
+        "updatedAt": 1721042327091
+    },
+    {
+        "_id":"l-102",
+        "title":"my list for shabt shalom",
+        "owner": {
+            "id": "xQbnt",
+            "imgUrl": "https://lh3.googleusercontent.com/a/ACg8ocLTQdHl9NRJc9pFi27CqnmkOJTBC6namN9PpUVf88gmpnKr2sFy=s96-c",
+            "username": "Tal Amit"
+        },
+        "items": [
+            "180",
+            "33",
+            "144",
+            "16",
+            "45",
+            "194",
+            "159",
+            "48",
+            "32",
+            "154"
+        ],
+        "createdAt":1721042670986,
+        "updatedAt": 1721042670986
+    }
+]

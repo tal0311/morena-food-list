@@ -5,6 +5,8 @@ import { userService } from "./user.service.js";
 
 
 import items from "./../data/item.json";
+
+
 const STORAGE_KEY = "item_DB";
 const LABELS_KEY = "labels_DB";
 
@@ -18,44 +20,62 @@ export const itemService = {
   getGroupsByLabels,
 
   updateLabel,
-  getLabels
+  setLabels
 };
 window.itemService = itemService;
 
 // loadItems();
 
 async function query(filterBy = {}) {
+  // console.log(filterBy);
   const loggedUser = userService.getLoggedInUser();
 
-  let items = await storageService.query(STORAGE_KEY);
-  const { isVegetarian, isVegan, isLactoseFree, isKosher, isGlutenFree } = loggedUser.settings;
-  if (isVegetarian) {
-    const vegItems = ['meat-and-poultry', 'fish', 'seafood']
-    items = items.filter((item) => !vegItems.includes(item.group));
-  }
-  if (isVegan) {
-    const veganItems = ['dairy', 'meat-and-poultry', 'fish', 'seafood']
-    items = items.filter((item) => !veganItems.includes(item.group));
+  let items = await fetch('https://cdn.jsdelivr.net/gh/tal0311/food-list-data@main/item.json')
+    .then(response => response.json())
+
+  // filtering by text as needed
+
+
+  if (filterBy.labels) {
+
+    const itemsByLabels = getGroupsByLabels(items)
+    await setLabels(itemsByLabels);
+    // console.log(itemsByLabels);
+    return itemsByLabels
+
   }
 
-  if (isLactoseFree) {
-    items = items.filter((item) => item.group !== 'dairy');
-  }
-  if (isKosher) {
-    items = items.filter((item) => item.group !== 'seafood');
-  }
 
-  if (isGlutenFree) {
-    items = items.filter((item) => item.group !== 'bread');
-  }
-
-  if (filterBy.txt) {
-    const regex = new RegExp(filterBy.txt, "i");
-    items = items.filter((item) => regex.test(item.txt));
-  }
+  // filter labels by user settings
 
   return items;
-  // return getGroupsByLabels(items);
+
+  // if (isVegetarian) {
+  //   const vegItems = ['meat-and-poultry', 'fish', 'seafood']
+  //   items = items.filter((item) => !vegItems.includes(item.group));
+  // }
+  // if (isVegan) {
+  //   const veganItems = ['dairy', 'meat-and-poultry', 'fish', 'seafood']
+  //   items = items.filter((item) => !veganItems.includes(item.group));
+  // }
+
+  // if (isLactoseFree) {
+  //   items = items.filter((item) => item.group !== 'dairy');
+  // }
+  // if (isKosher) {
+  //   items = items.filter((item) => item.group !== 'seafood');
+  // }
+
+  // if (isGlutenFree) {
+  //   items = items.filter((item) => item.group !== 'bread');
+  // }
+
+  // if (filterBy.txt) {
+  //   const regex = new RegExp(filterBy.txt, "i");
+  //   items = items.filter((item) => regex.test(item.txt));
+  // }
+
+  // return items;
 
 }
 
@@ -77,28 +97,27 @@ function getGroupsByLabels(list) {
 
 
 async function updateLabel(label) {
-  label = JSON.parse(JSON.stringify(label));
+  // label = JSON.parse(JSON.stringify(label));
 
   const user = userService.getLoggedInUser();
 
   user.labels = user.labels.map((l) => l.name === label.name ? { ...label, userInput: label.userInput } : l);
 
-  
-   userService.save(user);
+
+  userService.save(user);
   //  console.log('user', user.labels);
   return user.labels
-  
+
 }
 
 // Move to backend
-async function getLabels(list , user) {
-  user= JSON.parse(JSON.stringify(user))
-  list = JSON.parse(JSON.stringify(list))
-  // this is to prevent the labels history from being deleted from the user object
-  if (user.labels) return user.labels;
+async function setLabels(list) {
+
+  const user = userService.getLoggedInUser();
+
   user.labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
   await userService.save(user);
-  return user.labels;
+
 }
 
 
@@ -133,19 +152,27 @@ function getEmptyItem(name) {
   };
 }
 
-function prepDataForChart(list) {
-  const itemsMap = {};
-  list.reduce((acc, item) => {
-    if (!acc[item.group]) {
-      acc[item.group] = [];
-    }
-    acc[item.group].push(item);
-    return acc;
-  }, itemsMap);
+ function prepDataForChart(list) {
+
+  list = JSON.parse(JSON.stringify(list));
+
+  // console.log(list.items);
+  const itemsMap = list.reduce((acc, curr) => {
+   
+
+      if (!acc[curr.group]) {
+        acc[curr.group] = []
+      }
+      acc[curr.group].push(curr)
+
+    
+    return acc
+  }, {})
 
   for (const group in itemsMap) {
     itemsMap[group] = itemsMap[group].length;
   }
+  console.log(itemsMap);
   return itemsMap;
 }
 
@@ -165,6 +192,6 @@ function prepDataForChart(list) {
 // }
 
 // TEST DATA
-(() => {
-  utilService.saveToStorage(STORAGE_KEY, items);
-})();
+// (() => {
+//   utilService.saveToStorage(STORAGE_KEY, items);
+// })();

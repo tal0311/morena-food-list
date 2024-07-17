@@ -65,12 +65,12 @@ const gTrans = {
     es: "Pescado y mariscos",
     he: "דגים ומאכלי ים",
   },
-  'fish':{
+  'fish': {
     en: "Fish",
     es: "Pescado",
     he: "דגים",
   },
-  'seafood':{
+  'seafood': {
     en: "Seafood",
     es: "Mariscos",
     he: "מאכלי ים",
@@ -1490,10 +1490,11 @@ const gTrans = {
     es: "No hay historial en este momento",
     he: "אין היסטוריה כרגע",
   },
-  'eat-this-week': {
-    en: "What to Eat this week",
-    es: "Qué comer esta semana",
-    he: "מה לאכול השבוע",
+  'food-ideas': {
+    en: "Food Ideas",
+    es: "Ideas de comida",
+    he: "רעיונות לאוכל",
+
   },
   'dish-soap': {
 
@@ -1626,59 +1627,60 @@ const gTrans = {
     es: "Notas personales",
     he: "הערות אישיות",
   },
-  debug:{
+  debug: {
     en: "Debug",
     es: "Depurar",
     he: "ניפוי שגיאות",
   },
-  'food-inspiration':{
+  'food-inspiration': {
     en: "Food Inspiration",
     es: "Inspiración de comida",
     he: "השראה לאוכל",
-  
+
   },
-  'go-to-list':{
+  'go-to-list': {
     en: "Go to list",
     es: "Ir a la lista",
     he: "עבור לרשימה",
   },
-  'vegan':{
+  'vegan': {
     en: "Vegan",
     es: "Vegan",
     he: "טבעוני",
-  }, 'vegetarian':{
+  }, 'vegetarian': {
     en: "Vegeterian",
     es: "Vegetariano",
     he: "צמחוני",
-  }, 'gluten-free':{
+  }, 'gluten-free': {
     en: "Gluten Free",
     es: "Sin gluten",
     he: "ללא גלוטן",
-  }, 'lactose-free':{
+  }, 'lactose-free': {
     en: "Lactuse Free",
     es: "Sin lactosa",
     he: "ללא לקטוז",
-  }, 'kosher':{
+  }, 'kosher': {
     en: "Kosher",
     es: "Kosher",
     he: "כשר",
   },
-  'hm-action1':{
+  'hm-action1': {
     en: "Continue shopping",
     es: "Continuar",
     he: "המשך",
   },
-  'hm-action2':{
+  'hm-action2': {
     en: "Back to history list",
     es: "Volver a la lista de historial",
     he: "חזור ההיסטוריה",
-  
+
   }
-  
+
 };
 
-function doTrans(key, currLang) {
+function doTrans(key, currLang = 'he') {
   // console.debug("key", key);
+  // return
   var translation = gTrans[key][currLang];
   if (!translation) return key;
   return translation;

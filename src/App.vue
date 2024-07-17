@@ -15,12 +15,16 @@
 import { ref, onBeforeMount } from 'vue';
 import UserMsg from '@/components/UserMsg.vue'
 import { useUserStore } from './stores/user-store';
+import { useListStore } from './stores/list-store';
+
+const listStore = useListStore();
 
 const userStore = useUserStore();
-onBeforeMount(() => {
+onBeforeMount(async () => {
   console.log('App is mounted');
 
-  userStore.loadUser();
+  await userStore.loadUser();
+ await listStore.loadLists()
   
 })
 </script>

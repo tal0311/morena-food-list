@@ -1,6 +1,7 @@
 import { ref, computed, watchEffect } from "vue";
 import { defineStore } from "pinia";
 import { itemService } from "@/services/item.service.local";
+import { listService } from "@/services/list.service.js";
 import {
   showUserMsg,
   showErrorMsg,
@@ -10,35 +11,39 @@ import { useAppStore } from "@/stores/app-store";
 import { useUserStore } from "@/stores/user-store";
 import { userService } from "@/services/user.service";
 
+
 export const useListStore = defineStore("list", () => {
   const userStore = useUserStore();
 
-  const list = ref(null);
-  // const selectedItems = ref([]);
-  // const currLang = ref("en");
-  const labels = ref(null);
+  const lists = ref(null);
+  const currList = ref(null);
+  const listByLabels = ref(null);
 
-  const getList = computed(() => {
-    if (list.value) {
-      return itemService.getGroupsByLabels(list.value);
-    }
+  const getCurrList = computed(() => currList.value);
+
+  const getListForSummary = computed(() => Object.values(listByLabels.value)
+    .flatMap(item => item)
+    .filter(item => currList.value.items.includes(item._id)));
+
+  const getItemList = computed(() => {
+    console.log('listByLabels', listByLabels.value);
+    return listByLabels.value;
   });
-  // const getSelectedItems = computed(() => selectedItems?.value);
 
-  const getLabels = computed(() => labels.value);
+  const userLists = computed(() => {
 
-  async function setLabels() {
-    labels.value = await itemService.getLabels(
-      getList.value,
-      userStore.getUser
-    );
-  }
+    return lists?.value;
+  });
 
-  async function loadList() {
+  watchEffect(() => {
+    if(currList.value) console.log('currList', currList.value.items);
+  });
+
+
+  async function loadItems() {
     try {
-      const items = await itemService.query();
-      list.value = items;
-      setLabels();
+      listByLabels.value = await itemService.query({ labels: true });
+
     } catch (error) {
       console.debug("Failed to load list", error);
       // useAppStore().logError(error, false);
@@ -46,74 +51,107 @@ export const useListStore = defineStore("list", () => {
     }
   }
 
-  function setItemsFromShearedList(itemsIds) {
-    const user = userStore.loggedUser;
-    const userItems = user.selectedItems;
+  // function setItemsFromShearedList(itemsIds) {
+  //   const user = userStore.loggedUser;
+  //   const userItems = user.selectedItems;
 
-    list.value = list.value.map((item) => {
-      if (itemsIds.includes(item._id)) {
-        item.isSelected = true;
-        if (userItems.find((i) => i._id === item._id)) {
-          return item;
-        }
-        userItems.push(item);
-      }
-      return item;
-    });
-  
-    userStore.updateUserItems(userItems);
-  }
+  //   listByLabels.value = listByLabels.value.map((item) => {
+  //     if (itemsIds.includes(item._id)) {
+  //       item.isSelected = true;
+  //       if (userItems.find((i) => i._id === item._id)) {
+  //         return item;
+  //       }
+  //       userItems.push(item);
+  //     }
+  //     return item;
+  //   });
+
+  //   userStore.updateUserItems(userItems);
+  // }
 
   async function updateLabel(label) {
     // debugger
-    labels.value = await itemService.updateLabel(label);
-    console.log("labels", labels.value);
-    
+    await itemService.updateLabel(label);
+
+
     showSuccessMsg("Label updated successfully");
   }
 
-  function toggleSelect(itemId) {
-    // debugger;
-    console.trace();
-    const itemIdx = list?.value.findIndex((item) => item._id === itemId);
-    const item = list.value[itemIdx];
-    item.isSelected = !item.isSelected;
+  function toggleSelect({ labelName, itemId }) {
 
-    list.value.splice(itemIdx, 1, item);
+    listByLabels.value[labelName].map(item => {
+      if (item._id === itemId) {
+        item.isSelected = !item.isSelected;
+      }
+      return item;
+    })
 
-    let { selectedItems } = userStore.loggedUser;
+      // console.log(currList.value);
+    // debugger
+    if (!currList.value) currList.value = listService.getEmptyList();
 
-    if (item.isSelected) {
-      selectedItems.push(item);
+    if (currList.value.items.includes(itemId)) {
+      currList.value.items = currList.value.items.filter((id) => id !== itemId);
+      // console.log('currList inclouds', currList.value);
+
     } else {
-      selectedItems = selectedItems.filter((i) => i._id !== itemId);
+      currList.value.items.push(itemId);
     }
 
-    // console.log('after selected', selectedItems);
-    userStore.updateUser('selectedItems', JSON.parse(JSON.stringify(selectedItems)))
+
+
+    // console.log('currList', currList.value);
+
   }
+
 
   async function clearItems() {
     // debugger
-    list.value = list.value.map((item) => {
-      item.isSelected = false;
-      return item;
-    });
+    currList.value.items = []
+    await loadItems();
 
-    userStore.updateUser("selectedItems", []);
-    //  const user= userService.getLoggedInUser();
-    //   user.selectedItems = [];
-    //  await userService.save(user);
+  }
+
+  function setCurrList(list) {
+    currList.value = list;
+    const listItems= currList.value.items
+
+    for (const key in listByLabels.value) {
+      listByLabels.value[key].map(item => {
+        if (listItems.includes(item._id)) {
+          item.isSelected = true;
+        }
+        return item;
+      });
+    }
+   
+  }
+
+  async function loadLists() {
+    try {
+
+      lists.value = await listService.query();
+      console.log('loadLists', lists.value);
+    } catch (error) {
+      showErrorMsg("Failed to load lists, please try again later");
+
+    }
+
   }
 
   return {
-    loadList,
-    getList,
+    loadItems,
+    getItemList,
     toggleSelect,
     // getSelectedItems,
-    getLabels,
+    // getLabels,
     updateLabel,
-    setItemsFromShearedList,
+    // setItemsFromShearedList,
     clearItems,
+    loadLists,
+    userLists,
+    setCurrList,
+    getCurrList,
+    getListForSummary
   };
 });
