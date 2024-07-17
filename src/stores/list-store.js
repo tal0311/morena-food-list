@@ -88,7 +88,7 @@ export const useListStore = defineStore("list", () => {
 
       // console.log(currList.value);
     // debugger
-    // if (!currList.value) currList.value = listService.getEmptyList();
+    if (!currList.value) currList.value = listService.getEmptyList();
 
     if (currList.value.items.includes(itemId)) {
       currList.value.items = currList.value.items.filter((id) => id !== itemId);

@@ -1,7 +1,7 @@
 <template>
 
     <section class="summary-view grid blur-bg">
-       
+
         <div id="list-container">
             <ItemList v-if="selectItems" :list="selectItems" @selectItem="toggleSelectItem">
                 <h3>{{ $trans('list-results') }}</h3>
@@ -44,7 +44,7 @@ import { useUserStore } from '@/stores/user-store';
 
 // TODO: fix chart labels and data to human readable
 const listStore = useListStore()
-const userStore = useUserStore()
+
 let chartData = ref(null)
 let labels = ref(null)
 
@@ -53,13 +53,9 @@ const selectItems = computed(() => listStore.getListForSummary)
 
 watchEffect(() => {
     if (selectItems.value) {
-        console.log(selectItems.value);
         prepDataForChart()
     }
-
 })
-
-
 
 function prepDataForChart() {
     const data = itemService.prepDataForChart(selectItems.value)
@@ -71,49 +67,23 @@ function prepDataForChart() {
     cmpKey.value++
 }
 
-watchEffect(()=>{
-    if (chartData.value) {
-        // console.log(chartData.value);
-        // console.log(labels.value);
-        
-    }
-})
-
-
 
 function toggleSelectItem({ item }) {
-    console.log(item);
-      listStore.toggleSelect({labelName: item.group, itemId: item._id})
-    // userStore.toggleSelectItem(item)
+    listStore.toggleSelect({ labelName: item.group, itemId: item._id })
+
 }
 
 const route = useRoute()
 const router = useRouter()
 
-watchEffect(() => {
-    const { print } = route.query;
-
-    if (print === 'true') {
-        setTimeout(() => {
-            window.print()
-        }, 500)
-    }
-})
-
-
 function onBack() {
-
     const query = {}
-
     for (const key in route.query) {
         if (key !== 'print') {
             query[key] = route.query[key]
         }
-
     }
-
-
-    router.push({ name: 'list',params:route.params , query: query })
+    router.push({ name: 'list', params: route.params, query: query })
 }
 
 
@@ -123,7 +93,6 @@ function onBack() {
 .summary-view {
     position: fixed;
     width: 95vw;
-    /* background-color: white; */
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);

@@ -101,7 +101,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, onUpdated, computed } from 'vue'
+import { ref, onBeforeMount, onUpdated, computed, watchEffect, watch } from 'vue'
 import { utilService } from '@/services/util.service';
 import { useUserStore } from '@/stores/user-store'
 import { userService } from '@/services/user.service';
@@ -132,7 +132,13 @@ onBeforeMount(async () => {
 
 })
 
+
+const isFirstLoad = ref(true);
 onUpdated(() => {
+    if (isFirstLoad.value) {
+        isFirstLoad.value = false;
+        return;
+    }
     updateUser()
 })
 
