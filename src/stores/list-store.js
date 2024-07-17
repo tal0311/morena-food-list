@@ -20,6 +20,9 @@ export const useListStore = defineStore("list", () => {
   const listByLabels = ref(null);
 
   const getCurrList = computed(() => currList.value);
+  const getListForSummary = computed(() => Object.values(listByLabels.value)
+    .flatMap(item => item)
+    .filter(item => currList.value.items.includes(item._id)));
 
   const getItemList = computed(() => {
     // console.log('listByLabels', listByLabels.value);
@@ -54,7 +57,7 @@ export const useListStore = defineStore("list", () => {
 
   async function loadItems() {
     try {
-      listByLabels.value = await itemService.query();
+      listByLabels.value = await itemService.query({ labels: true });
 
     } catch (error) {
       console.debug("Failed to load list", error);
@@ -89,7 +92,7 @@ export const useListStore = defineStore("list", () => {
     showSuccessMsg("Label updated successfully");
   }
 
-  function toggleSelect({labelName, itemId}) {
+  function toggleSelect({ labelName, itemId }) {
     // console.log('toggleSelect', labelName, itemId);
     listByLabels.value[labelName].map(item => {
       if (item._id === itemId) {
@@ -99,7 +102,7 @@ export const useListStore = defineStore("list", () => {
     })
 
     // console.log('listByLabels', listByLabels.value[labelName]);
-   
+
     // const item = list.find((i) => i._id === itemId);
 
     // item.isSelected = !item.isSelected;
@@ -181,6 +184,7 @@ export const useListStore = defineStore("list", () => {
     loadLists,
     userLists,
     setCurrList,
-    getCurrList
+    getCurrList,
+    getListForSummary
   };
 });

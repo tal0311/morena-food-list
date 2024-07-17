@@ -27,34 +27,28 @@ window.itemService = itemService;
 // loadItems();
 
 async function query(filterBy = {}) {
+  console.log(filterBy);
   const loggedUser = userService.getLoggedInUser();
 
   let items = await fetch('https://cdn.jsdelivr.net/gh/tal0311/food-list-data@main/item.json')
     .then(response => response.json())
 
-   const randomItems = []
-  // console.log('items', items.length);
-
-  // for (let i = 0; i < 10; i++) {
-  //   randomItems.push(items[Math.floor(Math.random() * items.length-1)]._id)
-
-  // }
-  // console.log('randomItems', randomItems);
-
-    // console.log('items', items);
-    
-  // const { isVegetarian, isVegan, isLactoseFree, isKosher, isGlutenFree } = loggedUser.settings;
-  
   // filtering by text as needed
 
 
-const itemsByLabels= getGroupsByLabels(items)
+  if (filterBy.labels) {
 
-await setLabels(itemsByLabels);
+    const itemsByLabels = getGroupsByLabels(items)
+    await setLabels(itemsByLabels);
+    console.log(itemsByLabels);
+    return itemsByLabels
 
-// filter labels by user settings
+  }
 
-return itemsByLabels;
+
+  // filter labels by user settings
+
+  return items;
 
   // if (isVegetarian) {
   //   const vegItems = ['meat-and-poultry', 'fish', 'seafood']
@@ -109,21 +103,21 @@ async function updateLabel(label) {
 
   user.labels = user.labels.map((l) => l.name === label.name ? { ...label, userInput: label.userInput } : l);
 
-  
-   userService.save(user);
+
+  userService.save(user);
   //  console.log('user', user.labels);
   return user.labels
-  
+
 }
 
 // Move to backend
 async function setLabels(list) {
-  
+
   const user = userService.getLoggedInUser();
- 
+
   user.labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
   await userService.save(user);
-  
+
 }
 
 
@@ -158,19 +152,27 @@ function getEmptyItem(name) {
   };
 }
 
-function prepDataForChart(list) {
-  const itemsMap = {};
-  list.reduce((acc, item) => {
-    if (!acc[item.group]) {
-      acc[item.group] = [];
-    }
-    acc[item.group].push(item);
-    return acc;
-  }, itemsMap);
+ function prepDataForChart(list) {
+
+  list = JSON.parse(JSON.stringify(list));
+
+  // console.log(list.items);
+  const itemsMap = list.reduce((acc, curr) => {
+   
+
+      if (!acc[curr.group]) {
+        acc[curr.group] = []
+      }
+      acc[curr.group].push(curr)
+
+    
+    return acc
+  }, {})
 
   for (const group in itemsMap) {
     itemsMap[group] = itemsMap[group].length;
   }
+  console.log(itemsMap);
   return itemsMap;
 }
 

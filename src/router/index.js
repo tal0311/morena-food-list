@@ -114,7 +114,7 @@ router.beforeEach(async (to, from, next) => {
 
   }
   if (to.name === 'list-summary') {
-    if (!userStore.loggedUser.selectedItems.length) {
+    if (!listStore.getCurrList) {
       showSuccessMsg('Please select some items to see the summary')
       // to.meta = userStore.loggedUser.selectedItems
       next({ name: 'list' })

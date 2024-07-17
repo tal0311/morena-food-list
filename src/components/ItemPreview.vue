@@ -106,17 +106,22 @@ function itemInfo() {
     margin: 0 0 0.5rem 0;
     font-size: 1.5rem;
     grid-auto-flow: column;
-    /* grid-template-columns: 50% 50%; */
+    
     cursor: pointer;
     padding: 0.5rem;
     box-shadow: 0 0 1px 1px lightgray;
-
+    
     span:last-child {
         justify-self: end;
     }
-
+    
     &.shared input[type="checkbox"] {
         accent-color: var(--bClr5);
+    }
+    &.swiped{
+        padding-inline-start: 2rem;
+        grid-template-columns:40px 1fr 40px;
+
     }
 }
 

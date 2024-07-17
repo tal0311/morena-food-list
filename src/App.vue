@@ -20,11 +20,11 @@ import { useListStore } from './stores/list-store';
 const listStore = useListStore();
 
 const userStore = useUserStore();
-onBeforeMount(() => {
+onBeforeMount(async () => {
   console.log('App is mounted');
 
-  userStore.loadUser();
-  listStore.loadLists()
+  await userStore.loadUser();
+ await listStore.loadLists()
   
 })
 </script>

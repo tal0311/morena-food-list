@@ -1,10 +1,10 @@
 <template>
-     <!-- {{ labelList || 'No entries' }} -->
+    <!-- {{ groupList }} -->
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
 
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelectItem"
-                @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel"  :key="cmpKey" />
+                @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel" :key="cmpKey" />
             <details>
                 <summary>{{ $trans('personal-notes') }}</summary>
                 <section class="notes-container">
@@ -56,10 +56,11 @@ const labelList = ref(null)
 const user = computed(() => userStore.getUser)
 
 watchEffect(() => {
-    // console.log('groupList', user.value);
-    if(!user.value) return
+    if (!user.value) return
+    console.log(user.value);
     labelList.value = user.value.labels
-    // console.log('labelList', labelList.value);
+
+    
 })
 
 
@@ -72,6 +73,7 @@ onBeforeMount(async () => {
     getDataFromRoute()
     subscriptions[0] = eventBus.on('restore-history', () => {
         changeBtnState('done')
+    
     })
 
     // loadList()
@@ -81,6 +83,8 @@ onMounted(() => {
     const msg = 'Swipe item and click on the checkbox to select it'
     showSuccessMsg(msg)
 })
+
+
 
 async function loadItems() {
     await listStore.loadItems()
@@ -92,17 +96,24 @@ function getDataFromRoute() {
     const { history, share, ids, listId } = route.query
 
     if (ids) {
-        const idsFromRoute = ids.split(',')
-        listStore.setItemsFromShearedList(idsFromRoute)
+        // const idsFromRoute = ids.split(',')
+        // listStore.setItemsFromShearedList(idsFromRoute)
     }
     if (share) {
         // update the store to share the list mode
         appStore.setSharedList(true)
     }
+
+
     if (history) {
-        console.log( listId)
+        console.log(listId)
         listStore.setCurrList(listId)
         changeBtnState('history')
+        
+    }
+    
+    if(listId){
+        listStore.setCurrList(listId)
 
     }
 
@@ -126,7 +137,7 @@ async function clearItems() {
 }
 
 function toggleSelectItem($event) {
-    
+
     listStore.toggleSelect($event)
 }
 
@@ -140,7 +151,7 @@ function mainAction() {
         submitLabel()
         changeBtnState('done')
         return
-        
+
     }
 
     const modalType = btnState.value === 'history' ? 'ModalHistory' : 'ModalDone'

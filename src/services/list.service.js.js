@@ -11,7 +11,8 @@ const STORAGE_KEY = "list_DB";
 
 export const listService = {
   query,
-  getEmptyList
+  getEmptyList,
+  save
 };
 window.listService = listService;
 
@@ -20,8 +21,8 @@ window.listService = listService;
 async function query(filterBy = {}) {
   const loggedUser = userService.getLoggedInUser();
   let lists = await storageService.query(STORAGE_KEY);
-  console.log('lists', lists);
   lists = lists.filter(list => list.owner.id === loggedUser._id)
+  console.log('lists', lists);
   return lists;
 }
 
@@ -41,15 +42,19 @@ async function save(item) {
     savedItem = await storageService.put(STORAGE_KEY, item);
     // savedItem = await httpService.put(`item/${item._id}`, item)
 
+  }else{
+    savedItem = await storageService.post(STORAGE_KEY, item);
+    // savedItem = await httpService.post(`item`, item)
   }
   return savedItem;
 }
 
 function getEmptyList(title = "New List") {
+  const { _id: id, username, imgUrl } =userService.getLoggedInUser() 
   return {
-    __id: utilService.makeId(),
+    
     title,
-    owner: { ...userService.getLoggedInUser(), _id: userService.getLoggedInUser()._id },
+    owner: { id, username, imgUrl },
     items: [],
     createdAt: Date.now(),
     updatedAt: Date.now(),

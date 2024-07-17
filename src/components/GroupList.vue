@@ -2,7 +2,7 @@
     <!-- {{ labelList }} -->
     <!-- {{ groupList }} -->
     <details v-for="{ name, userInput }, idx in labelList" :key="name" :class="`list-details ${name}`">
-        <summary :class="[itemsMap[name] ? 'has-items' : '']">
+        <summary >
 
             <div class="summary-container">
                 <span>{{ $trans(name) }} <span class="counter">{{getCount(name)}}</span></span>
@@ -40,7 +40,7 @@ function onMore(labelName) {
     eventBus.emit('toggle-modal', { type: 'ModalInfo', info: labelName })
 }
 
-const itemsMap = ref({})
+
 
 function getCount(label) {
 
@@ -48,8 +48,7 @@ function getCount(label) {
     return count? `(${count})` : ''
 }
 
-function onSelect({ item, labelName, isShared }) {
-    // console.log(labelName, isShared);
+function onSelect({ item, labelName }) {
     emit('selectItem', { labelName, itemId: item._id })
 
 }

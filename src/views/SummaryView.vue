@@ -1,7 +1,7 @@
 <template>
 
     <section class="summary-view grid blur-bg">
-        <!-- <pre>{{ selectItems }}</pre> -->
+       
         <div id="list-container">
             <ItemList v-if="selectItems" :list="selectItems" @selectItem="toggleSelectItem">
                 <h3>{{ $trans('list-results') }}</h3>
@@ -41,6 +41,7 @@ import { itemService } from '@/services/item.service.local.js'
 import { useUserStore } from '@/stores/user-store';
 
 
+
 // TODO: fix chart labels and data to human readable
 const listStore = useListStore()
 const userStore = useUserStore()
@@ -48,10 +49,11 @@ let chartData = ref(null)
 let labels = ref(null)
 
 const cmpKey = ref(0)
-const selectItems = computed(() => userStore.getSelectedItems)
+const selectItems = computed(() => listStore.getListForSummary)
 
 watchEffect(() => {
     if (selectItems.value) {
+        console.log(selectItems.value);
         prepDataForChart()
     }
 
@@ -61,17 +63,27 @@ watchEffect(() => {
 
 function prepDataForChart() {
     const data = itemService.prepDataForChart(selectItems.value)
-    if (!Object.keys(data).length === 0) return
+    // if (!Object.keys(data).length === 0) return
+    // console.log(data);
     chartData.value = Object.values(data)
     labels.value = Object.keys(data)
     // this is for forcing the chart component to render when data changes
     cmpKey.value++
 }
 
+watchEffect(()=>{
+    if (chartData.value) {
+        // console.log(chartData.value);
+        // console.log(labels.value);
+        
+    }
+})
+
 
 
 function toggleSelectItem({ item }) {
-      listStore.toggleSelect(item._id)
+    console.log(item);
+      listStore.toggleSelect({labelName: item.group, itemId: item._id})
     // userStore.toggleSelectItem(item)
 }
 
