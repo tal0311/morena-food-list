@@ -122,7 +122,7 @@ function onBack() {
 <style scoped>
 .summary-view {
     position: fixed;
-    width: 80vw;
+    width: 95vw;
     /* background-color: white; */
     left: 50%;
     top: 50%;
