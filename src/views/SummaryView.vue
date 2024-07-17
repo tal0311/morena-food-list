@@ -113,7 +113,7 @@ function onBack() {
     }
 
 
-    router.push({ name: 'list', query: query })
+    router.push({ name: 'list',params:route.params , query: query })
 }
 
 

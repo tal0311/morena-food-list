@@ -58,16 +58,16 @@ function onSelect() {
 
 const sharedItem = ref(false)
 
-watchEffect(() => {
+// watchEffect(() => {
 
-    if (route.query.ids && route.query.share) {
-        if (route.query.ids.split(',').includes(props.item._id)) {
-            sharedItem.value = true
-        }
-    }
+//     if (route.query.ids && route.query.share) {
+//         if (route.query.ids.split(',').includes(props.item._id)) {
+//             sharedItem.value = true
+//         }
+//     }
 
    
-})
+// })
 
 function itemInfo() {
     showSuccessMsg('More info coming soon')

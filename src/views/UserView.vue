@@ -74,7 +74,7 @@
                     <li v-for="list in history" :key="history.id" class="grid grid-dir-col">
                         <small>{{ formatDate(list.createdAt) }}</small>
                         <small>{{ list.title }}</small>
-                        <RouterLink :to="`/list/${list._id}/?history=true`">
+                        <RouterLink :to="`/list/${list._id}/`">
                             <span class="secondary-btn">{{ $trans('restore') }}</span>
                         </RouterLink>
                     </li>
