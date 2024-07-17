@@ -12,7 +12,9 @@ const STORAGE_KEY = "list_DB";
 export const listService = {
   query,
   getEmptyList,
-  save
+  save,
+  getById,
+  remove
 };
 window.listService = listService;
 
@@ -22,7 +24,7 @@ async function query(filterBy = {}) {
   const loggedUser = userService.getLoggedInUser();
   let lists = await storageService.query(STORAGE_KEY);
   lists = lists.filter(list => list.owner.id === loggedUser._id)
-  console.log('lists', lists);
+  // console.log('lists', lists);
   return lists;
 }
 
@@ -49,7 +51,7 @@ async function save(item) {
   return savedItem;
 }
 
-function getEmptyList(title = "New List") {
+function getEmptyList(title = "רשימה חדשה") {
   const { _id: id, username, imgUrl } =userService.getLoggedInUser() 
   return {
     

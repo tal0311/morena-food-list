@@ -4,7 +4,7 @@
 
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelectItem"
-                @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel" :key="cmpKey" />
+                @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel" />
             <details>
                 <summary>{{ $trans('personal-notes') }}</summary>
                 <section class="notes-container">
@@ -30,7 +30,7 @@
 // TODO: DND to change the order of the groups
 // TODO: add a button to clear all the selected items add clear items progress bar
 import { useRoute, useRouter } from 'vue-router'
-import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect } from 'vue'
+import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect, onUpdated} from 'vue'
 import { useListStore } from '@/stores/list-store';
 
 import { useAppStore } from '@/stores/app-store'
@@ -57,12 +57,10 @@ const user = computed(() => userStore.getUser)
 
 watchEffect(() => {
     if (!user.value) return
-    console.log(user.value);
+    // console.log(user.value);
     labelList.value = user.value.labels
 
-    
 })
-
 
 const appStore = useAppStore()
 const subscriptions = []
@@ -72,18 +70,13 @@ onBeforeMount(async () => {
 
     getDataFromRoute()
     subscriptions[0] = eventBus.on('restore-history', () => {
+        loadItems()
         changeBtnState('done')
-    
+
     })
 
     // loadList()
 })
-
-onMounted(() => {
-    const msg = 'Swipe item and click on the checkbox to select it'
-    showSuccessMsg(msg)
-})
-
 
 
 async function loadItems() {
@@ -93,6 +86,7 @@ async function loadItems() {
 // const sharedIds = ref(null)
 function getDataFromRoute() {
 
+    // debugger
     const { history, share, ids, listId } = route.query
 
     if (ids) {
@@ -104,24 +98,21 @@ function getDataFromRoute() {
         appStore.setSharedList(true)
     }
 
-
-    if (history) {
-        console.log(listId)
+    if (listId && history) {
         listStore.setCurrList(listId)
         changeBtnState('history')
-        
     }
-    
-    if(listId){
+    if (listId && !history) {
         listStore.setCurrList(listId)
-
+        changeBtnState('done')
     }
+
 
 }
 
 
 
-const cmpKey = ref(0)
+
 async function clearItems() {
     console.debug('clear items');
     if (btnState.value === 'done') {
@@ -131,7 +122,6 @@ async function clearItems() {
         router.push({ name: 'list', query: {} })
         // location.reload()
         showSuccessMsg('Items cleared')
-        cmpKey.value++
         return
     }
 }

@@ -37,10 +37,10 @@ const btns = [
         name: 'save-history',
         action: saveHistory
     },
-    {
-        name: 'back',
-        action: closeModal
-    },
+    // {
+    //     name: 'back',
+    //     action: closeModal
+    // },
     // {
     //     name: 'debug',
     //     action: onDebug

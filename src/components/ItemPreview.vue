@@ -3,11 +3,11 @@
     <section :class="`item-preview grid ${isSwiped ? 'swiped' : 'disabled'} ${sharedItem && 'shared'} `">
         <input v-if="isSwiped" type="checkbox" :id="item._id" :checked="props.item.isSelected && isSwiped"
             @change="onSelect">
-        <div @click="isSwiped = !isSwiped">
+        <div @click="isSwiped = !isSwiped" class="item-info grid grid-dir-col">
             <span>{{ $trans(props.item.name) }}</span>
             <span>{{ props.item.icon }}</span>
         </div>
-        <span @click.stop="itemInfo" v-html="$svg('help')"></span>
+        <span class="icon-svg" @click.stop="itemInfo" v-html="$svg('help')"></span>
 
     </section>
 </template>
@@ -106,22 +106,28 @@ function itemInfo() {
     margin: 0 0 0.5rem 0;
     font-size: 1.5rem;
     grid-auto-flow: column;
-    
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    /* align-items: baseline; */
     cursor: pointer;
     padding: 0.5rem;
     box-shadow: 0 0 1px 1px lightgray;
-    
+
     span:last-child {
         justify-self: end;
     }
-    
+
     &.shared input[type="checkbox"] {
         accent-color: var(--bClr5);
     }
-    &.swiped{
-        padding-inline-start: 2rem;
-        grid-template-columns:40px 1fr 40px;
 
+    &.swiped {
+        grid-template-columns: 40px 1fr 40px;
+    }
+
+    .item-info {
+        grid-template-columns: repeat(2, fit-content);
+        gap: 1rem
     }
 }
 

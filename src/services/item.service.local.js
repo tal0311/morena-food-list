@@ -27,7 +27,7 @@ window.itemService = itemService;
 // loadItems();
 
 async function query(filterBy = {}) {
-  console.log(filterBy);
+  // console.log(filterBy);
   const loggedUser = userService.getLoggedInUser();
 
   let items = await fetch('https://cdn.jsdelivr.net/gh/tal0311/food-list-data@main/item.json')
@@ -40,7 +40,7 @@ async function query(filterBy = {}) {
 
     const itemsByLabels = getGroupsByLabels(items)
     await setLabels(itemsByLabels);
-    console.log(itemsByLabels);
+    // console.log(itemsByLabels);
     return itemsByLabels
 
   }
@@ -97,7 +97,7 @@ function getGroupsByLabels(list) {
 
 
 async function updateLabel(label) {
-  label = JSON.parse(JSON.stringify(label));
+  // label = JSON.parse(JSON.stringify(label));
 
   const user = userService.getLoggedInUser();
 

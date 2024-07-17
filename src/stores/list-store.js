@@ -86,14 +86,14 @@ export const useListStore = defineStore("list", () => {
 
   async function updateLabel(label) {
     // debugger
-    labels.value = await itemService.updateLabel(label);
-    console.log("labels", labels.value);
+    await itemService.updateLabel(label);
+    
 
     showSuccessMsg("Label updated successfully");
   }
 
   function toggleSelect({ labelName, itemId }) {
-    // console.log('toggleSelect', labelName, itemId);
+
     listByLabels.value[labelName].map(item => {
       if (item._id === itemId) {
         item.isSelected = !item.isSelected;
@@ -101,56 +101,14 @@ export const useListStore = defineStore("list", () => {
       return item;
     })
 
-    // console.log('listByLabels', listByLabels.value[labelName]);
-
-    // const item = list.find((i) => i._id === itemId);
-
-    // item.isSelected = !item.isSelected;
-
-    // debugger
-    // const idx = currList.value.items.findIndex((i) => i._id === itemId)
-
-    // if (idx === -1) {
-    //   currList.value.items.push(item)
-    // } else {
-    //   currList.value.items.splice(idx, 1)
-    // }
-
-    // console.log('currList', currList.value);
 
   }
-  // function toggleSelect(itemId) {
-  //   // debugger;
-  //   console.trace();
-  //   const itemIdx = listByLabels?.value.findIndex((item) => item._id === itemId);
-  //   const item = listByLabels.value[itemIdx];
-  //   item.isSelected = !item.isSelected;
 
-  //   listByLabels.value.splice(itemIdx, 1, item);
 
-  //   let { selectedItems } = userStore.loggedUser;
-
-  //   if (item.isSelected) {
-  //     selectedItems.push(item);
-  //   } else {
-  //     selectedItems = selectedItems.filter((i) => i._id !== itemId);
-  //   }
-
-  //   // console.log('after selected', selectedItems);
-  //   userStore.updateUser('selectedItems', JSON.parse(JSON.stringify(selectedItems)))
-  // }
-
-  async function clearItems() {
+  function clearItems() {
     // debugger
-    listByLabels.value = listByLabels.value.map((item) => {
-      item.isSelected = false;
-      return item;
-    });
+    listByLabels.value.items = []
 
-    userStore.updateUser("selectedItems", []);
-    //  const user= userService.getLoggedInUser();
-    //   user.selectedItems = [];
-    //  await userService.save(user);
   }
 
   function setCurrList(listId) {
@@ -158,18 +116,15 @@ export const useListStore = defineStore("list", () => {
   }
 
   async function loadLists() {
+    try {
 
-    lists.value = await listService.query();
-    console.log('loadLists', lists.value);
-    // try {
-    //   // debugger
-    //   const lists = await itemService.query();
-    //   console.log('lists', lists);
-    //   listByLabels.value = lists;
-    // } catch (error) {
-    //   console.debug("Failed to load lists", error);
-    //   showErrorMsg("Failed to load lists, please try again later");
-    // }
+      lists.value = await listService.query();
+      console.log('loadLists', lists.value);
+    } catch (error) {
+      showErrorMsg("Failed to load lists, please try again later");
+
+    }
+
   }
 
   return {
