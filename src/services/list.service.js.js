@@ -19,7 +19,7 @@ export const listService = {
 window.listService = listService;
 
 
-
+_createLists()
 async function query(filterBy = {}) {
   const loggedUser = userService.getLoggedInUser();
   let lists = await storageService.query(STORAGE_KEY);
@@ -65,7 +65,14 @@ function getEmptyList(title = "רשימה חדשה") {
 
 
 
+function _createLists(title, items) {
+  const lists = utilService.loadFromStorage(STORAGE_KEY);
+  if(!lists ){
 
+    utilService.saveToStorage(STORAGE_KEY, []);
+  }
+ 
+}
 
 
 
@@ -82,3 +89,7 @@ function getEmptyList(title = "רשימה חדשה") {
 //     }
 //   }));
 // })();
+
+(() => {
+  
+})();
