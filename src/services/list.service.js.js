@@ -39,16 +39,17 @@ async function remove(itemId) {
   // return httpService.delete(`item/${itemId}`)
 }
 async function save(item) {
-  var savedItem;
+  
+  
   if (item._id) {
-    savedItem = await storageService.put(STORAGE_KEY, item);
+     await storageService.put(STORAGE_KEY, item);
     // savedItem = await httpService.put(`item/${item._id}`, item)
 
   }else{
-    savedItem = await storageService.post(STORAGE_KEY, item);
+    await storageService.post(STORAGE_KEY, item);
     // savedItem = await httpService.post(`item`, item)
   }
-  return savedItem;
+  
 }
 
 function getEmptyList(title = "רשימה חדשה") {

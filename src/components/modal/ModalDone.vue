@@ -115,9 +115,12 @@ async function saveHistory() {
         return
 
     }
-    const title = prompt('set a title you\'r new list') || 'untitled list'
+    
+    
+    const title = prompt('Set a title you\'r new list')
     const listToSave = listService.getEmptyList(title)
     listToSave.items = JSON.parse(JSON.stringify(selectItems.value.items))
+    await listService.save(listToSave)
     showSuccessMsg('History saved successfully, watch it in the user page')
     // closeModal()
 
