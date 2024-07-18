@@ -1,6 +1,6 @@
 [
     {
-        "id": "r-1",
+        "_id": "r-1",
         "group": "fish",
         "he": {
             "title": "דג סלמון ברוטב עגבניות שרי",
@@ -14,6 +14,7 @@
     },
     {
         "_id": "r-2",
+        "group": "fish",
         "he": {
             "title": "תיבול שאפשר לשים על כל דג (ואפילו סלט ירקות)",
             "description": "מכינים תערובת פיצוחים לא קלויים: קשיו, פיסטוקים, זרעי חמניה או דלעת (בעצם כל דבר שאוהבים ומרגיש טוב בעיכול). מכניסים למעבד מזון יחד עם פטרוזיליה וכוסברה לפי הטעם, ראשי שום קלופים, שמן זית, מלח אטלנטי ופלפל גרוס. טוחנים לעיסה גסה ובתבנית, מניחים מעל הדג.מכניסים לתנור ב - 220 מעלות (טורבו) והכי חשוב להוציא כשהדג עוד רייר, הוא ימשיך להתבשל גם לאחר האפייה.  להגיש עם לימון לצד תפוחי אדמה קטנים או ירקות שורש שנאפו בתנור עם שמן זית, מלח פלפל, שיהיה בתיאבון"
@@ -24,7 +25,7 @@
         }
     },
     {
-        "id": "r-3",
+        "_id": "r-3",
         "group": "fish",
         "he": {
             "title": "בר ים משגע",
@@ -34,10 +35,10 @@
             "title": "Stunning Sea Bass",
             "description": "Ask the fish seller to slice the fish like a book and leave the bone in. Place the fish open on a tray and season with olive oil, plenty of crushed garlic, Atlantic salt, and black pepper. Put in the oven on the top shelf at a high heat of 250 degrees for only 10-15 minutes. Serve with a lemon wedge, homemade tahini, and vegetables baked in the oven with fresh za'atar or rosemary, olive oil, salt, and pepper."
         },
-        "imgUrl": "https://example.com/image1.jpg"
+        "imgUrl": ""
     },
     {
-        "id": "r-4",
+        "_id": "r-4",
         "group": "fish",
         "he": {
             "title": "טטאקי טונה בשנייה",
@@ -47,10 +48,10 @@
             "title": "Tuna Tataki in a Second",
             "description": "Buy a piece of fresh tuna. Massage the piece with olive oil and coat it in a mixture of white and black sesame seeds (just like schnitzel). In a pan with olive oil, sear the piece for about 30 seconds on each side, including the edges. Remove to a cutting board (the fish is still red inside). In a bowl, prepare the sauce: a bit of natural silan, ginger to taste, and a sauce called coconut aminos which is like soy sauce, but more nutritious and made from coconut (without a coconut taste). To serve: slice the fish into strips, drizzle the sauce over it, and sprinkle over chopped green onion, thin slices of radishes, and hot pepper, red or green, for those who like it. Eat with your hands or chopsticks. Enjoy."
         },
-        "imgUrl": "https://example.com/image2.jpg"
+        "imgUrl": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802817/Morena%20foodlist/R-8_qnmpla.jpg"
     },
     {
-        "id": "r-5",
+        "_id": "r-5",
         "group": "fish",
         "he": {
             "title": "סביצ'ה דג זה הדבר הכי קל להכנה",
@@ -60,10 +61,10 @@
             "title": "Fish Ceviche is the Easiest Thing to Make",
             "description": "All you need is fresh fish cut into tiny cubes. In a separate bowl, prepare the seasoning which can be based on olive oil, lemon, or orange juice, salt, and pepper, and add anything you like: parsley, cilantro, slices of avocado, cubes of mango, radishes, green onion, hot pepper (basically making a mini salad you like that can go with the fish). Mix everything, including the fish, and serve with curly lettuce leaves or hummus tortillas and/or hard-boiled eggs... idea!"
         },
-        "imgUrl": "https://example.com/image3.jpg"
+        "imgUrl": ""
     },
     {
-        "id": "r-6",
+        "_id": "r-6",
         "group": "fish",
         "he": {
             "title": "סלמון מיושן",
@@ -73,10 +74,10 @@
             "title": "Aged Salmon",
             "description": "Take pieces of salmon, coat them in coarse Atlantic salt and any seasoning you like: thyme, dried za'atar, dried coriander, oregano, you can add sweet or smoked paprika (really anything you like and recognize by sight). Let the fish sit on a rack in the refrigerator for at least three days, slice thinly and eat alongside a salad of roughly chopped kohlrabi and fennel, with plenty of lemon, salt, pepper, and olive oil."
         },
-        "imgUrl": "https://example.com/image4.jpg"
+        "imgUrl": ""
     },
     {
-        "id": "r-7",
+        "_id": "r-7",
         "group": "fish",
         "he": {
             "title": "דג ברוטב (מושט, דניס, בס, או מוסר)",
@@ -86,11 +87,11 @@
             "title": "Fish in Sauce (Mullet, Sea Bream, Bass, or Grouper)",
             "description": "Buy only fresh fish, preferably sea fish rather than farmed fish. In a wide, deep pan, heat olive oil and place the fish slices (skin side down). Season with paprika and turmeric and generously add: peeled garlic cloves, red bell pepper slices, coarsely chopped cilantro, chopped celery leaves, Atlantic salt, hot pepper or ground black pepper to taste, and a bit more olive oil over everything. **You can add whole chickpeas. Cook over low heat for about 20 minutes. Serve with white rice cooked in water with a celery leaf stalk for added flavor or hummus tortillas."
         },
-        "imgUrl": "https://example.com/image5.jpg"
+        "imgUrl": ""
     },
     {
-        "id": "r-8",
-        "group": "chicken-and-poltry",
+        "_id": "r-8",
+        "group": "poultry",
         "he": {
             "title": "פרגית על הגז או על התנור",
             "description": "בתבנית שמתאימה גם לתנור, מטגנים מלא, מלא, מלא, רצועות של בצל לבן, עד שהוא נהיה זהוב, זהוב, זהוב. מתבלים את הפרגיות ב: בהרט בנדיבות(!), פפריקה ומעט כמון. מניחים לצריבה יפה מכל צד (אפשר ביחד עם הבצל שכבר קיבלת צבע יפה). מוסיפים את האורז (יבש), גבעול סלרי שלם, מים רותחים והמלח. ממשיכים לבשל על הגז, אש נמוכה לשעה וחצי או שמכניסים לתנור ל 170 מעלות (טורבו). אוכלים עם סלט שאוהבים. אני אוהבת סלט קצוץ ירוק: תרד, עליי בייבי, חסות, פטרוזיליה, בצל ירוק ווכל מה שאוהבים (עם רוטב בסיס). **תוספת מגניבה לכל מאכל עם אורז היא עלה של סלרי בבישול, שיוציא טעם אוממי לכל הסיר."
@@ -99,10 +100,11 @@
             "title": "Grilled or Oven-Baked Chicken Thighs",
             "description": "In a tray suitable for the oven, fry lots and lots and lots of white onion strips until they are golden, golden, golden. Season the chicken thighs with: generous baharat(!), paprika, and a little cumin. Sear nicely on all sides (you can do this together with the onions that have already turned a nice color). Add the rice (dry), a whole celery stalk, boiling water, and salt. Continue cooking on the stove, low heat for an hour and a half or put in the oven at 170 degrees (turbo). Eat with a salad you like. I like a chopped green salad: spinach, baby leaves, lettuce, parsley, green onion, and anything you like (with a basic dressing). **A cool addition to any dish with rice is a celery leaf during cooking, which will release umami flavor into the whole pot."
         },
-        "imgUrl": "https://example.com/image6.jpg"
+        "imgUrl": ""
     },
     {
-        "id": "r-9",
+        "_id": "r-9",
+        "group": "poultry",
         "he": {
             "title": "סטוק של חזה הודו / עוף במקפיא",
             "description": "נשאר רק להוציא מההקפאה, לפרוס, להקפיץ על הפלנצ'ה ולהוסיף לכל ארוחה. בקערה עם מי מלח (פשוט מים ומלח אטלנטי בכמות יפה), מניחים את החזה ומשרים ל -24 שעות בכדי לשמור על העסיסיות והרכות. מכינים איזה תיבול שאוהבים: אני אוהבת לקחת דבש, חרדל, מלח, פלפל ומעט שמן זית. אפשר פלפל שחור מלח וסילאן טבעי. אפשר טימין, פפריקה, מלח או כל טיבול אחר שאוהבים ומזהים בעיניים. חשוב שהתיבול יהיה יחסית חזק בטעם ודומיננטי כי הוא הולך רק לצפות את הנתחים. מורחים על החזה (אפשר להכין מספר תיבולים שונים במקביל), מכסים בנייר אפייה ואז נייר כסף (שיהיה אטום). אופים ב 160 מעלות לכשעה וחצי. מוציאים, מקררים ומקפיאים."
@@ -111,10 +113,11 @@
             "title": "Turkey/Chicken Breast Stock in the Freezer",
             "description": "Just take it out of the freezer, slice it, stir-fry it on the plancha, and add it to any meal. In a bowl with salt water (just water and a good amount of Atlantic salt), place the breast and soak for 24 hours to maintain juiciness and tenderness. Prepare any seasoning you like: I like to use honey, mustard, salt, pepper, and a bit of olive oil. You can use black pepper, salt, and natural silan. You can use thyme, paprika, salt, or any other seasoning you like and recognize by sight. It is important that the seasoning is relatively strong and dominant in taste because it will only coat the pieces. Spread on the breast (you can prepare several different seasonings simultaneously), cover with baking paper and then aluminum foil (to be airtight). Bake at 160 degrees for about an hour and a half. Remove, cool, and freeze."
         },
-        "imgUrl": "https://example.com/image7.jpg"
+        "imgUrl": ""
     },
     {
-        "id": "r-10",
+        "_id": "r-10",
+        "group": "poultry",
         "he": {
             "title": "תבשיל עוף וחומוס על הגז",
             "description": "בסיר מטגנים בשמן זית את חלקי העוף (כרעיים ושוקיים), מתבלים בפפריקה, כורכום ומעט כמון. מוסיפים בצל (אפשר להיות פה נדיבים מאוד) וממשיכים לטגן. כשהכל זהוב ויפה, מוסיפים גרגירי חומוס, כוסברה ופטרוזיליה קצוצים אם אוהבים ועלי סלרי לטעם האוממי. שופכים מים רותחים עד שכמעט מכסים את העוף, מוסיפים מלח אטלנטי ופלפל שחור. מניחים על אש קטנה ונותנים לזה לפחות שעתיים. מושלם על אורז יסמין, פרסי או בסמטי לבן."
@@ -123,10 +126,11 @@
             "title": "Chicken and Chickpeas Stew on the Stove",
             "description": "In a pot, fry the chicken parts (thighs and drumsticks) in olive oil, season with paprika, turmeric, and a little cumin. Add onions (you can be very generous here) and continue frying. When everything is golden and beautiful, add chickpeas, chopped cilantro and parsley if you like, and celery leaves for the umami taste. Pour boiling water until it almost covers the chicken, add Atlantic salt and black pepper. Place on low heat and let it cook for at least two hours. Perfect over jasmine, Persian, or basmati white rice."
         },
-        "imgUrl": "https://example.com/image8.jpg"
+        "imgUrl": ""
     },
     {
-        "id": "r-11",
+        "_id": "r-11",
+        "group": "poultry",
         "he": {
             "title": "פילטים של עוף על הפלנצ׳ה",
             "description": "קונים פילטים של עוף (הם קצת יותר רבים וצרים משניצל עוף). במחבת מחממים: שמן זית, סילאן למתיקות וצבע, מלח אטלנטי ופלפל שחור גרוס. מניחים את הפילטים רק אחרי שהמחבת והרוטב חמים. נותנים להם טיגון טוב עד להשחמה בצד אחד ורק אז הופכים להשחמה בצד השני. כשהפילטים מוכנים מבפנים ושזופים מאוד מבחוץ, מעבירים לקערה. באותה מחבת מקפיצים ירקות (אפשר להוסיף שמן זית) עד למידת ״אל דנטה״, מוסיפים את הפילטים ומגישים לצד פחמימה טובה וטבעית או שאוכלים פשוט ככה בקערה או על עלה של חסה (:"
@@ -135,10 +139,11 @@
             "title": "Chicken Fillets on the Plancha",
             "description": "Buy chicken fillets (they are a bit more numerous and narrow than chicken schnitzel). In a pan, heat: olive oil, silan for sweetness and color, Atlantic salt, and ground black pepper. Place the fillets only after the pan and the sauce are hot. Give them a good fry until browned on one side and only then turn to brown on the other side. When the fillets are ready inside and very tanned on the outside, transfer to a bowl. In the same pan, stir-fry vegetables (you can add olive oil) until al dente, add the fillets and serve with a good and natural carbohydrate or just eat like this in a bowl or on a lettuce leaf (:"
         },
-        "imgUrl": "https://example.com/image9.jpg"
+        "imgUrl": ""
     },
     {
-        "id": "r-12",
+        "_id": "r-12",
+        "group": "poultry",
         "he": {
             "title": "שניצל עוף",
             "description": "העדפה שלי לטגן בשמן זית. אחרי שטובלים את השניצל בביצה, מצפים אותו בדרך המקובלת (אחת ל… לא יקרה כלום) או בשיבולת שועל גרוסה (קוואקר). לשים לב לא לשרוף את השמן אז אש בינונית ולאכול לצד ירקות שורש כמו: קולורבי, בצל, גזר, סלק שנאפו בשמן זית, שום או כל תבלין אחר. להגיש לצד פלח לימון ולתבול בחרדל משובח ללא חומרים משמרים."
@@ -147,10 +152,11 @@
             "title": "Chicken Schnitzel",
             "description": "My preference is to fry in olive oil. After dipping the schnitzel in egg, coat it in the usual way (once in a while... nothing will happen) or in ground oatmeal (quaker). Be careful not to burn the oil, so medium heat and eat alongside root vegetables like: kohlrabi, onion, carrot, beetroot baked in olive oil, garlic, or any other spice. Serve with a lemon wedge and dip in high-quality mustard without preservatives."
         },
-        "imgUrl": "https://example.com/image10.jpg"
+        "imgUrl": ""
     },
     {
-        "id": "r-13",
+        "_id": "r-13",
+        "group": "meat",
         "he": {
             "title": "קדירת בשרים",
             "description": "הסוד שלי לקדירת בשרים מעולה זה לשים שלושה סוגי בשרים: אסאדו, אוסובוקו ובשר כתף (בשר מספר 5) ולהוסיף לתיבול, קקאו! לוקחים את הבשרים, חותכים לקוביות או מבקשים מהקצב לעשות זאת. קולפים וחותכים לקוביות גדולות ירקות שורש וירקות: שורש כוסברה, פטרוזיליה, גזרים והרבה סלרי. מניחים הכל בתבנית עם נייר אפייה ומתבלים: פפריקה, סילאן, שמן זית, מלח אטלנטי ופלפל גרוס. מכינים ״שוקו״ בכוס גדולה: 1-3 כפיות של קקאו (בהתאם לכמות הבשר) ומים רותחים. שופכים על כל הבשר והירקות. מוסיפים מים רותחים ככה שיהיו נוזלים עד חצי גובה הבשר. עוטפים וסוגרים בנייר אפייה ומעליו נייר כסף לאיטום טוב. אופים בחום גבוהה (200 מעלות) למשך חצי שעה ואז מורידים את החום ל - 150 מעלות ל 3-4 שעות. להגיש לצד פירה או אורז וסלט חסה חמצמץ."
@@ -159,10 +165,11 @@
             "title": "Meat Stew",
             "description": "My secret to an excellent meat stew is to use three types of meat: asado, osso buco, and shoulder meat (meat number 5) and add cocoa to the seasoning! Take the meats, cut into cubes or ask the butcher to do so. Peel and cut into large cubes root vegetables and vegetables: coriander root, parsley, carrots, and lots of celery. Place everything in a tray with baking paper and season: paprika, silan, olive oil, Atlantic salt, and ground pepper. Prepare 'choco' in a large cup: 1-3 teaspoons of cocoa (depending on the amount of meat) and boiling water. Pour over all the meat and vegetables. Add boiling water so that there are liquids up to half the height of the meat. Wrap and seal with baking paper and aluminum foil for good sealing. Bake at high heat (200 degrees) for half an hour, then lower the heat to 150 degrees for 3-4 hours. Serve with mashed potatoes or rice and a tangy lettuce salad."
         },
-        "imgUrl": "https://example.com/image11.jpg"
+        "imgUrl": ""
     },
     {
-        "id": "r-14",
+        "_id": "r-14",
+        "group": "meat",
         "he": {
             "title": "ארוחת סטייק ברגע",
             "description": "לפעמים כל מה שצריך זה סטייק ולא צריך מנגל בשביל זה, פשוט על הפלנצ'ה. לוקחים סטייק (אנטריקוט, סינטה או דנבר), מחממים מחבת בשמן זית ומניחים את הסטייק לדקות ספורות לכל צד (בהתאם למידת העשייה הרצויה): 1 דקה לכל צד - רייר 3 דקות - מדיום רייר / וול בהתאם לעובי הנתח 5 דקות - וול דאן לתבל במלח גס אטלנטי ופלפל שחור. לצד הסטייק מכינים בטטה בתנור (רצועות דקות עם שמן זית מלח ופלפל או כל תבלין אחר) וירקות כמו: ברוקולי מבושל, שעועית ירוקה / עלי פאק צוי מוקפצים בשמן זית, שום, מלח ופלפל ואפשר גם סתם סלט חסה (:"
@@ -171,10 +178,11 @@
             "title": "Instant Steak Meal",
             "description": "Sometimes all you need is a steak and you don't need a grill for it, just the plancha. Take a steak (entrecote, sirloin, or Denver), heat a pan with olive oil and place the steak for a few minutes on each side (depending on the desired doneness): 1 minute on each side - rare 3 minutes - medium rare / well depending on the thickness of the piece 5 minutes - well done Season with coarse Atlantic salt and black pepper. Next to the steak, prepare baked sweet potato (thin strips with olive oil, salt, and pepper or any other seasoning) and vegetables like: steamed broccoli, green beans / stir-fried pak choi leaves in olive oil, garlic, salt, and pepper, and you can also just have a lettuce salad (:"
         },
-        "imgUrl": "https://example.com/image12.jpg"
+        "imgUrl": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802816/Morena%20foodlist/R-4_vaaxtm.jpg"
     },
     {
-        "id": "r-15",
+        "_id": "r-15",
+        "group": "meat",
         "he": {
             "title": "קציצות ברוטב או לא",
             "description": "איך אני מכינה קציצות? פעם ברוטב עגבניות ופעם לא. אני אוהבת לקחת בצל, לגרר אותו, לטגן אותו ולהוסיף אותו לתערובת יחד עם: פטרוזיליה וכוסברה קצוצים, סלרי קצוץ, ביצה, קוואקר ומעט סודה לשתייה ללא אלומיניום שתרכך עוד את הבשר. אני מוסיפה תיבול: פפריקה, מעט כמון, מלח אטלנטי ופלפל שחור. לקציצות ברוטב: אני מטגנת את הקציצות בסיר למדיום רייר ואז מוסיפה עגבניות מרוסקת בנינג׳ה, מעט סילאן לאיזון החמיצות מהעגבניות, פפריקה, מלח ופלפל לפי הטעם ועוד שמן זית. לקציצות ללא רוטב, אני פשוט מטגנת עד שהקציצות מוכנות בפנים (מדיום וול). להגיש לצד סלט ירקות ו/או אורז."
@@ -183,6 +191,189 @@
             "title": "Meatballs in Sauce or Not",
             "description": "How do I make meatballs? Sometimes with tomato sauce and sometimes not. I like to take an onion, grate it, fry it, and add it to the mixture along with: chopped parsley and cilantro, chopped celery, an egg, quaker, and a little aluminum-free baking soda to further soften the meat. I add seasoning: paprika, a little cumin, Atlantic salt, and black pepper. For meatballs in sauce: I fry the meatballs in a pot to medium rare and then add crushed tomatoes in a ninja, a little silan to balance the acidity from the tomatoes, paprika, salt and pepper to taste, and more olive oil. For meatballs without sauce, I simply fry until the meatballs are done inside (medium well). Serve with vegetable salad and/or rice."
         },
-        "imgUrl": "https://example.com/image13.jpg"
+        "imgUrl": ""
+    },
+    {
+        "_id": "r-16",
+        "group": "salad",
+        "he": {
+            "title": "רוטב בסיס לסלטים שלי",
+            "description": "לימון סחוט, תפוז סחוט, דבש, שמן זית, מלח אטלנטי, פלפל שחור. על הבסיס הזה אפשר להוסיף ולשנות לפי הטעם: חרדל/בלסמי או חומץ תפוחים במקום לימון ותפוז/צ׳ילי יבש/זעתר טרי או יבש/גרדת לימון/ערמונים/חתיכות פרי לגיוון/זרעי דלעת וחמנייה קלויים/שקדים קלופים קלויים."
+        },
+        "en": {
+            "title": "My Basic Salad Dressing",
+            "description": "Squeezed lemon, squeezed orange, honey, olive oil, Atlantic salt, black pepper. On this base, you can add and change according to taste: mustard/balsamic or apple cider vinegar instead of lemon and orange/dried chili/fresh or dried za'atar/lemon zest/chestnuts/pieces of fruit for variety/roasted pumpkin and sunflower seeds/roasted peeled almonds."
+        },
+        "imgUrl": ""
+    },
+    {
+        "_id": "r-17",
+        "group": "salad",
+        "he": {
+            "title": "סלט ירוקים וערמונים",
+            "description": "סוגים שונים של קרעי חסה, עלי תרד, גרגיר נחלים, בצל ירוק, רצועות דקות בקולפן של זוקיני או קישוא, ערמונים חתוכים לרבעים. לתבל ברוטב בסיס + צ׳ילי יבש וגרידת לימון."
+        },
+        "en": {
+            "title": "Green Salad with Chestnuts",
+            "description": "Various types of torn lettuce, spinach leaves, watercress, green onion, thin strips of zucchini or squash using a peeler, chestnuts cut into quarters. Season with the basic dressing + dried chili and lemon zest."
+        },
+        "imgUrl": ""
+    },
+    {
+        "_id": "r-18",
+        "group": "salad",
+        "he": {
+            "title": "סלט שנתקע בשיניים מפטרוזיליה וכוסברה",
+            "description": "קוצצים צרור פטרוזיליה, כוסברה, נענע ואפילו שמיר אם אוהבים. מתבלים ברוטב בסיס + חתיכות פרי כמו מנגו או אפרסק + זרעי דלעת וחמנייה קלויים במחבת קמה."
+        },
+        "en": {
+            "title": "Parsley and Cilantro Salad that Sticks in Your Teeth",
+            "description": "Chop a bunch of parsley, cilantro, mint, and even dill if you like. Season with the basic dressing + pieces of fruit like mango or peach + roasted pumpkin and sunflower seeds in a dry pan."
+        },
+        "imgUrl": ""
+    },
+    {
+        "_id": "r-19",
+        "group": "salad",
+        "he": {
+            "title": "שומר וקולורובי נפגשו לסלט",
+            "description": "פרוסות של קולורבי קלוף, רצועות שומר ורוטב בסיס פשוט וטעים עם תגבורת של לימון ושמן זית."
+        },
+        "en": {
+            "title": "Fennel and Kohlrabi Met for a Salad",
+            "description": "Slices of peeled kohlrabi, fennel strips, and a simple and tasty basic dressing with an extra touch of lemon and olive oil."
+        },
+        "imgUrl":""
+    },
+    {
+        "_id": "r-20",
+        "group": "salad",
+        "he": {
+            "title": "סלט גס",
+            "description": "עגבניות שרי פרוסות לחצאים או רבעים, מלפפון קלוף לזברה חתוך לרצועות גסות, בצל סגול וגמבה עם אוהבים. לתבל ברוטב בסיס + זעתר טרי או יבש."
+        },
+        "en": {
+            "title": "Coarse Salad",
+            "description": "Cherry tomatoes cut into halves or quarters, peeled cucumber cut into coarse strips, red onion and bell pepper if you like. Season with the basic dressing + fresh or dried za'atar."
+        },
+        "imgUrl": ""
+    },
+    {
+        "_id": "r-21",
+        "group": "salad",
+        "he": {
+            "title": "סלט עגבניות ובצל מהילדות",
+            "description": "את הסלט הזה ממש אהבתי בתור ילדה. פרוסות של עגבניות רגילות, טבעות של בצל לבן, שמן זית, מלח ופלפל. לשתות את המיץ בסיום (:"
+        },
+        "en": {
+            "title": "Tomato and Onion Salad from Childhood",
+            "description": "I really loved this salad as a child. Slices of regular tomatoes, rings of white onion, olive oil, salt, and pepper. Drink the juice at the end (:"
+        },
+        "imgUrl": ""
+    },
+    {
+        "_id": "r-22",
+        "group": "side-dish",
+        "he": {
+            "title": "חלבון וירקות כתוספת בצד זה מדהים",
+            "description": "כשנשאר חלבון כלשהו מארוחה קודמת או מהסופ״ש, אני אקח מנה ואחמם. לצידה אחתוך ירקות גס ואשפוך מעל הכל לימון, שמן זית, טחינה גולמית או אבוקדו כפרוסות. איכשהו זה תמיד יוצא פינוק (:"
+        },
+        "en": {
+            "title": "Protein and Vegetables as a Side Dish is Amazing",
+            "description": "When there is some leftover protein from a previous meal or the weekend, I take a portion and heat it up. Alongside it, I cut coarse vegetables and pour over everything lemon, olive oil, raw tahini, or sliced avocado. Somehow it always turns out to be a treat (:"
+        },
+        "imgUrl": ""
+    },
+    {
+        "_id": "r-23",
+        "group": "side-dish",
+        "he": {
+            "title": "טורטיות חומוס",
+            "description": "מהר כמו להכין חביתה. ככף קמח חומוס, מלח וכורכום (או כל תיבול אחר) בקערה. להוסיף מעט מים ולערבב טוב לעיסה יחסית דלילה (כמו של פנקייק). על מחבת חמה עם שמן זית, לטגן. הטורטייה מקבלת קריספיות קלה במסביב. עליה אפשר להניח ביצים/ עוף/גבינות/דגים וירקות בצד גם מעל (:"
+        },
+        "en": {
+            "title": "Chickpea Tortillas",
+            "description": "As quick as making an omelet. A tablespoon of chickpea flour, salt, and turmeric (or any other seasoning) in a bowl. Add a little water and mix well to a relatively thin batter (like pancake batter). Fry in a hot pan with olive oil. The tortilla gets a slight crispiness around the edges. You can place eggs/chicken/cheese/fish and vegetables on top and on the side (:"
+        },
+        "imgUrl": ""
+    },
+    {
+        "_id": "r-24",
+        "group": "salad",
+        "he": {
+            "title": "חומוס ביתי",
+            "description": "במים רותחים עם בצל חתוך לרבעים וגבעול סלרי, לבשל גרגירי חומוס טרי או קפוא (רק לא מקופסת שימורים). כשהחומוס רך לטחון אותו עם מעט מהמים שבושל בהם וטחינה לפי הטעם (אני משתמשת במלאה, תמיד!). להוסיף מלח אטלנטי ולהגיש עם שמן זית, כמון ולימון סחוט. לנגב עם ירקות + זיתים וביצים קשות בצד או שאריות מהקדרת בשרים (:"
+        },
+        "en": {
+            "title": "Homemade Hummus",
+            "description": "In boiling water with a quartered onion and a celery stalk, cook fresh or frozen chickpeas (just not from a can). When the chickpeas are soft, grind them with a bit of the water they were cooked in and tahini to taste (I always use whole tahini!). Add Atlantic salt and serve with olive oil, cumin, and squeezed lemon. Scoop with vegetables + olives and hard-boiled eggs on the side or leftovers from the meat stew (:"
+        },
+        "imgUrl": ""
+    },
+    {
+        "_id": "r-25",
+        "group": "other",
+        "he": {
+            "title": "ארוחה על עלה של חסה",
+            "description": "קניתם חסה נכון? נשאר להכין מנת חלבון פשוטה כגון עוף בתנור/ חביתה/ קציצות או סטייק על הפלנצה. טוב גם קופסת טונה (במים ולהוסיף לה שמן זית) אחת לשבוע/שבועיים היא פתרון … לחתוך 2-3 ירקות, לזלף מעל טחינה/שמן זית או להניח פרוסות אבוקדו או זיתים (תכלס אפשר גם וגם כי שמן לא משמין). טיפ של סבתות סופר חשוב: לאכול עם הידיים וללקק את האצבעות."
+        },
+        "en": {
+            "title": "Meal on a Lettuce Leaf",
+            "description": "Bought lettuce, right? All that’s left is to prepare a simple protein dish such as baked chicken/omelet/meatballs or steak on the plancha. A can of tuna (in water, add olive oil) once a week or every two weeks is also a solution. Cut 2-3 vegetables, drizzle tahini/olive oil on top or place avocado slices or olives (honestly, you can do both because oil doesn’t make you fat). Super important grandmother's tip: eat with your hands and lick your fingers."
+        },
+        "imgUrl": ""
+    },
+    {
+        "_id": "r-26",
+        "group": "other",
+        "he": {
+            "title": "אורז 'שאריות'",
+            "description": "תמיד כשמכינים אורז מכינים כמות יפה שתחזיק ל-3-4 ימים ואז כשרוצים לגוון או שנגמרו השאריות מהסופ\"ש (אבל האורז נשאר במקרר), מוסיפים לו ממגוון הירקות שבמקרר: חותכים לרצועות דקות, לדוגמה: גזר, קולורבי, קישואים, בצל סגול/לבן וגמבה, מקפיצים על מחבת להשחמה. טיפ של סבתות: כדי לתת לירקות השחמה ועדיין לשמור אותם אל דנטה, מניחים אותם במחבת ללא שמן בשלב הראשוני, אחרי השחמה מוסיפים שמן זית, ג'ינג'ר, קשיו טבעי או כל פיצוחים אחרים שאוהבים שאינם קלויים. מתבלים ברוטב קוקוס אמינו, מעט סילאן ומגישים עם ירוקים קצוצים מעל: בצל ירוק, פטרוזיליה או כוסברה. סוחטים מעל הכל לימון ואוכלים עם צ'ופסטיק. לארוחה מאוזנת מבחינת חלבון אני אוהבת להוסיף מקושקשת מ-2-3 ביצים או רצועות של בשר/עוף על המחבת. כמובן שאפשר גם להכין גרסה צמחונית לא פחות טעימה."
+        },
+        "en": {
+            "title": "Rice 'Leftovers'",
+            "description": "When making rice, always make a good amount to last for 3-4 days, and then when you want variety or the weekend leftovers are gone (but the rice is still in the fridge), add various vegetables from the fridge: cut into thin strips, for example: carrot, kohlrabi, zucchini, red/white onion, and bell pepper, stir-fry in a pan to brown. Grandmother's tip: to brown the vegetables while keeping them al dente, place them in the pan without oil initially, after browning add olive oil, ginger, natural cashews or any other unroasted nuts you like. Season with coconut aminos sauce, a little silan, and serve with chopped greens on top: green onion, parsley, or cilantro. Squeeze lemon over everything and eat with chopsticks. For a balanced protein meal, I like to add scrambled eggs from 2-3 eggs or strips of meat/chicken on the pan. Of course, you can also make a no less tasty vegetarian version."
+        },
+        "imgUrl": ""
+    },
+    
+    {
+        "_id": "r-27",
+        "group": "other",
+        "he": {
+            "title": "ארוחת גמבה מחוץ לבית",
+            "description": "זיכרון ילדות לאוכלי מוצרי החלב. בגמבה אדומה ממלאים גביע קוטג' 5% ומעלה (25 גרם חלבון בגביע שלם אז אפשר להפסיק עם מוצרי ה'PRO'). מגישים לצד ביצים קשות שהוכנו ערב (או יום יומיים) קודם, חופן זיתים או חצי אבוקדו וכבר חושבים על הקינוח המפנק לצד הקפה (שם פוגשים את הפחמימה). טיפ של סבתות: המתכון יכול לעבוד עם כל ירק: פרוסות קולורבי, מלפפון, כרוב ואיתם 'לנגב' את הקוטג'. בלי סכין ובלי מזלג. ואגב, אפשר להחליף את הירק בפרי: תפוח, קוטג' וכמה שקדים בצד."
+        },
+        "en": {
+            "title": "Bell Pepper Meal Outside the House",
+            "description": "A childhood memory for dairy product eaters. Fill a red bell pepper with 5% or higher cottage cheese (25 grams of protein in a whole tub so you can stop with the 'PRO' products). Serve alongside hard-boiled eggs prepared the evening (or a day or two) before, a handful of olives or half an avocado, and already think about the indulgent dessert next to the coffee (where you meet the carbohydrate). Grandmother's tip: the recipe can work with any vegetable: kohlrabi slices, cucumber, cabbage, and use them to 'scoop' the cottage cheese. No knife and no fork. By the way, you can replace the vegetable with fruit: apple, cottage cheese, and some almonds on the side."
+        },
+        "imgUrl": ""
+    },
+    {
+        "_id": "r-28",
+        "group": "eggs",
+        "he": {
+            "title": "ארוחה בקערה",
+            "description": "מאוהבת ברעיון ״ההרכבה״ הזה המושתת על צבעוניות! אני לרוב אחלק את הקערה ל: יותר חלבון, ירקות ושומנים ופחמימה עמילנית כתוספת קטנה. דוגמאות שאפשר לעשות ביניהן מיקס, לבחור דבר אחד או שניים מכל קבוצה ולצלחת קערה צבעונית שכל מי שמסתכל עליה רואה קודם חלבון, אח\"כ ירקות ושומן ופחמימה מעודנת בצד: חלבונים - 2-3 ביצים בכל ורסיה / שאריות דג/ בשר/ קציצות מהסופ״ש / שניצל שנשאר וכדומה. *אפשר לעשות מיקס חלבונים ממה שיש במקרר לדוגמה: דג שנשאר + חביתה. ירקות - ירקות חתוכים גס או לסלט עם שמן זית, לימון, מלח ופלפל (אפשר להתפרע ולגוון, פעם כרוב, פעם שומר ופעם סלט ישראלי). שומנים - שמן זית, אבוקדו, זיתים, פיצוחים לא קלויים, טחינה, אחת לגבינה שמנה ומשובחת. פחמימה עמילנית - אורז, כוסמת שאני אוהבת, בטטה, טורטיית חומוס, חומוס בייתי *באופן אישי אין לי בעיה לאכול פירות בארוחה כמנת פחמימה, לדוגמה: דג, חביתה, ירקות ירוקים וחופן אוכמניות או דובדבנים. לי זה טעים, מקווה שגם לך (:"
+        },
+        "en": {
+            "title": "Meal in a Bowl",
+            "description": "In love with this 'assembly' idea based on colorfulness! I usually divide the bowl into: more protein, vegetables, and fats, and starchy carbohydrate as a small addition. Examples that you can mix between, choose one or two from each group, and plate a colorful bowl that anyone looking at it first sees protein, then vegetables and fat, and a subtle carbohydrate on the side: Proteins - 2-3 eggs in any version / leftover fish/meat/meatballs from the weekend / leftover schnitzel, etc. *You can make a mix of proteins from what's in the fridge, for example: leftover fish + an omelet. Vegetables - coarsely cut vegetables or salad with olive oil, lemon, salt, and pepper (you can go wild and vary, sometimes cabbage, sometimes fennel, and sometimes an Israeli salad). Fats - olive oil, avocado, olives, unroasted nuts, tahini, occasionally rich and quality cheese. Starchy carbohydrate - rice, buckwheat which I love, sweet potato, chickpea tortilla, homemade hummus *Personally, I have no problem eating fruit in a meal as a carbohydrate portion, for example: fish, omelet, green vegetables, and a handful of blueberries or cherries. I find it tasty, hope you do too (:"
+        },
+        "imgUrl": ""
+    },
+    {
+        "_id": "r-29",
+        "group": "dessert",
+        "he": {
+            "title": "יוגורט כקינוח (ובטח לא במטרה לשבוע)",
+            "description": "יוגורט יווני 6% או 10%, כפית דבש או ריבה טובה, מעט שקדים קלופים. אופציה נוספת: לחתוך קוביות של פרי, להוסיף עוד שומן כדי שהנשנוש יהיה מספק כמו חמאת בוטנים טבעית או שקדיה, קינמון ומעט דבש. וכן זה מחליף כל מעדן במתיקות מעודנת או פרי (גם מי שהוא 0% שומן)."
+        },
+        "en": {
+            "title": "Yogurt as a Dessert (and Certainly Not to Fill You Up)",
+            "description": "Greek yogurt 6% or 10%, a teaspoon of honey or good jam, a few peeled almonds. Another option: cut fruit into cubes, add more fat so the snack is satisfying like natural peanut butter or almond butter, cinnamon, and a bit of honey. And yes, it replaces any dessert with mild sweetness or fruit (even if it is 0% fat)."
+        },
+        "imgUrl": ""
     }
 ]

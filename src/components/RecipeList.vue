@@ -1,9 +1,8 @@
 <template>
 
     <section class="recipe-list grid">
-    
-        <RecipePreview v-for="recipe in props.recipes" :key="recipe.id" :recipe="recipe" 
-        :is="props.is" @addToList="$emit('addToList',$event)"/>
+    <!-- <pre> {{ recipes.map(recipe => recipe) }}</pre> -->
+        <RecipePreview v-for="recipe in props.recipes" :recipe="recipe" :key="recipe._id"  />
 
     </section>
 
@@ -19,10 +18,7 @@ const props = defineProps({
         type: Object,
 
     },
-    is: {
-        type: String
-    }
-})
+  })
 </script>
 
 <style scoped>

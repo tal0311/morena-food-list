@@ -61,9 +61,9 @@ const labelList = ref(null)
 const user = computed(() => userStore.getUser)
 
 watchEffect(() => {
-    if (!user.value) return
-    // console.log(user.value);
-    labelList.value = user.value.labels
+  if(user.value){
+      labelList.value = user.value.labels
+  }
 
 })
 

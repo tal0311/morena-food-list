@@ -7,27 +7,23 @@ import { useListStore } from "./list-store";
 
 // TODO : convert error handling to plugin
 export const useRecipeStore = defineStore("recipe", () => {
-    
-
-    const matchRecipes = ref(null);
-
-    const getMatchRecipes = computed(() => matchRecipes.value);
 
 
-     function loadMatches() {
-        matchRecipes.value=  recipeService.query()
+    const recipes = ref(null);
+
+
+    const getRecipes = computed(() => {
+        return recipes.value;
+    });
+
+
+    async function loadRecipes() {
+        recipes.value = await recipeService.query()
     }
 
-    const recipesList = ref(null);
-    const getRecipes = computed(() => recipesList?.value);
-    async function loadRecipes(){
-        return await recipeService.getRecipes()
-    }
 
     return {
         loadRecipes,
-        getRecipes,
-        loadMatches,
-        getMatchRecipes
+        getRecipes
     }
 })

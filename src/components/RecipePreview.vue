@@ -2,29 +2,23 @@
     <section>
 
 
+        <!-- {{ props.recipe.title }} -->
+
         <article class="recipe-preview grid" @click="isOpen = !isOpen">
-            <img :src="props.recipe.image" :alt="props.recipe.title">
-            <div v-if="props.is === 'match'" class="match">
-                <span class="match-num" :style="getStyle">Products match {{ props.recipe.percentage }} %</span>
-            </div>
-            <div v-else class="match add" @click.stop="addToList">
-                {{ btnStatus }}
-            </div>
+            <img :src="props.recipe.imgUrl" :alt="props.recipe.title">
+            
+            
             <div class="info-container grid">
                 <h4>{{ props.recipe.title }}</h4>
                 <div class="sub-info grid">
-                    <span>{{ props.recipe.level }} </span> <span>{{ props.recipe.prepTime }}min</span>
+                    <span>{{ props.recipe.title }} </span> <span>{{ props.recipe.group }}</span>
                 </div>
             </div>
         </article>
 
         <section v-if="isOpen">
 
-            <ul>
-                <li v-for="step in props.recipe.instructions" :key="step">
-                    {{ step }}
-                </li>
-            </ul>
+           <p>{{ props.recipe.description }}</p>
 
         </section>
 
@@ -33,75 +27,16 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import {ref} from 'vue'
 
 const props = defineProps({
     recipe: {
-        type: Object,
-
-    },
-    is: {
-        type: String
+        type: Object   
     }
+   
 })
 
-
-const btnStatus = ref('Add to list');
-const isOpen = ref(false);
-
-// const url = computed(() => {
-//   return new URL(`../assets/images/recipe/${props.recipe.recipe.image}`).href;
-// });
-
-
-const emit = defineEmits(['addToList']);
-function addToList() {
-    
-    if (btnStatus.value === 'Added') return;
-    btnStatus.value = 'Added';
-    emit('addToList', props.recipe._id);
-
-
-}
-
-
-const getStyle = computed(() => {
-    
-    if (props.recipe.percentage > 90) {
-        return {
-            color: 'lightgreen'
-        };
-    } else if (props.recipe.percentage > 80) {
-        return {
-            color: 'green'
-        };
-    } else if (props.recipe.percentage > 70) {
-        return {
-            color: 'yellow'
-        };
-    } else if (props.recipe.percentage > 60) {
-        return {
-            color: 'lightyellow'
-        };
-    } else if (props.recipe.percentage > 50) {
-        return {
-            color: 'orange'
-        };
-    } else if (props.recipe.percentage > 40) {
-        return {
-            color: 'darkorange'
-        };
-    } else if (props.recipe.percentage > 20) {
-        return {
-            color: 'red'
-        };
-    } else {
-        return {
-            color: 'gray'
-        };
-    }
-
-})
+const isOpen = ref(false)
 
 </script>
 

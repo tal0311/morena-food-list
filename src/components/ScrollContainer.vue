@@ -21,7 +21,7 @@ const props = defineProps({
     options: {
         type: Object,
         default: () => ({
-            arrowType: 'ios',
+            arrowType: 'chevron',
             scrollType: 'smooth',
             scrollLength: 200,
             firstElClass: '',
@@ -118,15 +118,18 @@ const indicator = computed(() => {
     width: 100%;
     justify-content: center;
 }
+
 section.sl {
     display: grid;
     grid-auto-flow: column;
     gap: 1rem;
     overflow-x: auto;
 }
+
 section.sl::-webkit-scrollbar {
     display: none;
 }
+
 div.item {
     background-color: #333;
     color: #fff;
@@ -137,6 +140,7 @@ div.item {
     width: 200px;
     height: 100px;
 }
+
 .sc button {
     position: relative;
     display: grid;
@@ -146,13 +150,20 @@ div.item {
     border-radius: 50%;
     cursor: pointer;
 }
+
 .sc button:disabled {
     opacity: 0%;
 }
+
 .sc button:first-of-type {
     margin-right: -1rem;
+    padding: 0;
+    background-color: transparent;
 }
+
 .sc button:last-of-type {
+    padding: 0;
     margin-left: -1rem;
+    background-color: transparent;
 }
 </style>

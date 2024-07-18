@@ -1,92 +1,131 @@
 <template>
     <section class="recipe-view">
+        <!-- {{ recipes }} -->
         <h2>{{ $trans('food-inspiration') }}</h2>
-        <RecipeList v-if="recipes && recipes.length" :recipes="recipes" :is="'match'" />
-        <RecipeList v-else="inspiration && inspiration.length" :recipes="inspiration" :is="'inspiration'"
-            @addToList="addToList" />
+        <section class="filter-container grid grid-dir-col">
 
-        <footer v-if="listFromRecipes.length" class="blur-bg">
-            <button class="primary-btn" @click="goToList">{{ $trans('go-to-list') }}</button>
-        </footer>
+            <button v-for="btn in filterBtns" :key="btn" :class="[activeLabel === btn&& 'active', 'grid', 'secondary-btn']" 
+                @click="setFilterByGroup(btn)">
+                <span>{{ getIconByBtn(btn) }}</span>
+                <small>{{ countByGroup[btn]}}</small>
+            </button>
+
+
+
+        </section>
+        <RecipeList v-if="recipes" :recipes="recipes" :is="'match'" />
 
     </section>
 </template>
 
 <script setup>
-import { ref, computed, onBeforeMount, watchEffect, onMounted } from 'vue';
+import { ref, computed, onBeforeMount, watchEffect } from 'vue';
 import { useRecipeStore } from '@/stores/recipe-store';
 import { useRoute, useRouter } from 'vue-router';
 import RecipeList from '@/components/RecipeList.vue'
-import { recipeService } from '@/services/recipe.service.local';
-import { useListStore } from '@/stores/list-store';
-import { showSuccessMsg } from '@/services/event-bus.service';
-// import InspPreview from '@/components/InspPreview.vue'
+import ScrollContainer from '@/components/ScrollContainer.vue';
+
+
 const recipeStore = useRecipeStore()
-const route = useRoute()
-const inspiration = ref(null)
+
+const filterByGroup = ref(null)
+const recipes = computed(() => {
+    if (!filterByGroup.value || filterByGroup.value === 'all') return recipeStore.getRecipes
+
+    return recipeStore.getRecipes.filter(recipe => recipe.group === filterByGroup.value)
+})
+const filterBtns = ref(null)
+const countByGroup = ref(null)
+const isFirstTime = ref(true)
+const activeLabel = ref(null)
+
+watchEffect(() => {
+    if (recipes.value && isFirstTime.value) {
+        isFirstTime.value = false
+        filterBtns.value = ['all', ...Array.from(new Set(recipes.value.map(recipe => recipe.group && recipe.group)))]
+
+        countByGroup.value = recipes.value.reduce((acc, recipe) => {
+            acc['all'] =recipes.value.length
+            acc[recipe.group] = acc[recipe.group] + 1 || 1
+            return acc
+        }, {})
+    }
+
+})
+
+function setFilterByGroup(label) {
+    activeLabel.value = label
+    filterByGroup.value = label
+
+}
+
+function getIconByBtn(btn) {
+    const opts = {
+        'all': 'All',
+        'fish': ' 🐟',
+        'meat': '🍖',
+        'salad': '🥗',
+        'dessert': '🍰',
+        'other': '🍲',
+        'side-dish': '🍚',
+        'soup': '🍲',
+        'eggs': '🍳',
+        'poultry': '🍗',
+
+
+    }
+
+    return opts[btn] || btn
+}
+
 
 onBeforeMount(() => {
-    if (route.query.inspiration) {
-        loadRecipes()
-    }
-})
 
-onMounted(() => {
-    if (route.query.inspiration) {
-        showSuccessMsg("Select a recipe to add products to the list");
-    }
-})
+    loadRecipes()
 
-async function loadRecipes() {
-    inspiration.value = await recipeService.getRecipes()
-}
-
-const recipes = computed(() => {
-    return recipeStore.getMatchRecipes
 })
 
 
-const listFromRecipes = ref([])
-async function addToList(id) {
-    const items = await recipeService.getProductsFromRecipe(id)
-    if (items.length) {
-        listFromRecipes.value = Array.from(new Set(
-            [...JSON.parse(JSON.stringify(listFromRecipes.value)), ...items]
-        ))
-    }
-
+function loadRecipes() {
+    recipeStore.loadRecipes()
 
 }
 
-const router = useRouter()
-function goToList() {
 
-    router.push({
-        name: 'list', query:
-        {
-            share: true,
-            ids: listFromRecipes.value.map(item => item._id).join(','),
-            history: true
-        }
-    })
-}
+
+
 
 
 </script>
 <style scoped>
-footer {
-    position: fixed;
-    bottom: 5rem;
-    left: 50%;
+.recipe-view {
     display: grid;
-    place-content: center;
-    transform: translateX(-50%);
-    transition: translate 0.2s;
-    width: 100%;
+    gap: 2rem;
 
-    button {
-        padding: 1rem;
+    h2 {
+        margin-block-end: 0;
     }
 
+    .filter-container {
+      
+        padding: 0.2rem;
+        gap: 1rem;
+        overflow: auto;
+
+        button {
+            height: 3rem;
+            width: 3rem;
+            place-content: center;
+            /* gap: 0.5rem; */
+
+
+            &.active {
+                opacity: 0.5;
+            }
+
+
+
+        }
+    }
 }
 </style>
