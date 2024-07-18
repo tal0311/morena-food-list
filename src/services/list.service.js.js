@@ -66,6 +66,10 @@ function getEmptyList(title = "רשימה חדשה") {
 
 
 
+
+
+
+// TODO:fix this on deploy 
 // TEST DATA
 // (() => {
 //   utilService.saveToStorage(STORAGE_KEY, lists.map(list => {

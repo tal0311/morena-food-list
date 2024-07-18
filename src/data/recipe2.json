@@ -1,0 +1,255 @@
+
+[
+    {
+        "_id": "5f8f4b3b9b3b3b0017b1f3b1",
+        "title": "Salmon",
+        "description": "Salmon is a popular food. Classified as an oily fish, salmon is considered to be healthy due to the fish's high protein, high omega-3 fatty acids, and high vitamin D content.",
+        "ingredients": [
+            "salmon",
+            "salt",
+            "black-pepper",
+            "lemons"
+        ],
+        "products":"Salmon fillets (4) 1/2 teaspoon salt 1/2 teaspoon pepper 1 tablespoon lemon juice",
+        "instructions": [
+            "Preheat oven to 450 degrees F (230 degrees C).",
+            "Season salmon fillets with salt, pepper, and lemon juice.",
+            "Place in a baking dish and bake for 12-15 minutes."
+        ],
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802815/Morena%20foodlist/R-1_wsmfyj.jpg",
+        "level": "Easy",
+        "prepTime": 5,
+        "cookTime": 15
+    },
+    {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b2",
+        "title": "Salmon with Tomatoes and Greens",
+        "description": "Salmon baked with tomatoes and greens, a dish rich in protein, carbohydrates, fiber, vitamins, minerals, and healthy fats.",
+        "ingredients": [
+            "tomatoes",
+            "cilantro",
+            "garlic",
+            "lemons",
+            "paprika",
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
+        ],
+        "products": "4 salmon fillets, 2 tomatoes or cherry tomatoes, 1 bunch cilantro, 4 cloves garlic, 1 lemon, 1 teaspoon paprika, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
+        "instructions": [
+            "Preheat oven to 220 degrees C (turbo).",
+            "Chop all vegetables (peel and deseed the lemon) and crush the garlic.",
+            "Add spices gently and mix everything with hands, slightly crushing the mixture to release juices and flavors.",
+            "Generously place the mixture on the fish (cut large pieces and season between them).",
+            "About 10-15 minutes before eating, place on the top shelf of the oven. Bake for 10-15 minutes until the fish is medium rare.",
+            "Serve with lemon, alongside white rice or any other natural carbohydrate."
+        ],
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802815/Morena%20foodlist/R-2_p3vlx5.jpg",
+        "level": "Medium",
+        "prepTime": 15,
+        "cookTime": 15
+    },
+    {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b3",
+        "title": "Chicken Thighs with Crispy Rice",
+        "description": "Chicken thighs or parts cooked with crispy rice on the stovetop.",
+        "ingredients": [
+            "chicken-thighs",
+            "onions",
+            "celery",
+            "rice",
+            "baharat",
+            "paprika",
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
+        ],
+        "products": "4 chicken thighs, 2 white onions, 2 celery stalks, 1 cup white rice, 1 teaspoon baharat, 1 teaspoon paprika, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
+        "instructions": [
+            "Slice the onions thinly and fry until nicely browned.",
+            "Add chicken parts, spices (generously with paprika and baharat) and continue cooking (can use a covered pot and stir occasionally).",
+            "When the chicken gets a nice color, add rice and stir for another 5 minutes with the pot covered.",
+            "Place whole celery leaves in the pot for umami flavor, add water and salt (1.5 cups of water and 1 teaspoon of salt per cup of rice).",
+            "Cook on very low heat for about 1.5 hours.",
+            "Before serving, increase the heat to give the rice at the bottom a good crisp.",
+            "Serve alongside a salad with vegetables and greens."
+        ],
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802818/Morena%20foodlist/R-3_lw7be7.jpg",
+        "level": "Medium",
+        "prepTime": 20,
+        "cookTime": 90
+    },
+    {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b4",
+        "title": "Greens and Chestnuts Salad",
+        "description": "A fresh and vibrant salad with greens, chestnuts, and a tangy dressing.",
+        "ingredients": [
+            "lettuce",
+            "spinach",
+            "watercress",
+            "green-onion",
+            "zucchini",
+            "squash",
+            "chestnuts",
+            "honey",
+            "lemons",
+            "oranges",
+            "crushed-chili",
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
+        ],
+        "products": "1 head lettuce, 1 bunch spinach or watercress, 2 green onions, 1 zucchini, 1 cup chestnuts, 1 teaspoon honey, 1 lemon, 1 orange, 1 teaspoon crushed chili, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
+        "instructions": [
+            "Wash and tear the leaves by hand, slice the zucchini thinly with a peeler, halve the chestnuts and mix everything in a bowl.",
+            "In a jar, squeeze lemon juice, orange juice, add a teaspoon of honey, crushed chili to taste, olive oil, salt, and pepper. Mix well.",
+            "Pour the dressing over the salad just before serving and toss gently to maintain crispness.",
+            "Serve alongside meat, fish, chicken, or even homemade hummus."
+        ],
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802816/Morena%20foodlist/R-4_vaaxtm.jpg",
+        "level": "Easy",
+        "prepTime": 15,
+        "cookTime": 0
+    },
+    {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b5",
+        "title": "Chickpea Tortillas",
+        "description": "Simple and nutritious tortillas made from chickpea flour, perfect with various fillings.",
+        "ingredients": [
+            "chickpea-flour",
+            "turmeric",
+            "salt"
+        ],
+        "products": "1 cup chickpea flour, 1/2 teaspoon turmeric (optional), 1/2 teaspoon salt",
+        "instructions": [
+            "In a bowl, mix chickpea flour with water to a pancake batter consistency.",
+            "Add turmeric and salt to taste.",
+            "Heat a non-stick pan with a little olive oil. When the oil is hot (not burning), pour in the batter.",
+            "Flip only after bubbles appear and the edges are slightly brown.",
+            "Remove when the center of the tortilla is dry.",
+            "Serve with scrambled eggs, avocado, and a simple vegetable salad."
+        ],
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802817/Morena%20foodlist/R-5_x4wipc.jpg",
+        "level": "Easy",
+        "prepTime": 10,
+        "cookTime": 10
+    },
+    {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b6",
+        "title": "Homemade Hummus",
+        "description": "Creamy and delicious homemade hummus, perfect as a dip or spread.",
+        "ingredients": [
+            "chickpeas",
+            "celery",
+            "onion",
+            "full-tahini",
+            "lemons",
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
+        ],
+        "products": "2 cups frozen chickpeas, 2 celery stalks, 1 white onion, 1/2 cup full tahini, 1 lemon, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
+        "instructions": [
+            "In a pot with boiling water, add quartered onion, whole celery leaves, and salt. Cook until chickpeas are soft.",
+            "Remove the onion and celery, and 3/4 of the water.",
+            "Transfer the remaining chickpeas and 1/4 of the water to a food processor. Add tahini and blend until smooth.",
+            "For extra smoothness, pass the hummus through a sieve.",
+            "Serve with olive oil, lemon, chopped parsley and cilantro, alongside hard-boiled eggs or any leftover protein."
+        ],
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802817/Morena%20foodlist/R-6_wdzw8f.jpg",
+        "level": "Medium",
+        "prepTime": 20,
+        "cookTime": 60
+    },
+    {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b7",
+        "title": "Coarse Vegetable Salad",
+        "description": "A robust salad with fresh vegetables, seasoned simply and deliciously.",
+        "ingredients": [
+            "cucumbers",
+            "tomatoes",
+            "red-onion",
+            "green-onion",
+            "za'atar",
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
+        ],
+        "products": "2 cucumbers, 2 tomatoes, 1 red onion, 2 green onions, 1 teaspoon za'atar, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
+        "instructions": [
+            "Cut all vegetables into coarse strips.",
+            "Generously season with olive oil, za'atar, lemon juice, and salt and pepper to taste.",
+            "Serve as a side dish to the main meal."
+        ],
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802816/Morena%20foodlist/R-10_j72z3l.jpg",
+        "level": "Easy",
+        "prepTime": 10,
+        "cookTime": 0
+    },
+    {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b8",
+        "title": "Chicken, Chickpea, and Vegetable Stew",
+        "description": "A hearty stew with chicken, chickpeas, and a variety of vegetables.",
+        "ingredients": [
+            "chicken-thighs",
+            "onion",
+            "chickpeas",
+            "celery",
+            "parsley",
+            "cilantro",
+            "turmeric",
+            "paprika",
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
+        ],
+        "products": "4 chicken thighs, 1 white onion, 1 cup fresh or frozen chickpeas, 2 celery stalks, 1 bunch parsley, 1 bunch cilantro, 1 teaspoon turmeric, 1 teaspoon paprika, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
+        "instructions": [
+            "In a pot, heat olive oil and add diced or sliced onion until golden.",
+            "Add chicken parts, turmeric, and paprika, and continue to cook until lightly browned.",
+            "Add chickpeas, chopped celery, parsley, and cilantro, and cook for another 5 minutes.",
+            "Pour boiling water until the chicken starts to float, season with salt and pepper, and cook on low heat for 2-3 hours.",
+            "Serve with white rice, mashed potatoes, or crispy baked sweet potatoes."
+        ],
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802817/Morena%20foodlist/R-8_qnmpla.jpg",
+        "level": "Medium",
+        "prepTime": 20,
+        "cookTime": 180
+    },
+    {
+        "_id": "60f8f4b3b9b3b3b0017b1f3b9",
+        "title": "Meat and Bone Casserole",
+        "description": "A rich casserole of assorted meats and bones, slow-cooked with vegetables and spices.",
+        "ingredients": [
+            "beef-ribs",
+            "osso-buco",
+            "beef-shoulder",
+            "celery-root",
+            "parsley-root",
+            "cilantro-root",
+            "carrots",
+            "onions",
+            "celery",
+            "cocoa",
+            "paprika",
+            "silan",
+            "olive-oil",
+            "atlantic-salt",
+            "black-pepper"
+        ],
+        "products": "2 lbs beef ribs, 2 osso buco pieces, 1 lb shoulder meat, 1 celery root, 2 parsley roots, 2 cilantro roots, 4 carrots, 2 white onions, 2 celery stalks, 1 teaspoon cocoa, 1 teaspoon paprika, 1 tablespoon silan, 2 tablespoons olive oil, 1 teaspoon Atlantic salt, 1/2 teaspoon black pepper",
+        "instructions": [
+            "Preheat oven to 200 degrees C.",
+            "Place meats on a baking sheet with parchment paper.",
+            "Roughly chop the roots, onions, carrots, and celery, and spread among and over the meat.",
+            "Prepare a mixture in a cup of boiling water with cocoa, add spices generously, and pour over the meat and vegetables.",
+            "The water should reach halfway up the baking sheet. Drizzle silan over everything.",
+            "Bake at high heat for 20 minutes, then reduce to 160-170 degrees C and cook for 4 hours.",
+            "Serve with white rice, mashed potatoes, or roasted butternut squash."
+        ],
+        "image": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802816/Morena%20foodlist/R-10_j72z3l.jpg",
+        "level": "Hard",
+        "prepTime": 30,
+        "cookTime": 300
+    }
+]

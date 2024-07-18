@@ -1,6 +1,6 @@
 <template>
     <section class="user-page grid">
-        <!-- <pre>{{ user }}</pre> -->
+
         <UserPreview :user="user" />
         <h1> {{ getTitle(user.username) }} <span>👋</span></h1>
         <details>
@@ -101,7 +101,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, onUpdated, computed, watchEffect, watch } from 'vue'
+import { ref, onBeforeMount, onUpdated, computed } from 'vue'
 import { utilService } from '@/services/util.service';
 import { useUserStore } from '@/stores/user-store'
 import { userService } from '@/services/user.service';

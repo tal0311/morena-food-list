@@ -1,6 +1,6 @@
 <template>
     <!-- {{ groupList }} -->
-    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid" :key="cmpKey">
+    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid" >
 
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelectItem"
@@ -52,7 +52,8 @@ const listStore = useListStore()
 const userStore = useUserStore()
 // loading the list from the route guard
 const groupList = computed(() => {
-    console.log(listStore?.getItemList);
+    // console.log(listStore?.getItemList);
+    console.log('groupList computed');
     return listStore?.getItemList
 })
 const labelList = ref(null)
@@ -66,20 +67,16 @@ watchEffect(() => {
 
 })
 
-const appStore = useAppStore()
+
 const subscriptions = []
 const cmpKey = ref(0)
 onBeforeMount(async () => {
     // debugger
     await loadItems()
+    console.log('listIdx mounted');
 
     await getDataFromRoute()
-    subscriptions[0] = eventBus.on('restore-history', () => {
-        // await loadItems()
-        cmpKey.value++
-        changeBtnState('done')
-
-    })
+   
 
     // loadList()
 })

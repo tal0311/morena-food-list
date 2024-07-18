@@ -81,8 +81,8 @@ router.beforeEach(async (to, from, next) => {
 
   routeHistory.push({ to, from, user: userStore.loggedUser })
 
-
-
+  
+  
   if (!loggedUser && to.name !== 'login') {
     showSuccessMsg('Please login to continue')
     next({ name: 'login' })

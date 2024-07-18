@@ -7,7 +7,7 @@
             <span class="sep"></span> <span class="or">OR</span> <span class="sep"></span>
         </div>
         <!-- <GoogleLogin :callback="callback" prompt auto-login /> -->
-        <GoogleLogin :callback="callback" prompt auto-login/>
+        <GoogleLogin :callback="callback" prompt auto-login />
     </section>
 
 </template>
@@ -21,7 +21,7 @@ import { useRouter } from 'vue-router';
 
 const userStore = useUserStore()
 const userCredFromGoogle = ref(null)
-const  router = useRouter()
+const router = useRouter()
 
 function callback(response) {
     if (response.error) {
@@ -32,22 +32,22 @@ function callback(response) {
 
 }
 
-async function login(type,credential) {
+async function login(type, credential) {
     try {
-        
-       await userStore.login(type,credential)
+
+        await userStore.login(type, credential)
         router.push('/')
     } catch (error) {
         console.error('error', error)
         login('guest')
-        
+
     }
 }
 
-function getCredFromGoogle({ credential }) {
+async function getCredFromGoogle({ credential }) {
     userCredFromGoogle.value = decodeCredential(credential)
-    userCredFromGoogle.value.jwt= credential
-    login('google', userCredFromGoogle.value)
+    userCredFromGoogle.value.jwt = credential
+    await login('google', userCredFromGoogle.value)
 }
 
 
@@ -59,6 +59,7 @@ function getCredFromGoogle({ credential }) {
     border: 1px solid var(--bClr1);
     padding: 2.5rem 0;
     border-radius: var(--br);
+
     h1 {
         font-size: 2rem;
         margin: 0;
@@ -74,17 +75,17 @@ function getCredFromGoogle({ credential }) {
 }
 
 .sep-container {
-    gap : 0.5rem;
+    gap: 0.5rem;
     color: var(--clr5);
     width: 100%;
     /* background: aliceblue; */
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
 
-    .or{
+    .or {
         font-size: 1rem;
         /* color: var(--bClr1); */
-    
+
     }
 }
 
@@ -98,16 +99,15 @@ function getCredFromGoogle({ credential }) {
 /* override google styling */
 
 
-    #container {
-        background-color: lightblue;
-        div[role="button"]{
+#container {
+    background-color: lightblue;
 
-            height: 42px;
-            border: 1px solid #7c94bb;
-            border-radius: 8px;
-        }
-        
+    div[role="button"] {
+
+        height: 42px;
+        border: 1px solid #7c94bb;
+        border-radius: 8px;
     }
 
-
+}
 </style>

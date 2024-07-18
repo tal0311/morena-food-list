@@ -11,14 +11,11 @@ export const useUserStore = defineStore("user", () => {
 
 
   const currLang = ref("en");
-  const loggedUser = ref(null);
+  const loggedUser = ref(userService.getLoggedInUser())
 
-  const getUser = computed(() => loggedUser.value);
-  const getCurrLang = computed(() => currLang.value);
-  const getSelectedItems = computed(() => {
-   
-    return loggedUser.value.selectedItems;
-  })
+  const getUser = computed(() => loggedUser.value)
+  const getCurrLang = computed(() => currLang.value)
+
   watchEffect(() => {
     // console.log("loggedUser", loggedUser.value);
   });
@@ -27,9 +24,9 @@ export const useUserStore = defineStore("user", () => {
   async function login(loginType, credentials) {
     try {
       loggedUser.value = await userService.login(loginType, credentials);
-      if(!loggedUser.value) return
+      if (!loggedUser.value) return
       setLang(loggedUser.value.settings.lang);
-     
+
       return
     } catch (error) {
       console.error("error", error);
@@ -55,7 +52,7 @@ export const useUserStore = defineStore("user", () => {
   async function updateUserItems(items) {
     loggedUser.value.selectedItems = items;
     // console.log('loggedUser.value', loggedUser.value);
-    loggedUser.value= await userService.save(loggedUser.value);
+    loggedUser.value = await userService.save(loggedUser.value);
   }
 
   async function updateUser(key, value) {
@@ -65,16 +62,16 @@ export const useUserStore = defineStore("user", () => {
 
     try {
 
-      
+
       loggedUser.value = { ...JSON.parse(JSON.stringify(loggedUser.value)), [key]: value };
       const user = await userService.save(loggedUser.value);
       console.log('user after', user);
       // loggedUser.value = user
-      
-      if(key === 'settings') {
+
+      if (key === 'settings') {
         setLang(value);
       }
-      
+
 
     } catch (error) {
       console.error(error);
@@ -106,7 +103,7 @@ export const useUserStore = defineStore("user", () => {
     getCurrLang,
     addHistory,
     login,
-    getSelectedItems,
+
     loadUser,
     updateUserItems,
 
