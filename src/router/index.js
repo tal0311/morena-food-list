@@ -97,12 +97,7 @@ router.beforeEach(async (to, from, next) => {
 
   // this is to determine to load the matches or not
   if (to.name === "recipe") {
-    if (!to.query.inspiration) {
-      // next({ name: "list" });
-      // listStore.loadList()
-      recipeStore.loadMatches();
-
-    }
+    
 
   }
 

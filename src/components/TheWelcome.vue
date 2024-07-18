@@ -17,7 +17,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 function navigateTo() {
-router.push({ name: 'recipe' , query:{inspiration: true}})
+router.push({ name: 'recipe' })
 }
 
 

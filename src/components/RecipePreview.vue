@@ -1,120 +1,81 @@
 <template>
     <section>
-
-
-        <!-- {{ props.recipe.title }} -->
-
         <article class="recipe-preview grid" @click="isOpen = !isOpen">
             <img :src="props.recipe.imgUrl" :alt="props.recipe.title">
-            
-            
+
+
             <div class="info-container grid">
                 <h4>{{ props.recipe.title }}</h4>
-                <div class="sub-info grid">
-                    <span>{{ props.recipe.title }} </span> <span>{{ props.recipe.group }}</span>
-                </div>
+
             </div>
         </article>
+        <Transition>
 
-        <section v-if="isOpen">
-
-           <p>{{ props.recipe.description }}</p>
-
-        </section>
-
-
+            <section v-if="isOpen">
+                <ul>
+                    <li v-for="item in descriptionAsList">{{ item }}.</li>
+                </ul>
+            </section>
+        </Transition>
     </section>
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps({
     recipe: {
-        type: Object   
+        type: Object
     }
-   
+
 })
 
 const isOpen = ref(false)
 
+const descriptionAsList = computed(() => {
+    return props.recipe.description.split('.').filter(item => item)
+})
+
 </script>
 
 <style scoped>
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+
 .recipe-preview {
-
-
-    /* padding: 2rem; */
+    overflow: hidden;
     box-shadow: 0 0 2px 0px var(--clr4);
-
-    width: 90vw;
     height: 500px;
     position: relative;
     border-radius: var(--br);
     overflow: hidden;
     color: #fff;
 
-    display: grid;
-    grid-template-columns: 0.2fr 1.8fr 0.2fr;
-    grid-template-rows: 20px 0.6fr 2.1fr 1.5fr 20px;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        ". . ."
-        ". match ."
-        ". . ."
-        ". info ."
-        ". . .";
+    grid-template-columns: 20px 1fr 20px;
+    grid-template-rows: 40px 1fr 40px 40px;
+    ;
 
-    align-items: center;
 
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.601) 0%, rgba(47, 47, 47, 0.327) 30%, rgba(64, 64, 64, 0.099) 100%);
-}
 
-.match {
-    grid-area: match;
-    border: none;
-    padding: 0.5rem;
-    background-color: #333333c2;
-    color: var(--bClr2);
-    border-radius: var(--br);
-    width: fit-content;
+    .info-container {
+        grid-column: 2;
+        grid-row: 3;
 
-    &.add {
-        background-color: var(--clr39);
-        color: var(--bClr4);
-        /* box-shadow: 0 0 2px 0px var(--clr4); */
-    }
-}
+        h4 {
+            font-size: 1.2rem;
+            margin: 0;
 
-.match-num {
-    font-size: 1rem;
-    /* font-weight: bolder; */
-}
+        }
 
-.info-container {
-    grid-area: info;
-    border: none;
-    padding: 0.6rem;
-
-    color: var(--bClr2);
-    border-radius: var(--br);
-    display: grid;
-    gap: 0.3rem;
-    align-self: end;
-
-    h4 {
-        font-weight: 600;
-        margin: 0;
-        letter-spacing: 1px;
-    }
-
-    .sub-info {
-        display: grid;
-        grid-auto-flow: column;
-        grid-template-columns: 25% 25%;
-        align-items: center;
-        gap: 0.5rem;
     }
 }
 

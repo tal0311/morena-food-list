@@ -4,10 +4,10 @@
         <h2>{{ $trans('food-inspiration') }}</h2>
         <section class="filter-container grid grid-dir-col">
 
-            <button v-for="btn in filterBtns" :key="btn" :class="[activeLabel === btn&& 'active', 'grid', 'secondary-btn']" 
-                @click="setFilterByGroup(btn)">
+            <button v-for="btn in filterBtns" :key="btn"
+                :class="[activeLabel === btn && 'active', 'grid', 'secondary-btn']" @click="setFilterByGroup(btn)">
                 <span>{{ getIconByBtn(btn) }}</span>
-                <small>{{ countByGroup[btn]}}</small>
+                <small>{{ countByGroup[btn] }}</small>
             </button>
 
 
@@ -21,9 +21,8 @@
 <script setup>
 import { ref, computed, onBeforeMount, watchEffect } from 'vue';
 import { useRecipeStore } from '@/stores/recipe-store';
-import { useRoute, useRouter } from 'vue-router';
 import RecipeList from '@/components/RecipeList.vue'
-import ScrollContainer from '@/components/ScrollContainer.vue';
+
 
 
 const recipeStore = useRecipeStore()
@@ -45,7 +44,7 @@ watchEffect(() => {
         filterBtns.value = ['all', ...Array.from(new Set(recipes.value.map(recipe => recipe.group && recipe.group)))]
 
         countByGroup.value = recipes.value.reduce((acc, recipe) => {
-            acc['all'] =recipes.value.length
+            acc['all'] = recipes.value.length
             acc[recipe.group] = acc[recipe.group] + 1 || 1
             return acc
         }, {})
@@ -107,7 +106,11 @@ function loadRecipes() {
     }
 
     .filter-container {
-      
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
         padding: 0.2rem;
         gap: 1rem;
         overflow: auto;
