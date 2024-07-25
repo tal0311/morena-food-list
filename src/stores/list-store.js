@@ -82,7 +82,7 @@ export const useListStore = defineStore("list", () => {
     await itemService.updateLabel(label);
 
 
-    showSuccessMsg("Label updated successfully");
+    showSuccessMsg('labelUpdated');
   }
 
   function toggleSelect({ labelName, itemId }) {

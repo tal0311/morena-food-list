@@ -63,7 +63,7 @@ function isItemShared() {
 }
 
 function itemInfo() {
-    showSuccessMsg('More info coming soon')
+    showSuccessMsg('comingSoon')
 }
 
 

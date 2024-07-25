@@ -19,14 +19,9 @@ import { useListStore } from './stores/list-store';
 import { useRouter } from 'vue-router';
 
 const listStore = useListStore();
-
 const userStore = useUserStore();
-
 const user = computed(() => userStore.getUser);
-
-
 const router = useRouter();
-
 
 watchEffect(() => {
   if (user.value) {
@@ -36,16 +31,11 @@ watchEffect(() => {
   }
 })
 
-
 async function loadData() {
-
   await userStore.loadUser();
   await listStore.loadLists()
 }
 </script>
-
-
-
 
 <style scoped>
 .main-app {

@@ -1,20 +1,16 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { showErrorMsg } from "@/services/event-bus.service";
 import { reportService } from "@/services/report.service";
+import { errorService } from "@/services/error.service";
 
 // TODO : convert error handling to plugin
 export const useAppStore = defineStore("app", () => {
-  const isTourActive = ref(false);
+
   const errorLogs = ref([]);
-  const isListShared = ref(false);
 
-  const getListStatus = computed(() => isListShared.value);
-  const getIsTourActive = computed(() => isTourActive.value);
-
-  function toggleTourState() {
-    isTourActive.value = !isTourActive.value;
-  }
+  errorService.setup()
+  
 
   function logError(err, isShowError = true) {
     if (isShowError) {
@@ -27,18 +23,12 @@ export const useAppStore = defineStore("app", () => {
     reportService.sendEmail(errorLogs.value);
   }
 
-  function setSharedList(isShared) {
-    isListShared.value = isShared;
-  }
-
-
-
   return {
-    getIsTourActive,
-    toggleTourState,
+   
     logError,
     reportError,
-    setSharedList,
-    getListStatus
+   
   }
 })
+
+

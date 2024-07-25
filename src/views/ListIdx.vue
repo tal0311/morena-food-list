@@ -74,12 +74,11 @@ watchEffect(() => {
 const subscriptions = []
 const cmpKey = ref(0)
 onBeforeMount(async () => {
-    // debugger
-   
+
+  
     console.log('listIdx mounted');
-    setTimeout(async() => {
-        await loadItems()
-    }, 0);
+    await loadItems()
+    
 
     await getDataFromRoute()
 
@@ -133,7 +132,7 @@ async function clearItems() {
         listStore.clearItems()
         router.push({ name: 'list', query: {} })
         // location.reload()
-        showSuccessMsg('Items cleared')
+        showSuccessMsg('itemsCleared')
         return
     }
 }

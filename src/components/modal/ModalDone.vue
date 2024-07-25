@@ -8,7 +8,7 @@
 <script setup>
 import { watchEffect, ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
-import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
+import { eventBus, showSuccessMsg, showErrorMsg } from '@/services/event-bus.service';
 import { useUserStore } from '@/stores/user-store';
 import { useListStore } from '@/stores/list-store';
 import { listService } from '@/services/list.service.js';
@@ -75,8 +75,8 @@ const selectItems = computed(() => listStore.getCurrList)
 async function onSendList() {
 
 
-    if (!selectItems.value.items.length) {
-        showSuccessMsg('Nothing to share')
+    if (!selectItems.value || !selectItems.value.items.length) {
+        showSuccessMsg('noItemsToShare')
         return
     }
     try {
@@ -85,10 +85,10 @@ async function onSendList() {
         const url = `${import.meta.env.VITE_PROD_URL}?share=true&ids=${idsTosShare}`;
 
         await navigator.share({ title: 'My shopping list', text: 'Check out my shopping list', url: url })
-        showSuccessMsg('List sent successfully ')
+        showSuccessMsg('itemsShared')
 
     } catch (error) {
-        showSuccessMsg('Failed to send list')
+        showErrorMsg('failedToShare')
     }
     finally {
         closeModal()
@@ -99,29 +99,25 @@ async function onSendList() {
 
 
 async function saveHistory() {
-    
 
-    console.log('selectItems.value', selectItems.value);
-    if (!selectItems.value.items.length) {
-        showSuccessMsg('Select items to save history')
+    if (!selectItems.value || !selectItems.value.items.length) {
+        showSuccessMsg('selectToSave')
         return
     }
-   
-    console.log('selectItems.value', selectItems.value.items);
+
     if (selectItems.value._id) {
         await listService.save(selectItems.value)
-        
-        showSuccessMsg('List updated successfully')
+        showSuccessMsg(listSaved)
         return
 
     }
-    
-    
+
+
     const title = prompt('Set a title you\'r new list')
     const listToSave = listService.getEmptyList(title)
     listToSave.items = JSON.parse(JSON.stringify(selectItems.value.items))
     await listService.save(listToSave)
-    showSuccessMsg('History saved successfully, watch it in the user page')
+    showSuccessMsg('newList')
     // closeModal()
 
 }

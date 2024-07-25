@@ -8,6 +8,7 @@ import router from "./router";
 
 import i18nPlugin from "./plugins/i18nPlugin";
 import svgPlugin from "./plugins/svgPlugin";
+import errorPlugin from './plugins/errorPlugin'
 import vue3GoogleLogin from 'vue3-google-login'
 
 
@@ -15,6 +16,7 @@ const app = createApp(App);
 
 // Libraries
 app.use(createPinia());
+
 app.use(router);
 
 // login with google
@@ -27,11 +29,7 @@ app.use(vue3GoogleLogin, {
 
 app.use(i18nPlugin);
 app.use(svgPlugin);
+app.use(errorPlugin);
 
 app.mount("#app");
 
-// import { useAppStore } from "./stores/app-store";
-// const appStore = useAppStore();
-// window.onerror = (err) => {
-  // appStore.logError(err);
-// };

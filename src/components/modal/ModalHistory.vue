@@ -30,7 +30,7 @@ function onSelectHistory() {
         closeModal()
         router.push({ name: 'list', query })
         // eventBus.emit('restore-history')
-        showSuccessMsg('History restored')
+        showSuccessMsg('restoreHistory')
 
     }
 }

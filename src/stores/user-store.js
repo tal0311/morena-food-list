@@ -20,6 +20,8 @@ export const useUserStore = defineStore("user", () => {
     try {
       loggedUser.value = await userService.login(loginType, credentials);
       // console.log('loggedUser', loggedUser.value);
+
+      
       if (!loggedUser.value) return
       setLang(loggedUser.value.settings.lang);
 

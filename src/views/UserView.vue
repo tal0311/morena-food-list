@@ -147,7 +147,7 @@ updateUser = utilService.debounce(updateUser, 1000);
 
 function updateUser() {
     userStore.updateLoggedUser(user.value);
-    showSuccessMsg('User updated successfully');
+    showSuccessMsg('userUpdated');
 }
 
 function getTitle(username) {

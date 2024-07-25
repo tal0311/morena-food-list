@@ -1,5 +1,3 @@
-import { DEV_BASE_URL } from '../config.js'
-import { httpService } from './http.service.js'
 import { userService } from './user.service.js'
 
 export const errorService = {
@@ -29,7 +27,7 @@ function _createNewError(err) {
   return {
     _id: $utils.makeId(),
     desc: `[Error handler ${err}]`,
-    user: userService.getLoggedinUser()
+    user: userService.getLoggedInUser(),
   }
 }
 
