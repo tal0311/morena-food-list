@@ -1,6 +1,6 @@
 <template>
     <!-- {{ groupList }} -->
-    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid" >
+    <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
 
         <div id="list-container" class="list-container grid">
             <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelectItem"
@@ -61,9 +61,9 @@ const labelList = ref(null)
 const user = computed(() => userStore.getUser)
 
 watchEffect(() => {
-  if(user.value){
-      labelList.value = user.value.labels
-  }
+    if (user.value) {
+        labelList.value = user.value.labels
+    }
 
 })
 
@@ -76,7 +76,7 @@ onBeforeMount(async () => {
     console.log('listIdx mounted');
 
     await getDataFromRoute()
-   
+
 
     // loadList()
 })
@@ -94,15 +94,17 @@ async function getDataFromRoute() {
     const { listId } = route.params
 
     if (ids) {
-        // const idsFromRoute = ids.split(',')
-        // listStore.setItemsFromShearedList(idsFromRoute)
+        const list = listStore.createShearedList(ids)
+        
+        router.push({ path: `list/${list._id}`, query: { share: true } })
+
     }
-    if (share) {
-        // update the store to share the list mode
-        // appStore.setSharedList(true)
+    if (share && listId) {
+        listStore.loadSharedList()
+
     }
 
-    if (listId) {
+    if (listId && !share) {
         await loadList(listId)
     }
 
@@ -110,7 +112,7 @@ async function getDataFromRoute() {
 }
 
 async function loadList(listId) {
-    const list= await listService.getById(listId)
+    const list = await listService.getById(listId)
     listStore.setCurrList(list)
 }
 

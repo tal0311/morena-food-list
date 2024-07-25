@@ -2,6 +2,7 @@ import { ref, computed, watchEffect } from "vue";
 import { defineStore } from "pinia";
 import { itemService } from "@/services/item.service.local";
 import { listService } from "@/services/list.service.js";
+import { utilService } from "@/services/util.service";
 import {
   showUserMsg,
   showErrorMsg,
@@ -10,9 +11,14 @@ import {
 import { useAppStore } from "@/stores/app-store";
 import { useUserStore } from "@/stores/user-store";
 import { userService } from "@/services/user.service";
+import { useRouter } from "vue-router";
+
+
 
 
 export const useListStore = defineStore("list", () => {
+  const router = useRouter();
+
   const userStore = useUserStore();
 
   const lists = ref(null);
@@ -36,7 +42,7 @@ export const useListStore = defineStore("list", () => {
   });
 
   watchEffect(() => {
-    if(currList.value) console.log('currList', currList.value.items);
+    if (currList.value) console.log('currList', currList.value);
   });
 
 
@@ -86,7 +92,7 @@ export const useListStore = defineStore("list", () => {
       return item;
     })
 
-      // console.log(currList.value);
+    // console.log(currList.value);
     // debugger
     if (!currList.value) currList.value = listService.getEmptyList();
 
@@ -112,19 +118,23 @@ export const useListStore = defineStore("list", () => {
 
   }
 
-  function setCurrList(list) {
+  function setCurrList(list, isShared = false) {
     currList.value = list;
-    const listItems= currList.value.items
+    const listItems = currList.value.items
 
     for (const key in listByLabels.value) {
       listByLabels.value[key].map(item => {
         if (listItems.includes(item._id)) {
           item.isSelected = true;
+          if(isShared){
+            item.isShared = isShared;
+
+          }
         }
         return item;
       });
     }
-   
+
   }
 
   async function loadLists() {
@@ -139,8 +149,35 @@ export const useListStore = defineStore("list", () => {
 
   }
 
+  function createShearedList(ids) {
+
+    const list = listService.getEmptyList("Shared List");
+    list.items = ids.split(",").map((id) => id.trim());
+
+    list._id = utilService.makeId()
+
+    setCurrList(list, true);
+    utilService.saveToStorage("shared-list", currList.value);
+
+    return currList.value;
+
+  }
+
+  function loadSharedList() {
+    try {
+      const list = utilService.loadFromStorage("shared-list");
+      console.log('list from storage', list);
+      setCurrList(list);
+      return list;
+    } catch (error) {
+      showErrorMsg("Failed to load sheared list, create a new one");
+    }
+  }
+
   return {
+    loadSharedList,
     loadItems,
+    createShearedList,
     getItemList,
     toggleSelect,
     // getSelectedItems,

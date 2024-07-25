@@ -3,7 +3,7 @@
     <section :class="`item-preview grid ${isSwiped ? 'swiped' : 'disabled'} ${sharedItem && 'shared'} `">
         <input v-if="isSwiped" type="checkbox" :id="item._id" :checked="props.item.isSelected && isSwiped"
             @change="onSelect">
-        <div @click="isSwiped = !isSwiped"  class="item-info grid grid-dir-col">
+        <div @click="isSwiped = !isSwiped" class="item-info grid grid-dir-col">
             <span>{{ $trans(props.item.name) }}</span>
             <span>{{ props.item.icon }}</span>
         </div>
@@ -24,10 +24,10 @@ const props = defineProps({
     item: Object,
     idx: Number,
     labelName: String,
-    display:{
+    display: {
         type: String,
         default: 'list-items'
-    
+
     }
 })
 
@@ -49,10 +49,18 @@ function onSelect() {
 const sharedItem = ref(false)
 
 watchEffect(() => {
-   if(props.item.isSelected) {
-       isSwiped.value = true
-   }
+    if (props.item.isSelected) {
+        isSwiped.value = true
+    }
+    if (props.item.isShared) {
+        sharedItem.value = true
+    }
 })
+
+function isItemShared() {
+
+
+}
 
 function itemInfo() {
     showSuccessMsg('More info coming soon')
