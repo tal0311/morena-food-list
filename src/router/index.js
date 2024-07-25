@@ -77,7 +77,7 @@ router.beforeEach(async (to, from, next) => {
 
 
   if (to.name === 'list') {
-    await listStore.loadItems()
+    // await listStore.loadItems()
   }
 
   if (to.name === 'list-summary') {

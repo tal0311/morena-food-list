@@ -160,7 +160,6 @@ export const useListStore = defineStore("list", () => {
 
     setCurrList(list, true);
     utilService.saveToStorage("shared-list", currList.value);
-
     return currList.value;
 
   }
@@ -169,7 +168,7 @@ export const useListStore = defineStore("list", () => {
     try {
       const list = utilService.loadFromStorage("shared-list");
       // console.log('list from storage', list);
-      setCurrList(list);
+      setCurrList(list, true);
       return list;
     } catch (error) {
       showErrorMsg("Failed to load sheared list, create a new one");

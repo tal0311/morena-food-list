@@ -64,7 +64,7 @@ watchEffect(() => {
     // console.log('watching user changed');
     if (user.value) {
         // console.log('setting labelList', user.value);
-        
+
         labelList.value = user.value.labels
     }
 
@@ -74,16 +74,9 @@ watchEffect(() => {
 const subscriptions = []
 const cmpKey = ref(0)
 onBeforeMount(async () => {
-
-  
     console.log('listIdx mounted');
     await loadItems()
-    
-
     await getDataFromRoute()
-
-
-    // loadList()
 })
 
 
@@ -100,11 +93,12 @@ async function getDataFromRoute() {
 
     if (ids) {
         const list = listStore.createShearedList(ids)
-        
+
         router.push({ path: `list/${list._id}`, query: { share: true } })
 
     }
     if (share && listId) {
+    
         listStore.loadSharedList()
 
     }
