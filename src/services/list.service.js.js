@@ -75,22 +75,23 @@ function _createLists(title, items) {
  
 }
 
+function createDemoList(){
+  utilService.saveToStorage(STORAGE_KEY, lists.map(list => {
+    return {
+      ...list,
+      owner:{
+        ...list.owner,
+        id: userService.getLoggedInUser()._id
+      }
+    }
+  }));
+}
 
 
-// TODO:fix this on deploy 
-// TEST DATA
-// (() => {
-//   utilService.saveToStorage(STORAGE_KEY, lists.map(list => {
-//     return {
-//       ...list,
-//       owner:{
-//         ...list.owner,
-//         id: userService.getLoggedInUser()._id
-//       }
-//     }
-//   }));
-// })();
 
-(() => {
-  
-})();
+// TODO:remove this on deploy 
+setTimeout(() => {
+  createDemoList()
+}, 1000);
+
+

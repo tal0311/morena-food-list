@@ -71,23 +71,13 @@ const router = createRouter({
 const routeHistory = []
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
-  const loggedUser = userStore.loggedUser
-
-
-
   const listStore = useListStore()
-  const recipeStore = useRecipeStore()
   const { logError } = useAppStore()
-
   routeHistory.push({ to, from, user: userStore.loggedUser })
 
-  
-  
-  if (!loggedUser && to.name !== 'login') {
-    showSuccessMsg('Please login to continue')
-    next({ name: 'login' })
-    return
-  }
+
+
+
 
   // this is to make sure that the user is logged in before entering the home page
   if (to.name === "*") {
@@ -97,7 +87,7 @@ router.beforeEach(async (to, from, next) => {
 
   // this is to determine to load the matches or not
   if (to.name === "recipe") {
-    
+
 
   }
 
@@ -117,7 +107,7 @@ router.beforeEach(async (to, from, next) => {
     }
 
   }
-  
+
 
   // default to the next route
   next();
