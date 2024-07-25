@@ -32,7 +32,7 @@ export const useListStore = defineStore("list", () => {
     .filter(item => currList.value.items.includes(item._id)));
 
   const getItemList = computed(() => {
-    console.log('listByLabels', listByLabels.value);
+    // console.log('listByLabels', listByLabels.value);
     return listByLabels.value;
   });
 
@@ -42,13 +42,15 @@ export const useListStore = defineStore("list", () => {
   });
 
   watchEffect(() => {
-    if (currList.value) console.log('currList', currList.value);
+    if (currList.value) console.debug('currList', currList.value);
   });
 
 
   async function loadItems() {
     try {
       listByLabels.value = await itemService.query({ labels: true });
+      // BUG: only this is to set the user in its store after it has labels or the list in indx view will not render the labels, need to find a better way, maybe to load the user in the app store
+      userStore.loadUser();
 
     } catch (error) {
       console.debug("Failed to load list", error);
@@ -126,7 +128,7 @@ export const useListStore = defineStore("list", () => {
       listByLabels.value[key].map(item => {
         if (listItems.includes(item._id)) {
           item.isSelected = true;
-          if(isShared){
+          if (isShared) {
             item.isShared = isShared;
 
           }
@@ -141,7 +143,7 @@ export const useListStore = defineStore("list", () => {
     try {
 
       lists.value = await listService.query();
-      console.log('loadLists', lists.value);
+      // console.log('loadLists', lists.value);
     } catch (error) {
       showErrorMsg("Failed to load lists, please try again later");
 
@@ -166,7 +168,7 @@ export const useListStore = defineStore("list", () => {
   function loadSharedList() {
     try {
       const list = utilService.loadFromStorage("shared-list");
-      console.log('list from storage', list);
+      // console.log('list from storage', list);
       setCurrList(list);
       return list;
     } catch (error) {

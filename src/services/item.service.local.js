@@ -27,9 +27,10 @@ window.itemService = itemService;
 // loadItems();
 
 async function query(filterBy = {}) {
-  console.log(filterBy);
+  // debugger
+  // console.log(filterBy);
   const loggedUser = userService.getLoggedInUser();
-  console.log('loggedUser', loggedUser);
+  // console.log('loggedUser', loggedUser);
 
   let items = await fetch('https://cdn.jsdelivr.net/gh/tal0311/food-list-data@main/item.json')
     .then(response => response.json())

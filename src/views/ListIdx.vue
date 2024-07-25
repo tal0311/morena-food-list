@@ -53,15 +53,18 @@ const userStore = useUserStore()
 // loading the list from the route guard
 const groupList = computed(() => {
     // console.log(listStore?.getItemList);
-    console.log('groupList computed');
-    return listStore?.getItemList
+    // console.log('groupList computed');
+    return listStore.getItemList
 })
 const labelList = ref(null)
 
 const user = computed(() => userStore.getUser)
 
 watchEffect(() => {
+    // console.log('watching user changed');
     if (user.value) {
+        // console.log('setting labelList', user.value);
+        
         labelList.value = user.value.labels
     }
 
@@ -72,8 +75,11 @@ const subscriptions = []
 const cmpKey = ref(0)
 onBeforeMount(async () => {
     // debugger
-    await loadItems()
+   
     console.log('listIdx mounted');
+    setTimeout(async() => {
+        await loadItems()
+    }, 0);
 
     await getDataFromRoute()
 

@@ -45,6 +45,8 @@ import { useUserStore } from '@/stores/user-store';
 // TODO: fix chart labels and data to human readable
 const listStore = useListStore()
 
+
+
 let chartData = ref(null)
 let labels = ref(null)
 
@@ -85,6 +87,7 @@ function onBack() {
     }
     router.push({ name: 'list', params: route.params, query: query })
 }
+
 
 
 </script>

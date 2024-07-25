@@ -11,19 +11,15 @@ export const useUserStore = defineStore("user", () => {
 
 
   const currLang = ref("en");
-  const loggedUser = ref(userService.getLoggedInUser())
+  const loggedUser = ref(userService.getLoggedInUser());
 
-  const getUser = computed(() => loggedUser.value)
+  const getUser = computed(() => loggedUser?.value)
   const getCurrLang = computed(() => currLang.value)
-
-  watchEffect(() => {
-    // console.log("loggedUser", loggedUser.value);
-  });
-
 
   async function login(loginType, credentials) {
     try {
       loggedUser.value = await userService.login(loginType, credentials);
+      // console.log('loggedUser', loggedUser.value);
       if (!loggedUser.value) return
       setLang(loggedUser.value.settings.lang);
 

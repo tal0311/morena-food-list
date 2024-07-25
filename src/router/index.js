@@ -72,32 +72,14 @@ const routeHistory = []
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
   const listStore = useListStore()
-  const { logError } = useAppStore()
+  
   routeHistory.push({ to, from, user: userStore.loggedUser })
 
 
-
-
-
-  // this is to make sure that the user is logged in before entering the home page
-  if (to.name === "*") {
-    // console.log('home');
-
+  if (to.name === 'list') {
+    await listStore.loadItems()
   }
 
-  // this is to determine to load the matches or not
-  if (to.name === "recipe") {
-
-
-  }
-
-  // this to load the list when the user enters the list page
-  if (to.name === "list") {
-
-    // listStore.loadList()
-
-
-  }
   if (to.name === 'list-summary') {
     if (!listStore.getCurrList) {
       showSuccessMsg('Please select some items to see the summary')
