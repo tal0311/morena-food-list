@@ -10,7 +10,7 @@ export const useUserStore = defineStore("user", () => {
   const appStore = useAppStore();
 
 
-  const currLang = ref("en");
+  const currLang = ref("he");
   const loggedUser = ref(userService.getLoggedInUser());
 
   const getUser = computed(() => loggedUser?.value)
