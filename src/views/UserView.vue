@@ -97,6 +97,16 @@
             </RouterLink>
         </footer>
 
+        <button @click="getData">Test fetch Data</button>
+
+        <section v-if="dataFromFetch">
+
+            
+            <textarea name="" id="" rows="30">
+                {{ dataFromFetch }}
+            </textarea>
+        </section>
+
     </section>
 </template>
 
@@ -109,8 +119,17 @@ import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
 import { useListStore } from '@/stores/list-store';
 import UserPreview from '@/components/UserPreview.vue'
 
+
 const user = ref(null);
 const userStore = useUserStore();
+
+const dataFromFetch = ref(null);
+
+const getData = async () => {
+    const res = await fetch(import.meta.env.VITE_SERVER_URL+'items')
+    const data = await res.json()
+    dataFromFetch.value = JSON.stringify(data, null, 2)
+}
 
 
 const diets = [
@@ -133,13 +152,13 @@ onBeforeMount(async () => {
 
 
 const isFirstLoad = ref(true);
-onUpdated(() => {
-    if (isFirstLoad.value) {
-        isFirstLoad.value = false;
-        return;
-    }
-    updateUser()
-})
+// onUpdated(() => {
+//     if (isFirstLoad.value) {
+//         isFirstLoad.value = false;
+//         return;
+//     }
+//     updateUser()
+// })
 
 
 

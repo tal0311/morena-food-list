@@ -3,10 +3,6 @@ import { storageService } from "./async-storage.service.js";
 import { utilService } from "./util.service.js";
 import { userService } from "./user.service.js";
 
-
-import items from "./../data/item.json";
-
-
 const STORAGE_KEY = "item_DB";
 const LABELS_KEY = "labels_DB";
 
@@ -32,7 +28,7 @@ async function query(filterBy = {}) {
   const loggedUser = userService.getLoggedInUser();
   // console.log('loggedUser', loggedUser);
 
-  let items = await fetch('https://cdn.jsdelivr.net/gh/tal0311/food-list-data@main/item.json')
+  let items = await fetch(import.meta.env.VITE_DATA_URL)
     .then(response => response.json())
 
   // filtering by text as needed
