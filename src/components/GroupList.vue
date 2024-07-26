@@ -1,30 +1,32 @@
 <template>
     <!-- {{ labelList }} -->
     <!-- {{ groupList }} -->
-    <details v-for="{ name, userInput }, idx in labelList" :key="name" :class="`list-details ${name}`">
+    
+    <details v-for=" label,idx in labelList" :key="label.name" :class="`list-details ${labelOrder[idx]}`">
         <summary >
 
+            
             <div class="summary-container">
-                <span>{{ $trans(name) }} <span class="counter">{{getCount(name)}}</span></span>
-                <button @click.stop="onMore(name)" class="more-btn" v-html="$svg('more')">
+                <span>{{ $trans(labelOrder[idx]) }} <span class="counter">{{getCount(labelOrder[idx])}}</span></span>
+                <button @click.stop="onMore(labelOrder[idx])" class="more-btn" v-html="$svg('more')">
                 </button>
             </div>
 
 
         </summary>
-        <ItemList :list="groupList[name]" :labelName="name" @selectItem="onSelect" />
+        <ItemList :list="groupList[labelOrder[idx]]" :labelName="labelOrder[idx]" @selectItem="onSelect" />
 
-        <textarea @input="handleLabelChange" rows="5" :data-groupname="name" placeholder="Add your notes here..."
-            :value="userInput" @focus="$emit('toggleEdit')"></textarea>
+        <textarea @input="handleLabelChange" rows="5" :data-groupname="labelOrder[idx]" :placeholder="`${$trans('add-notes')} ${$trans(labelOrder[idx])}...`"
+            :value="labelList[idx].userInput" @focus="$emit('toggleEdit')"></textarea>
     </details>
 </template>
 
 <script setup>
 import ItemList from '@/components/ItemList.vue'
 import { eventBus, showSuccessMsg } from '@/services/event-bus.service';
-import { reactive, ref, shallowRef, watch, watchEffect } from 'vue';
 
-const props = defineProps(['labelList', 'groupList'])
+
+const props = defineProps(['labelList', 'groupList', 'labelOrder'])
 const emit = defineEmits(['selectItem', 'toggleEdit', 'updateLabel'])
 
 function handleLabelChange($event) {

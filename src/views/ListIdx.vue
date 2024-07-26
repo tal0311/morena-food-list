@@ -3,7 +3,7 @@
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
 
         <div id="list-container" class="list-container grid">
-            <GroupList :labelList="labelList" :groupList="groupList" @selectItem="toggleSelectItem"
+            <GroupList :labelList="labelList" :groupList="groupList" :labelOrder="labelOrder" @selectItem="toggleSelectItem"
                 @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel" />
             <details>
                 <summary>{{ $trans('personal-notes') }}</summary>
@@ -57,15 +57,15 @@ const groupList = computed(() => {
     return listStore.getItemList
 })
 const labelList = ref(null)
+const labelOrder = ref(null)
 
 const user = computed(() => userStore.getUser)
 
 watchEffect(() => {
-    // console.log('watching user changed');
     if (user.value) {
-        // console.log('setting labelList', user.value);
-
+        labelOrder.value = user.value.labelOrder
         labelList.value = user.value.labels
+       
     }
 
 })

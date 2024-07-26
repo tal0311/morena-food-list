@@ -54,15 +54,41 @@
                     <section class="preferences grid">
                         <label v-for="diet in diets" :for="diet.label">
                             {{ $trans(diet.label) }}
-                            <input type="checkbox" name="diet" @change="updateUser" :id="diet.label" v-model="user.settings[diet.value]">
+                            <input type="checkbox" name="diet" @change="updateUser" :id="diet.label"
+                                v-model="user.settings[diet.value]">
                         </label>
                     </section>
+
+
 
                 </div>
 
             </section>
+
+
         </details>
 
+        <details v-if="user.labelOrder">
+            <summary>
+                {{ $trans('group-order') }}
+            </summary>
+            <section class="group-order-container">
+                <ul class="group-list clean-list grid">
+                    <li v-for="label, idx in user.labels" class="grid grid-dir-col">
+                        <span> {{ $trans(label.name) }} </span>
+                        <div class="btn-container grid grid-dir-col">
+                            <button class="icon-svg icon" v-html="$svg('up_arrow')"
+                                @click="setGroupOrder(label.name, idx, -1)" :disabled="idx === 0"></button>
+                            <button class="icon-svg icon" v-html="$svg('down_arrow')"
+                                @click="setGroupOrder(label.name, idx, 1)"
+                                :disabled="idx === user.labels.length - 1"></button>
+                        </div>
+
+                    </li>
+                </ul>
+            </section>
+
+        </details>
         <details>
             <summary>
                 <div>{{ $trans('history') }}
@@ -82,6 +108,7 @@
                 <p v-else>{{ $trans('no-history') }}</p>
             </section>
         </details>
+
         <details>
             <summary>{{ $trans('personal-notes') }}</summary>
             <section class="notes-container">
@@ -97,7 +124,7 @@
             </RouterLink>
         </footer>
 
-       </section>
+    </section>
 </template>
 
 <script setup>
@@ -131,6 +158,14 @@ onBeforeMount(async () => {
 
 })
 
+function setGroupOrder(label, idx, dir) {
+    const labelToMove = user.value.labels.find(l => l.name === label)
+    user.value.labels.splice(idx, 1)
+    user.value.labels.splice((idx + dir), 0, labelToMove)
+
+    user.value.labelOrder = user.value.labels.map(l => l.name)
+    updateUser()
+}
 
 const isFirstLoad = ref(true);
 onUpdated(() => {
@@ -388,5 +423,26 @@ textarea {
 
 .language-label {
     margin-block: 0.5rem;
+}
+
+
+.group-order-container {
+    .group-list {
+        gap: 1rem;
+
+        li {
+            justify-content: space-between;
+
+            .btn-container {
+                gap: 1rem;
+
+                button {
+                    &:disabled {
+                        opacity: 0.2;
+                    }
+                }
+            }
+        }
+    }
 }
 </style>

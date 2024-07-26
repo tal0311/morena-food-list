@@ -41,9 +41,7 @@ export const useListStore = defineStore("list", () => {
     return lists?.value;
   });
 
-  watchEffect(() => {
-    if (currList.value) console.debug('currList', currList.value);
-  });
+  
 
 
   async function loadItems() {

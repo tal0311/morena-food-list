@@ -40,7 +40,6 @@ const route = useRoute()
 const listStore = useListStore()
 
 function onSelect() {
-    console.log('selecting item', props.item);
     emit('selectItem', { item: props.item, labelName: props.labelName })
 }
 

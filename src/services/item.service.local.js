@@ -14,119 +14,65 @@ export const itemService = {
   getEmptyItem,
   prepDataForChart,
   getGroupsByLabels,
-
   updateLabel,
   setLabels
 };
 window.itemService = itemService;
 
-// loadItems();
-
 async function query(filterBy = {}) {
-  // debugger
-  // console.log(filterBy);
   const user = userService.getLoggedInUser();
-  // console.log('loggedUser', loggedUser);
-
   let items = await fetch(import.meta.env.VITE_DATA_URL)
     .then(response => response.json())
 
-  // filtering by text as needed
-
-
-
-
-  // filter labels by user settings
-
-
-
   if (filterBy.labels) {
-
-    let itemsByLabels = null
-    itemsByLabels = getGroupsByLabels(items)
+    let itemsByLabels = getGroupsByLabels(items)
     itemsByLabels = filterByUserSettings(user, itemsByLabels)
     await setLabels(itemsByLabels);
     return itemsByLabels
-
   }
-
-  //  if (filterBy.txt) {
-  //   const regex = new RegExp(filterBy.txt, "i");
-  //   items = items.filter((item) => regex.test(item.txt));
-  // }user
-
-  // return items;
-
-
 }
 
 // move to backend
 function filterByUserSettings({ settings }, itemsByLabels) {
-
   const filterLabels = []
-
   for (const key in settings) {
     const exclude = ['lang', 'notifications']
     if (settings[key] && !exclude.includes(key)) {
       filterLabels.push(key)
     }
-
   }
-
-
-
 
   filterLabels.forEach(prefs => {
     console.log('prefs', prefs);
     if (prefs === 'isVegan') {
       const noneVeganGroups = ['meat-and-poultry', 'dairy', 'eggs', 'fish', 'honey']
-
       noneVeganGroups.forEach(group => {
-        console.log(itemsByLabels[group])
         itemsByLabels[group] && delete itemsByLabels[group]
       })
-
     }
 
     if (prefs === 'isGlutenFree') {
       const noneGlutenFreeGroups = ['bread', 'pasta', 'cereal', 'flour', 'baked-goods']
-
       noneGlutenFreeGroups.forEach(group => {
-        console.log(itemsByLabels[group])
         itemsByLabels[group] && delete itemsByLabels[group]
       })
-
     }
 
     if (prefs === 'isVegetarian') {
       const noneVegetarianGroups = ['meat-and-poultry', 'fish']
-
       noneVegetarianGroups.forEach(group => {
-        console.log(itemsByLabels[group])
         itemsByLabels[group] && delete itemsByLabels[group]
       })
-
     }
 
     if (prefs === 'isKosher') {
-      const noneKosherGroups = ['pork', 'shellfish' , 'seafood']
-
+      const noneKosherGroups = ['seafood']
       noneKosherGroups.forEach(group => {
-        console.log(itemsByLabels[group])
         itemsByLabels[group] && delete itemsByLabels[group]
       })
-
     }
   })
 
-
-
-  // delete itemsByLabels[label]
-
-
-
-
-  console.log('itemsByLabels', itemsByLabels);
   return itemsByLabels
 
 }
@@ -166,8 +112,10 @@ async function updateLabel(label) {
 async function setLabels(list) {
 
   const user = userService.getLoggedInUser();
-
+  user.labels = !user.labels  || user.labels.length !== Object.keys(list).length ? Object.keys(list).map(label => ({ name: label, userInput: "" })) : user.labels;
   user.labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
+  user.labelOrder = user.labelOrder || user.labelOrder.length != user.labels.length ? user.labels.map(label => label.name) : user.labelOrder;
+
   await userService.save(user);
 
 }

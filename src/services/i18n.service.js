@@ -1674,6 +1674,16 @@ const gTrans = {
     es: "Volver a la lista de historial",
     he: "חזור ההיסטוריה",
 
+  },
+  'add-notes':{
+    en:'Add your notes for group ',
+    es:'',
+    he:'הוסף רשימות אישיות לקבוצה '
+  },
+  'group-order':{
+    en:'Group Order',
+    es:'',
+    he:'סדר קבוצות מוצרים'
   }
 
 };
