@@ -2,6 +2,7 @@
   <section class="main-app main-layout">
     <RouterView />
     <UserMsg />
+    
   </section>
 </template>
 
