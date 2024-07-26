@@ -45,7 +45,7 @@ function filterByUserSettings({ settings }, itemsByLabels) {
   filterLabels.forEach(prefs => {
     console.log('prefs', prefs);
     if (prefs === 'isVegan') {
-      const noneVeganGroups = ['meat-and-poultry', 'dairy', 'eggs', 'fish', 'honey']
+      const noneVeganGroups = ['meat-and-poultry', 'dairy', 'eggs', 'fish', 'honey','seafood']
       noneVeganGroups.forEach(group => {
         itemsByLabels[group] && delete itemsByLabels[group]
       })
