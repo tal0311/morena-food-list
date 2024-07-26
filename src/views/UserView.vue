@@ -361,6 +361,8 @@ input[type="text"] {
 
 .switch {
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     position: relative;
     border-radius: 100vh;
     width: 2.5rem;

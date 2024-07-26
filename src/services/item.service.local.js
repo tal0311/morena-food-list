@@ -114,7 +114,7 @@ async function setLabels(list) {
   const user = userService.getLoggedInUser();
   user.labels = !user.labels  || user.labels.length !== Object.keys(list).length ? Object.keys(list).map(label => ({ name: label, userInput: "" })) : user.labels;
   user.labels = Object.keys(list).map(label => ({ name: label, userInput: "" }));
-  user.labelOrder = user.labelOrder || user.labelOrder.length != user.labels.length ? user.labels.map(label => label.name) : user.labelOrder;
+  user.labelOrder = !user.labelOrder || user.labelOrder.length != user.labels.length ? user.labels.map(label => label.name) : user.labelOrder;
 
   await userService.save(user);
 
