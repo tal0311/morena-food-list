@@ -25,7 +25,7 @@ window.itemService = itemService;
 async function query(filterBy = {}) {
   // debugger
   // console.log(filterBy);
-  const loggedUser = userService.getLoggedInUser();
+  const user = userService.getLoggedInUser();
   // console.log('loggedUser', loggedUser);
 
   let items = await fetch(import.meta.env.VITE_DATA_URL)
@@ -34,46 +34,100 @@ async function query(filterBy = {}) {
   // filtering by text as needed
 
 
-  if (filterBy.labels) {
-
-    const itemsByLabels = getGroupsByLabels(items)
-    await setLabels(itemsByLabels);
-    // console.log(itemsByLabels);
-    return itemsByLabels
-
-  }
 
 
   // filter labels by user settings
 
-  return items;
 
-  // if (isVegetarian) {
-  //   const vegItems = ['meat-and-poultry', 'fish', 'seafood']
-  //   items = items.filter((item) => !vegItems.includes(item.group));
-  // }
-  // if (isVegan) {
-  //   const veganItems = ['dairy', 'meat-and-poultry', 'fish', 'seafood']
-  //   items = items.filter((item) => !veganItems.includes(item.group));
-  // }
 
-  // if (isLactoseFree) {
-  //   items = items.filter((item) => item.group !== 'dairy');
-  // }
-  // if (isKosher) {
-  //   items = items.filter((item) => item.group !== 'seafood');
-  // }
+  if (filterBy.labels) {
 
-  // if (isGlutenFree) {
-  //   items = items.filter((item) => item.group !== 'bread');
-  // }
+    let itemsByLabels = null
+    itemsByLabels = getGroupsByLabels(items)
+    itemsByLabels = filterByUserSettings(user, itemsByLabels)
+    await setLabels(itemsByLabels);
+    return itemsByLabels
 
-  // if (filterBy.txt) {
+  }
+
+  //  if (filterBy.txt) {
   //   const regex = new RegExp(filterBy.txt, "i");
   //   items = items.filter((item) => regex.test(item.txt));
-  // }
+  // }user
 
   // return items;
+
+
+}
+
+// move to backend
+function filterByUserSettings({ settings }, itemsByLabels) {
+
+  const filterLabels = []
+
+  for (const key in settings) {
+    const exclude = ['lang', 'notifications']
+    if (settings[key] && !exclude.includes(key)) {
+      filterLabels.push(key)
+    }
+
+  }
+
+
+
+
+  filterLabels.forEach(prefs => {
+    console.log('prefs', prefs);
+    if (prefs === 'isVegan') {
+      const noneVeganGroups = ['meat-and-poultry', 'dairy', 'eggs', 'fish', 'honey']
+
+      noneVeganGroups.forEach(group => {
+        console.log(itemsByLabels[group])
+        itemsByLabels[group] && delete itemsByLabels[group]
+      })
+
+    }
+
+    if (prefs === 'isGlutenFree') {
+      const noneGlutenFreeGroups = ['bread', 'pasta', 'cereal', 'flour', 'baked-goods']
+
+      noneGlutenFreeGroups.forEach(group => {
+        console.log(itemsByLabels[group])
+        itemsByLabels[group] && delete itemsByLabels[group]
+      })
+
+    }
+
+    if (prefs === 'isVegetarian') {
+      const noneVegetarianGroups = ['meat-and-poultry', 'fish']
+
+      noneVegetarianGroups.forEach(group => {
+        console.log(itemsByLabels[group])
+        itemsByLabels[group] && delete itemsByLabels[group]
+      })
+
+    }
+
+    if (prefs === 'isKosher') {
+      const noneKosherGroups = ['pork', 'shellfish' , 'seafood']
+
+      noneKosherGroups.forEach(group => {
+        console.log(itemsByLabels[group])
+        itemsByLabels[group] && delete itemsByLabels[group]
+      })
+
+    }
+  })
+
+
+
+  // delete itemsByLabels[label]
+
+
+
+
+  console.log('itemsByLabels', itemsByLabels);
+  return itemsByLabels
 
 }
 
@@ -150,20 +204,20 @@ function getEmptyItem(name) {
   };
 }
 
- function prepDataForChart(list) {
+function prepDataForChart(list) {
 
   list = JSON.parse(JSON.stringify(list));
 
   // console.log(list.items);
   const itemsMap = list.reduce((acc, curr) => {
-   
 
-      if (!acc[curr.group]) {
-        acc[curr.group] = []
-      }
-      acc[curr.group].push(curr)
 
-    
+    if (!acc[curr.group]) {
+      acc[curr.group] = []
+    }
+    acc[curr.group].push(curr)
+
+
     return acc
   }, {})
 

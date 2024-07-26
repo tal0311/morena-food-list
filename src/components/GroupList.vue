@@ -44,7 +44,7 @@ function onMore(labelName) {
 
 function getCount(label) {
 
-    const count= props.groupList[label].filter(item => item.isSelected).length
+    const count= props.groupList[label]?.filter(item => item.isSelected).length
     return count? `(${count})` : ''
 }
 

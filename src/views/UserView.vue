@@ -54,7 +54,7 @@
                     <section class="preferences grid">
                         <label v-for="diet in diets" :for="diet.label">
                             {{ $trans(diet.label) }}
-                            <input type="checkbox" name="diet" :id="diet.label" v-model="user.settings[diet.value]">
+                            <input type="checkbox" name="diet" @change="updateUser" :id="diet.label" v-model="user.settings[diet.value]">
                         </label>
                     </section>
 
@@ -97,11 +97,7 @@
             </RouterLink>
         </footer>
 
-        <button @click="getData">Test fetch Data</button>
-
-       
-
-    </section>
+       </section>
 </template>
 
 <script setup>
@@ -137,13 +133,13 @@ onBeforeMount(async () => {
 
 
 const isFirstLoad = ref(true);
-// onUpdated(() => {
-//     if (isFirstLoad.value) {
-//         isFirstLoad.value = false;
-//         return;
-//     }
-//     updateUser()
-// })
+onUpdated(() => {
+    if (isFirstLoad.value) {
+        isFirstLoad.value = false;
+        return;
+    }
+    // updateUser()
+})
 
 
 
