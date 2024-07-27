@@ -38,13 +38,13 @@ import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
 import DashBoard from '@/components/DashBoard.vue'
 import { itemService } from '@/services/item.service.local.js'
-import { useUserStore } from '@/stores/user-store';
+import { useGlobals } from '@/composables/useGlobals';
 
 
 
 // TODO: fix chart labels and data to human readable
 const listStore = useListStore()
-
+const { $trans}= useGlobals()
 
 
 let chartData = ref(null)
@@ -61,10 +61,8 @@ watchEffect(() => {
 
 function prepDataForChart() {
     const data = itemService.prepDataForChart(selectItems.value)
-    // if (!Object.keys(data).length === 0) return
-    // console.log(data);
     chartData.value = Object.values(data)
-    labels.value = Object.keys(data)
+    labels.value = Object.keys(data).map((label) => $trans(label))
     // this is for forcing the chart component to render when data changes
     cmpKey.value++
 }
