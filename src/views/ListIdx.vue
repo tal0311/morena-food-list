@@ -3,17 +3,18 @@
     <section v-if="groupList && labelList" ref="listRef" class="list-idx grid">
 
         <div id="list-container" class="list-container grid">
-            <GroupList :labelList="labelList" :groupList="groupList" :labelOrder="labelOrder" @selectItem="toggleSelectItem"
-                @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel" />
+            <GroupList :labelList="labelList" :groupList="groupList" :labelOrder="labelOrder"
+                @selectItem="toggleSelectItem" @toggleEdit="changeBtnState('edit')" @updateLabel="updateLabel" />
             <details>
                 <summary>{{ $trans('personal-notes') }}</summary>
                 <section class="notes-container">
-                    <textarea @focus="changeBtnState('edit')" @blur="updateUserText">{{ user.personalTxt || $trans('personal-notes') }}</textarea>
+                    <textarea @focus="changeBtnState('edit')"
+                        @blur="updateUserText">{{ user.personalTxt || $trans('personal-notes') }}</textarea>
 
                 </section>
             </details>
         </div>
-        <footer id="footer-container" :class="['footer-container']">
+        <footer class="footer-container">
             <div @contextmenu.prevent="clearItems">
                 <button :class="`primary-btn ${btnState}`" @click.stop="mainAction" v-html="$svg(btnState)"></button>
             </div>
@@ -63,7 +64,7 @@ watchEffect(() => {
     if (user.value) {
         labelOrder.value = user.value.labelOrder
         labelList.value = user.value.labels
-       
+
     }
 
 })
@@ -96,7 +97,7 @@ async function getDataFromRoute() {
 
     }
     if (share && listId) {
-    
+
         listStore.loadSharedList()
 
     }
@@ -171,9 +172,9 @@ function submitLabel() {
     listStore.updateLabel(label.value)
 }
 
-function updateUserText(event){
-    
-    userStore.updateUser('personalTxt',event.target.value )
+function updateUserText(event) {
+
+    userStore.updateUser('personalTxt', event.target.value)
     changeBtnState('done')
 
 }
@@ -206,22 +207,25 @@ footer {
     display: grid;
     place-content: center;
     transform: translateX(-50%);
-    transition: translate 0.2s;
     width: 100%;
-    /* background-color: aquamarine; */
 
-    &.blur-bg {
-        bottom: 4rem;
-        padding: 1rem;
-        /* background-color: var(--bClr2); */
+    button {
+        box-shadow: 0 0 1px 2px var(--clr2);
+
+        &:active {
+            box-shadow: none;
+        }
+
     }
+
 }
 
 
-:is(.done, .edit , .history){
+:is(.done, .edit, .history) {
     padding: 0.8rem 0.8rem;
 
 }
+
 .edit {
     color: var(--bClr2);
     background-color: var(--clr36);
@@ -314,4 +318,3 @@ textarea {
 
 }
 </style>
-
