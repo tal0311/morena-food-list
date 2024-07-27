@@ -74,11 +74,11 @@ function itemInfo() {
     font-size: 1.5rem;
     grid-auto-flow: column;
     gap: 1rem;
-    grid-template-columns: 1fr 1fr;
-    /* align-items: baseline; */
+    grid-template-columns: 2fr 1fr;
     cursor: pointer;
     padding: 0.5rem;
     box-shadow: 0 0 1px 1px lightgray;
+
 
     span:last-child {
         justify-self: end;
@@ -93,7 +93,7 @@ function itemInfo() {
     }
 
     .item-info {
-        grid-template-columns: repeat(2, fit-content);
+        grid-template-columns: max-content 1fr;
         gap: 1rem
     }
 }
