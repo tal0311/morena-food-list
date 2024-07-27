@@ -21,7 +21,7 @@ export const useUserStore = defineStore("user", () => {
       loggedUser.value = await userService.login(loginType, credentials);
       // console.log('loggedUser', loggedUser.value);
 
-      
+
       if (!loggedUser.value) return
       setLang(loggedUser.value.settings.lang);
 
@@ -47,25 +47,17 @@ export const useUserStore = defineStore("user", () => {
     loggedUser.value = await userService.save(userToUpdate);
   }
 
-  async function updateUserItems(items) {
-    loggedUser.value.selectedItems = items;
-    // console.log('loggedUser.value', loggedUser.value);
-    loggedUser.value = await userService.save(loggedUser.value);
-  }
+  // async function updateUserItems(items) {
+  //   loggedUser.value.selectedItems = items;
+  //   // console.log('loggedUser.value', loggedUser.value);
+  //   loggedUser.value = await userService.save(loggedUser.value);
+  // }
 
   async function updateUser(key, value) {
-
-    // console.trace()
-    // console.log("updating user in store");
-
     try {
-
-
       loggedUser.value = { ...JSON.parse(JSON.stringify(loggedUser.value)), [key]: value };
       const user = await userService.save(loggedUser.value);
-      console.log('user after', user);
-      // loggedUser.value = user
-
+      // console.log('user after', user);
       if (key === 'settings') {
         setLang(value);
       }
@@ -103,7 +95,7 @@ export const useUserStore = defineStore("user", () => {
     login,
 
     loadUser,
-    updateUserItems,
+    // updateUserItems,
 
 
   }

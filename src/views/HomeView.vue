@@ -21,7 +21,7 @@
 
 <script setup>
 
-// TODO: add last login date to user and refresh the local storage btn
+
 import { computed } from 'vue'
 import TheWelcome from '@/components/TheWelcome.vue'
 

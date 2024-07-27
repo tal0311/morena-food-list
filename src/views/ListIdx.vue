@@ -8,7 +8,7 @@
             <details>
                 <summary>{{ $trans('personal-notes') }}</summary>
                 <section class="notes-container">
-                    <textarea @focus="changeBtnState('edit')">{{ user.personalTxt || 'No entries' }}</textarea>
+                    <textarea @focus="changeBtnState('edit')" @blur="updateUserText">{{ user.personalTxt || $trans('personal-notes') }}</textarea>
 
                 </section>
             </details>
@@ -25,10 +25,8 @@
 </template>
 
 <script setup>
-// TODO: able to edit personal notes
-// TODO: clear user selected items when the user leaves the page
-// TODO: DND to change the order of the groups
-// TODO: add a button to clear all the selected items add clear items progress bar
+
+
 import { useRoute, useRouter } from 'vue-router'
 import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect, onUpdated } from 'vue'
 import { useListStore } from '@/stores/list-store';
@@ -173,13 +171,19 @@ function submitLabel() {
     listStore.updateLabel(label.value)
 }
 
+function updateUserText(event){
+    
+    userStore.updateUser('personalTxt',event.target.value )
+    changeBtnState('done')
+
+}
+
 
 
 onUnmounted(() => {
     subscriptions.forEach(sub => sub())
 })
 
-// TODO: convert all css to nested css
 </script>
 
 <style scoped>
@@ -213,20 +217,17 @@ footer {
     }
 }
 
-/* TODO:refactor btn-state */
-.done {
-    padding: 0.8rem 0.8rem;
-    /* background-color: var(--clr4); */
-}
 
-.edit {
+:is(.done, .edit , .history){
     padding: 0.8rem 0.8rem;
+
+}
+.edit {
     color: var(--bClr2);
     background-color: var(--clr36);
 }
 
 .history {
-    padding: 0.8rem 0.8rem;
     background-color: var(--clr11);
 
 }
@@ -234,7 +235,6 @@ footer {
 
 details {
     box-shadow: 0 0 2px 0px var(--clr4);
-    /* outline: 1px solid #c9c9c9; */
     border-radius: 2px;
     padding: 0.5em 0.5em 0;
 
@@ -295,20 +295,6 @@ textarea {
     font-size: 1.5rem;
 }
 
-.history-actions {
-    /* background-color: aqua; */
-    width: 100%;
-
-    grid-auto-columns: 1fr 1fr;
-    gap: 1rem;
-
-    button {
-        padding: 0.8rem 0.8rem;
-        width: 40vw;
-
-
-    }
-}
 
 .notes-container {
 
@@ -329,6 +315,3 @@ textarea {
 }
 </style>
 
-<!-- height: 80vh;
-overflow-y: auto;
-overflow-x: hidden; -->

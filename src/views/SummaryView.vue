@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, computed, watch, watchEffect } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
@@ -42,9 +42,9 @@ import { useGlobals } from '@/composables/useGlobals';
 
 
 
-// TODO: fix chart labels and data to human readable
+
 const listStore = useListStore()
-const { $trans}= useGlobals()
+const { $trans } = useGlobals()
 
 
 let chartData = ref(null)

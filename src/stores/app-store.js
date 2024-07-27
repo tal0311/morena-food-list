@@ -4,7 +4,7 @@ import { showErrorMsg } from "@/services/event-bus.service";
 import { reportService } from "@/services/report.service";
 import { errorService } from "@/services/error.service";
 
-// TODO : convert error handling to plugin
+
 export const useAppStore = defineStore("app", () => {
 
   const errorLogs = ref([]);
