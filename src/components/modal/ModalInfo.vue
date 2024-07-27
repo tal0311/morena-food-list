@@ -1,11 +1,8 @@
 <template>
     <section class="info-modal">
-        <!-- <pre>{{ infoForDisplay }}</pre> -->
-        <!-- <h3>{{ infoForDisplay.title }}</h3>
-        <p>{{ infoForDisplay.info }}</p> -->
         <h3>{{ infoForDisplay.title }}</h3>
-        <!-- <textarea class="info" :value="infoForDisplay.info" rows="15"></textarea> -->
-        <p>{{ infoForDisplay.info }}</p>
+        <!-- {{ infoForDisplay.info }} -->
+        <p v-for="info,idx in infoForDisplay.info">{{ info }}</p>
     </section>
 
 </template>
