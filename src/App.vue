@@ -22,7 +22,7 @@ let timeOutIdx = null;
 
 onMounted(()=>{
   console.log('App is mounted', import.meta.env);
-  
+  console.log(process.env.BUILD_ENV);
   document.title = import.meta.env.VITE_APP_TITLE;  
 })
 
