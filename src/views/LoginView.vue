@@ -45,8 +45,9 @@ async function login(type, credential) {
 }
 
 async function getCredFromGoogle({ credential }) {
+    console.log('credential', credential);
     userCredFromGoogle.value = decodeCredential(credential)
-    userCredFromGoogle.value.jwt = credential
+    
     await login('google', userCredFromGoogle.value)
 }
 

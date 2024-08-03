@@ -27,7 +27,7 @@ async function query(filterBy = {}) {
   if (filterBy.labels) {
     let itemsByLabels = getGroupsByLabels(items)
     itemsByLabels = filterByUserSettings(user, itemsByLabels)
-    await setLabels(itemsByLabels);
+    await setLabels(itemsByLabels)
     return itemsByLabels
   }
 }

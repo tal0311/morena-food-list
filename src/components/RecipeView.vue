@@ -38,7 +38,8 @@ const countByGroup = ref(null)
 const isFirstTime = ref(true)
 const activeLabel = ref(null)
 
-watchEffect(() => {
+// SOCKET 'recipes-labels' 
+watchEffect(() => {filterByGroup
     if (recipes.value && isFirstTime.value) {
         isFirstTime.value = false
         filterBtns.value = ['all', ...Array.from(new Set(recipes.value.map(recipe => recipe.group && recipe.group)))]

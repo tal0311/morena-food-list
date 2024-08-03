@@ -51,8 +51,9 @@ function removeUser(userId) {
 }
 
 
-
+// BACKEND 
 async function login(loginType, credentials) {
+    
 
     if (loginType === 'guest') {
         let guestUser = getGuestUser();
@@ -64,7 +65,7 @@ async function login(loginType, credentials) {
         user.username = credentials.name
         user.email = credentials.email
         user.imgUrl = credentials.picture
-        user.jwt = credentials.jwt
+        user.googleID = credentials.sub
         return await save(user)
 
 

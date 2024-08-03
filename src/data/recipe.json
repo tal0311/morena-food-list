@@ -10,7 +10,15 @@
             "title": "Salmon in cherry tomato sauce",
             "description": " Cut cherry tomatoes into slices, quarters or round slices, marinate in olive oil, thyme or any other spice you like. Add, Atlantic salt and ground pepper. Put in the oven that has been preheated to 220 degrees (turbo) and remove the fish when it is slightly rare, it will continue to cook even after baking and will be juicy on your plate. Excellent to serve alongside rice and vegetables or baked potato (olive oil, salt and pepper)."
         },
-        "imgUrl": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802815/Morena%20foodlist/R-9_b2eoli.jpg"
+        "imgUrl": "https://res.cloudinary.com/tal-amit-dev/image/upload/v1715802815/Morena%20foodlist/R-9_b2eoli.jpg",
+        "ingredients":[
+            "66a506bd7a92d58045788207",
+            "66a506bd7a92d5804578820b",
+            "66a506bd7a92d5804578822d",
+            "66a506bd7a92d58045788242",
+            "66a506bd7a92d58045788227"
+        ],
+        "visibility":"publice"
     },
     {
         "_id": "r-2",
@@ -100,7 +108,15 @@
             "title": "Grilled or Oven-Baked Chicken Thighs",
             "description": "In a tray suitable for the oven, fry lots and lots and lots of white onion strips until they are golden, golden, golden. Season the chicken thighs with: generous baharat(!), paprika, and a little cumin. Sear nicely on all sides (you can do this together with the onions that have already turned a nice color). Add the rice (dry), a whole celery stalk, boiling water, and salt. Continue cooking on the stove, low heat for an hour and a half or put in the oven at 170 degrees (turbo). Eat with a salad you like. I like a chopped green salad: spinach, baby leaves, lettuce, parsley, green onion, and anything you like (with a basic dressing). **A cool addition to any dish with rice is a celery leaf during cooking, which will release umami flavor into the whole pot."
         },
-        "imgUrl": ""
+        "imgUrl": "",
+        "ingredients":[
+            "66a506bd7a92d58045788207",
+            "66a506bd7a92d5804578820b",
+            "66a506bd7a92d5804578822d",
+            "66a506bd7a92d58045788242",
+            "66a506bd7a92d58045788227"
+        ],
+        "visibility":"publice"
     },
     {
         "_id": "r-9",

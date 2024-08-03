@@ -9,7 +9,8 @@
                 <summary>{{ $trans('personal-notes') }}</summary>
                 <section class="notes-container">
                     <textarea @focus="changeBtnState('edit')"
-                        @blur="updateUserText">{{ user.personalTxt || $trans('personal-notes') }}</textarea>
+                        @blur="updateUserText">{{ user.personalTxt || $trans('personal-notes') }}
+                    </textarea>
 
                 </section>
             </details>
@@ -29,15 +30,12 @@
 
 
 import { useRoute, useRouter } from 'vue-router'
-import { ref, onBeforeMount, computed, onUnmounted, onMounted, watchEffect, onUpdated } from 'vue'
+import { ref, onBeforeMount, computed, onUnmounted, watchEffect } from 'vue'
 import { useListStore } from '@/stores/list-store';
-
-import { useAppStore } from '@/stores/app-store'
 
 import { eventBus } from '@/services/event-bus.service';
 import { showSuccessMsg } from '@/services/event-bus.service';
 import { useUserStore } from '@/stores/user-store';
-
 
 import GroupList from '@/components/GroupList.vue';
 import AppLoader from '@/components/AppLoader.vue';
@@ -49,10 +47,8 @@ const router = useRouter()
 
 const listStore = useListStore()
 const userStore = useUserStore()
-// loading the list from the route guard
+
 const groupList = computed(() => {
-    // console.log(listStore?.getItemList);
-    // console.log('groupList computed');
     return listStore.getItemList
 })
 const labelList = ref(null)
@@ -64,11 +60,8 @@ watchEffect(() => {
     if (user.value) {
         labelOrder.value = user.value.labelOrder
         labelList.value = user.value.labels
-
     }
-
 })
-
 
 const subscriptions = []
 const cmpKey = ref(0)
@@ -78,35 +71,24 @@ onBeforeMount(async () => {
     await getDataFromRoute()
 })
 
-
 async function loadItems() {
     await listStore.loadItems()
 }
 
-// const sharedIds = ref(null)
 async function getDataFromRoute() {
-
-    // debugger
     const { share, ids } = route.query
     const { listId } = route.params
 
     if (ids) {
         const list = listStore.createShearedList(ids)
-
         router.push({ path: `list/${list._id}`, query: { share: true } })
-
     }
     if (share && listId) {
-
         listStore.loadSharedList()
-
     }
-
     if (listId && !share) {
         await loadList(listId)
     }
-
-
 }
 
 async function loadList(listId) {
@@ -114,25 +96,17 @@ async function loadList(listId) {
     listStore.setCurrList(list)
 }
 
-
-
-
 async function clearItems() {
     console.debug('clear items');
     if (btnState.value === 'done') {
-        // debugger
-
         listStore.clearItems()
         router.push({ name: 'list', query: {} })
-        // location.reload()
         showSuccessMsg('itemsCleared')
         return
     }
 }
 
 function toggleSelectItem($event) {
-    // console.trace()
-
     listStore.toggleSelect($event)
 }
 
@@ -148,15 +122,9 @@ function mainAction() {
         return
 
     }
-
-
-
     const modalType = btnState.value === 'history' ? 'ModalHistory' : 'ModalDone'
-
     eventBus.emit('toggle-modal', { type: modalType })
-
 }
-
 
 function changeBtnState(val) {
     btnState.value = val
@@ -173,13 +141,9 @@ function submitLabel() {
 }
 
 function updateUserText(event) {
-
     userStore.updateUser('personalTxt', event.target.value)
     changeBtnState('done')
-
 }
-
-
 
 onUnmounted(() => {
     subscriptions.forEach(sub => sub())

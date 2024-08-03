@@ -1,0 +1,1714 @@
+[
+  {
+    "_id": "1",
+    "name": "Apples",
+    "icon": "🍎",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/apples-info",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "2",
+    "name": "Milk",
+    "icon": "🥛",
+    "group": "dairy",
+    "readMoreURL": "https://example.com/milk-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "3",
+    "name": "Bread",
+    "icon": "🍞",
+    "group": "grains",
+    "readMoreURL": "https://example.com/bread-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "4",
+    "name": "Bananas",
+    "icon": "🍌",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/bananas-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "5",
+    "name": "Salmon",
+    "icon": "🐟",
+    "group": "fish",
+    "readMoreURL": "https://example.com/eggs-info",
+    "color": "pink",
+    "isSelected": false
+  },
+  {
+    "_id": "6",
+    "name": "Eggs",
+    "icon": "🥚",
+    "group": "meat-and-poultry",
+    "readMoreURL": "https://example.com/eggs-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "7",
+    "name": "Chicken",
+    "icon": "🍗",
+    "group": "meat-and-poultry",
+    "readMoreURL": "https://example.com/chicken-info",
+    "color": "lightbrown",
+    "isSelected": false
+  },
+  {
+    "_id": "8",
+    "name": "Spinach",
+    "icon": "🥬",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/spinach-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "9",
+    "name": "Tomatoes",
+    "icon": "🍅",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/tomatoes-info",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "10",
+    "name": "Cheese",
+    "icon": "🧀",
+    "group": "dairy",
+    "readMoreURL": "https://example.com/cheese-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "11",
+    "name": "Rice",
+    "icon": "🍚",
+    "group": "grains",
+    "readMoreURL": "https://example.com/rice-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "12",
+    "name": "orange",
+    "icon": "🍊",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/oranges-info",
+    "color": "orange",
+    "isSelected": false
+  },
+  {
+    "_id": "13",
+    "name": "yogurt",
+    "icon": "🥣",
+    "group": "dairy",
+    "readMoreURL": "https://example.com/yogurt-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "14",
+    "name": "pasta",
+    "icon": "🍝",
+    "group": "grains",
+    "readMoreURL": "https://example.com/pasta-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "15",
+    "name": "Pineapple",
+    "icon": "🍍",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/pineapple-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "16",
+    "name": "butter",
+    "icon": "🧈",
+    "group": "dairy",
+    "readMoreURL": "https://example.com/butter-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "17",
+    "name": "carrots",
+    "icon": "🥕",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/carrots-info",
+    "color": "orange",
+    "isSelected": false
+  },
+  {
+    "_id": "18",
+    "name": "lettuce",
+    "icon": "🥗",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/lettuce-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "19",
+    "name": "beef",
+    "icon": "🥩",
+    "group": "meat-and-poultry",
+    "readMoreURL": "https://example.com/beef-info",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "20",
+    "name": "turkey",
+    "icon": "🦃",
+    "group": "meat-and-poultry",
+    "readMoreURL": "https://example.com/turkey-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "21",
+    "name": "broccoli",
+    "icon": "🥦",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/broccoli-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "22",
+    "name": "cucumbers",
+    "icon": "🥒",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/cucumbers-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "23",
+    "name": "potatoes",
+    "icon": "🥔",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/potatoes-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "24",
+    "name": "cabbage",
+    "icon": "🥬",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/cabbage-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "25",
+    "name": "grapes",
+    "icon": "🍇",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/grapes-info",
+    "color": "purple",
+    "isSelected": false
+  },
+  {
+    "_id": "26",
+    "name": "mangoes",
+    "icon": "🥭",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/mangoes-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "27",
+    "name": "peaches",
+    "icon": "🍑",
+    "group": "fruit",
+    "readMoreURL": "https://example.com/peaches-info",
+    "color": "orange",
+    "isSelected": false
+  },
+  {
+    "_id": "28",
+    "name": "cereal",
+    "icon": "🥣",
+    "group": "grains",
+    "readMoreURL": "https://example.com/cereal-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "29",
+    "name": "peanut-butter",
+    "icon": "🥜",
+    "group": "grains",
+    "readMoreURL": "https://example.com/peanut-butter-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "30",
+    "name": "honey",
+    "icon": "🍯",
+    "group": "sweeteners",
+    "readMoreURL": "https://example.com/honey-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "31",
+    "name": "sugar",
+    "icon": "🍬",
+    "group": "sweeteners",
+    "readMoreURL": "https://example.com/sugar-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "32",
+    "name": "coffee",
+    "icon": "☕",
+    "group": "beverages",
+    "readMoreURL": "https://example.com/coffee-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "33",
+    "name": "tea",
+    "icon": "🍵",
+    "group": "beverages",
+    "readMoreURL": "https://example.com/tea-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "34",
+    "name": "beer",
+    "icon": "🍺",
+    "group": "alcohol",
+    "readMoreURL": "https://example.com/beer-info",
+    "color": "golden",
+    "isSelected": false
+  },
+  {
+    "_id": "35",
+    "name": "wine",
+    "icon": "🍷",
+    "group": "alcohol",
+    "readMoreURL": "https://example.com/wine-info",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "39",
+    "name": "salt",
+    "icon": "🧂",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "https://example.com/salt-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "40",
+    "name": "pepper",
+    "icon": "🌶",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "https://example.com/pepper-info",
+    "color": "black",
+    "isSelected": false
+  },
+  {
+    "_id": "41",
+    "name": "cinnamon",
+    "icon": "🌰",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "https://example.com/cinnamon-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "42",
+    "name": "vanilla",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "https://example.com/vanilla-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "43",
+    "name": "garlic",
+    "icon": "🧄",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "https://example.com/garlic-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "44",
+    "name": "onion",
+    "icon": "🧅",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/onions-info",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "45",
+    "name": "peas",
+    "icon": "🌱",
+    "group": "vegetable",
+    "readMoreURL": "https://example.com/peas-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "46",
+    "name": "olive-oil",
+    "icon": "🫒",
+    "group": "cooking-oils",
+    "readMoreURL": "https://example.com/olive-oil-info",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "47",
+    "name": "canola-oil",
+    "icon": "🌻",
+    "group": "cooking-oils",
+    "readMoreURL": "https://example.com/canola-oil-info",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "48",
+    "name": "coconut-oil",
+    "icon": "🥥",
+    "group": "cooking-oils",
+    "readMoreURL": "https://example.com/coconut-oil-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "49",
+    "name": "soy-sauce",
+    "icon": "🥢",
+    "group": "condiments",
+    "readMoreURL": "https://example.com/soy-sauce-info",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "68",
+    "name": "shrimp",
+    "icon": "🍤",
+    "group": "seafood",
+    "readMoreURL": "https://example.com/shrimp-info",
+    "color": "pink",
+    "isSelected": false
+  },
+  {
+    "_id": "69",
+    "name": "scallops",
+    "icon": "🐚",
+    "group": "seafood",
+    "readMoreURL": "https://example.com/scallops-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "70",
+    "name": "lobster",
+    "icon": "🦞",
+    "group": "seafood",
+    "readMoreURL": "https://example.com/lobster-info",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "71",
+    "name": "crab",
+    "icon": "🦀",
+    "group": "seafood",
+    "readMoreURL": "https://example.com/crab-info",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "72",
+    "name": "trout",
+    "icon": "🐟",
+    "group": "fish",
+    "readMoreURL": "https://example.com/trout-info",
+    "color": "pink",
+    "isSelected": false
+  },
+  {
+    "_id": "73",
+    "name": "mussels",
+    "icon": "🐚",
+    "group": "seafood",
+    "readMoreURL": "https://example.com/mussels-info",
+    "color": "black",
+    "isSelected": false
+  },
+  {
+    "_id": "74",
+    "name": "oysters",
+    "icon": "🐚",
+    "group": "seafood",
+    "readMoreURL": "https://example.com/oysters-info",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "75",
+    "name": "sardines",
+    "icon": "🐟",
+    "group": "fish",
+    "readMoreURL": "https://example.com/sardines-info",
+    "color": "silver",
+    "isSelected": false
+  },
+  {
+    "_id": "78",
+    "name": "zucchinis",
+    "icon": "🥒",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "79",
+    "name": "green-yellow-beans",
+    "icon": "🥦",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "80",
+    "name": "white-purple-cabbage",
+    "icon": "🥬",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "81",
+    "name": "cauliflower",
+    "icon": "🥦",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "84",
+    "name": "kohlrabi",
+    "icon": "🥬",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "85",
+    "name": "leek",
+    "icon": "🧅",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "86",
+    "name": "turnip",
+    "icon": "🍠",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "87",
+    "name": "tarragon",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "88",
+    "name": "coriander",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "89",
+    "name": "atlantic-salt",
+    "icon": "🧂",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "90",
+    "name": "black-pepper",
+    "icon": "🌶",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "black",
+    "isSelected": false
+  },
+  {
+    "_id": "91",
+    "name": "cumin",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "92",
+    "name": "curry",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "93",
+    "name": "ginger",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "94",
+    "name": "paprika",
+    "icon": "🌶",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "95",
+    "name": "rosemary",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "96",
+    "name": "thyme",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "97",
+    "name": "basil",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "98",
+    "name": "mustard-seeds",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "99",
+    "name": "hawaiege-for-soup",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "100",
+    "name": "cayenne-pepper",
+    "icon": "🌶",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "101",
+    "name": "baharat",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "102",
+    "name": "clove",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "103",
+    "name": "soy-milk",
+    "icon": "🥛",
+    "group": "dairy-replacements",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "104",
+    "name": "almond-milk",
+    "icon": "🥛",
+    "group": "dairy-replacements",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "105",
+    "name": "oat-milk",
+    "icon": "🥛",
+    "group": "dairy-replacements",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "106",
+    "name": "coconut-milk",
+    "icon": "🥛",
+    "group": "dairy-replacements",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "107",
+    "name": "kefir-milk",
+    "icon": "🥛",
+    "group": "dairy-replacements",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "108",
+    "name": "salmon-eggs",
+    "icon": "🐟",
+    "group": "fish",
+    "readMoreURL": "",
+    "color": "pink",
+    "isSelected": false
+  },
+  {
+    "_id": "109",
+    "name": "tuna-stake",
+    "icon": "🐟",
+    "group": "fish",
+    "readMoreURL": "",
+    "color": "pink",
+    "isSelected": false
+  },
+  {
+    "_id": "110",
+    "name": "herring",
+    "icon": "🐟",
+    "group": "fish",
+    "readMoreURL": "",
+    "color": "pink",
+    "isSelected": false
+  },
+  {
+    "_id": "111",
+    "name": "caviar",
+    "icon": "🐟",
+    "group": "seafood",
+    "readMoreURL": "",
+    "color": "black",
+    "isSelected": false
+  },
+  {
+    "_id": "112",
+    "name": "roasted-baru-seeds",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "113",
+    "name": "natural-cashew-nuts",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "114",
+    "name": "cacao-nibs",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "115",
+    "name": "pumpkin-seeds",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "116",
+    "name": "sunflower-seeds",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "117",
+    "name": "chia-seeds",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "black",
+    "isSelected": false
+  },
+  {
+    "_id": "118",
+    "name": "flax-seeds",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "119",
+    "name": "hemp-seeds",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "120",
+    "name": "walnuts",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "121",
+    "name": "almonds",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "122",
+    "name": "sesame-seeds",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "123",
+    "name": "macadamia-nuts",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "124",
+    "name": "pistachio",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "125",
+    "name": "pine-nut",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "126",
+    "name": "black-sesame-seed",
+    "icon": "🌰",
+    "group": "nuts-and-seeds",
+    "readMoreURL": "",
+    "color": "black",
+    "isSelected": false
+  },
+  {
+    "_id": "127",
+    "name": "mct-oil",
+    "icon": "🌻",
+    "group": "cooking-oils",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "128",
+    "name": "avocado-oil",
+    "icon": "🥑",
+    "group": "cooking-oils",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "129",
+    "name": "grapeseed-oil",
+    "icon": "🍇",
+    "group": "cooking-oils",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "130",
+    "name": "sesame-oil",
+    "icon": "🌰",
+    "group": "cooking-oils",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "131",
+    "name": "butter",
+    "icon": "🧈",
+    "group": "dairy",
+    "readMoreURL": "",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "132",
+    "name": "ghee",
+    "icon": "🧈",
+    "group": "dairy",
+    "readMoreURL": "",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "133",
+    "name": "coconut-butter",
+    "icon": "🥥",
+    "group": "dairy",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "134",
+    "name": "cocoa-butter",
+    "icon": "🍫",
+    "group": "dairy",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "135",
+    "name": "coconut-cream",
+    "icon": "🥥",
+    "group": "dairy-replacements",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "136",
+    "name": "cashew-cream",
+    "icon": "🌰",
+    "group": "dairy-replacements",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "137",
+    "name": "silan",
+    "icon": "🍯",
+    "group": "sweeteners",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "138",
+    "name": "maple-syrup",
+    "icon": "🍁",
+    "group": "sweeteners",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "139",
+    "name": "agave-syrup",
+    "icon": "🌵",
+    "group": "sweeteners",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "140",
+    "name": "mustard",
+    "icon": "🌿",
+    "group": "spread",
+    "readMoreURL": "",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "141",
+    "name": "tahini",
+    "icon": "🌰",
+    "group": "spread",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "142",
+    "name": "coconut-amino",
+    "icon": "🥥",
+    "group": "condiments",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "143",
+    "name": "balsamic-vinegar",
+    "icon": "🍇",
+    "group": "condiments",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "144",
+    "name": "apple-cider-vinegar",
+    "icon": "🍎",
+    "group": "condiments",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "145",
+    "name": "wine-vinegar",
+    "icon": "🍷",
+    "group": "condiments",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "146",
+    "name": "rice-vinegar",
+    "icon": "🍚",
+    "group": "condiments",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "147",
+    "name": "Sechug",
+    "icon": "🌶",
+    "group": "spread",
+    "readMoreURL": "",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "148",
+    "name": "pullets",
+    "icon": "🍳",
+    "group": "meat-and-poultry",
+    "readMoreURL": "",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "149",
+    "name": "Lamb",
+    "icon": "🍖",
+    "group": "meat-and-poultry",
+    "readMoreURL": "",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "150",
+    "name": "sea-weed",
+    "icon": "🌿",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "151",
+    "name": "mushrooms",
+    "icon": "🍄",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "152",
+    "name": "asparagus",
+    "icon": "🌱",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "153",
+    "name": "artichoke",
+    "icon": "🌱",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "154",
+    "name": "spirulina",
+    "icon": "🌿",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "155",
+    "name": "kale",
+    "icon": "🥬",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "156",
+    "name": "chard",
+    "icon": "🥬",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "157",
+    "name": "chlorella",
+    "icon": "🌿",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "158",
+    "name": "wild-rice",
+    "icon": "🍚",
+    "group": "grains",
+    "readMoreURL": "",
+    "color": "black",
+    "isSelected": false
+  },
+  {
+    "_id": "159",
+    "name": "quinoa",
+    "icon": "🍚",
+    "group": "grains",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "160",
+    "name": "amaranth",
+    "icon": "🍚",
+    "group": "grains",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "161",
+    "name": "Buckwheat",
+    "icon": "🍚",
+    "group": "grains",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "162",
+    "name": "millet",
+    "icon": "🍚",
+    "group": "grains",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "999",
+    "name": "wheat",
+    "icon": "🌾",
+    "group": "grains",
+    "readMoreURL": "",
+    "color": "golden",
+    "isSelected": false
+  },
+  {
+    "_id": "163",
+    "name": "couscous",
+    "icon": "🍚",
+    "group": "grains",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "164",
+    "name": "corn",
+    "icon": "🌽",
+    "group": "grains",
+    "readMoreURL": "",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "165",
+    "name": "breads",
+    "icon": "🍞",
+    "group": "grains",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "166",
+    "name": "whole-wheat-bread",
+    "icon": "🍞",
+    "group": "bread",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "167",
+    "name": "spelled-bread",
+    "icon": "🍞",
+    "group": "bread",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "168",
+    "name": "rye-bread",
+    "icon": "🍞",
+    "group": "bread",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "169",
+    "name": "black-lentils",
+    "icon": "🌱",
+    "group": "legumes",
+    "readMoreURL": "",
+    "color": "black",
+    "isSelected": false
+  },
+  {
+    "_id": "170",
+    "name": "chickpeas",
+    "icon": "🥜",
+    "group": "legumes",
+    "readMoreURL": "",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "171",
+    "name": "chickpea-flour",
+    "icon": "🥜",
+    "group": "legumes",
+    "readMoreURL": "",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "172",
+    "name": "beans-white-brown",
+    "icon": "🌱",
+    "group": "legumes",
+    "readMoreURL": "",
+    "color": "white / brown",
+    "isSelected": false
+  },
+  {
+    "_id": "173",
+    "name": "lentils",
+    "icon": "🌱",
+    "group": "legumes",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "174",
+    "name": "beans",
+    "icon": "🌱",
+    "group": "legumes",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "175",
+    "name": "pears",
+    "icon": "🍐",
+    "group": "fruit",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "176",
+    "name": "figs",
+    "icon": "🫒",
+    "group": "fruit",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "177",
+    "name": "apricots",
+    "icon": "🍑",
+    "group": "fruit",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "178",
+    "name": "strawberries",
+    "icon": "🍓",
+    "group": "fruit",
+    "readMoreURL": "",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "179",
+    "name": "blueberries",
+    "icon": "🫐",
+    "group": "fruit",
+    "readMoreURL": "",
+    "color": "blue",
+    "isSelected": false
+  },
+  {
+    "_id": "180",
+    "name": "raspberries",
+    "icon": "🍇",
+    "group": "fruit",
+    "readMoreURL": "",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "181",
+    "name": "lemons",
+    "icon": "🍋",
+    "group": "fruit",
+    "readMoreURL": "",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "182",
+    "name": "limes",
+    "icon": "🍈",
+    "group": "fruit",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "183",
+    "name": "grapes",
+    "icon": "🍇",
+    "group": "fruit",
+    "readMoreURL": "",
+    "color": "purple",
+    "isSelected": false
+  },
+  {
+    "_id": "184",
+    "name": "baharat",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  },
+  {
+    "_id": "185",
+    "name": "watercress",
+    "icon": "🌱",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "186",
+    "name": "green-onion",
+    "icon": "🧅",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "187",
+    "name": "crushed-chili",
+    "icon": "🌶",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "188",
+    "name": "turmeric",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "yellow",
+    "isSelected": false
+  },
+  {
+    "_id": "189",
+    "name": "full-tahini",
+    "icon": "🌰",
+    "group": "spread",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "190",
+    "name": "red-onion",
+    "icon": "🧅",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "191",
+    "name": "za'atar",
+    "icon": "🌿",
+    "group": "spices-and-seasonings",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+  },
+  {
+    "_id": "192",
+    "name": "beef-ribs",
+    "icon": "🍖",
+    "group": "meat-and-poultry",
+    "readMoreURL": "",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "193",
+    "name": "osso-buco",
+    "icon": "🍖",
+    "group": "meat-and-poultry",
+    "readMoreURL": "",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "194",
+    "name": "beef-shoulder",
+    "icon": "🍖",
+    "group": "meat-and-poultry",
+    "readMoreURL": "",
+    "color": "red",
+    "isSelected": false
+  },
+  {
+    "_id": "195",
+    "name": "celery-root",
+    "icon": "🥔",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "196",
+    "name": "parsley-root",
+    "icon": "🥔",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "197",
+    "name": "cilantro-root",
+    "icon": "🥔",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "white",
+    "isSelected": false
+  },
+  {
+    "_id": "198",
+    "name": "celery",
+    "icon": "🥬",
+    "group": "vegetable",
+    "readMoreURL": "",
+    "color": "green",
+    "isSelected": false
+
+  },
+  {
+    "_id": "199",
+    "name": "cocoa",
+    "icon": "🍫",
+    "group": "backing-products",
+    "readMoreURL": "",
+    "color": "brown",
+    "isSelected": false
+  
+  },
+
+  {
+    "_id": "200",
+    "name": "dish-soap",
+    "icon": "🧼",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "201",
+    "name": "dishwasher-soap",
+    "icon": "🧼",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+
+  },
+  {
+    "_id": "202",
+    "name": "laundry-soap",
+    "icon": "🧼",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+
+  },
+  {
+    "_id": "203",
+    "name": "toilet-paper",
+    "icon": "🧻",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "204",
+    "name": "bleach",
+    "icon": "🧼",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "205",
+    "name": "paper-towels",
+    "icon": "🧻",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+
+  },
+  {
+    "_id": "206",
+    "name": "window-cleaner",
+    "icon": "🧴",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "207",
+    "name": "mop",
+    "icon": "🧹",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "208",
+    "name": "broom",
+    "icon": "🧹",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "209",
+    "name": "dustpan",
+    "icon": "🧹",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "210",
+    "name": "scrubbing-brush",
+    "icon": "🪥",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  
+  {
+    "_id": "212",
+    "name": "floor-cleaner",
+    "icon": "🧴",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  {
+    "_id": "213",
+    "name": "sponges",
+    "icon": "🧽",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  },
+  
+  {
+    "_id": "215",
+    "name": "disinfectant-wipes",
+    "icon": "🧴",
+    "group": "cleaning-items",
+    "readMoreURL": "",
+    "color": "various",
+    "isSelected": false
+  }
+  
+
+
+]
