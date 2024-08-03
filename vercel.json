@@ -1,0 +1,8 @@
+{
+  "preview": {
+    "buildCommand": "vite build --mode staging"
+  },
+  "production": {
+    "buildCommand": "vite build --mode production"
+  }
+}
