@@ -27,7 +27,8 @@ function createSocketService() {
     setup() {
       socket = io(baseUrl)
       setTimeout(() => {
-        const user = userService.getLoggedinUser()
+        const user = userService.getLoggedInUser()
+        console.log('Emitting user-watch', user._id);
         if (user) this.login(user._id)
       }, 500)
     },
