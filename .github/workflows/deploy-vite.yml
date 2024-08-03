@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy static content to Pages (staging)
 
 on:
   # Runs on pushes targeting the default branch
@@ -37,8 +37,8 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
-      - name: Build
-        run: npm run build
+      - name: Build For Staging
+        run: npm run build:staging
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
