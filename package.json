@@ -6,7 +6,12 @@
   "scripts": {
     "dev": "vite --port 5173",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+
+    "build:staging": "vite build --mode staging",
+    "build:production": "vite build --mode production"
+    
+    
   },
   "dependencies": {
     "driver.js": "^1.3.1",
