@@ -25,7 +25,7 @@ onMounted(()=>{
   console.debug('import.mete.env', import.meta.env);
   console.debug('config', config);
   console.log('node env:', process.env.NODE_ENV);
-  console.log('Vercel env:', process.env.VITE_ENV_VAR);
+  console.log('Vercel env:', import.meta.env.VITE_ENV_VAR);
  
 
   setStage()
