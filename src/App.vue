@@ -23,7 +23,9 @@ let timeOutIdx = null;
 onMounted(()=>{
   console.log('App is mounted', import.meta.env);
  
-  document.title = import.meta.env.VITE_APP_TITLE;  
+  document.title = import.meta.env.VITE_VERCEL_ENV === 'production' 
+  ? import.meta.env.VITE_APP_TITLE
+    :import.meta.env.VITE_APP_TITLE +' (!Staging)';  
 })
 
 
