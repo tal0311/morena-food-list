@@ -1,6 +1,6 @@
 html {
-   font-family: 'AR', sans-serif;
-   letter-spacing: 1px;
+  font-family: 'AR', sans-serif;
+  letter-spacing: 1px;
 }
 
 body {
@@ -10,9 +10,12 @@ body {
   margin: 0;
   overflow-x: hidden;
 
-  &.staging{
+
+
+  &.staging {
     border: 3px solid red;
   }
+
 }
 
 * {
@@ -54,7 +57,7 @@ a {
   border-radius: var(--br);
 }
 
-.error-btn{
+.error-btn {
   border: none;
   background-color: var(--bClr2);
   outline: 1px solid var(--clr12);
@@ -62,6 +65,7 @@ a {
   padding: 0.5rem 0.8rem;
   border-radius: var(--br);
 }
+
 .icon {
   border: none;
   background: none;
@@ -74,12 +78,10 @@ a {
 }
 
 details summary::-webkit-details-marker {
-  display:none;
+  display: none;
 }
 
-.icon-svg{
+.icon-svg {
   display: grid;
   place-content: center;
 }
-
-

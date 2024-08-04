@@ -24,6 +24,8 @@ let timeOutIdx = null;
 onMounted(()=>{
   console.debug('import.mete.env', import.meta.env);
   console.debug('config', config);
+  console.log('node env:', process.env.NODE_ENV);
+  console.log('Vercel env:', process.env.ENV_VAR);
  
 
   setStage()
