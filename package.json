@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 5173",
-    "build": "vite build",
+    "build": "vite build --mode staging",
     "preview": "vite preview",
-    "build:staging": "vite build --mode staging",
+    
     "build:production": "vite build --mode production"
   },
   "dependencies": {
