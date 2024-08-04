@@ -23,10 +23,24 @@ let timeOutIdx = null;
 onMounted(()=>{
   console.log('App is mounted', import.meta.env);
  
+
+  setStage()
   document.title = import.meta.env.VITE_VERCEL_ENV === 'production' 
   ? import.meta.env.VITE_APP_TITLE
-    :import.meta.env.VITE_APP_TITLE +' (!Staging)';  
+    :import.meta.env.VITE_APP_TITLE +' (!Staging)'; 
+    
+  
 })
+
+function setStage(){
+  if(import.meta.env.VITE_VERCEL_ENV === 'production'){
+    document.body.classList.add('production')
+    document.title = import.meta.env.VITE_APP_TITLE
+  }else{
+    document.body.classList.add('staging')
+    document.title = import.meta.env.VITE_APP_TITLE +' (!Staging)'
+  }
+}
 
 
 // SOCKET: manage socket connections
