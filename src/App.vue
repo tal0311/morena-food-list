@@ -22,9 +22,10 @@ let timeOutIdx = null;
 
 onMounted(()=>{
   console.log('App is mounted', import.meta.env);
-  console.log(import.meta.env.BUILD_ENV);
-  console.log(import.meta.VITE_BUILD_ENV);
+  console.log('build env:', import.meta.env.BUILD_ENV);
+  console.log('vite build env:', import.meta.VITE_BUILD_ENV);
   console.log('vercel Env:', import.meta.env.VITE_VERCEL_ENV);
+  console.log('VITE_APP_MODE:', import.meta.env.VITE_APP_MODE);
   document.title = import.meta.env.VITE_APP_TITLE;  
 })
 
