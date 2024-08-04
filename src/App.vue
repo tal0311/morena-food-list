@@ -14,6 +14,7 @@ import UserMsg from '@/components/UserMsg.vue'
 import { useUserStore } from './stores/user-store';
 import { useListStore } from './stores/list-store';
 import { useRouter } from 'vue-router';
+import config from '@/config';
 
 // import { socketService } from './services/socket.service';
 
@@ -22,21 +23,18 @@ let timeOutIdx = null;
 
 onMounted(()=>{
   console.log('App is mounted', import.meta.env);
+  console.log('App is mounted', config);
  
 
   setStage()
-  document.title = import.meta.env.VITE_VERCEL_ENV === 'production' 
-  ? import.meta.env.VITE_APP_TITLE
-    :import.meta.env.VITE_APP_TITLE +' (!Staging)'; 
+ 
     
   
 })
 
 function setStage(){
-  if(import.meta.env.VITE_VERCEL_ENV === 'production'){
-    document.body.classList.add('production')
-    document.title = import.meta.env.VITE_APP_TITLE
-  }else{
+   
+  if(config.MODE === 'staging'){
     document.body.classList.add('staging')
     document.title = import.meta.env.VITE_APP_TITLE +' (!Staging)'
   }
