@@ -22,8 +22,8 @@ const isSocketConnected = ref(false);
 let timeOutIdx = null;
 
 onMounted(()=>{
-  console.log('App is mounted', import.meta.env);
-  console.log('App is mounted', config);
+  console.debug('import.mete.env', import.meta.env);
+  console.debug('config', config);
  
 
   setStage()
