@@ -4,7 +4,7 @@ import { utilService } from "./util.service.js";
 import { userService } from "./user.service.js";
 
 
-import lists from "./../data/list.json";
+import lists from "../data/list.json";
 
 const STORAGE_KEY = "list_DB";
 

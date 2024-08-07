@@ -21,24 +21,17 @@ import config from '@/config';
 const isSocketConnected = ref(false);
 let timeOutIdx = null;
 
-onMounted(()=>{
+onMounted(() => {
   console.debug('import.mete.env', import.meta.env);
-  console.debug('config', config);
-  console.log('node env:', process.env.NODE_ENV);
-  console.log('Vercel env:', import.meta.env.VITE_ENV_VAR);
- 
-
   setStage()
- 
-    
-  
+
 })
 
-function setStage(){
-   
-  if(config.MODE === 'staging'){
+function setStage() {
+
+  if (config.MODE === 'staging') {
     document.body.classList.add('staging')
-    document.title = import.meta.env.VITE_APP_TITLE +' (!Staging)'
+    document.title = import.meta.env.VITE_APP_TITLE + ' (!Staging)'
   }
 }
 
