@@ -29,10 +29,7 @@ onMounted(() => {
 
 function setStage() {
 
-  if (config.MODE === 'staging') {
-    document.body.classList.add('staging')
-    document.title = import.meta.env.VITE_APP_TITLE + ' (!Staging)'
-  }
+
 }
 
 
