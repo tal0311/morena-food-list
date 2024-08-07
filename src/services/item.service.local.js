@@ -30,6 +30,8 @@ async function query(filterBy = {}) {
     await setLabels(itemsByLabels)
     return itemsByLabels
   }
+
+  return items;
 }
 
 // move to backend

@@ -21,22 +21,17 @@ import config from '@/config';
 const isSocketConnected = ref(false);
 let timeOutIdx = null;
 
-onMounted(()=>{
-  console.log('App is mounted', import.meta.env);
-  console.log('App is mounted', config);
- 
-
+onMounted(() => {
+  console.debug('import.mete.env', import.meta.env);
   setStage()
- 
-    
-  
+
 })
 
-function setStage(){
-   
-  if(config.MODE === 'staging'){
+function setStage() {
+
+  if (config.MODE === 'staging') {
     document.body.classList.add('staging')
-    document.title = import.meta.env.VITE_APP_TITLE +' (!Staging)'
+    document.title = import.meta.env.VITE_APP_TITLE + ' (!Staging)'
   }
 }
 

@@ -13,13 +13,16 @@ export const userService = {
     signup,
     getGuestUser,
     // updateUser
+    query
 }
 
 createUsers()
 window.userService = userService;
 
 
-
+async function query() {
+     return await storageService.query(STORAGE_KEY);
+}
 
 function getLoggedInUser() {
     let user = utilService.loadFromStorage(LOGGED_USER);
