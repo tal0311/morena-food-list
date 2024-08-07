@@ -23,14 +23,11 @@ let timeOutIdx = null;
 
 onMounted(() => {
   console.debug('import.mete.env', import.meta.env);
-  setStage()
+  document.title = import.meta.env.VITE_APP_TITLE;
 
 })
 
-function setStage() {
 
-
-}
 
 
 // SOCKET: manage socket connections
