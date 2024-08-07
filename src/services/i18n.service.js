@@ -1,5 +1,9 @@
 
-const gTrans = await fetch('https://cdn.jsdelivr.net/gh/tal0311/food-list-data@main/items-trans.json').then(res => res.json())
+var gTrans;
+(async ()=>{
+   gTrans = await fetch('https://cdn.jsdelivr.net/gh/tal0311/food-list-data@main/items-trans.json').then(res => res.json())
+
+})()
 
 function doTrans(key, currLang = 'he') {
   // console.debug("key", key);
