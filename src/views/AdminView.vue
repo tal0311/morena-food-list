@@ -163,7 +163,7 @@ onBeforeMount(async () => {
     lists.value = await listService.query();
 
     console.log('Getting items from Backend', );
-    fetch('https://foodlist-server.onrender.com/api/item')
+    fetch(import.meta.env.VITE_SERVER_URL + '/api/item')
         .then(response => response.json())
         .then(data => console.log(data));
 

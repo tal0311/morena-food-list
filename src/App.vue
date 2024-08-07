@@ -23,17 +23,14 @@ let timeOutIdx = null;
 
 onMounted(() => {
   console.debug('import.mete.env', import.meta.env);
-  setStage()
+  document.title = import.meta.env.VITE_APP_TITLE;
+
+  console.log(import.meta.env.VITE_APP_TITLE);
+  
 
 })
 
-function setStage() {
 
-  if (config.MODE === 'staging') {
-    document.body.classList.add('staging')
-    document.title = import.meta.env.VITE_APP_TITLE + ' (!Staging)'
-  }
-}
 
 
 // SOCKET: manage socket connections
