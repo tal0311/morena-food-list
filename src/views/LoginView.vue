@@ -46,7 +46,7 @@ async function login(type, credential) {
     }
 }
 
-constDemoUser={
+const demoUser={
     "username": "Tal Amit",
     "email": "tal.amit0311@gmail.com",
     "password": "",
