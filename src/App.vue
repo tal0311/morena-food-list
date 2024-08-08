@@ -8,6 +8,10 @@
 
 <script setup>
 //TODO: canva info ang img
+// TODO: in supermarket screen, shoed list of items not selected and able to select then like in summary screen
+// TODO: in summary screen, show the items that by group order
+// TODO: lock screen in super mode to prevent touching the screen,
+// TODO: moran filter unwanted items
 
 import { computed, watchEffect, onMounted, ref } from 'vue';
 import UserMsg from '@/components/UserMsg.vue'
