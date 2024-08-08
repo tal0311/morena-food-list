@@ -11,7 +11,7 @@
 
       <footer class="grid" @contextmenu.prevent="resetStorage">
         <RouterLink to="/user" class="icon" v-html="$svg('account')"></RouterLink>
-        <RouterLink v-if="isBtnDisplayed" to="/user" class="icon admin-btn" v-html="$svg('admin')"></RouterLink>
+        <RouterLink v-if="isBtnDisplayed" to="/admin" class="icon admin-btn" v-html="$svg('admin')"></RouterLink>
       </footer>
       <section>
       </section>

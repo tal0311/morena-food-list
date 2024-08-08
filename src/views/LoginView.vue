@@ -46,6 +46,35 @@ async function login(type, credential) {
     }
 }
 
+constDemoUser={
+    "username": "Tal Amit",
+    "email": "tal.amit0311@gmail.com",
+    "password": "",
+    "goals": [],
+    "settings": {
+        "lang": "he",
+        "notifications": true,
+        "isVegan": false,
+        "isVegetarian": false,
+        "isGlutenFree": false,
+        "isLactoseFree": false,
+        "isKosher": false
+    },
+    "level": 1,
+    "points": 0,
+    "achievements": [],
+    "selectedItems": [],
+    "imgUrl": "https://lh3.googleusercontent.com/a/ACg8ocLTQdHl9NRJc9pFi27CqnmkOJTBC6namN9PpUVf88gmpnKr2sFy=s96-c",
+    "age": null,
+    "city": "",
+    "labels": [],
+    "history": [],
+    "personalTxt": "",
+    "role": "admin",
+    "googleID": "116549974717956267584",
+    "_id": "t0x7G"
+}
+
 async function getCredFromGoogle({ credential }) {
     // console.log('credential', credential);
     userCredFromGoogle.value = decodeCredential(credential)

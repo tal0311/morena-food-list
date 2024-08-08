@@ -20,7 +20,7 @@
                 <button :class="`primary-btn ${btnState}`" @click.stop="mainAction" v-html="$svg(btnState)"></button>
             </div>
         </footer>
-        <AppModal />
+        <!-- <AppModal /> -->
     </section>
     <AppLoader v-else />
     <RouterView />
@@ -39,7 +39,7 @@ import { useUserStore } from '@/stores/user-store';
 
 import GroupList from '@/components/GroupList.vue';
 import AppLoader from '@/components/AppLoader.vue';
-import AppModal from '@/components/AppModal.vue';
+// import AppModal from '@/components/AppModal.vue';
 import { listService } from '@/services/list.service.js';
 
 const route = useRoute()

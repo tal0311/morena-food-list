@@ -4,7 +4,7 @@
         <h1>Welcome Moran, You can update your data base from here</h1>
         <section class="admin-filter grid ">
 
-            <section class="entity-filter">
+            <section class="entity-filter grid">
                 <span>Filter By: </span>
 
                 <section class="actions-container grid grid-dir-col">
@@ -13,6 +13,7 @@
                     <button class="primary-btn" @click="setFilterBy('items')">Items</button>
                     <button class="primary-btn" @click="setFilterBy('lists')">Lists</button>
                 </section>
+                <button class="secondary-btn" @click="addUser">Create user</button>
             </section>
             <form action="">
                 Search: <input type="text" v-model="searchTerm" :placeholder="`Search ${filterBy}`" />
@@ -126,6 +127,7 @@ import { userService } from '@/services/user.service';
 import { itemService } from '@/services/item.service.local';
 import { listService } from '@/services/list.service';
 import { i18Service } from '@/services/i18n.service';
+import { eventBus } from '@/services/event-bus.service';
 
 
 const users = ref(null);
@@ -162,7 +164,9 @@ onBeforeMount(async () => {
     items.value = await itemService.query();
     lists.value = await listService.query();
 
-    console.log('Getting items from Backend', );
+    console.log('Getting items from Backend',);
+
+    import.meta.env.MODE !== 'development' &&
     fetch(import.meta.env.VITE_SERVER_URL + '/api/item')
         .then(response => response.json())
         .then(data => console.log(data));
@@ -213,6 +217,14 @@ function deleteList(listId) {
 
 function getTranslation(key) {
     return i18Service.getTransItem(key);
+}
+
+function addUser() {
+    console.log('adding user');
+    // userService.add();
+    eventBus.emit('toggle-modal', { type: 'ModalAddUser' });
+    console.log(eventBus);
+    
 }
 
 </script>
@@ -276,16 +288,18 @@ function getTranslation(key) {
 
     .entity-filter {
         padding-inline: 0.5rem;
-        display: grid;
+
+        justify-content: space-between;
         grid-auto-flow: column;
         gap: 1rem;
         align-items: center;
         font-size: larger;
-        justify-content: start;
-    
 
 
-        /* max-width: 50%; */
+        .secondary-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
 
         .actions-container {
             gap: 1rem;
