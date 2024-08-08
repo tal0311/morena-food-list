@@ -82,7 +82,7 @@ async function onSendList() {
     try {
         // debugger
         let idsTosShare = selectItems.value.items.join(',')
-        const url = `${import.meta.env.VITE_PROD_URL}?share=true&ids=${idsTosShare}`;
+        const url = `${import.meta.env.VITE_PROD_URL}list?share=true&ids=${idsTosShare}`;
 
         await navigator.share({ title: 'My shopping list', text: 'Check out my shopping list', url: url })
         showSuccessMsg('itemsShared')

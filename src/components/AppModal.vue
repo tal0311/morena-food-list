@@ -11,6 +11,8 @@ import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
 import ModalDone from '@/components/modal/ModalDone.vue';
 import ModalInfo from '@/components/modal/ModalInfo.vue';
 import ModalHistory from '@/components/modal/ModalHistory.vue';
+import ModalAddUser from '@/components/modal/ModalAddUser.vue';
+// src/components/modal/ModalAddUser.vue
 
 
 
@@ -27,6 +29,8 @@ onBeforeMount(() => {
 })
 
 function setModal({ type, info }) {
+    console.log(type, info);
+    
     console.debug(type, info);
     isModalOpen.value = true
 
@@ -42,6 +46,9 @@ function setModal({ type, info }) {
             break;
         case 'ModalHistory':
             modalTYpe.value = ModalHistory
+            break;
+        case 'ModalAddUser':
+            modalTYpe.value = ModalAddUser
             break;
         default:
             modalTYpe.value = ModalDone

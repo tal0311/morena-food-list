@@ -2,7 +2,7 @@
   <section class="main-app main-layout">
     <RouterView />
     <UserMsg />
-
+    <AppModal />
   </section>
 </template>
 
@@ -13,6 +13,7 @@ import { computed, watchEffect, onMounted, ref } from 'vue';
 import UserMsg from '@/components/UserMsg.vue'
 import { useUserStore } from './stores/user-store';
 import { useListStore } from './stores/list-store';
+import AppModal from '@/components/AppModal.vue';
 import { useRouter } from 'vue-router';
 
 
