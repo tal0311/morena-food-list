@@ -14,7 +14,7 @@ import UserMsg from '@/components/UserMsg.vue'
 import { useUserStore } from './stores/user-store';
 import { useListStore } from './stores/list-store';
 import { useRouter } from 'vue-router';
-import config from '@/config';
+
 
 // import { socketService } from './services/socket.service';
 

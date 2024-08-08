@@ -10,7 +10,7 @@ import i18nPlugin from "./plugins/i18nPlugin";
 import svgPlugin from "./plugins/svgPlugin";
 import errorPlugin from './plugins/errorPlugin'
 import vue3GoogleLogin from 'vue3-google-login'
-import config from "./config";
+
 
 
 const app = createApp(App);
@@ -21,8 +21,11 @@ app.use(createPinia());
 app.use(router);
 
 // login with google
+console.log(import.meta.env.VITE_G_CLIENT_ID);
+
 app.use(vue3GoogleLogin, {
-  clientId: config.VITE_G_CLIENT_ID
+  clientId: import.meta.env.VITE_G_CLIENT_ID
+
 })
 // Plugins
 

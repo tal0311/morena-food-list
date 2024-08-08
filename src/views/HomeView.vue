@@ -9,8 +9,9 @@
 
       <TheWelcome />
 
-      <footer id="language-modal" @contextmenu.prevent="resetStorage">
+      <footer class="grid" @contextmenu.prevent="resetStorage">
         <RouterLink to="/user" class="icon" v-html="$svg('account')"></RouterLink>
+        <RouterLink v-if="isBtnDisplayed" to="/user" class="icon admin-btn" v-html="$svg('admin')"></RouterLink>
       </footer>
       <section>
       </section>
@@ -24,16 +25,29 @@
 
 import { computed } from 'vue'
 import TheWelcome from '@/components/TheWelcome.vue'
+import { useUserStore } from '@/stores/user-store';
 
 const getIcon = computed(() => {
   const icons = ["✅", "🥬", "🥦", "🥒", "🥑", "🫒", "🍅", "🍄", "🍑", "🍌", "🍇", "☕", "🥛", "🥩", "🧀", "🥚", "🥝", "🍉", "🍎", "🥭", "🍍", "🍌", "🍋", "🍊", "🍒", "🍓", "🫐", "🫑", "🌽", "🍆", "🫒", "🍅"];
   return icons[Math.floor(Math.random() * icons.length)];
 })
 
+const user = computed(() => useUserStore().getUser)
+
+
+
 function resetStorage() {
   localStorage.clear()
   location.reload()
 }
+
+const isBtnDisplayed = computed(() => {
+
+  const admins =['admin', 'super-admin','super_user']
+  console.log(user.value.role);
+  
+  return admins.includes(user.value.role)
+})
 
 
 
@@ -82,6 +96,11 @@ footer {
   position: fixed;
   bottom: 3rem;
   left: 3rem;
+  gap: 2rem;
+
+  .admin-btn{
+    background-color: crimson;
+  }
 }
 
 .lang-modal {

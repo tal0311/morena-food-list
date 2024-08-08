@@ -118,10 +118,11 @@
             </section>
         </details>
 
-        <footer>
+        <footer >
             <RouterLink to="/list" class="primary-btn">
                 <span>{{ $trans('start-shopping') }}</span>
             </RouterLink>
+       
         </footer>
 
     </section>
@@ -234,6 +235,7 @@ const historyCounter = computed(() => history?.value?.length || 'No history');
 }
 
 footer {
+  
 
     span {
         padding-block: 0.5em;
