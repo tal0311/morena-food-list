@@ -111,7 +111,9 @@ function getEmptyUser() {
         city: "",
         labels: [],
         history: [],
-        personalTxt: ""
+        personalTxt: "",
+        role: "admin"
+
     }
 }
 
@@ -140,7 +142,8 @@ function getGuestUser() {
         "city": "Israel", //get location from useragent
         "labels": [],
         "history": [],
-        "personalTxt": ""
+        "personalTxt": "",
+        role: "guest"
     }
 }
 

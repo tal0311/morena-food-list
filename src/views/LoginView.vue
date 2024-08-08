@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watchEffect } from 'vue'
+import { ref } from 'vue'
 import { decodeCredential } from 'vue3-google-login'
 import { useUserStore } from '@/stores/user-store';
 import { useRouter } from 'vue-router';
@@ -24,6 +24,8 @@ const userCredFromGoogle = ref(null)
 const router = useRouter()
 
 function callback(response) {
+    console.log('response', response);
+    
     if (response.error) {
         console.error('error', response.error)
     } else {
@@ -45,9 +47,9 @@ async function login(type, credential) {
 }
 
 async function getCredFromGoogle({ credential }) {
-    console.log('credential', credential);
+    // console.log('credential', credential);
     userCredFromGoogle.value = decodeCredential(credential)
-    
+
     await login('google', userCredFromGoogle.value)
 }
 
