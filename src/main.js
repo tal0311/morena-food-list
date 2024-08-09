@@ -20,9 +20,6 @@ app.use(createPinia());
 
 app.use(router);
 
-// login with google
-console.log(import.meta.env.VITE_G_CLIENT_ID);
-
 app.use(vue3GoogleLogin, {
   clientId: import.meta.env.VITE_G_CLIENT_ID
 

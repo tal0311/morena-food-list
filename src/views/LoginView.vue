@@ -1,13 +1,21 @@
 <template>
     <section class="main-layout login-view">
         <h1>Login</h1>
-        <button class="secondary-btn" @click="login('guest')">Continue as guest</button>
+        <form class="grid" @submit.prevent="login('credentials', credentials)">
+            <input type="email" v-model="credentials.email" placeholder="Email" required>
+            <input type="password" v-model="credentials.password" placeholder="Password" required>
+            <button type="submit" class="primary-btn">Login</button>
+        </form>
+        <button class="secondary-btn grid" @click="login('guest')">
+            <span>Continue as guest</span>
+            <small>(less features less fun)</small>
+        </button>
         <div class="sep-container grid grid-dir-col">
 
             <span class="sep"></span> <span class="or">OR</span> <span class="sep"></span>
         </div>
         <!-- <GoogleLogin :callback="callback" prompt auto-login /> -->
-        <GoogleLogin :callback="callback" prompt auto-login />
+        <GoogleLogin :callback="callback" prompt />
     </section>
 
 </template>
@@ -18,6 +26,11 @@ import { decodeCredential } from 'vue3-google-login'
 import { useUserStore } from '@/stores/user-store';
 import { useRouter } from 'vue-router';
 
+const credentials = ref({
+    email: 'tal.amit0311@gmail.com',
+    password: '1234'
+})
+
 
 const userStore = useUserStore()
 const userCredFromGoogle = ref(null)
@@ -25,7 +38,7 @@ const router = useRouter()
 
 function callback(response) {
     console.log('response', response);
-    
+
     if (response.error) {
         console.error('error', response.error)
     } else {
@@ -36,17 +49,24 @@ function callback(response) {
 
 async function login(type, credential) {
     try {
+        console.log(type, credential);
+        if (type === 'credentials') {
+            await userStore.login(type, { email: credential.email, password: credential.password })
+            router.push('/')
+        } else {
+            await userStore.login(type, credential)
+        }
 
-        await userStore.login(type, credential)
-        router.push('/')
+        // await userStore.login(type, credential)
+        // router.push('/')
     } catch (error) {
-        console.error('error', error)
-        login('guest')
+        // console.error('error', error)
+        // login('guest')
 
     }
 }
 
-const demoUser={
+const demoUser = {
     "username": "Tal Amit",
     "email": "tal.amit0311@gmail.com",
     "password": "",
@@ -103,6 +123,27 @@ async function getCredFromGoogle({ credential }) {
         padding: 0.6rem 0;
         width: 100%;
         /* height: 3rem; */
+    }
+
+    form {
+        gap: 1rem;
+
+        input {
+            padding: 0.5rem;
+            border: 1px solid var(--bClr1);
+            border-radius: var(--br);
+            font-size: 1rem;
+            color: var(--clr7);
+
+            &:focus {
+                outline: 1px solid var(--bClr3);
+            }
+        }
+
+        .primary-btn {
+            padding: 1rem;
+            width: 100%;
+        }
     }
 }
 

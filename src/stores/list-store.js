@@ -1,6 +1,6 @@
 import { ref, computed, watchEffect } from "vue";
 import { defineStore } from "pinia";
-import { itemService } from "@/services/item.service.local";
+import { itemService } from "@/services/item.service";
 import { listService } from "@/services/list.service.js";
 import { utilService } from "@/services/util.service";
 import {
@@ -8,9 +8,7 @@ import {
   showErrorMsg,
   showSuccessMsg,
 } from "@/services/event-bus.service";
-import { useAppStore } from "@/stores/app-store";
 import { useUserStore } from "@/stores/user-store";
-import { userService } from "@/services/user.service";
 import { useRouter } from "vue-router";
 
 
