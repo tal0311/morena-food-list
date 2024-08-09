@@ -22,18 +22,11 @@ import AppModal from '@/components/AppModal.vue';
 import { useRouter } from 'vue-router';
 
 
-import { socketService, SOCKET_EVENT_UPDATE_USER } from './services/socket.service';
+import { socketService } from './services/socket.service';
 
 const userStore = useUserStore();
 const isSocketConnected = ref(false);
-onBeforeMount(() => {
 
-  socketService.on(SOCKET_EVENT_UPDATE_USER, (user) => {
-    console.log('User updated', user);
-    
-  
-  })
-})
 
 onMounted(() => {
   console.debug('import.mete.env', import.meta.env);
