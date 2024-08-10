@@ -22,15 +22,15 @@ window.itemService = itemService;
 
 async function query(filterBy = {}) {
   const user = userService.getLoggedInUser();
-  let items = await fetch(import.meta.env.VITE_DATA_URL)
-  .then(response => response.json())
-  // const items= await httpService.get('item')
-  if (filterBy.labels) {
-    let itemsByLabels = getGroupsByLabels(items)
-    itemsByLabels = filterByUserSettings(user, itemsByLabels)
-    await setLabels(itemsByLabels)
-    return itemsByLabels
-  }
+  // let items = await fetch(import.meta.env.VITE_DATA_URL)
+  // .then(response => response.json())
+  const items= await httpService.get('item',filterBy)
+  // if (filterBy.labels) {
+  //   let itemsByLabels = getGroupsByLabels(items)
+  //   itemsByLabels = filterByUserSettings(user, itemsByLabels)
+  //   await setLabels(itemsByLabels)
+  //   return itemsByLabels
+  // }
 
   return items;
 }

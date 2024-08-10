@@ -1,6 +1,20 @@
 import gUsers from './../data/user.json';
 import { storageService } from './async-storage.service.js';
+import { httpService } from './http.service';
 import { utilService } from './util.service';
+import { useUserStore } from '@/stores/user-store';
+import { socketService, SOCKET_EVENT_UPDATE_USER } from './socket.service';
+
+
+setTimeout(() => {
+    const userStore = useUserStore();
+    socketService.on(SOCKET_EVENT_UPDATE_USER, (user) => {
+        _saveLoggedUser(user);
+        userStore.loggedUser.value = user;
+
+    });
+    // console.log('userService', userService);
+}, 0);
 const STORAGE_KEY = 'user_DB';
 const LOGGED_USER = 'loggedUser';
 
@@ -21,7 +35,7 @@ window.userService = userService;
 
 
 async function query() {
-     return await storageService.query(STORAGE_KEY);
+    return await httpService.get('user');
 }
 
 function getLoggedInUser() {
@@ -30,20 +44,18 @@ function getLoggedInUser() {
 }
 
 async function save(user) {
-    // const err = new Error();
-    // console.trace()
-
-    // user = JSON.parse(JSON.stringify(user))
-
-    const method = (user._id) ? 'put' : 'post';
-    const updatedUser = await storageService[method](STORAGE_KEY, user);
+  
+    let updatedUser = null
+    if (user._id) {
+        updatedUser = await httpService.put('user/' + user._id, user)
+    }
+    else {
+        updatedUser = await httpService.post('user', user)
+    }
 
     if (updatedUser) {
-        // console.log('updatedUser', updatedUser);
         _saveLoggedUser(updatedUser);
-        
         return updatedUser;
-
     }
 
 }
@@ -56,23 +68,32 @@ function removeUser(userId) {
 
 // BACKEND 
 async function login(loginType, credentials) {
-    
 
-    if (loginType === 'guest') {
-        let guestUser = getGuestUser();
-        return await save(guestUser)
+    const user = await httpService.post('auth/login', credentials)
+    console.log('user', user);
 
+
+    if (user) {
+        _saveLoggedUser(user);
+        return user;
     }
-    if (loginType === 'google') {
-        let user = getEmptyUser();
-        user.username = credentials.name
-        user.email = credentials.email
-        user.imgUrl = credentials.picture
-        user.googleID = credentials.sub
-        return await save(user)
 
 
-    }
+    // if (loginType === 'guest') {
+    //     let guestUser = getGuestUser();
+    //     return await save(guestUser)
+
+    // }
+    // if (loginType === 'google') {
+    //     let user = getEmptyUser();
+    //     user.username = credentials.name
+    //     user.email = credentials.email
+    //     user.imgUrl = credentials.picture
+    //     user.googleID = credentials.sub
+    //     return await save(user)
+
+
+    // }
 }
 
 function signup(credentials) {
@@ -164,6 +185,6 @@ function createUsers() {
 }
 
 (async () => {
-//    _saveLoggedUser(gUsers[0])
+    //    _saveLoggedUser(gUsers[0])
 })()
 

@@ -1600,7 +1600,38 @@ const gTrans = {
     "en": "Group Order",
     "es": "",
     "he": "סדר קבוצות מוצרים"
-  }
+  },
+  'my-lists': {
+    'en': 'My Lists',
+    'es': 'Mis Listas',
+    'he': 'הרשימות שלי'
+  },
+  'other-lists': {
+    'en': 'Other Lists',
+    'es': 'Otras Listas',
+    'he': 'רשימות אחרות'
+
+  },
+  'import-public-lists': {
+    'en': 'Import Public Lists',
+    'es': 'Importar Listas Públicas',
+    'he': 'ייבא רשימות ציבוריות'
+  },
+  'loading-public-lists': {
+    en: 'Loading Public Lists',
+    es: 'Cargando Listas Públicas',
+    he: 'טוען רשימות ציבוריות'
+  },
+  'public-lists': {
+    en: 'Public Lists',
+    es: 'Listas Públicas',
+    he: 'רשימות ציבוריות'
+  },
+  'no-public-lists': {
+    en: 'No Public Lists',
+    es: 'No hay listas públicas',
+    he: 'אין רשימות ציבוריות'
+  },
 }
 
 function doTrans(key, currLang = 'he') {

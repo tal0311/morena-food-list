@@ -41,6 +41,7 @@ import GroupList from '@/components/GroupList.vue';
 import AppLoader from '@/components/AppLoader.vue';
 // import AppModal from '@/components/AppModal.vue';
 import { listService } from '@/services/list.service.js';
+// import { listService } from '@/services/list.service.local.js';
 
 const route = useRoute()
 const router = useRouter()
@@ -97,7 +98,7 @@ async function loadList(listId) {
 }
 
 async function clearItems() {
-    console.debug('clear items');
+ 
     if (btnState.value === 'done') {
         listStore.clearItems()
         router.push({ name: 'list', query: {} })
@@ -115,7 +116,6 @@ const btnState = ref('done')
 const label = ref({ name: '', userInput: '' })
 
 function mainAction() {
-
     if (btnState.value === 'edit') {
         submitLabel()
         changeBtnState('done')

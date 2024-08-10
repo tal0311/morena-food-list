@@ -109,7 +109,7 @@
                     <tr v-for="list in filteredLists" :key="list._id">
                         <td contenteditable>{{ list._id }}</td>
                         <td contenteditable>{{ list.title }}</td>
-                        <td contenteditable>{{ list.items }}</td>
+                        <td contenteditable>{{ list.items.map(item => item.name) }}</td>
                         <td contenteditable>{{ list.owner.username }}</td>
                         <td>
                             <button @click="deleteList(list.id)">Delete</button>
@@ -119,12 +119,17 @@
             </table>
         </details>
     </section>
+
+    <section v-else>
+        <AppLoader />
+    </section>
 </template>
 
 <script setup>
 import { computed, ref, onBeforeMount } from 'vue';
+import AppLoader from '@/components/AppLoader.vue';
 import { userService } from '@/services/user.service';
-import { itemService } from '@/services/item.service.local';
+import { itemService } from '@/services/item.service';
 import { listService } from '@/services/list.service';
 import { i18Service } from '@/services/i18n.service';
 import { eventBus } from '@/services/event-bus.service';
@@ -152,6 +157,8 @@ const filteredItems = computed(() => {
 });
 
 const filteredLists = computed(() => {
+    
+    
     return lists.value?.filter(list => {
         const regex = new RegExp(searchTerm.value, 'i');
         return list.title.match(regex)
@@ -162,14 +169,14 @@ onBeforeMount(async () => {
     console.log('AdminView is mounted',);
     users.value = await userService.query();
     items.value = await itemService.query();
-    lists.value = await listService.query();
+    lists.value = await listService.query({admin:true});
 
     console.log('Getting items from Backend',);
 
-    import.meta.env.MODE !== 'development' &&
-    fetch(import.meta.env.VITE_SERVER_URL + '/api/item')
-        .then(response => response.json())
-        .then(data => console.log(data));
+    // import.meta.env.MODE !== 'development' &&
+    // fetch(import.meta.env.VITE_SERVER_URL + '/api/item')
+    //     .then(response => response.json())
+    //     .then(data => console.log(data));
 
 
     document.body.dir = 'ltr';
