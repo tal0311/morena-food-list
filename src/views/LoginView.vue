@@ -52,10 +52,11 @@ async function login(type, credential) {
         console.log(type, credential);
         if (type === 'credentials') {
             await userStore.login(type, { email: credential.email, password: credential.password })
-            router.push('/')
+
         } else {
             await userStore.login(type, credential)
         }
+        router.push('/')
 
         // await userStore.login(type, credential)
         // router.push('/')

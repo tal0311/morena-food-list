@@ -39,12 +39,13 @@ async function query() {
 }
 
 function getLoggedInUser() {
-    let user = utilService.loadFromStorage(LOGGED_USER);
-    return user;
+    return _loadUserFromStorage();
+    // let user = utilService.loadFromStorage(LOGGED_USER);
+    // return user;
 }
 
 async function save(user) {
-  
+
     let updatedUser = null
     if (user._id) {
         updatedUser = await httpService.put('user/' + user._id, user)
@@ -68,33 +69,73 @@ function removeUser(userId) {
 
 // BACKEND 
 async function login(loginType, credentials) {
+    let user = null
+    console.log("♠️ ~ login ~ ", loginType, credentials);
+    // debugger
 
-    const user = await httpService.post('auth/login', credentials)
-    console.log('user', user);
-
+    switch (loginType) {
+        case 'guest':
+            user = await loginAsGuest();
+            break
+        case 'google':
+            user = await loginWithGoogle(credentials);
+            break
+        case 'credentials':
+            user = await loginWithCredentials(credentials);
+            break
+    }
 
     if (user) {
         _saveLoggedUser(user);
         return user;
     }
-
-
-    // if (loginType === 'guest') {
-    //     let guestUser = getGuestUser();
-    //     return await save(guestUser)
-
-    // }
-    // if (loginType === 'google') {
-    //     let user = getEmptyUser();
-    //     user.username = credentials.name
-    //     user.email = credentials.email
-    //     user.imgUrl = credentials.picture
-    //     user.googleID = credentials.sub
-    //     return await save(user)
-
-
-    // }
 }
+
+async function loginWithCredentials(credentials) {
+    return await httpService.post('auth/login/credentials', credentials)
+
+}
+
+async function loginWithGoogle(credentials) {
+
+    const userCredentials = {
+        ...getEmptyUser(),
+        googleID: credentials.sub,
+        username: credentials.name,
+        email: credentials.email,
+        imgUrl: credentials.picture
+    }
+
+    return await httpService.post('auth/login/google', userCredentials)
+}
+
+async function loginAsGuest() {
+    console.log("♠️ ~ loginAsGuest ~ ");
+
+    return await httpService.post('auth/signup/guest')
+
+
+}
+
+
+
+
+// if (loginType === 'guest') {
+//     let guestUser = getGuestUser();
+//     return await save(guestUser)
+
+// }
+// if (loginType === 'google') {
+//     let user = getEmptyUser();
+//     user.username = credentials.name
+//     user.email = credentials.email
+//     user.imgUrl = credentials.picture
+//     user.googleID = credentials.sub
+//     return await save(user)
+
+
+// }
+
 
 function signup(credentials) {
     const user = storageService.query(STORAGE_KEY);
@@ -133,7 +174,7 @@ function getEmptyUser() {
         labels: [],
         history: [],
         personalTxt: "",
-        role: "admin"
+        role: "user"
 
     }
 }
@@ -164,13 +205,19 @@ function getGuestUser() {
         "labels": [],
         "history": [],
         "personalTxt": "",
-        role: "guest"
+        role: "guest",
+        createdAt: Date.now(),
     }
 }
 
+function _loadUserFromStorage() {
+    return  JSON.parse(sessionStorage.getItem(LOGGED_USER))
+    // return utilService.loadFromStorage(LOGGED_USER);
+}
 
 function _saveLoggedUser(user) {
-    utilService.saveToStorage(LOGGED_USER, user);
+    sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
+    // utilService.saveToStorage(LOGGED_USER, user);
     return user;
 }
 
@@ -184,7 +231,5 @@ function createUsers() {
     return users;
 }
 
-(async () => {
-    //    _saveLoggedUser(gUsers[0])
-})()
+
 
