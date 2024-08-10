@@ -64,7 +64,6 @@ function getEmptyList(title = "רשימה חדשה") {
   return {
   
     title,
-    visibility: 'public',
     items: [],
  
   };

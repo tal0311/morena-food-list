@@ -74,14 +74,14 @@
             </summary>
             <section class="group-order-container">
                 <ul class="group-list clean-list grid">
-                    <li v-for="label, idx in user.labels" class="grid grid-dir-col">
-                        <span> {{ $trans(label.name) }} </span>
+                    <li v-for="label, idx in user.labelOrder" class="grid grid-dir-col">
+                        <span> {{ $trans(label) }} </span>
                         <div class="btn-container grid grid-dir-col">
                             <button class="icon-svg icon" v-html="$svg('up_arrow')"
-                                @click="setGroupOrder(label.name, idx, -1)" :disabled="idx === 0"></button>
+                                @click="setGroupOrder(label, idx, -1)" :disabled="idx === 0"></button>
                             <button class="icon-svg icon" v-html="$svg('down_arrow')"
-                                @click="setGroupOrder(label.name, idx, 1)"
-                                :disabled="idx === user.labels.length - 1"></button>
+                                @click="setGroupOrder(label, idx, 1)"
+                                :disabled="idx === user.labelOrder.length - 1"></button>
                         </div>
 
                     </li>
@@ -89,7 +89,7 @@
             </section>
 
         </details>
-        <details open>
+        <details>
             <summary>
                 <div>{{ $trans('my-lists') }}
                     <small class="counter">({{ historyCounter }})</small>
