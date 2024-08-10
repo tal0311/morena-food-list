@@ -1,7 +1,8 @@
 import { ref, computed, watchEffect } from "vue";
 import { defineStore } from "pinia";
 import { itemService } from "@/services/item.service";
-import { listService } from "@/services/list.service.local.js";
+// import { listService } from "@/services/list.service.local.js";
+import { listService } from "@/services/list.service.js";
 import { utilService } from "@/services/util.service";
 import {
   showUserMsg,
@@ -30,19 +31,14 @@ export const useListStore = defineStore("list", () => {
     .filter(item => currList.value.items.includes(item._id)));
 
   const getItemList = computed(() => {
-    // console.log('listByLabels', listByLabels.value);
     return listByLabels.value;
   });
 
   const userLists = computed(() => {
-
     return lists?.value;
   });
 
-  
-
-
-  async function loadItems() {
+    async function loadItems() {
     try {
       listByLabels.value = await itemService.query({ labels: true });
       // BUG: only this is to set the user in its store after it has labels or the list in indx view will not render the labels, need to find a better way, maybe to load the user in the app store
@@ -136,10 +132,10 @@ export const useListStore = defineStore("list", () => {
 
   }
 
-  async function loadLists() {
+  async function loadLists(filterBy = {}) {
     try {
 
-      lists.value = await listService.query();
+      lists.value = await listService.query(filterBy);
       // console.log('loadLists', lists.value);
     } catch (error) {
       showErrorMsg("Failed to load lists, please try again later");

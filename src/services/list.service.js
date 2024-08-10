@@ -20,86 +20,52 @@ export const listService = {
 window.listService = listService;
 
 
-_createLists()
+// _createLists()
 async function query(filterBy = {}) {
   try {
-    
+
     console.log('filterBy', filterBy);
-    
-    const lists= await httpService.get('list',filterBy)
+
+    const lists = await httpService.get('list', filterBy)
     return lists;
   } catch (error) {
     console.log('error', error);
-    
+
     throw "[Failed to load lists, please try again later] " + error;
-    
+
   }
 }
 
 
-function getById(itemId) {
-  return storageService.get(STORAGE_KEY, itemId);
-  // return httpService.get(`item/${itemId}`)
+function getById(listId) {
+  // return storageService.get(STORAGE_KEY, itemId);
+  return httpService.get(`list/${listId}`)
 }
 
-async function remove(itemId) {
-  await storageService.remove(STORAGE_KEY, itemId);
-  // return httpService.delete(`item/${itemId}`)
+async function remove(listId) {
+  // await storageService.remove(STORAGE_KEY, itemId);
+  return httpService.delete(`list/${listId}`)
 }
-async function save(item) {
-  
-  
-  if (item._id) {
-     await storageService.put(STORAGE_KEY, item);
-    // savedItem = await httpService.put(`item/${item._id}`, item)
+async function save(list) {
+let savedItem;
 
-  }else{
-    await storageService.post(STORAGE_KEY, item);
-    // savedItem = await httpService.post(`item`, item)
+  if (list._id) {
+    // await storageService.put(STORAGE_KEY, list);
+    savedItem = await httpService.put(`list/${list._id}`, list)
+
+  } else {
+    // await storageService.post(STORAGE_KEY, list);
+    savedItem = await httpService.post('list',list)
   }
-  
+
 }
 
 function getEmptyList(title = "רשימה חדשה") {
-  const { _id: id, username, imgUrl } =userService.getLoggedInUser() 
   return {
-    
+  
     title,
-    owner: { id, username, imgUrl },
+    visibility: 'public',
     items: [],
-    createdAt: Date.now(),
-    updatedAt: Date.now(),
+ 
   };
 }
-
-
-
-function _createLists(title, items) {
-  const lists = utilService.loadFromStorage(STORAGE_KEY);
-  if(!lists ){
-
-    utilService.saveToStorage(STORAGE_KEY, []);
-  }
- 
-}
-
-function createDemoList(){
-  utilService.saveToStorage(STORAGE_KEY, lists.map(list => {
-    return {
-      ...list,
-      owner:{
-        ...list.owner,
-        id: userService.getLoggedInUser()._id
-      }
-    }
-  }));
-}
-
-
-
-// TODO:remove this on deploy 
-setTimeout(() => {
-  createDemoList()
-}, 1000);
-
-

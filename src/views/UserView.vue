@@ -89,26 +89,40 @@
             </section>
 
         </details>
-        <details>
+        <details open>
             <summary>
-                <div>{{ $trans('history') }}
+                <div>{{ $trans('my-lists') }}
                     <small class="counter">({{ historyCounter }})</small>
                 </div>
             </summary>
             <section class="history-container">
-                <ul v-if="history" class="history-list clean-list grid">
-                    <li v-for="list in history" :key="history.id" class="grid grid-dir-col">
+                <ul v-if="lists" class="history-list clean-list grid">
+                    <li v-for="list in lists" :key="list._id" class="grid grid-dir-col">
                         <small>{{ formatDate(list.createdAt) }}</small>
                         <small>{{ list.title }}</small>
-                        <RouterLink :to="`/list/${list._id}/`">
+                        <RouterLink :to="`/list/${list._id}`">
                             <span class="secondary-btn">{{ $trans('restore') }}</span>
                         </RouterLink>
                     </li>
                 </ul>
                 <p v-else>{{ $trans('no-history') }}</p>
+                <button class="public-list-btn primary-btn" @click="loadPublicLists">
+                    {{$trans(btnSate)}}
+                </button>
+          
+                <ul v-if="publicLists" class="public-list clean-list grid">
+                    <li v-for="list in publicLists" :key="list._id" class="grid grid-dir-col">
+                        <small>{{ formatDate(list.createdAt) }}</small>
+                        <small>{{ list.title }}</small>
+                        <RouterLink :to="`/list/${list._id}`">
+                            <span class="secondary-btn">{{ $trans('restore') }}</span>
+                        </RouterLink>
+                    </li>
+                </ul>
+
             </section>
         </details>
-
+     
         <details>
             <summary>{{ $trans('personal-notes') }}</summary>
             <section class="notes-container">
@@ -118,11 +132,11 @@
             </section>
         </details>
 
-        <footer >
+        <footer>
             <RouterLink to="/list" class="primary-btn">
                 <span>{{ $trans('start-shopping') }}</span>
             </RouterLink>
-       
+
         </footer>
 
     </section>
@@ -133,10 +147,10 @@ import { ref, onBeforeMount, onUpdated, computed } from 'vue'
 import { utilService } from '@/services/util.service';
 import { useUserStore } from '@/stores/user-store'
 import { userService } from '@/services/user.service';
-import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
+import { listService } from '@/services/list.service';
+import { showSuccessMsg } from '@/services/event-bus.service';
 import { useListStore } from '@/stores/list-store';
 import UserPreview from '@/components/UserPreview.vue'
-
 
 const user = ref(null);
 const userStore = useUserStore();
@@ -151,13 +165,26 @@ const diets = [
 ]
 
 const listStore = useListStore();
-const history = computed(() => listStore.userLists)
+const lists = computed(() => listStore.userLists)
+const btnSate = ref('import-public-lists')
+const publicLists = ref([])
+
 
 onBeforeMount(async () => {
     user.value = userService.getLoggedInUser();
     await listStore.loadLists()
-
 })
+
+async function loadPublicLists() {
+    btnSate.value ='loading-public-lists'
+    publicLists.value = await listService.query({ visibility: 'public' })
+    if (!publicLists.value.length) {
+        btnSate.value = 'no-public-lists'
+        return
+    }
+    btnSate.value = 'public-lists'
+
+}
 
 function setGroupOrder(label, idx, dir) {
     const labelToMove = user.value.labels.find(l => l.name === label)
@@ -195,11 +222,11 @@ function formatDate(date) {
     return new Date(date).toLocaleDateString('he-IL');
 };
 
-const historyCounter = computed(() => history?.value?.length || 'No history');
+const historyCounter = computed(() => lists?.value?.length || 'No history');
 </script>
 
 <style scoped>
-.history-list {
+.history-list,.public-list {
     gap: 0.5rem;
     padding: 0.5rem;
 
@@ -235,7 +262,7 @@ const historyCounter = computed(() => history?.value?.length || 'No history');
 }
 
 footer {
-  
+
 
     span {
         padding-block: 0.5em;
@@ -448,5 +475,10 @@ textarea {
             }
         }
     }
+}
+.public-list-btn.primary-btn{
+    padding: 0.5rem 1rem;
+    margin-block: 1rem;
+    width: 100%;
 }
 </style>

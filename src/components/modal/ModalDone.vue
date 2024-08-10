@@ -9,18 +9,15 @@
 import { watchEffect, ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
 import { eventBus, showSuccessMsg, showErrorMsg } from '@/services/event-bus.service';
-import { useUserStore } from '@/stores/user-store';
+// import { useUserStore } from '@/stores/user-store';
 import { useListStore } from '@/stores/list-store';
-import { listService } from '@/services/list.service.local.js';
+import { listService } from '@/services/list.service.js';
+// import { listService } from '@/services/list.service.local.js';
 
 const emit = defineEmits(['resetModal'])
-const userStore = useUserStore()
+// const userStore = useUserStore()
 const listStore = useListStore()
 const btns = [
-    // {
-    //     name: 'print',
-    //     action: onPrintList
-    // },
     {
         name: 'summary',
         action: onShowSummary
@@ -29,38 +26,16 @@ const btns = [
         name: 'share-list',
         action: onSendList
     },
-    // {
-    //     name: 'home-action-1',
-    //     action: onRecipe
-    // },
     {
         name: 'save-history',
         action: saveHistory
     },
-    // {
-    //     name: 'back',
-    //     action: closeModal
-    // },
-    // {
-    //     name: 'debug',
-    //     action: onDebug
-    // }
 ]
 
 const router = useRouter()
 const route = useRoute()
 
-function onPrintList() {
 
-    onShowSummary({ print: true })
-    closeModal()
-}
-
-function onDebug() {
-    console.debug('debug');
-    router.push({ name: 'debug', query: route.query })
-    closeModal()
-}
 
 function onShowSummary() {
 
