@@ -12,6 +12,7 @@
 // TODO: in summary screen, show the items that by group order
 // TODO: lock screen in super mode to prevent touching the screen,
 // TODO: moran filter unwanted items
+// TODO: mini loaders for actions like login
 
 import { computed, watchEffect, onMounted, ref, onBeforeMount } from 'vue';
 import UserMsg from '@/components/UserMsg.vue'
