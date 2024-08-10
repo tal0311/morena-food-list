@@ -67,19 +67,18 @@ async function login(type, credential) {
         setTimeout(() => {
             isLoading.value[type] = false
         }, 2000);
-        // console.log('login with credentials' ,isLoading.value);
-        // if (type === 'credentials') {
+        console.log('login with credentials' ,isLoading.value);
+        if (type === 'credentials') {
             
-        //     await userStore.login(type, { email: credential.email, password: credential.password })
+            await userStore.login(type, { email: credential.email, password: credential.password })
 
-        // } else {
+        } else {
 
-        //     await userStore.login(type, credential)
-        // }
-        // router.push('/')
+            await userStore.login(type, credential)
+        }
+        router.push('/')
 
-        // await userStore.login(type, credential)
-        // router.push('/')
+     
     } catch (error) {
          
         // console.error('error', error)
