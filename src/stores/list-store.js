@@ -1,7 +1,7 @@
 import { ref, computed, watchEffect } from "vue";
 import { defineStore } from "pinia";
 import { itemService } from "@/services/item.service";
-import { listService } from "@/services/list.service.js";
+import { listService } from "@/services/list.service.local.js";
 import { utilService } from "@/services/util.service";
 import {
   showUserMsg,

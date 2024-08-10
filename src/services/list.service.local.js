@@ -5,7 +5,6 @@ import { userService } from "./user.service.js";
 
 
 import lists from "../data/list.json";
-import { httpService } from "./http.service.js";
 
 const STORAGE_KEY = "list_DB";
 
@@ -22,18 +21,11 @@ window.listService = listService;
 
 _createLists()
 async function query(filterBy = {}) {
-  try {
-    
-    console.log('filterBy', filterBy);
-    
-    const lists= await httpService.get('list',filterBy)
-    return lists;
-  } catch (error) {
-    console.log('error', error);
-    
-    throw "[Failed to load lists, please try again later] " + error;
-    
-  }
+  const loggedUser = userService.getLoggedInUser();
+  let lists = await storageService.query(STORAGE_KEY);
+  lists = lists.filter(list => list.owner.id === loggedUser._id)
+  
+  return lists;
 }
 
 

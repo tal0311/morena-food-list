@@ -11,7 +11,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { eventBus, showSuccessMsg, showErrorMsg } from '@/services/event-bus.service';
 import { useUserStore } from '@/stores/user-store';
 import { useListStore } from '@/stores/list-store';
-import { listService } from '@/services/list.service.js';
+import { listService } from '@/services/list.service.local.js';
 
 const emit = defineEmits(['resetModal'])
 const userStore = useUserStore()

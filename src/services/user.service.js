@@ -35,7 +35,7 @@ window.userService = userService;
 
 
 async function query() {
-    return await storageService.query(STORAGE_KEY);
+    return await httpService.get('user');
 }
 
 function getLoggedInUser() {

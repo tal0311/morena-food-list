@@ -40,7 +40,7 @@ import { useUserStore } from '@/stores/user-store';
 import GroupList from '@/components/GroupList.vue';
 import AppLoader from '@/components/AppLoader.vue';
 // import AppModal from '@/components/AppModal.vue';
-import { listService } from '@/services/list.service.js';
+import { listService } from '@/services/list.service.local.js';
 
 const route = useRoute()
 const router = useRouter()
