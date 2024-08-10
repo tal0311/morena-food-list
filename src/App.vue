@@ -29,6 +29,8 @@ const isSocketConnected = ref(false);
 
 
 onMounted(() => {
+
+  console.log('App is mounted');
   console.debug('import.mete.env', import.meta.env);
   document.title = import.meta.env.VITE_APP_TITLE;
 
