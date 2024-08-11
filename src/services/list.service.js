@@ -24,12 +24,12 @@ window.listService = listService;
 async function query(filterBy = {}) {
   try {
 
-    console.log('filterBy', filterBy);
+    
 
     const lists = await httpService.get('list', filterBy)
     return lists;
   } catch (error) {
-    console.log('error', error);
+    console.error('error', error);
 
     throw "[Failed to load lists, please try again later] " + error;
 

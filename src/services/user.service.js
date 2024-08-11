@@ -13,7 +13,7 @@ setTimeout(() => {
         userStore.loggedUser.value = user;
 
     });
-    // console.log('userService', userService);
+
 }, 0);
 const STORAGE_KEY = 'user_DB';
 const LOGGED_USER = 'loggedUser';

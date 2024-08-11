@@ -35,9 +35,6 @@ onMounted(() => {
   console.debug('import.mete.env', import.meta.env);
   document.title = import.meta.env.VITE_APP_TITLE;
 
-  console.log(import.meta.env.VITE_APP_TITLE);
-
-
 })
 
 function toggleSocket(val) {
@@ -74,7 +71,7 @@ let timeOutIdx = null;
 const SOCKET_TIMEOUT = 7 * 60 * 1000;
 // SOCKET: manage socket connections
 function setUpSockets() {
-  console.log('App is mounted');
+ 
   toggleSocket(true);
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {

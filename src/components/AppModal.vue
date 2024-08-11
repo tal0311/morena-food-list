@@ -29,20 +29,14 @@ onBeforeMount(() => {
 })
 
 function setModal({ type, info }) {
-    console.log(type, info);
-    
-    console.debug(type, info);
     isModalOpen.value = true
-
     modalClass.value = type
-    
-    // debugger
 
     switch (type) {
         case 'ModalInfo':
             modalTYpe.value = ModalInfo
             modalInfo.value = info
-            
+
             break;
         case 'ModalHistory':
             modalTYpe.value = ModalHistory
@@ -103,13 +97,13 @@ dialog.blur-bg {
     padding: 1rem;
     border-radius: var(--br);
     max-height: 80vh;
-    
-      
+
+
 }
 
 dialog.blur-bg:not(.ModalInfo) {
     width: 70%;
- 
+
 }
 
 dialog.blur-bg::backdrop {

@@ -51,17 +51,11 @@ function toggleRememberMe(){
 
 const isLoading = ref({ credentials: false, google: false, guest: false })
 
-watchEffect(() => {
-    console.log('isLoading', isLoading.value);
-
-})
 const userStore = useUserStore()
 const userCredFromGoogle = ref(null)
 const router = useRouter()
 
 function callback(response) {
-    console.log('response', response);
-
     if (response.error) {
         console.error('error', response.error)
     } else {
@@ -72,8 +66,6 @@ function callback(response) {
 
 async function login(type, credential) {
     try {
-        console.log(type, credential);
-        
         isLoading.value[type] = true
      
         if (type === 'credentials') {
@@ -125,7 +117,6 @@ const demoUser = {
 }
 
 async function getCredFromGoogle({ credential }) {
-    // console.log('credential', credential);
     userCredFromGoogle.value = decodeCredential(credential)
 
     await login('google', userCredFromGoogle.value)

@@ -86,23 +86,14 @@ export const useListStore = defineStore("list", () => {
       }
       return item;
     })
-
-    // console.log(currList.value);
-    // debugger
+ 
     if (!currList.value) currList.value = listService.getEmptyList();
 
     if (currList.value.items.includes(itemId)) {
       currList.value.items = currList.value.items.filter((id) => id !== itemId);
-      // console.log('currList inclouds', currList.value);
-
     } else {
       currList.value.items.push(itemId);
     }
-
-
-
-    // console.log('currList', currList.value);
-
   }
 
 
@@ -136,7 +127,7 @@ export const useListStore = defineStore("list", () => {
     try {
 
       lists.value = await listService.query(filterBy);
-      // console.log('loadLists', lists.value);
+     
     } catch (error) {
       showErrorMsg("Failed to load lists, please try again later");
 
@@ -160,7 +151,7 @@ export const useListStore = defineStore("list", () => {
   function loadSharedList() {
     try {
       const list = utilService.loadFromStorage("shared-list");
-      // console.log('list from storage', list);
+   
       setCurrList(list, true);
       return list;
     } catch (error) {

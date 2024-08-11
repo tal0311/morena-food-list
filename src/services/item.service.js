@@ -24,7 +24,7 @@ async function query(filterBy = {}) {
   const user = userService.getLoggedInUser();
   // let items = await fetch(import.meta.env.VITE_DATA_URL)
   // .then(response => response.json())
-  const items= await httpService.get('item',filterBy)
+  const items = await httpService.get('item', filterBy)
   // if (filterBy.labels) {
   //   let itemsByLabels = getGroupsByLabels(items)
   //   itemsByLabels = filterByUserSettings(user, itemsByLabels)
@@ -46,7 +46,6 @@ function filterByUserSettings({ settings }, itemsByLabels) {
   }
 
   filterLabels.forEach(prefs => {
-    console.log('prefs', prefs);
     if (prefs === 'isVegan') {
       const noneVeganGroups = ['meat-and-poultry', 'dairy', 'eggs', 'fish', 'honey', 'seafood']
       noneVeganGroups.forEach(group => {
@@ -96,17 +95,14 @@ function getGroupsByLabels(list) {
 }
 
 
-
+// BACKEND move to backend
 async function updateLabel(label) {
   // label = JSON.parse(JSON.stringify(label));
 
   const user = userService.getLoggedInUser();
 
   user.labels = user.labels.map((l) => l.name === label.name ? { ...label, userInput: label.userInput } : l);
-
-
   userService.save(user);
-  //  console.log('user', user.labels);
   return user.labels
 
 }

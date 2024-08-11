@@ -1,13 +1,13 @@
 <template>
     <!-- {{ labelList }} -->
     <!-- {{ groupList }} -->
-    
-    <details v-for=" label,idx in labelList" :key="label.name" :class="`list-details ${labelOrder[idx]}`">
-        <summary >
 
-            
+    <details v-for=" label, idx in labelList" :key="label.name" :class="`list-details ${labelOrder[idx]}`">
+        <summary>
+
+
             <div class="summary-container">
-                <span>{{ $trans(labelOrder[idx]) }} <span class="counter">{{getCount(labelOrder[idx])}}</span></span>
+                <span>{{ $trans(labelOrder[idx]) }} <span class="counter">{{ getCount(labelOrder[idx]) }}</span></span>
                 <button @click.stop="onMore(labelOrder[idx])" class="more-btn" v-html="$svg('more')">
                 </button>
             </div>
@@ -16,8 +16,9 @@
         </summary>
         <ItemList :list="groupList[labelOrder[idx]]" :labelName="labelOrder[idx]" @selectItem="onSelect" />
 
-        <textarea @input="handleLabelChange" rows="5" :data-groupname="labelOrder[idx]" :placeholder="`${$trans('add-notes')} ${$trans(labelOrder[idx])}...`"
-            :value="labelList[idx].userInput" @focus="$emit('toggleEdit')"></textarea>
+        <textarea @input="handleLabelChange" rows="5" :data-groupname="labelOrder[idx]"
+            :placeholder="`${$trans('add-notes')} ${$trans(labelOrder[idx])}...`" :value="labelList[idx].userInput"
+            @focus="$emit('toggleEdit')"></textarea>
     </details>
 </template>
 
@@ -30,11 +31,8 @@ const props = defineProps(['labelList', 'groupList', 'labelOrder'])
 const emit = defineEmits(['selectItem', 'toggleEdit', 'updateLabel'])
 
 function handleLabelChange($event) {
-    // emit('toggleEdit', name)
     const userInput = $event.target.value
     const name = $event.target.dataset.groupname
-
-    // console.log({ name, userInput });
     emit('updateLabel', { name, userInput })
 }
 
@@ -46,8 +44,8 @@ function onMore(labelName) {
 
 function getCount(label) {
 
-    const count= props.groupList[label]?.filter(item => item.isSelected).length
-    return count? `(${count})` : ''
+    const count = props.groupList[label]?.filter(item => item.isSelected).length
+    return count ? `(${count})` : ''
 }
 
 function onSelect({ item, labelName }) {
