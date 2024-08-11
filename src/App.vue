@@ -71,7 +71,7 @@ watchEffect(() => {
 
 
 let timeOutIdx = null;
-const SOCKET_TIMEOUT = 5000;
+const SOCKET_TIMEOUT = 7 * 60 * 1000;
 // SOCKET: manage socket connections
 function setUpSockets() {
   console.log('App is mounted');

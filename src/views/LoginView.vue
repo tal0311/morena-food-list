@@ -16,6 +16,10 @@
                 <small>(less features less fun)</small>
             </span>
         </button>
+        <label for="" class="grid grid-dir-col">
+            Remember me
+            <input @change="toggleRememberMe" type="checkbox">
+        </label>
         <div class="sep-container grid grid-dir-col">
 
             <span class="sep"></span> <span class="or">OR</span> <span class="sep"></span>
@@ -36,6 +40,14 @@ const credentials = ref({
     email: 'tal.amit0311@gmail.com',
     password: '1234'
 })
+
+
+const rememberMe = ref(false) 
+
+function toggleRememberMe(){
+    rememberMe.value = !rememberMe.value
+    localStorage.setItem('rememberMe', rememberMe.value)
+}
 
 const isLoading = ref({ credentials: false, google: false, guest: false })
 
@@ -64,10 +76,6 @@ async function login(type, credential) {
         
         isLoading.value[type] = true
      
-        setTimeout(() => {
-            isLoading.value[type] = false
-        }, 2000);
-        console.log('login with credentials' ,isLoading.value);
         if (type === 'credentials') {
             
             await userStore.login(type, { email: credential.email, password: credential.password })
