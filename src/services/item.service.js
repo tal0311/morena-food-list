@@ -14,84 +14,21 @@ export const itemService = {
   remove,
   getEmptyItem,
   prepDataForChart,
-  getGroupsByLabels,
   updateLabel,
   setLabels
 };
 window.itemService = itemService;
 
 async function query(filterBy = {}) {
-  const user = userService.getLoggedInUser();
-  // let items = await fetch(import.meta.env.VITE_DATA_URL)
-  // .then(response => response.json())
-  const items = await httpService.get('item', filterBy)
-  // if (filterBy.labels) {
-  //   let itemsByLabels = getGroupsByLabels(items)
-  //   itemsByLabels = filterByUserSettings(user, itemsByLabels)
-  //   await setLabels(itemsByLabels)
-  //   return itemsByLabels
-  // }
+  try {
 
-  return items;
-}
+    const items = await httpService.get('item', filterBy)
+    return items;
+  } catch (error) {
+    console.error('error', error);
 
-// move to backend
-function filterByUserSettings({ settings }, itemsByLabels) {
-  const filterLabels = []
-  for (const key in settings) {
-    const exclude = ['lang', 'notifications']
-    if (settings[key] && !exclude.includes(key)) {
-      filterLabels.push(key)
-    }
+    throw "[Failed to load items, please try again later] " + error;
   }
-
-  filterLabels.forEach(prefs => {
-    if (prefs === 'isVegan') {
-      const noneVeganGroups = ['meat-and-poultry', 'dairy', 'eggs', 'fish', 'honey', 'seafood']
-      noneVeganGroups.forEach(group => {
-        itemsByLabels[group] && delete itemsByLabels[group]
-      })
-    }
-
-    if (prefs === 'isGlutenFree') {
-      const noneGlutenFreeGroups = ['bread', 'pasta', 'cereal', 'flour', 'baked-goods']
-      noneGlutenFreeGroups.forEach(group => {
-        itemsByLabels[group] && delete itemsByLabels[group]
-      })
-    }
-
-    if (prefs === 'isVegetarian') {
-      const noneVegetarianGroups = ['meat-and-poultry', 'fish']
-      noneVegetarianGroups.forEach(group => {
-        itemsByLabels[group] && delete itemsByLabels[group]
-      })
-    }
-
-    if (prefs === 'isKosher') {
-      const noneKosherGroups = ['seafood']
-      noneKosherGroups.forEach(group => {
-        itemsByLabels[group] && delete itemsByLabels[group]
-      })
-    }
-  })
-
-  return itemsByLabels
-
-}
-
-
-function getGroupsByLabels(list) {
-
-  const itemMap = list.reduce((acc, item) => {
-    if (!acc[item.group]) {
-      acc[item.group] = [];
-    }
-    acc[item.group].push(item);
-    return acc;
-  }, {});
-
-  return itemMap;
-
 }
 
 

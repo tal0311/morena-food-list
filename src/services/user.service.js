@@ -192,7 +192,7 @@ function _loadUserFromStorage() {
 }
 
 function _saveLoggedUser(user) {
-    debugger
+    
     JSON.parse(localStorage.getItem('rememberMe'))
         ? localStorage.setItem(LOGGED_USER, JSON.stringify(user))
         : sessionStorage.setItem(LOGGED_USER, JSON.stringify(user))

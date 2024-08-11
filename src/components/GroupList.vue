@@ -1,24 +1,17 @@
 <template>
-    <!-- {{ labelList }} -->
-    <!-- {{ groupList }} -->
-
     <details v-for=" label, idx in labelList" :key="label.name" :class="`list-details ${labelOrder[idx]}`">
         <summary>
-
-
             <div class="summary-container">
                 <span>{{ $trans(labelOrder[idx]) }} <span class="counter">{{ getCount(labelOrder[idx]) }}</span></span>
                 <button @click.stop="onMore(labelOrder[idx])" class="more-btn" v-html="$svg('more')">
                 </button>
             </div>
-
-
         </summary>
         <ItemList :list="groupList[labelOrder[idx]]" :labelName="labelOrder[idx]" @selectItem="onSelect" />
-
         <textarea @input="handleLabelChange" rows="5" :data-groupname="labelOrder[idx]"
-            :placeholder="`${$trans('add-notes')} ${$trans(labelOrder[idx])}...`" :value="labelList[idx].userInput"
-            @focus="$emit('toggleEdit')"></textarea>
+            :placeholder="`${$trans('add-notes')} ${$trans(labelOrder[idx])}...`"
+            :value="labelList.find(l => l.name === labelOrder[idx]).userInput" @focus="$emit('toggleEdit')">
+        </textarea>
     </details>
 </template>
 
