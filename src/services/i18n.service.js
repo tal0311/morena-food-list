@@ -1632,6 +1632,24 @@ const gTrans = {
     es: 'No hay listas públicas',
     he: 'אין רשימות ציבוריות'
   },
+  'shop': {
+    en: 'Shop',
+    es: 'Comprar',
+    he: 'מצב קניה'
+  
+  },
+  'lock':{
+    en: 'Lock',
+    es: 'Bloquear',
+    he: 'נעילה'
+  },
+  'unlock':{
+    en: 'Unlock',
+    es: 'Desbloquear',
+    he: 'פתיחה'
+  
+  }
+  
 }
 
 function doTrans(key, currLang = 'he') {

@@ -5,10 +5,8 @@ import {
 import HomeView from "../views/HomeView.vue";
 import { useUserStore } from "@/stores/user-store";
 import { useListStore } from "@/stores/list-store";
-import { useAppStore } from "@/stores/app-store";
-import { useRecipeStore } from "@/stores/recipe-store";
 import { showUserMsg, showSuccessMsg } from "@/services/event-bus.service";
-import { userService } from "@/services/user.service";
+
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -65,8 +63,8 @@ const router = createRouter({
       component: () => import("@/views/ErrorView.vue"),
     },
     {
-      path:'/admin',
-      name:'admin',
+      path: '/admin',
+      name: 'admin',
       component: () => import("@/views/AdminView.vue"),
 
     }
@@ -79,7 +77,7 @@ const routeHistory = []
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
   const listStore = useListStore()
-  
+
   routeHistory.push({ to, from, user: userStore.loggedUser })
 
 

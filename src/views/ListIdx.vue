@@ -22,7 +22,9 @@
         <!-- <AppModal /> -->
     </section>
     <AppLoader v-else />
-    <RouterView />
+    <section class="router-view">
+        <RouterView />
+    </section>
 </template>
 
 <script setup>
@@ -277,5 +279,9 @@ textarea {
         padding: 0.5rem;
     }
 
+}
+
+.router-view {
+   
 }
 </style>

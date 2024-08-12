@@ -12,6 +12,7 @@ import ModalDone from '@/components/modal/ModalDone.vue';
 import ModalInfo from '@/components/modal/ModalInfo.vue';
 import ModalHistory from '@/components/modal/ModalHistory.vue';
 import ModalAddUser from '@/components/modal/ModalAddUser.vue';
+import ModalLock from './modal/ModalLock.vue';
 // src/components/modal/ModalAddUser.vue
 
 
@@ -43,6 +44,9 @@ function setModal({ type, info }) {
             break;
         case 'ModalAddUser':
             modalTYpe.value = ModalAddUser
+            break;
+        case 'ModalLock':
+            modalTYpe.value = ModalLock
             break;
         default:
             modalTYpe.value = ModalDone
@@ -76,6 +80,7 @@ function resetModal() {
 }
 
 function clickOutSide(ev) {
+    if(modalClass.value === 'ModalLock') return
     if (ev.target.classList.contains('app-modal')) {
         isModalOpen.value = false
     }
@@ -99,6 +104,13 @@ dialog.blur-bg {
     max-height: 80vh;
 
 
+}
+
+dialog.blur-bg.ModalLock {
+    backdrop-filter: initial;
+     &::backdrop {
+        background-color: rgba(94, 94, 94, 0.2);
+    }
 }
 
 dialog.blur-bg:not(.ModalInfo) {

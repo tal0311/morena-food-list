@@ -33,17 +33,13 @@ function onMore(labelName) {
     eventBus.emit('toggle-modal', { type: 'ModalInfo', info: labelName })
 }
 
-
-
 function getCount(label) {
-
     const count = props.groupList[label]?.filter(item => item.isSelected).length
     return count ? `(${count})` : ''
 }
 
 function onSelect({ item, labelName }) {
     emit('selectItem', { labelName, itemId: item._id })
-
 }
 
 

@@ -66,6 +66,15 @@ a {
   border-radius: var(--br);
 }
 
+.special-btn {
+  border: none;
+  background-color: var(--bClr6);
+  font-weight: 700;
+  color: var(--bClr2);
+  border: 1px solid var(--bClr2);
+  border-radius: var(--br);
+}
+
 .icon {
   border: none;
   background: none;
@@ -84,4 +93,10 @@ details summary::-webkit-details-marker {
 .icon-svg {
   display: grid;
   place-content: center;
+}
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }

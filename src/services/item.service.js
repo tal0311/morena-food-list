@@ -57,9 +57,11 @@ async function setLabels(list) {
 }
 
 
-function getById(itemId) {
-  return storageService.get(STORAGE_KEY, itemId);
-  // return httpService.get(`item/${itemId}`)
+async function getById(itemId) {
+  console.log('item.service.js getById itemId:', itemId);
+  
+  // return storageService.get(STORAGE_KEY, itemId);
+   return await httpService.get(`item/${itemId}`)
 }
 
 async function remove(itemId) {
