@@ -4,12 +4,22 @@
         <form class="grid" @submit.prevent="login('credentials', credentials)">
             <input type="email" v-model="credentials.email" placeholder="Email" required>
             <input type="password" v-model="credentials.password" placeholder="Password" required>
-            <button type="submit" class="primary-btn">Login</button>
+            <button type="submit" :class="`primary-btn ${isLoading.credentials? 'loading' :''}` ">
+                <MiniLoader v-if="isLoading.credentials" />
+                <p v-else>Login</p>
+            </button>
         </form>
         <button class="secondary-btn grid" @click="login('guest')">
-            <span>Continue as guest</span>
-            <small>(less features less fun)</small>
+            <MiniLoader v-if="isLoading.guest" />
+            <span v-else class="grid ">
+                Continue as guest
+                <small>(less features less fun)</small>
+            </span>
         </button>
+        <label for="" class="grid grid-dir-col">
+            Remember me
+            <input @change="toggleRememberMe" type="checkbox">
+        </label>
         <div class="sep-container grid grid-dir-col">
 
             <span class="sep"></span> <span class="or">OR</span> <span class="sep"></span>
@@ -21,24 +31,31 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref , watchEffect } from 'vue'
 import { decodeCredential } from 'vue3-google-login'
 import { useUserStore } from '@/stores/user-store';
 import { useRouter } from 'vue-router';
-
+import MiniLoader from '@/components/MiniLoader.vue'
 const credentials = ref({
     email: 'tal.amit0311@gmail.com',
     password: '1234'
 })
 
 
+const rememberMe = ref(false) 
+
+function toggleRememberMe(){
+    rememberMe.value = !rememberMe.value
+    localStorage.setItem('rememberMe', rememberMe.value)
+}
+
+const isLoading = ref({ credentials: false, google: false, guest: false })
+
 const userStore = useUserStore()
 const userCredFromGoogle = ref(null)
 const router = useRouter()
 
 function callback(response) {
-    console.log('response', response);
-
     if (response.error) {
         console.error('error', response.error)
     } else {
@@ -49,18 +66,21 @@ function callback(response) {
 
 async function login(type, credential) {
     try {
-        console.log(type, credential);
+        isLoading.value[type] = true
+     
         if (type === 'credentials') {
+            
             await userStore.login(type, { email: credential.email, password: credential.password })
 
         } else {
+
             await userStore.login(type, credential)
         }
         router.push('/')
 
-        // await userStore.login(type, credential)
-        // router.push('/')
+     
     } catch (error) {
+         
         // console.error('error', error)
         // login('guest')
 
@@ -97,7 +117,6 @@ const demoUser = {
 }
 
 async function getCredFromGoogle({ credential }) {
-    // console.log('credential', credential);
     userCredFromGoogle.value = decodeCredential(credential)
 
     await login('google', userCredFromGoogle.value)
@@ -142,7 +161,11 @@ async function getCredFromGoogle({ credential }) {
         }
 
         .primary-btn {
-            padding: 1rem;
+
+            &.loading{
+                padding: 0.8rem;
+            }
+            /* padding: 1rem; */
             width: 100%;
         }
     }

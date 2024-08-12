@@ -1,7 +1,7 @@
 <template>
     <!-- <pre></pre> -->
-    <section :class="`item-preview grid ${isSwiped ? 'swiped' : 'disabled'} ${sharedItem && 'shared'} `">
-        <input v-if="isSwiped" type="checkbox" :id="item._id" :checked="props.item.isSelected && isSwiped"
+    <section :class="`item-preview grid ${isSwiped ? 'swiped' : 'disabled'} ${sharedItem && 'shared'} ${display}`">
+        <input v-if="isSwiped" type="checkbox" :id="item._id" :checked="isItemChecked"
             @change="onSelect">
         <div @click="isSwiped = !isSwiped" class="item-info grid grid-dir-col">
             <span>{{ $trans(props.item.name) }}</span>
@@ -15,7 +15,7 @@
 <script setup>
 
 import { useRoute } from 'vue-router'
-import { computed, onBeforeMount, onMounted, ref, watchEffect } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import { showSuccessMsg } from '@/services/event-bus.service';
 import { useListStore } from '@/stores/list-store';
 
@@ -35,13 +35,16 @@ const emit = defineEmits(['selectItem', 'shearSelectItem'])
 
 const isSwiped = ref(false)
 
-const route = useRoute()
-
-const listStore = useListStore()
-
 function onSelect() {
+    if(props.display === 'shopping-list') return
     emit('selectItem', { item: props.item, labelName: props.labelName })
 }
+
+const isItemChecked = computed(() => {
+    if(props.item.isSelected && isSwiped.value && props.display !== 'shopping-list') {
+        return true
+    }
+})
 
 
 
@@ -55,11 +58,6 @@ watchEffect(() => {
         sharedItem.value = true
     }
 })
-
-function isItemShared() {
-
-
-}
 
 function itemInfo() {
     showSuccessMsg('comingSoon')

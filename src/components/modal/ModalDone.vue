@@ -1,6 +1,6 @@
 <template>
     <div class="actions-container grid">
-        <button v-for="btn in btns" class="secondary-btn" @click="btn.action">{{ $trans(btn.name) }}</button>
+        <button v-for="btn in btns" :class="`${btn.name==='shop'? 'special-btn':'secondary-btn'}`" @click="btn.action">{{ $trans(btn.name) }}</button>
     </div>
 
 </template>
@@ -30,6 +30,10 @@ const btns = [
         name: 'save-history',
         action: saveHistory
     },
+    {
+        name:'shop',
+        action:onShope
+    }
 ]
 
 const router = useRouter()
@@ -97,11 +101,11 @@ async function saveHistory() {
 
 }
 
-function onRecipe() {
+function onShope(){
+    console.log('shope')
+    router.push({ name: 'list-summary', query: { shopping: true } })
     closeModal()
-    router.push({ name: 'recipe' })
 }
-
 function closeModal() {
     console.debug('close modal');
     emit('resetModal')
@@ -123,5 +127,9 @@ dialog.blur-bg {
 
 .actions-container {
     gap: 1rem;
+}
+
+.special-btn{
+    font-size: 1rem;
 }
 </style>

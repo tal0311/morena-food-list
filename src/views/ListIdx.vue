@@ -8,8 +8,7 @@
             <details>
                 <summary>{{ $trans('personal-notes') }}</summary>
                 <section class="notes-container">
-                    <textarea @focus="changeBtnState('edit')"
-                        @blur="updateUserText">{{ user.personalTxt || $trans('personal-notes') }}
+                    <textarea @focus="changeBtnState('edit')" @blur="updateUserText">{{ user.personalTxt || $trans('personal-notes') }}
                     </textarea>
 
                 </section>
@@ -23,7 +22,9 @@
         <!-- <AppModal /> -->
     </section>
     <AppLoader v-else />
-    <RouterView />
+    <section class="router-view">
+        <RouterView />
+    </section>
 </template>
 
 <script setup>
@@ -67,7 +68,6 @@ watchEffect(() => {
 const subscriptions = []
 const cmpKey = ref(0)
 onBeforeMount(async () => {
-    console.log('listIdx mounted');
     await loadItems()
     await getDataFromRoute()
 })
@@ -98,7 +98,7 @@ async function loadList(listId) {
 }
 
 async function clearItems() {
- 
+
     if (btnState.value === 'done') {
         listStore.clearItems()
         router.push({ name: 'list', query: {} })
@@ -132,8 +132,7 @@ function changeBtnState(val) {
 
 
 function updateLabel(updateLabel) {
-    console.log('updateLabel', updateLabel);
-    label.value = { ...updateLabel }
+     label.value = { ...updateLabel }
 }
 
 function submitLabel() {
@@ -280,5 +279,9 @@ textarea {
         padding: 0.5rem;
     }
 
+}
+
+.router-view {
+   
 }
 </style>

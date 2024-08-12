@@ -171,14 +171,6 @@ onBeforeMount(async () => {
     items.value = await itemService.query();
     lists.value = await listService.query({admin:true});
 
-    console.log('Getting items from Backend',);
-
-    // import.meta.env.MODE !== 'development' &&
-    // fetch(import.meta.env.VITE_SERVER_URL + '/api/item')
-    //     .then(response => response.json())
-    //     .then(data => console.log(data));
-
-
     document.body.dir = 'ltr';
 });
 

@@ -12,6 +12,7 @@
 // TODO: in summary screen, show the items that by group order
 // TODO: lock screen in super mode to prevent touching the screen,
 // TODO: moran filter unwanted items
+// TODO: btn component with loading state
 
 import { computed, watchEffect, onMounted, ref, onBeforeMount } from 'vue';
 import UserMsg from '@/components/UserMsg.vue'
@@ -33,9 +34,6 @@ onMounted(() => {
   console.log('App is mounted');
   console.debug('import.mete.env', import.meta.env);
   document.title = import.meta.env.VITE_APP_TITLE;
-
-  console.log(import.meta.env.VITE_APP_TITLE);
-
 
 })
 
@@ -70,10 +68,10 @@ watchEffect(() => {
 
 
 let timeOutIdx = null;
-const SOCKET_TIMEOUT = 5000;
+const SOCKET_TIMEOUT = 7 * 60 * 1000;
 // SOCKET: manage socket connections
 function setUpSockets() {
-  console.log('App is mounted');
+ 
   toggleSocket(true);
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {

@@ -13,7 +13,7 @@ setTimeout(() => {
         userStore.loggedUser.value = user;
 
     });
-    // console.log('userService', userService);
+
 }, 0);
 const STORAGE_KEY = 'user_DB';
 const LOGGED_USER = 'loggedUser';
@@ -30,7 +30,8 @@ export const userService = {
     query
 }
 
-createUsers()
+// createUsers()
+
 window.userService = userService;
 
 
@@ -39,6 +40,7 @@ async function query() {
 }
 
 function getLoggedInUser() {
+
     return _loadUserFromStorage();
     // let user = utilService.loadFromStorage(LOGGED_USER);
     // return user;
@@ -61,18 +63,13 @@ async function save(user) {
 
 }
 
-
 function removeUser(userId) {
     return storageService.remove(STORAGE_KEY, userId);
 }
 
-
 // BACKEND 
 async function login(loginType, credentials) {
     let user = null
-    console.log("♠️ ~ login ~ ", loginType, credentials);
-    // debugger
-
     switch (loginType) {
         case 'guest':
             user = await loginAsGuest();
@@ -93,7 +90,6 @@ async function login(loginType, credentials) {
 
 async function loginWithCredentials(credentials) {
     return await httpService.post('auth/login/credentials', credentials)
-
 }
 
 async function loginWithGoogle(credentials) {
@@ -110,32 +106,8 @@ async function loginWithGoogle(credentials) {
 }
 
 async function loginAsGuest() {
-    console.log("♠️ ~ loginAsGuest ~ ");
-
-    return await httpService.post('auth/signup/guest')
-
-
+     return await httpService.post('auth/signup/guest')
 }
-
-
-
-
-// if (loginType === 'guest') {
-//     let guestUser = getGuestUser();
-//     return await save(guestUser)
-
-// }
-// if (loginType === 'google') {
-//     let user = getEmptyUser();
-//     user.username = credentials.name
-//     user.email = credentials.email
-//     user.imgUrl = credentials.picture
-//     user.googleID = credentials.sub
-//     return await save(user)
-
-
-// }
-
 
 function signup(credentials) {
     const user = storageService.query(STORAGE_KEY);
@@ -211,12 +183,21 @@ function getGuestUser() {
 }
 
 function _loadUserFromStorage() {
-    return  JSON.parse(sessionStorage.getItem(LOGGED_USER))
+    const loggedUser = JSON.parse(localStorage.getItem('rememberMe'))
+        ? JSON.parse(localStorage.getItem(LOGGED_USER))
+        : JSON.parse(sessionStorage.getItem(LOGGED_USER))
+
+    return loggedUser
     // return utilService.loadFromStorage(LOGGED_USER);
 }
 
 function _saveLoggedUser(user) {
-    sessionStorage.setItem(LOGGED_USER, JSON.stringify(user));
+    
+    JSON.parse(localStorage.getItem('rememberMe'))
+        ? localStorage.setItem(LOGGED_USER, JSON.stringify(user))
+        : sessionStorage.setItem(LOGGED_USER, JSON.stringify(user))
+
+
     // utilService.saveToStorage(LOGGED_USER, user);
     return user;
 }

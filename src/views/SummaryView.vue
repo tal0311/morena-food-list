@@ -1,9 +1,10 @@
 <template>
 
-    <section class="summary-view grid blur-bg">
+    <section class="summary-view grid">
 
         <div id="list-container">
-            <ItemList v-if="selectItems" :list="selectItems" @selectItem="toggleSelectItem">
+            <ItemList v-if="selectItems" :list="selectItems" :display="isShoppingMode ? 'shopping-list' : 'list-items'"
+                @selectItem="toggleSelectItem">
                 <h3>{{ $trans('list-results') }}</h3>
             </ItemList>
             <section v-else class="no-items grid">
@@ -24,8 +25,10 @@
             </div>
         </div>
 
-        <footer>
+        <footer v-if="isFooterVisible" :class="`grid grid-dir-col ${isShoppingMode ? 'shopping blur-bg' : ''}`">
             <button class="secondary-btn" @click="onBack">{{ $trans('back') }}</button>
+            <button v-if="isShoppingMode" class="special-btn icon-svg" @click="lockScreen"
+                v-html="$svg('lock')"></button>
         </footer>
 
     </section>
@@ -39,12 +42,17 @@ import ItemList from '@/components/ItemList.vue'
 import DashBoard from '@/components/DashBoard.vue'
 import { itemService } from '@/services/item.service.local.js'
 import { useGlobals } from '@/composables/useGlobals';
+import { eventBus } from '@/services/event-bus.service';
 
 
 
 
 const listStore = useListStore()
 const { $trans } = useGlobals()
+
+const route = useRoute()
+
+const isShoppingMode = ref(route.query.shopping === 'true')
 
 
 let chartData = ref(null)
@@ -73,17 +81,20 @@ function toggleSelectItem({ item }) {
 
 }
 
-const route = useRoute()
 const router = useRouter()
 
 function onBack() {
-    const query = {}
-    for (const key in route.query) {
-        if (key !== 'print') {
-            query[key] = route.query[key]
-        }
-    }
-    router.push({ name: 'list', params: route.params, query: query })
+
+    router.push({ name: 'list', params: route.params })
+}
+
+eventBus.on('display-footer', () => {
+    isFooterVisible.value = true
+})
+const isFooterVisible = ref(true)
+function lockScreen() {
+    isFooterVisible.value = false
+    eventBus.emit('toggle-modal', { type: 'ModalLock' })
 }
 
 
@@ -92,15 +103,19 @@ function onBack() {
 
 <style scoped>
 .summary-view {
+    padding-inline: 0.5rem;
     position: fixed;
-    width: 95vw;
+    width: 100vw;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     overflow-y: auto;
-    height: 90vh;
+    height: 100vh;
+
+    
     align-content: space-between;
-    backdrop-filter: blur(10px);
+    background-color: var(--bClr2);
+
 
     &>*:not(footer) {
         text-align: center;
@@ -114,8 +129,23 @@ function onBack() {
     opacity: 0.5;
 }
 
+footer {
+    margin-block-end: 5rem;
+    gap: 1rem;
+
+
+    &.shopping {
+        position: sticky;
+        bottom: 4rem;
+        left: 50%;
+        width: 100%;
+        padding-block: 1rem;
+    }
+}
+
 footer button {
     padding: 0.5rem 1.5rem;
     font-size: 1rem;
+
 }
 </style>
