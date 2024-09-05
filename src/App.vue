@@ -8,17 +8,15 @@
 
 <script setup>
 //TODO: canva info ang img
-// TODO: in supermarket screen, shoed list of items not selected and able to select then like in summary screen
 // TODO: in summary screen, show the items that by group order
 // TODO: lock screen in super mode to prevent touching the screen,
 // TODO: moran filter unwanted items
-// TODO: btn component with loading state
 
-import { computed, watchEffect, onMounted, ref, onBeforeMount } from 'vue';
+
+import { computed, onMounted, ref, onBeforeMount } from 'vue';
 import UserMsg from '@/components/UserMsg.vue'
 import { useUserStore } from './stores/user-store';
 import { useListStore } from './stores/list-store';
-import { userService } from './services/user.service';
 import AppModal from '@/components/AppModal.vue';
 import { useRouter } from 'vue-router';
 
@@ -28,6 +26,22 @@ import { socketService } from './services/socket.service';
 const userStore = useUserStore();
 const isSocketConnected = ref(false);
 
+const router = useRouter();
+const listStore = useListStore()
+
+
+onBeforeMount(() => {
+  console.log('App is about to mount');
+  userStore.loadUser();
+  const user = computed(() => userStore.getUser).value
+
+  if (user?.email && user?.username) {
+    setUpSockets()
+    loadData()
+  } else {
+    router.push('/login')
+  }
+})
 
 onMounted(() => {
 
@@ -51,19 +65,22 @@ function toggleSocket(val) {
 
 }
 
-const listStore = useListStore();
 
-const user = computed(() => userStore.getUser);
-const router = useRouter();
 
-watchEffect(() => {
-  if (user.value) {
-    setUpSockets()
-    loadData()
-  } else {
-    router.push('/login')
-  }
-})
+
+
+
+// watchEffect(() => {
+ 
+//   const { email, username } = user.value
+
+//   if (email && username) {
+//     setUpSockets()
+//     loadData()
+//   } else {
+//     router.push('/login')
+//   }
+// })
 
 
 
@@ -71,7 +88,7 @@ let timeOutIdx = null;
 const SOCKET_TIMEOUT = 7 * 60 * 1000;
 // SOCKET: manage socket connections
 function setUpSockets() {
- 
+
   toggleSocket(true);
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
@@ -93,7 +110,6 @@ function setUpSockets() {
 
 
 async function loadData() {
-  await userStore.loadUser();
   await listStore.loadLists()
 }
 </script>

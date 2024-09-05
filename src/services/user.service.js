@@ -40,14 +40,11 @@ async function query() {
 }
 
 function getLoggedInUser() {
-
-    return _loadUserFromStorage();
-    // let user = utilService.loadFromStorage(LOGGED_USER);
-    // return user;
+    const loggedUser= _loadUserFromStorage();
+    return loggedUser;
 }
 
 async function save(user) {
-
     let updatedUser = null
     if (user._id) {
         updatedUser = await httpService.put('user/' + user._id, user)
@@ -81,7 +78,7 @@ async function login(loginType, credentials) {
             user = await loginWithCredentials(credentials);
             break
     }
-
+    debugger
     if (user) {
         _saveLoggedUser(user);
         return user;
@@ -106,7 +103,7 @@ async function loginWithGoogle(credentials) {
 }
 
 async function loginAsGuest() {
-     return await httpService.post('auth/signup/guest')
+    return await httpService.post('auth/signup/guest')
 }
 
 function signup(credentials) {
@@ -188,29 +185,18 @@ function _loadUserFromStorage() {
         : JSON.parse(sessionStorage.getItem(LOGGED_USER))
 
     return loggedUser
-    // return utilService.loadFromStorage(LOGGED_USER);
+  
 }
 
 function _saveLoggedUser(user) {
-    
+
     JSON.parse(localStorage.getItem('rememberMe'))
         ? localStorage.setItem(LOGGED_USER, JSON.stringify(user))
         : sessionStorage.setItem(LOGGED_USER, JSON.stringify(user))
 
-
-    // utilService.saveToStorage(LOGGED_USER, user);
     return user;
 }
 
-function createUsers() {
-    let users = utilService.loadFromStorage(STORAGE_KEY);
-    if (!users || !users.length) {
-        users = gUsers
-        utilService.saveToStorage(STORAGE_KEY, users);
-    }
-
-    return users;
-}
 
 
 

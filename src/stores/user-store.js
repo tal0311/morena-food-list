@@ -1,17 +1,14 @@
 import { defineStore } from "pinia";
-import { ref, computed, watchEffect } from "vue";
-import { showErrorMsg } from "@/services/event-bus.service";
-import { reportService } from "@/services/report.service";
+import { ref, computed } from "vue";
 import { useAppStore } from "@/stores/app-store";
 import { userService } from "@/services/user.service";
-
 
 export const useUserStore = defineStore("user", () => {
   const appStore = useAppStore();
 
 
   const currLang = ref("he");
-  const loggedUser = ref(userService.getLoggedInUser());
+  const loggedUser = ref(null);
 
   const getUser = computed(() => loggedUser?.value)
   const getCurrLang = computed(() => currLang.value)
@@ -21,8 +18,6 @@ export const useUserStore = defineStore("user", () => {
       loggedUser.value = await userService.login(loginType, credentials);
       if (!loggedUser.value) return
       setLang(loggedUser.value.settings.lang);
-
-      return
     } catch (error) {
       console.error("error", error);
     }
@@ -44,12 +39,6 @@ export const useUserStore = defineStore("user", () => {
     loggedUser.value = await userService.save(userToUpdate);
   }
 
-  // async function updateUserItems(items) {
-  //   loggedUser.value.selectedItems = items;
-  //   // console.log('loggedUser.value', loggedUser.value);
-  //   loggedUser.value = await userService.save(loggedUser.value);
-  // }
-
   async function updateUser(key, value) {
     try {
       loggedUser.value = { ...JSON.parse(JSON.stringify(loggedUser.value)), [key]: value };
@@ -58,14 +47,11 @@ export const useUserStore = defineStore("user", () => {
       if (key === 'settings') {
         setLang(value);
       }
-
-
     } catch (error) {
       console.error(error);
       appStore.logError(`[error: failed to update user with selected items] - ${error}`, true);
 
     }
-
   }
 
   function addHistory(Log) {
@@ -75,7 +61,6 @@ export const useUserStore = defineStore("user", () => {
   }
 
   function setLang(lang) {
-    // console.debug("setting lang", lang);
     const langOptions = ["en", "he", "es"];
     currLang.value = langOptions.includes(lang) ? lang : "en";
     document.body.setAttribute("dir", currLang.value === "he" ? "rtl" : "ltr");
