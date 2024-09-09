@@ -19,6 +19,7 @@ import { useUserStore } from './stores/user-store';
 import { useListStore } from './stores/list-store';
 import AppModal from '@/components/AppModal.vue';
 import { useRouter } from 'vue-router';
+import { i18Service } from "./services/i18n.service";
 
 
 import { socketService } from './services/socket.service';
@@ -30,8 +31,9 @@ const router = useRouter();
 const listStore = useListStore()
 
 
-onBeforeMount(() => {
+onBeforeMount(async() => {
   console.log('App is about to mount');
+
   userStore.loadUser();
   const user = computed(() => userStore.getUser).value
 
@@ -42,6 +44,7 @@ onBeforeMount(() => {
     router.push('/login')
   }
 })
+
 
 onMounted(() => {
 

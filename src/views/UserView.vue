@@ -5,10 +5,11 @@
         <h1> {{ getTitle(user.username) }} <span>👋</span></h1>
         <details>
             <summary>{{ $trans('user-info') }}</summary>
-            <section class="summary-container">
+            <section class="summary-container grid">
                 <div>
                     <input type="text" v-model="user.username">
                 </div>
+                <button class="special-btn" @click="logout">{{$trans('logout') }}</button>
             </section>
         </details>
 
@@ -150,6 +151,7 @@ import { userService } from '@/services/user.service';
 import { listService } from '@/services/list.service';
 import { showSuccessMsg } from '@/services/event-bus.service';
 import { useListStore } from '@/stores/list-store';
+import {useRouter} from 'vue-router'
 import UserPreview from '@/components/UserPreview.vue'
 
 const user = ref(null);
@@ -221,6 +223,12 @@ function getTitle(username) {
 function formatDate(date) {
     return new Date(date).toLocaleDateString('he-IL');
 };
+
+const router = useRouter()
+async function logout() {
+    await userStore.logout();
+    router.push('/login');
+}
 
 const historyCounter = computed(() => lists?.value?.length || 'No history');
 </script>
@@ -480,5 +488,18 @@ textarea {
     padding: 0.5rem 1rem;
     margin-block: 1rem;
     width: 100%;
+}
+
+.summary-container {
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--bClr1);
+    border-radius: 2px;
+    margin-block: 1rem;
+
+    .special-btn {
+        padding: 0.5rem 1rem;
+        width: 100%;
+    }
 }
 </style>

@@ -20,7 +20,11 @@ function createEventEmitter() {
 export const eventBus = createEventEmitter()
 
 export function showUserMsg(msg) {
-  const { settings: { lang } } = userService.getLoggedInUser();
+  const loggedInUser = userService.getLoggedInUser();
+  let lang = 'he'
+  if(loggedInUser) {
+    lang = loggedInUser.settings.lang
+  }
   eventBus.emit('show-msg', getMsgByLang(msg, lang))
 }
 
@@ -34,6 +38,8 @@ export function showErrorMsg(txt) {
 const userMsgs = {
   he: {
     'success': {
+      loginSuccess: 'התחברת בהצלחה',
+      logout:'יצאת מהמערכת בהצלחה',
       userUpdated: 'המשתמש עודכן בהצלחה',
       itemsCleared: 'הפריטים נמחקו בהצלחה',
       labelUpdated: "התווית עודכנה בהצלחה",
@@ -53,6 +59,7 @@ const userMsgs = {
       listUpdated: 'הרשימה עודכנה בהצלחה',
     },
     'error': {
+      googleLoginFailed: 'התחברות עם גוגל נכשלה',
       failedToShare: 'שליחת הרשימה נכשלה',
       itemAdded: 'הוספת הפריט נכשלה',
       itemRemoved: 'הפריט לא נמצא ברשימה',
@@ -64,6 +71,8 @@ const userMsgs = {
   },
   en: {
     'success': {
+      loginSuccess: 'Logged in successfully',
+      logout:'Logged out successfully',
       userUpdated: 'User updated successfully',
       itemsCleared: 'Items cleared successfully',
       labelUpdated: "Label updated successfully",
@@ -83,6 +92,7 @@ const userMsgs = {
       listUpdated: 'List updated successfully',
     },
     'error': {
+      googleLoginFailed: 'Google login failed',
       itemAdded: 'Failed to add item',
       itemRemoved: 'Item not found in list',
       listAdded: 'Failed to add list',
@@ -94,7 +104,7 @@ const userMsgs = {
 
 }
 
-function getMsgByLang(msg, lang) {
+function getMsgByLang(msg, lang = 'he') {
   return {
     txt: userMsgs[lang][msg.type][msg.txt] || msg.txt,
     type: msg.type

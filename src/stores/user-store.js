@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { useAppStore } from "@/stores/app-store";
 import { userService } from "@/services/user.service";
+import { showErrorMsg, showSuccessMsg } from "@/services/event-bus.service";
 
 export const useUserStore = defineStore("user", () => {
   const appStore = useAppStore();
@@ -18,15 +19,20 @@ export const useUserStore = defineStore("user", () => {
       loggedUser.value = await userService.login(loginType, credentials);
       if (!loggedUser.value) return
       setLang(loggedUser.value.settings.lang);
+      return loggedUser.value;
     } catch (error) {
+
       console.error("error", error);
+      throw error;
     }
 
   }
 
-  async function signup(credentials) { }
-
-  async function logout() { }
+  async function logout() {
+    await userService.logout();
+    loggedUser.value = null;
+    showSuccessMsg("logout");
+  }
 
   function loadUser() {
     loggedUser.value = userService.getLoggedInUser();
@@ -75,7 +81,7 @@ export const useUserStore = defineStore("user", () => {
     getCurrLang,
     addHistory,
     login,
-
+    logout,
     loadUser,
     // updateUserItems,
 
