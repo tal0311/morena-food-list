@@ -39,7 +39,7 @@ function getCount(label) {
 }
 
 function onSelect({ item, labelName }) {
-    emit('selectItem', { labelName, itemId: item._id })
+   emit('selectItem', { labelName, itemId: item._id })
 }
 
 
