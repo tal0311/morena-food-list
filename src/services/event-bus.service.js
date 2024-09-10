@@ -59,6 +59,7 @@ const userMsgs = {
       listUpdated: 'הרשימה עודכנה בהצלחה',
     },
     'error': {
+      FormValidation:'אנא מלא את כל השדות הנדרשים',
       googleLoginFailed: 'התחברות עם גוגל נכשלה',
       failedToShare: 'שליחת הרשימה נכשלה',
       itemAdded: 'הוספת הפריט נכשלה',
@@ -92,6 +93,7 @@ const userMsgs = {
       listUpdated: 'List updated successfully',
     },
     'error': {
+      FormValidation:'Please fill all required fields',
       googleLoginFailed: 'Google login failed',
       itemAdded: 'Failed to add item',
       itemRemoved: 'Item not found in list',

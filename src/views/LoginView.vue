@@ -25,7 +25,10 @@
             <span class="sep"></span> <span class="or">OR</span> <span class="sep"></span>
         </div>
         <!-- <GoogleLogin :callback="callback" prompt auto-login /> -->
-        <GoogleLogin :callback="callback" prompt />
+        <button class="google-login grid">
+            <MiniLoader v-if="isLoading.google"/>
+            <GoogleLogin v-else :callback="callback" prompt />
+        </button>
     </section>
 
 </template>
@@ -39,8 +42,8 @@ import MiniLoader from '@/components/MiniLoader.vue'
 import { showErrorMsg ,showSuccessMsg } from '@/services/event-bus.service';
 
 const credentials = ref({
-    email: 'tal.amit@gmail.com',
-    password: '1234'
+    email: '',
+    password: ''
 })
 
 
@@ -77,7 +80,7 @@ async function login(type, credential) {
             loggedUser = await userStore.login(type, { email: credential.email, password: credential.password })
 
         } else {
-
+        
             loggedUser = await userStore.login(type, credential)
         }
 
@@ -93,34 +96,7 @@ async function login(type, credential) {
     }
 }
 
-const demoUser = {
-    "username": "Tal Amit",
-    "email": "tal.amit0311@gmail.com",
-    "password": "",
-    "goals": [],
-    "settings": {
-        "lang": "he",
-        "notifications": true,
-        "isVegan": false,
-        "isVegetarian": false,
-        "isGlutenFree": false,
-        "isLactoseFree": false,
-        "isKosher": false
-    },
-    "level": 1,
-    "points": 0,
-    "achievements": [],
-    "selectedItems": [],
-    "imgUrl": "https://lh3.googleusercontent.com/a/ACg8ocLTQdHl9NRJc9pFi27CqnmkOJTBC6namN9PpUVf88gmpnKr2sFy=s96-c",
-    "age": null,
-    "city": "",
-    "labels": [],
-    "history": [],
-    "personalTxt": "",
-    "role": "admin",
-    "googleID": "116549974717956267584",
-    "_id": "t0x7G"
-}
+
 
 async function getCredFromGoogle({ credential }) {
     userCredFromGoogle.value = decodeCredential(credential)
@@ -202,16 +178,10 @@ async function getCredFromGoogle({ credential }) {
 
 /* override google styling */
 
-
-#container {
-    background-color: lightblue;
-
-    div[role="button"] {
-
-        height: 42px;
-        border: 1px solid #7c94bb;
-        border-radius: 8px;
-    }
-
+.google-login{
+    background: none;
+    border: none;
+    
 }
+
 </style>

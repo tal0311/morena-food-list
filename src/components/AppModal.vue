@@ -1,6 +1,7 @@
 <template>
-    <dialog ref="dialogRef" @click="clickOutSide" :class="`app-modal blur-bg ${modalClass}`">
-        <component :is="modalTYpe" @resetModal="isModalOpen = false" :info="modalInfo && modalInfo" />
+    <dialog ref="dialogRef" @click="clickOutSide" :class="`app-modal blur-bg ${modalClass} ${addedClasses}`">
+  
+        <component :is="modalTYpe" @resetModal="isModalOpen = false" :info="modalInfo && modalInfo" @modifyModal="modifyModal" />
     </dialog>
 </template>
 
@@ -12,7 +13,10 @@ import ModalDone from '@/components/modal/ModalDone.vue';
 import ModalInfo from '@/components/modal/ModalInfo.vue';
 import ModalHistory from '@/components/modal/ModalHistory.vue';
 import ModalAddUser from '@/components/modal/ModalAddUser.vue';
-import ModalLock from './modal/ModalLock.vue';
+import ModalLock from '@/components/modal/ModalLock.vue';
+import ModalAddList from '@/components/modal/ModalAddList.vue';
+import ModalAddItem from '@/components/modal/ModalAddItem.vue';
+
 // src/components/modal/ModalAddUser.vue
 
 
@@ -24,10 +28,15 @@ const modalTYpe = shallowRef(null)
 const modalInfo = ref(null)
 const modalClass = ref(null)
 const subscription = []
+const addedClasses = ref('')
 onBeforeMount(() => {
     // to handle multiple subscriptions
     subscription[0] = eventBus.on('toggle-modal', setModal)
 })
+
+function modifyModal(classToAdd) {
+    addedClasses.value = classToAdd
+}
 
 function setModal({ type, info }) {
     isModalOpen.value = true
@@ -47,6 +56,12 @@ function setModal({ type, info }) {
             break;
         case 'ModalLock':
             modalTYpe.value = ModalLock
+            break;
+        case 'ModalAddList':
+            modalTYpe.value = ModalAddList
+            break;
+        case 'ModalAddItem':
+            modalTYpe.value = ModalAddItem
             break;
         default:
             modalTYpe.value = ModalDone
@@ -97,6 +112,7 @@ button {
     padding: 0.8rem;
 }
 
+
 dialog.blur-bg {
     border: none;
     padding: 1rem;
@@ -113,7 +129,7 @@ dialog.blur-bg.ModalLock {
     }
 }
 
-dialog.blur-bg:not(.ModalInfo) {
+dialog.blur-bg:not(.ModalInfo, .ModalAddItem) {
     width: 70%;
 
 }
@@ -131,4 +147,15 @@ dialog.blur-bg::backdrop {
     opacity: 0.5;
     cursor: not-allowed;
 }
+.mini {
+    /* transform: translateY(100%); */
+    backdrop-filter: blur(0);
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    height: 8vh;
+    overflow: hidden;
+ 
+}
+
 </style>

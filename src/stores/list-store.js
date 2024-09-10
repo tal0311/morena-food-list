@@ -16,8 +16,6 @@ import { useRouter } from "vue-router";
 
 
 export const useListStore = defineStore("list", () => {
-  const router = useRouter();
-
   const userStore = useUserStore();
 
   const lists = ref(null);
@@ -38,9 +36,9 @@ export const useListStore = defineStore("list", () => {
     return lists?.value;
   });
 
-    async function loadItems() {
+    async function loadItems(labels =true) {
     try {
-      listByLabels.value = await itemService.query({ labels: true });
+      listByLabels.value = await itemService.query({ labels  });
       // BUG: only this is to set the user in its store after it has labels or the list in indx view will not render the labels, need to find a better way, maybe to load the user in the app store
       // use socket from BE later to load the user with labels
       userStore.loadUser();

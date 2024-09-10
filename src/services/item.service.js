@@ -70,10 +70,15 @@ async function remove(itemId) {
 }
 async function save(item) {
   var savedItem;
+  console.log('item.service.js save item:', item);
+  
   if (item._id) {
-    savedItem = await storageService.put(STORAGE_KEY, item);
-    // savedItem = await httpService.put(`item/${item._id}`, item)
+    // savedItem = await storageService.put(STORAGE_KEY, item);
+    savedItem = await httpService.put(`item/${item._id}`, item)
 
+  }else {
+    // savedItem = await storageService.post(STORAGE_KEY, item);
+    savedItem = await httpService.post('item', item)  
   }
   return savedItem;
 }

@@ -8,15 +8,13 @@ import { showErrorMsg } from './event-bus.service';
 
 
 
-setTimeout(async () => {
-    const userStore = await import('@/stores/user-store');
-    const { useUserStore } = userStore;
-    const userStoreInstance = useUserStore();
+setTimeout(() => {
+    const userStore = useUserStore();
     socketService.on(SOCKET_EVENT_UPDATE_USER, (user) => {
         _saveLoggedUser(user);
-        userStoreInstance.loggedUser.value = user;
+        userStore.loggedUser.value = user;
     });
-}, 0);
+}, 500);
 const STORAGE_KEY = 'user_DB';
 const LOGGED_USER = 'loggedUser';
 

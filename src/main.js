@@ -12,6 +12,7 @@ import errorPlugin from './plugins/errorPlugin'
 import vue3GoogleLogin from 'vue3-google-login'
 import { i18Service } from "./services/i18n.service";
 
+// this is for getting the app translations before the app is mounted
 (async () => {
   try {
 
@@ -28,9 +29,6 @@ import { i18Service } from "./services/i18n.service";
 
     })
     // Plugins
-
-
-
     app.use(i18nPlugin);
     app.use(svgPlugin);
     app.use(errorPlugin);

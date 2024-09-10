@@ -1659,14 +1659,14 @@ var gTrans;
 // }
 
 async function init(){
-  const res=  await fetch('https://cdn.jsdelivr.net/gh/tal0311/food-list-data@main/items-trans.json')
+  const res=  await fetch(import.meta.env.VITE_SERVER_URL + '/api/trans')
   gTrans = await res.json()
   console.log(gTrans);
   
 }
 
  function doTrans(key, currLang = 'he') {
-  if (!gTrans[key]) return 'UNKNOWN';
+  if (!gTrans[key]) return key || 'UNKNOWN';
 
   // console.debug("key", key);
   // return
