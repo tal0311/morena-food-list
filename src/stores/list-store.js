@@ -10,9 +10,6 @@ import {
   showSuccessMsg,
 } from "@/services/event-bus.service";
 import { useUserStore } from "@/stores/user-store";
-import { useRouter } from "vue-router";
-
-
 
 
 export const useListStore = defineStore("list", () => {
@@ -36,12 +33,14 @@ export const useListStore = defineStore("list", () => {
     return lists?.value;
   });
 
-    async function loadItems(labels =true) {
+  async function loadItems(labels = true) {
     try {
-      listByLabels.value = await itemService.query({ labels  });
+      const items = await itemService.query({ labels });
       // BUG: only this is to set the user in its store after it has labels or the list in indx view will not render the labels, need to find a better way, maybe to load the user in the app store
       // use socket from BE later to load the user with labels
+      listByLabels.value = items
       userStore.loadUser();
+      checkDefaultSelectedItems(items);
 
     } catch (error) {
       console.debug("Failed to load list", error);
@@ -50,23 +49,16 @@ export const useListStore = defineStore("list", () => {
     }
   }
 
-  // function setItemsFromShearedList(itemsIds) {
-  //   const user = userStore.loggedUser;
-  //   const userItems = user.selectedItems;
-
-  //   listByLabels.value = listByLabels.value.map((item) => {
-  //     if (itemsIds.includes(item._id)) {
-  //       item.isSelected = true;
-  //       if (userItems.find((i) => i._id === item._id)) {
-  //         return item;
-  //       }
-  //       userItems.push(item);
-  //     }
-  //     return item;
-  //   });
-
-  //   userStore.updateUserItems(userItems);
-  // }
+  function checkDefaultSelectedItems(listByLabels) {
+     for (const key in listByLabels) {
+      const itemsToSelect = listByLabels[key].filter(item => item.isSelected);
+      if (itemsToSelect.length) {
+        itemsToSelect.forEach(item => {
+          addItemToCurrList(item._id);
+        })
+      }
+    }
+  }
 
   async function updateLabel(label) {
     // debugger
@@ -84,7 +76,12 @@ export const useListStore = defineStore("list", () => {
       }
       return item;
     })
- 
+
+    addItemToCurrList(itemId);
+
+  }
+
+  function addItemToCurrList(itemId) {
     if (!currList.value) currList.value = listService.getEmptyList();
 
     if (currList.value.items.includes(itemId)) {
@@ -125,7 +122,7 @@ export const useListStore = defineStore("list", () => {
     try {
 
       lists.value = await listService.query(filterBy);
-     
+
     } catch (error) {
       showErrorMsg("Failed to load lists, please try again later");
 
@@ -149,7 +146,7 @@ export const useListStore = defineStore("list", () => {
   function loadSharedList() {
     try {
       const list = utilService.loadFromStorage("shared-list");
-   
+
       setCurrList(list, true);
       return list;
     } catch (error) {

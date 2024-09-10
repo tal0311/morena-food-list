@@ -132,7 +132,7 @@ function changeBtnState(val) {
 
 
 function updateLabel(updateLabel) {
-     label.value = { ...updateLabel }
+    label.value = { ...updateLabel }
 }
 
 function submitLabel() {
@@ -281,7 +281,5 @@ textarea {
 
 }
 
-.router-view {
-   
-}
+.router-view {}
 </style>
