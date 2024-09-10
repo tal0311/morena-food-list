@@ -1,9 +1,11 @@
-import gUsers from './../data/user.json';
+
 import { storageService } from './async-storage.service.js';
 import { httpService } from './http.service';
 import { utilService } from './util.service';
 import { useUserStore } from '@/stores/user-store';
 import { socketService, SOCKET_EVENT_UPDATE_USER } from './socket.service';
+import { showErrorMsg } from './event-bus.service';
+
 
 
 setTimeout(() => {
@@ -11,10 +13,8 @@ setTimeout(() => {
     socketService.on(SOCKET_EVENT_UPDATE_USER, (user) => {
         _saveLoggedUser(user);
         userStore.loggedUser.value = user;
-
     });
-
-}, 0);
+}, 500);
 const STORAGE_KEY = 'user_DB';
 const LOGGED_USER = 'loggedUser';
 
@@ -27,7 +27,8 @@ export const userService = {
     signup,
     getGuestUser,
     // updateUser
-    query
+    query,
+    logout,
 }
 
 // createUsers()
@@ -40,14 +41,11 @@ async function query() {
 }
 
 function getLoggedInUser() {
-
-    return _loadUserFromStorage();
-    // let user = utilService.loadFromStorage(LOGGED_USER);
-    // return user;
+    const loggedUser = _loadUserFromStorage();
+    return loggedUser;
 }
 
 async function save(user) {
-
     let updatedUser = null
     if (user._id) {
         updatedUser = await httpService.put('user/' + user._id, user)
@@ -70,26 +68,39 @@ function removeUser(userId) {
 // BACKEND 
 async function login(loginType, credentials) {
     let user = null
-    switch (loginType) {
-        case 'guest':
-            user = await loginAsGuest();
-            break
-        case 'google':
-            user = await loginWithGoogle(credentials);
-            break
-        case 'credentials':
-            user = await loginWithCredentials(credentials);
-            break
-    }
+    try {
 
-    if (user) {
-        _saveLoggedUser(user);
-        return user;
+        switch (loginType) {
+            case 'guest':
+                user = await loginAsGuest();
+                break
+            case 'google':
+                user = await loginWithGoogle(credentials);
+                break
+            case 'credentials':
+                user = await loginWithCredentials(credentials);
+                break
+        }
+
+        if (user) {
+            _saveLoggedUser(user);
+            return user;
+        }
+    } catch (error) {
+        alert(error.message)
+        throw new Error('Login failed')
+
     }
 }
 
 async function loginWithCredentials(credentials) {
-    return await httpService.post('auth/login/credentials', credentials)
+    try {
+
+        return await httpService.post('auth/login/credentials', credentials)
+    } catch (error) {
+        throw new Error('Invalid username or password')
+
+    }
 }
 
 async function loginWithGoogle(credentials) {
@@ -102,11 +113,16 @@ async function loginWithGoogle(credentials) {
         imgUrl: credentials.picture
     }
 
-    return await httpService.post('auth/login/google', userCredentials)
+    try {
+        return await httpService.post('auth/login/google', userCredentials)
+
+    } catch (error) {
+        throw new Error('Google login failed')
+    }
 }
 
 async function loginAsGuest() {
-     return await httpService.post('auth/signup/guest')
+    return await httpService.post('auth/signup/guest')
 }
 
 function signup(credentials) {
@@ -117,6 +133,20 @@ function signup(credentials) {
         storageService.post(STORAGE_KEY, credentials);
         _saveLoggedUser(credentials);
         return credentials;
+    }
+}
+
+async function logout() {
+
+    try {
+
+        await httpService.post('auth/logout')
+        sessionStorage.clear()
+        localStorage.clear()
+        return
+    } catch (error) {
+        console.log('error', error)
+
     }
 }
 
@@ -146,7 +176,8 @@ function getEmptyUser() {
         labels: [],
         history: [],
         personalTxt: "",
-        role: "user"
+        role: "user",
+        exItems: []
 
     }
 }
@@ -188,29 +219,18 @@ function _loadUserFromStorage() {
         : JSON.parse(sessionStorage.getItem(LOGGED_USER))
 
     return loggedUser
-    // return utilService.loadFromStorage(LOGGED_USER);
+
 }
 
 function _saveLoggedUser(user) {
-    
+
     JSON.parse(localStorage.getItem('rememberMe'))
         ? localStorage.setItem(LOGGED_USER, JSON.stringify(user))
         : sessionStorage.setItem(LOGGED_USER, JSON.stringify(user))
 
-
-    // utilService.saveToStorage(LOGGED_USER, user);
     return user;
 }
 
-function createUsers() {
-    let users = utilService.loadFromStorage(STORAGE_KEY);
-    if (!users || !users.length) {
-        users = gUsers
-        utilService.saveToStorage(STORAGE_KEY, users);
-    }
-
-    return users;
-}
 
 
 

@@ -13,7 +13,7 @@
                     <button class="primary-btn" @click="setFilterBy('items')">Items</button>
                     <button class="primary-btn" @click="setFilterBy('lists')">Lists</button>
                 </section>
-                <button class="secondary-btn" @click="addUser">Create user</button>
+                <!-- <button class="secondary-btn" @click="addUser">Create user</button> -->
             </section>
             <form action="">
                 Search: <input type="text" v-model="searchTerm" :placeholder="`Search ${filterBy}`" />
@@ -23,6 +23,9 @@
 
         <details :open="filterBy === 'users'">
             <summary>Users</summary>
+            <div class="create-btn grid">
+                <button @click="addUser">create</button>
+            </div>
 
             <table>
                 <thead>
@@ -50,6 +53,9 @@
 
         <details :open="filterBy === 'items'">
             <summary>Food Items</summary>
+            <div class="create-btn grid">
+                <button @click="addItem">create</button>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -95,6 +101,9 @@
 
         <details :open="filterBy === 'lists'">
             <summary>Lists</summary>
+            <div class="create-btn grid">
+                <button @click="addList">create</button>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -126,13 +135,14 @@
 </template>
 
 <script setup>
-import { computed, ref, onBeforeMount } from 'vue';
+import { computed, ref, onBeforeMount, onBeforeUnmount } from 'vue';
 import AppLoader from '@/components/AppLoader.vue';
 import { userService } from '@/services/user.service';
 import { itemService } from '@/services/item.service';
 import { listService } from '@/services/list.service';
 import { i18Service } from '@/services/i18n.service';
 import { eventBus } from '@/services/event-bus.service';
+
 
 
 const users = ref(null);
@@ -157,22 +167,38 @@ const filteredItems = computed(() => {
 });
 
 const filteredLists = computed(() => {
-    
-    
+
+
     return lists.value?.filter(list => {
         const regex = new RegExp(searchTerm.value, 'i');
         return list.title.match(regex)
     });
 });
 
+const subscriptions = [];
 onBeforeMount(async () => {
     console.log('AdminView is mounted',);
     users.value = await userService.query();
     items.value = await itemService.query();
-    lists.value = await listService.query({admin:true});
+    lists.value = await listService.query({ admin: true });
+    subscriptions[0] = eventBus.on('modal-filter', onModalFilter);
+    subscriptions[1] = eventBus.on('get-groups-from-admin', getGroups);
 
     document.body.dir = 'ltr';
 });
+
+function getGroups() {
+    const groups = items.value.map(item => item.group);
+    eventBus.emit('get-groups', groups);
+
+}
+
+function onModalFilter(filter) {
+    console.log('filter', filter);
+    searchTerm.value = filter;
+}
+
+
 
 function setFilterBy(filter) {
     filterBy.value = filter;
@@ -219,13 +245,26 @@ function getTranslation(key) {
 }
 
 function addUser() {
+    eventBus.emit('toggle-modal', { type: 'ModalAddUser' });
+}
+function addItem() {
     console.log('adding user');
     // userService.add();
-    eventBus.emit('toggle-modal', { type: 'ModalAddUser' });
+    eventBus.emit('toggle-modal', { type: 'ModalAddItem' });
+    // console.log(eventBus);
+
+}
+function addList() {
+    console.log('adding user');
+    // userService.add();
+    eventBus.emit('toggle-modal', { type: 'ModalAddList' });
     console.log(eventBus);
-    
+
 }
 
+onBeforeUnmount(() => {
+    subscriptions.forEach(sub => sub());
+});
 </script>
 
 <style scoped>
@@ -287,8 +326,7 @@ function addUser() {
 
     .entity-filter {
         padding-inline: 0.5rem;
-
-        justify-content: space-between;
+        grid-template-columns: 100px min-content;
         grid-auto-flow: column;
         gap: 1rem;
         align-items: center;
@@ -335,6 +373,15 @@ function addUser() {
         }
 
 
+    }
+}
+
+.create-btn {
+    justify-content: end;
+
+    button {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
     }
 }
 </style>
