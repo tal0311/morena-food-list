@@ -14,7 +14,7 @@ setTimeout(() => {
         _saveLoggedUser(user);
         userStore.loggedUser.value = user;
     });
-}, 500);
+}, 1000);
 const STORAGE_KEY = 'user_DB';
 const LOGGED_USER = 'loggedUser';
 

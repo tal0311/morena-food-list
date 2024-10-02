@@ -72,10 +72,10 @@
                     <tr v-for="item in filteredItems" :key="item._id" :class="`item-${item._id}`">
                         <td>{{ item._id }}</td>
                         <td>
-                            <span contenteditable @blur="saveItem('name', item._id, $event)">{{ item.name }}</span>
+                            <span>{{ item.name }}</span>
                             / {{ getTranslation(item.name) }}
                         </td>
-                        <td contenteditable @blur="saveItem('group', item._id, $event)">
+                        <td>
                             <span>
                                 {{ item.group }}
                             </span>
@@ -83,14 +83,15 @@
 
                             {{ getTranslation(item.group) }}
                         </td>
-                        <td contenteditable @blur="saveItem('color', item._id, $event)">
+                        <td>
                             {{ item.color }}
                         </td>
-                        <td contenteditable @blur="saveItem('readMoreURL', item._id, $event)">
+                        <td>
                             {{ item.readMoreURL || 'No Read More Url' }}
                         </td>
-                        <td contenteditable>{{ item.icon }}</td>
+                        <td>{{ item.icon }}</td>
                         <td>
+                            <button @click="selectItem(item)">update</button>
                             <button @click="deleteItem(item._id)">Delete</button>
                         </td>
                     </tr>
@@ -177,19 +178,38 @@ const filteredLists = computed(() => {
 
 const subscriptions = [];
 onBeforeMount(async () => {
-    console.log('AdminView is mounted',);
-    users.value = await userService.query();
-    items.value = await itemService.query();
-    lists.value = await listService.query({ admin: true });
+
+    await loadItems();
+    await loadLists();
+    await loadUsers();
     subscriptions[0] = eventBus.on('modal-filter', onModalFilter);
     subscriptions[1] = eventBus.on('get-groups-from-admin', getGroups);
-
+    subscriptions[2] = eventBus.on('item-added', loadItems);
+    subscriptions[3] = eventBus.on('item-update', addUpdatedItem);
     document.body.dir = 'ltr';
 });
 
+async function loadUsers() {
+    users.value = await userService.query();
+}
+
+async function loadLists() {
+    lists.value = await listService.query({ admin: true });
+}
+
+async function loadItems() {
+    items.value = await itemService.query();
+
+}
+
+function addUpdatedItem(item) {
+    items.value.push(item);
+}
+
+
 function getGroups() {
     const groups = items.value.map(item => item.group);
-    eventBus.emit('get-groups', groups);
+    eventBus.emit('get-groups', [...new Set(groups)]);
 
 }
 
@@ -215,18 +235,16 @@ function deleteUser(userId) {
     // userService.remove(userId);
 }
 
-function saveItem(key, itemId, event) {
-    console.log('saving', key, event.target.innerText);
-    const item = items.value.find(item => item._id === itemId);
+function selectItem(item) {
+    eventBus.emit('toggle-modal', { type: 'ModalAddItem', info: JSON.parse(JSON.stringify(item)) });
     // itemService.save(item);
-
-    item[key] = event.target.innerText;
-    console.log('saving', item);
 }
 
-function deleteItem(itemId) {
-    console.log('deleting', itemId);
-    // itemService.remove(itemId);
+async function deleteItem(itemId) {
+    await itemService.remove(itemId);
+    items.value = items.value.filter(item => item._id !== itemId);
+    console.log('deleted', itemId);
+
 }
 
 function saveList(listId) {
@@ -248,15 +266,13 @@ function addUser() {
     eventBus.emit('toggle-modal', { type: 'ModalAddUser' });
 }
 function addItem() {
-    console.log('adding user');
+    console.log('adding item');
     // userService.add();
     eventBus.emit('toggle-modal', { type: 'ModalAddItem' });
     // console.log(eventBus);
 
 }
 function addList() {
-    console.log('adding user');
-    // userService.add();
     eventBus.emit('toggle-modal', { type: 'ModalAddList' });
     console.log(eventBus);
 
@@ -264,6 +280,7 @@ function addList() {
 
 onBeforeUnmount(() => {
     subscriptions.forEach(sub => sub());
+    subscriptions.length = 0;
 });
 </script>
 

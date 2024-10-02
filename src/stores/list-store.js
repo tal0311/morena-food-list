@@ -45,10 +45,12 @@ export const useListStore = defineStore("list", () => {
     } catch (error) {
       console.debug("Failed to load list", error);
       // useAppStore().logError(error, false);
-      showErrorMsg("Failed to load list, please try again later");
+      // TODO: show error message 
+      // showErrorMsg("Failed to load list, please try again later");
     }
   }
 
+  // if the admin has selected items to be selected by default in db, this function will select them
   function checkDefaultSelectedItems(listByLabels) {
      for (const key in listByLabels) {
       const itemsToSelect = listByLabels[key].filter(item => item.isSelected);

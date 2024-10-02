@@ -1,5 +1,5 @@
 <template>
-    <section :class="['add-item', isSeeThrow ? 'see' : '']">
+    <section v-if="itemToAdd" :class="['add-item', isSeeThrow ? 'see' : '']">
         <button @click="modify" v-html="$svg(btnState)"></button>
         <h1>Add Item <small>(if its red, it must have a value)</small> </h1>
         <form ref="formRef" class="grid" @submit.prevent="addItem">
@@ -49,7 +49,7 @@
             </div>
 
             <div class="actions-container grid grid-dir-col">
-                <button class="primary-btn" @click.prevent="addItem">Add</button>
+                <button class="primary-btn" @click.prevent="addItem">{{ itemToAdd._id ? 'Update' : 'Add' }}</button>
                 <button class="secondary-btn" @click.prevent="resetForm">Reset</button>
             </div>
 
@@ -63,32 +63,41 @@
 </template>
 <script setup>
 
-import { ref, onMounted, onBeforeMount, computed , onBeforeUnmount} from 'vue';
+import { ref, onMounted, onBeforeMount, computed, onBeforeUnmount, watchEffect } from 'vue';
 import { adminService } from '@/services/admin.service';
 import { eventBus, showErrorMsg } from '@/services/event-bus.service';
 import { itemService } from '@/services/item.service';
 
+const props = defineProps(['info'])
+const emit = defineEmits(['modifyModal', 'resetModal'])
+
 // or get by id to update
-const itemToAdd = ref(adminService.getEmptyItem())
+const itemToAdd = ref(null)
 const formRef = ref(null)
 const isSeeThrow = ref(false)
 const groups = ref([])
-const subscriptions=[]
+const subscriptions = []
+
 onBeforeMount(() => {
-   subscriptions[0]= eventBus.on('addItem', addItem)
-   subscriptions[1]= eventBus.on('get-groups', (g) => {
+    if (props.info) {
+        const emptyItem = adminService.getEmptyItem()
+        itemToAdd.value = { ...emptyItem, ...props.info }
+
+    } else {
+        itemToAdd.value = adminService.getEmptyItem()
+    }
+
+    subscriptions[1] = eventBus.on('get-groups', (g) => {
         groups.value = g
     })
 
     getGroups()
 })
+const btnState = computed(() => isSeeThrow.value ? 'expend' : 'mini')
 
 function updateGroup(ev) {
     itemToAdd.value.group = ev.target.value
 }
-const btnState = computed(() => isSeeThrow.value ? 'expend' : 'mini')
-
-const emit = defineEmits(['modifyModal'])
 function getItem() {
     eventBus.emit('modal-filter', itemToAdd.value.name)
 }
@@ -102,20 +111,25 @@ async function addItem() {
     const isFormValid = formRef.value.checkValidity()
 
     if (!isFormValid) {
-       showErrorMsg('FormValidation')
+        showErrorMsg('FormValidation')
         return
     }
 
-    // BACKEND save all keys as lowercase
-    console.log('itemToAdd.value', itemToAdd.value);
 
     await itemService.save(itemToAdd.value)
+    if (itemToAdd.value._id) {
+        eventBus.emit('item-updated', itemToAdd.value)
+    } else {
+        eventBus.emit('item-added', itemToAdd.value)
+    }
 
-    // adminService.addItem(itemToAdd.value)
     resetForm()
+
+    emit('resetModal')
 }
 
 function resetForm() {
+    itemToAdd.value = null
     formRef.value.reset()
 }
 
@@ -124,8 +138,9 @@ function getGroups() {
 }
 
 
-onBeforeUnmount(()=>{
-    subscriptions.forEach(sub=>sub())
+onBeforeUnmount(() => {
+    subscriptions.forEach(sub => sub())
+    subscriptions.length = 0
 })
 </script>
 
@@ -164,7 +179,8 @@ form {
         gap: 0.5rem;
     }
 
-    input ,select{
+    input,
+    select {
         padding: 0.5rem;
         border-radius: var(--br);
         border: 1px solid var(--bClr2);
@@ -173,7 +189,8 @@ form {
 }
 
 
-input, select {
+input,
+select {
 
     &:valid {
         border: 1px solid green;
@@ -197,7 +214,7 @@ input, select {
 
     }
 
-    
+
 
 }
 
