@@ -65,8 +65,8 @@ async function getById(itemId) {
 }
 
 async function remove(itemId) {
-  await storageService.remove(STORAGE_KEY, itemId);
-  // return httpService.delete(`item/${itemId}`)
+  // await storageService.remove(STORAGE_KEY, it1emId);
+  return httpService.delete(`item/${itemId}`)
 }
 async function save(item) {
   var savedItem;

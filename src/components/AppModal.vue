@@ -1,7 +1,7 @@
 <template>
     <dialog ref="dialogRef" @click="clickOutSide" :class="`app-modal blur-bg ${modalClass} ${addedClasses}`">
-  
-        <component :is="modalTYpe" @resetModal="isModalOpen = false" :info="modalInfo && modalInfo" @modifyModal="modifyModal" />
+
+        <component :is="modalTYpe" @resetModal="closeModal" :info="modalInfo && modalInfo" @modifyModal="modifyModal" />
     </dialog>
 </template>
 
@@ -17,18 +17,14 @@ import ModalLock from '@/components/modal/ModalLock.vue';
 import ModalAddList from '@/components/modal/ModalAddList.vue';
 import ModalAddItem from '@/components/modal/ModalAddItem.vue';
 
-// src/components/modal/ModalAddUser.vue
-
-
-
 const dialogRef = ref(null)
 const isModalOpen = ref(false)
 const modalTYpe = shallowRef(null)
-
 const modalInfo = ref(null)
 const modalClass = ref(null)
 const subscription = []
 const addedClasses = ref('')
+
 onBeforeMount(() => {
     // to handle multiple subscriptions
     subscription[0] = eventBus.on('toggle-modal', setModal)
@@ -39,13 +35,17 @@ function modifyModal(classToAdd) {
 }
 
 function setModal({ type, info }) {
+    console.debug('type', type);
+    console.debug('info', info);
+
+
     isModalOpen.value = true
     modalClass.value = type
 
     switch (type) {
         case 'ModalInfo':
-            modalTYpe.value = ModalInfo
             modalInfo.value = info
+            modalTYpe.value = ModalInfo
 
             break;
         case 'ModalHistory':
@@ -61,6 +61,7 @@ function setModal({ type, info }) {
             modalTYpe.value = ModalAddList
             break;
         case 'ModalAddItem':
+            modalInfo.value = info
             modalTYpe.value = ModalAddItem
             break;
         default:
@@ -70,7 +71,6 @@ function setModal({ type, info }) {
 }
 
 watchEffect(() => {
-    // console.debug(isModalOpen.value);
     if (!dialogRef.value) return
     if (isModalOpen.value) {
         openModal()
@@ -88,14 +88,15 @@ function openModal() {
 
 function closeModal() {
     dialogRef.value.close()
+    modalInfo.value = null
+    modalClass.value = null
+    addedClasses.value = ''
+    modalTYpe.value = null
 }
 
-function resetModal() {
-    isModalOpen.value = false
-}
 
 function clickOutSide(ev) {
-    if(modalClass.value === 'ModalLock') return
+    if (modalClass.value === 'ModalLock') return
     if (ev.target.classList.contains('app-modal')) {
         isModalOpen.value = false
     }
@@ -124,7 +125,8 @@ dialog.blur-bg {
 
 dialog.blur-bg.ModalLock {
     backdrop-filter: initial;
-     &::backdrop {
+
+    &::backdrop {
         background-color: rgba(94, 94, 94, 0.2);
     }
 }
@@ -147,15 +149,17 @@ dialog.blur-bg::backdrop {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
 .mini {
     /* transform: translateY(100%); */
     backdrop-filter: blur(0);
+
     &::backdrop {
         background-color: rgba(0, 0, 0, 0.2);
     }
-    height: 8vh;
-    overflow: hidden;
- 
-}
 
+    height: 7vh;
+    overflow: hidden;
+
+}
 </style>
