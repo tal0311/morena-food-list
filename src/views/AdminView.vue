@@ -111,7 +111,7 @@
                             <div class="item actions-container grid grid-dir-col">
 
                                 <button @click="selectItem(_id)">Select</button>
-                                <button @click="deleteItem(_id)">Delete</button>
+                                <button @click="removeItem(_id)">Delete</button>
                             </div>
                         </td>
                     </tr>
@@ -264,7 +264,9 @@ function selectItem(itemId) {
     // itemService.save(item);
 }
 
-async function deleteItem(itemId) {
+async function removeItem(itemId) {
+    const isConfirm = confirm('Are you sure you want to delete this item?');
+    if (!isConfirm) return;  
     await itemService.remove(itemId);
     items.value = items.value.filter(item => item._id !== itemId);
     console.log('deleted', itemId);
