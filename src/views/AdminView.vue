@@ -53,46 +53,66 @@
 
         <details :open="filterBy === 'items'">
             <summary>Food Items</summary>
+
             <div class="create-btn grid">
                 <button @click="addItem">create</button>
             </div>
+
+
+
+
             <table>
                 <thead>
+                  
                     <tr>
-                        <th>Id</th>
-                        <th>Name</th>
+                        <th v-if="false">Id</th>
                         <th>Group</th>
-                        <th>color</th>
-                        <th>Read More At</th>
-                        <th>Icon</th>
+                        <th>Name</th>
+                        <th v-if="false">Color</th>
+                        <th v-if="false">Read More URL</th>
+                        <th v-if="false">Icon</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in filteredItems" :key="item._id" :class="`item-${item._id}`">
-                        <td>{{ item._id }}</td>
-                        <td>
-                            <span>{{ item.name }}</span>
-                            / {{ getTranslation(item.name) }}
-                        </td>
-                        <td>
-                            <span>
-                                {{ item.group }}
+                    <tr v-for="{ _id, group, color, readMoreURL, icon, name } in filteredItems" :key="_id"
+                        :class="`item-${_id}`">
+                        <td v-if="false">{{ _id }}</td>
+                        <td >
+                            <span class="text-bold">
+                                {{ group }}
                             </span>
-                            /
+                            <ul class="clean-list grid">
+                                <li v-for="value, key in getTranslation(group)">
+                                    <small>
+                                        {{ key }}: {{ value }}
+                                    </small>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <span class="text-bold">{{ name }}</span>
+                            <ul class="clean-list grid">
+                                <li v-for="value, key in getTranslation(name)">
+                                    <small>
+                                        {{ key }}: {{ value }}
+                                    </small>
+                                </li>
+                            </ul>
+                        </td>
+                        <td v-if="false">
+                            {{ color }}
+                        </td>
+                        <td v-if="false">
+                            {{ readMoreURL || 'No Read More Url' }}
+                        </td>
+                        <td v-if="false">{{ icon }}</td>
+                        <td>
+                            <div class="item actions-container grid grid-dir-col">
 
-                            {{ getTranslation(item.group) }}
-                        </td>
-                        <td>
-                            {{ item.color }}
-                        </td>
-                        <td>
-                            {{ item.readMoreURL || 'No Read More Url' }}
-                        </td>
-                        <td>{{ item.icon }}</td>
-                        <td>
-                            <button @click="selectItem(item)">update</button>
-                            <button @click="deleteItem(item._id)">Delete</button>
+                                <button @click="selectItem(_id)">Select</button>
+                                <button @click="deleteItem(_id)">Delete</button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -108,7 +128,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th v-if="false">Id</th>
                         <th>Title</th>
                         <th>Items</th>
                         <th>Owner</th>
@@ -117,12 +137,13 @@
                 </thead>
                 <tbody>
                     <tr v-for="list in filteredLists" :key="list._id">
-                        <td contenteditable>{{ list._id }}</td>
-                        <td contenteditable>{{ list.title }}</td>
-                        <td contenteditable>{{ list.items.map(item => item.name) }}</td>
-                        <td contenteditable>{{ list.owner.username }}</td>
+                        <td v-if="false">{{ list._id }}</td>
+                        <td >{{ list.title }}</td>
+                        <td >{{ list.items.map(item => item.name).join(', ') }}</td>
+                        <td >{{ list.owner.username }}</td>
                         <td>
                             <button @click="deleteList(list.id)">Delete</button>
+                            <button @click="selectList(list.id)">Select</button>
                         </td>
                     </tr>
                 </tbody>
@@ -136,7 +157,7 @@
 </template>
 
 <script setup>
-import { computed, ref, onBeforeMount, onBeforeUnmount } from 'vue';
+import { computed, ref, onBeforeMount, onBeforeUnmount, watchEffect } from 'vue';
 import AppLoader from '@/components/AppLoader.vue';
 import { userService } from '@/services/user.service';
 import { itemService } from '@/services/item.service';
@@ -168,13 +189,13 @@ const filteredItems = computed(() => {
 });
 
 const filteredLists = computed(() => {
-
-
     return lists.value?.filter(list => {
         const regex = new RegExp(searchTerm.value, 'i');
         return list.title.match(regex)
     });
 });
+
+
 
 const subscriptions = [];
 onBeforeMount(async () => {
@@ -185,7 +206,7 @@ onBeforeMount(async () => {
     subscriptions[0] = eventBus.on('modal-filter', onModalFilter);
     subscriptions[1] = eventBus.on('get-groups-from-admin', getGroups);
     subscriptions[2] = eventBus.on('item-added', loadItems);
-    subscriptions[3] = eventBus.on('item-update', addUpdatedItem);
+    subscriptions[3] = eventBus.on('item-updated', addUpdatedItem);
     document.body.dir = 'ltr';
 });
 
@@ -202,8 +223,8 @@ async function loadItems() {
 
 }
 
-function addUpdatedItem(item) {
-    items.value.push(item);
+async function addUpdatedItem() {
+    await loadItems();
 }
 
 
@@ -222,7 +243,9 @@ function onModalFilter(filter) {
 
 function setFilterBy(filter) {
     filterBy.value = filter;
+ 
 }
+
 
 function saveUser(userId) {
     const user = users.value.find(user => user._id === userId);
@@ -235,7 +258,8 @@ function deleteUser(userId) {
     // userService.remove(userId);
 }
 
-function selectItem(item) {
+function selectItem(itemId) {
+    const item = items.value.find(item => item._id === itemId);
     eventBus.emit('toggle-modal', { type: 'ModalAddItem', info: JSON.parse(JSON.stringify(item)) });
     // itemService.save(item);
 }
@@ -257,26 +281,32 @@ function deleteList(listId) {
     console.log('deleting', listId);
     // listService.remove(listId);
 }
+function selectList(listId) {
+    return
+    const list = lists.value.find(list => list._id === listId);
+    eventBus.emit('toggle-modal', { type: 'ModalAddList', info: JSON.parse(JSON.stringify(list)) });
+    // listService.save(list);
+}
 
 function getTranslation(key) {
     return i18Service.getTransItem(key);
 }
 
 function addUser() {
-    eventBus.emit('toggle-modal', { type: 'ModalAddUser' });
+    eventBus.emit('toggle-modal', { type: 'ModalAddUser' })
 }
 function addItem() {
-    console.log('adding item');
     // userService.add();
-    eventBus.emit('toggle-modal', { type: 'ModalAddItem' });
+    eventBus.emit('toggle-modal', { type: 'ModalAddItem' })
     // console.log(eventBus);
 
 }
 function addList() {
-    eventBus.emit('toggle-modal', { type: 'ModalAddList' });
+    eventBus.emit('toggle-modal', { type: 'ModalAddList' })
     console.log(eventBus);
 
 }
+
 
 onBeforeUnmount(() => {
     subscriptions.forEach(sub => sub());
@@ -399,6 +429,18 @@ onBeforeUnmount(() => {
     button {
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
+    }
+}
+
+.item {
+    &.actions-container {
+        gap: 1rem;
+        place-content: center;
+
+
+        button {
+            padding: 0.5rem 1rem;
+        }
     }
 }
 </style>

@@ -25,10 +25,10 @@
             </div>
 
             <div class="form-group grid">
-                <label for="group">Group</label>
-                <select name="group" @change="updateGroup" required>
+                <label for="group">Group <span v-if="itemToAdd.group" class="group-name">({{ itemToAdd.group }})</span></label>
+                <select name="group" @change="updateGroup" :required="itemToAdd._id?false:true">
                     <option value="">Select Group</option>
-                    <option v-for="(group, idx) in groups" :key="idx">{{ group }}</option>
+                    <option v-for="(group, idx) in groups" :class="`${group === itemToAdd.group? 'green-txt':''}`" :key="idx">{{ group }}</option>
                 </select>
             </div>
 
@@ -67,6 +67,7 @@ import { ref, onMounted, onBeforeMount, computed, onBeforeUnmount, watchEffect }
 import { adminService } from '@/services/admin.service';
 import { eventBus, showErrorMsg } from '@/services/event-bus.service';
 import { itemService } from '@/services/item.service';
+import { i18Service } from '@/services/i18n.service';
 
 const props = defineProps(['info'])
 const emit = defineEmits(['modifyModal', 'resetModal'])
@@ -80,9 +81,7 @@ const subscriptions = []
 
 onBeforeMount(() => {
     if (props.info) {
-        const emptyItem = adminService.getEmptyItem()
-        itemToAdd.value = { ...emptyItem, ...props.info }
-
+        loadItem()
     } else {
         itemToAdd.value = adminService.getEmptyItem()
     }
@@ -95,6 +94,17 @@ onBeforeMount(() => {
 })
 const btnState = computed(() => isSeeThrow.value ? 'expend' : 'mini')
 
+
+function loadItem(){
+    const emptyItem = adminService.getEmptyItem()
+        const trans= i18Service.getTransItem(props.info.name)
+        for (const key in trans) {
+            emptyItem.translation[key].val = trans[key]
+        }
+       itemToAdd.group = props.info.group
+       itemToAdd.value = { ...emptyItem, ...props.info }
+
+}
 function updateGroup(ev) {
     itemToAdd.value.group = ev.target.value
 }
@@ -186,6 +196,12 @@ form {
         border: 1px solid var(--bClr2);
         font-size: larger;
     }
+
+    .group-name {
+        font-size: smaller;
+        color: var(--bClr3);
+        border-radius: var(--br);
+    }
 }
 
 
@@ -213,9 +229,15 @@ select {
         background-color: var(--bClr1);
 
     }
+   
 
 
 
+}
+
+option.green-txt {
+    color: green;
+    background-color: var(--bClr2);
 }
 
 
