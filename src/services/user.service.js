@@ -2,9 +2,9 @@
 import { storageService } from './async-storage.service.js';
 import { httpService } from './http.service';
 import { utilService } from './util.service';
-import { useUserStore } from '@/stores/user-store';
 import { socketService, SOCKET_EVENT_UPDATE_USER } from './socket.service';
 import { showErrorMsg } from './event-bus.service';
+import { useUserStore } from '@/stores/user-store';
 
 
 

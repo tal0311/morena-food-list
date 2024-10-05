@@ -142,8 +142,8 @@
                         <td >{{ list.items.map(item => item.name).join(', ') }}</td>
                         <td >{{ list.owner.username }}</td>
                         <td>
-                            <button @click="deleteList(list.id)">Delete</button>
-                            <button @click="selectList(list.id)">Select</button>
+                            <!-- <button @click="deleteList(list.id)">Delete</button> -->
+                            <button @click="selectList(list._id)">Select</button>
                         </td>
                     </tr>
                 </tbody>
@@ -207,6 +207,7 @@ onBeforeMount(async () => {
     subscriptions[1] = eventBus.on('get-groups-from-admin', getGroups);
     subscriptions[2] = eventBus.on('item-added', loadItems);
     subscriptions[3] = eventBus.on('item-updated', addUpdatedItem);
+    subscriptions[4] = eventBus.on('search-item', );
     document.body.dir = 'ltr';
 });
 
@@ -284,7 +285,6 @@ function deleteList(listId) {
     // listService.remove(listId);
 }
 function selectList(listId) {
-    return
     const list = lists.value.find(list => list._id === listId);
     eventBus.emit('toggle-modal', { type: 'ModalAddList', info: JSON.parse(JSON.stringify(list)) });
     // listService.save(list);

@@ -154,7 +154,7 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style>
+<style scoped>
 form {
     background-color: var(--bClr1);
     padding: 1.5rem 1rem;
@@ -229,9 +229,6 @@ select {
         background-color: var(--bClr1);
 
     }
-   
-
-
 
 }
 
