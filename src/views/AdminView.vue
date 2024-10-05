@@ -76,7 +76,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="{ _id, group, color, readMoreURL, icon, name } in filteredItems" :key="_id"
-                        :class="`item-${_id}`">
+                        :class="`item item-${_id}`">
                         <td v-if="false">{{ _id }}</td>
                         <td >
                             <span class="text-bold">
@@ -108,7 +108,7 @@
                         </td>
                         <td v-if="false">{{ icon }}</td>
                         <td>
-                            <div class="item actions-container grid grid-dir-col">
+                            <div class="actions-container grid grid-dir-col">
 
                                 <button @click="selectItem(_id)">Select</button>
                                 <button @click="removeItem(_id)">Delete</button>
@@ -123,7 +123,7 @@
         <details :open="filterBy === 'lists'">
             <summary>Lists</summary>
             <div class="create-btn grid">
-                <button @click="addList">create</button>
+                <button @click="createList">create</button>
             </div>
             <table>
                 <thead>
@@ -136,14 +136,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="list in filteredLists" :key="list._id">
+                    <tr v-for="list in filteredLists" :key="list._id" class="list">
                         <td v-if="false">{{ list._id }}</td>
                         <td >{{ list.title }}</td>
                         <td >{{ list.items.map(item => item.name).join(', ') }}</td>
                         <td >{{ list.owner.username }}</td>
-                        <td>
-                            <!-- <button @click="deleteList(list.id)">Delete</button> -->
-                            <button @click="selectList(list._id)">Select</button>
+                        <td >
+                            <div class="actions-container grid grid-dir-col">
+
+                                <button @click="removeList(list._id)">Delete</button>
+                                <button @click="selectList(list._id)">Select</button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -207,7 +210,7 @@ onBeforeMount(async () => {
     subscriptions[1] = eventBus.on('get-groups-from-admin', getGroups);
     subscriptions[2] = eventBus.on('item-added', loadItems);
     subscriptions[3] = eventBus.on('item-updated', addUpdatedItem);
-    subscriptions[4] = eventBus.on('search-item', );
+    subscriptions[4] = eventBus.on('list-added', addList );
     document.body.dir = 'ltr';
 });
 
@@ -274,20 +277,30 @@ async function removeItem(itemId) {
 
 }
 
-function saveList(listId) {
-    const list = lists.value.find(list => list._id === listId);
-    console.log('saving', list);
-    // listService.save(list);
+
+async function removeList(listId) {
+    const isConfirm = confirm('Are you sure you want to delete this list?');
+    if (!isConfirm) return;
+    try {
+           lists.value = lists.value.filter(list => list._id !== listId);
+       await listService.remove(listId);
+    } catch (error) {
+        await loadLists();
+        
+    }
 }
 
-function deleteList(listId) {
-    console.log('deleting', listId);
-    // listService.remove(listId);
+function createList() {
+    eventBus.emit('toggle-modal', { type: 'ModalAddList' });
 }
+
 function selectList(listId) {
     const list = lists.value.find(list => list._id === listId);
     eventBus.emit('toggle-modal', { type: 'ModalAddList', info: JSON.parse(JSON.stringify(list)) });
     // listService.save(list);
+}
+function addList(listToAdd){
+    lists.value.push(listToAdd);
 }
 
 function getTranslation(key) {
@@ -303,11 +316,10 @@ function addItem() {
     // console.log(eventBus);
 
 }
-function addList() {
-    eventBus.emit('toggle-modal', { type: 'ModalAddList' })
-    console.log(eventBus);
 
-}
+
+
+
 
 
 onBeforeUnmount(() => {
@@ -434,12 +446,10 @@ onBeforeUnmount(() => {
     }
 }
 
-.item {
-    &.actions-container {
+:is(.item,.list) {
+    td > .actions-container {
         gap: 1rem;
         place-content: center;
-
-
         button {
             padding: 0.5rem 1rem;
         }

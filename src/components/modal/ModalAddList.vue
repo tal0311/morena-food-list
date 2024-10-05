@@ -4,7 +4,7 @@
 
         <form ref="fromRef" class="grid" @submit.prevent="">
             <label v-for="value, key in listToAdd" :for="key">
-                <h3>{{ key }}</h3>
+                <h3 >{{ key }}</h3>
                 <div v-if="key === 'items'">
                     <input type="text" class="items-input" list="list-items" v-model="selectedItem"
                         placeholder="Select item">
@@ -38,7 +38,7 @@
 
 
 
-                <input v-if="['createdAt', 'updatedAt', 'title'].includes(key)" type="text" :name="key"
+                <input v-if="['createdAt', 'updatedAt', 'title','_id'].includes(key)" :disabled="key==='_id'" type="text" :name="key"
                     v-model="listToAdd[key]" required>
 
 
@@ -59,68 +59,74 @@
 <script setup>
 import { adminService } from '@/services/admin.service';
 import { ref, onBeforeMount } from 'vue';
-import { useRoute } from 'vue-router';
 import { itemService } from '@/services/item.service';
 import { userService } from '@/services/user.service';
 import UserPreview from '../UserPreview.vue';
+import { listService } from '@/services/list.service';
+import { eventBus } from '@/services/event-bus.service';
 
-
-
-
-const route = useRoute();
 const listToAdd = ref(null)
 
 const items = ref(null)
 const selectedItem = ref('')
+
+const props = defineProps(['info'])
 onBeforeMount(async () => {
 
     await loadItems()
+
     const { _id: id, imgUrl, username } = userService.getLoggedInUser()
-    if (route.params.id) {
-        console.log('Editing list with id:', route.params.id);
+    if (props.info) {
+        loadList()
     } else {
-
-        listToAdd.value = adminService.getEmptyList()
-        listToAdd.value.createdAt = new Date().toISOString().split('T')[0]
-        listToAdd.value.updatedAt = new Date().toISOString().split('T')[0]
-        listToAdd.value.owner = { _id: id, imgUrl, username }
-
+        loadEmptyList({ id, imgUrl, username })
     }
 
 })
 
 async function loadItems() {
     items.value = await itemService.query()
-    console.log('items', items.value);
+}
+
+async function loadList() {
+    const list = await listService.getById(props.info._id)
+        list.items = items.value.filter(item => list.items.includes(item._id))
+    listToAdd.value = list
+    // listToAdd.value.owner = { _id: id, imgUrl, username }
+    const hDate =new Date().toISOString().split('T')[0]
+    listToAdd.value.createdAt = hDate
+    listToAdd.value.updatedAt = hDate
+}
+
+function loadEmptyList({ id, imgUrl, username }) {
+    listToAdd.value = adminService.getEmptyList()
+    const hDate =new Date().toISOString().split('T')[0]
+    listToAdd.value.createdAt = hDate
+    listToAdd.value.updatedAt = hDate
+    listToAdd.value.owner = { id, imgUrl, username }
 }
 
 function AddItem() {
-
-
     const item = items.value.find(item => item.name === selectedItem.value)
-    // const item = items.value.find(item => item.name === itemRef.value)
     if (!item) return
     listToAdd.value.items.push(item)
     selectedItem.value = ''
 }
+
 function isItemInList(itemName) {
     const isItemInList = listToAdd.value?.items.find(item => item.name === itemName)
     return isItemInList ? true : false
-
 }
 
 function removeFromList(itemId) {
-    const idx = listToAdd.value.items.findIndex(item => item._id !== itemId)
-    listToAdd.value.items.splice(idx, 1)
+    listToAdd.value.items = listToAdd.value.items.filter(i => i._id !== itemId)
 }
 
-function saveList() {
-    listToAdd.value.items = listToAdd.value.items.map(item => item._id)
-
-    console.log('listToAdd', listToAdd.value)
-    //  listToAdd.value
-    // adminService.saveList(listToAdd.value)
-    // eventBus.$emit('show-msg', { txt: 'List saved', type: 'success' })
+async function saveList() {
+    const listToSave = JSON.parse(JSON.stringify(listToAdd.value))
+    listToSave.items = listToSave.items.map(item => item._id)
+    await listService.save(listToSave)
+    eventBus.emit('list-added', listToAdd.value)
 }
 </script>
 
