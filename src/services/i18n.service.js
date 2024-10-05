@@ -1,7 +1,7 @@
 
 var gTrans;
 // (async ()=>{
-   
+
 
 // })()
 
@@ -1637,7 +1637,7 @@ var gTrans;
 //     en: 'Shop',
 //     es: 'Comprar',
 //     he: 'מצב קניה'
-  
+
 //   },
 //   'lock':{
 //     en: 'Lock',
@@ -1648,24 +1648,23 @@ var gTrans;
 //     en: 'Unlock',
 //     es: 'Desbloquear',
 //     he: 'פתיחה'
-  
+
 //   },
 //   'logout':{
 //     en: 'Logout',
 //     es: 'Cerrar sesión',
 //     he: 'התנתקות'
 //   },
-  
+
 // }
 
-async function init(){
-  const res=  await fetch(import.meta.env.VITE_SERVER_URL + '/api/trans')
+async function init() {
+  const res = await fetch(import.meta.env.VITE_SERVER_URL + '/api/trans')
   gTrans = await res.json()
-  console.log(gTrans);
-  
+  // console.log(gTrans);
 }
 
- function doTrans(key, currLang = 'he') {
+function doTrans(key, currLang = 'he') {
   if (!gTrans[key]) return key || 'UNKNOWN';
 
   // console.debug("key", key);

@@ -63,7 +63,7 @@ function getEmptyItem() {
 function getEmptyList() {
     return {
         title: "",
-        visibility: "",
+        visibility: "public",
         owner: {
             id: "",
             imgUrl: "",

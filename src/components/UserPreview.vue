@@ -1,16 +1,21 @@
 <template>
-    <div class="user-preview grid">
-            <!-- <pre>{{ props.user.imgUrl }}</pre> -->
-            <img v-if="!isImageError" :src="props.user.imgUrl" :alt="props.user.fullname" @error="isImageError=true">
-            <div class="user-initials" v-else >{{userInitials }}</div>
-        </div>
+    <div :class="`user-preview grid ${display}`">
+        <!-- <pre>{{ props.user.imgUrl }}</pre> -->
+        <img v-if="!isImageError" :src="props.user.imgUrl" :alt="props.user.fullname" @error="isImageError = true">
+        <div class="user-initials" v-else>{{ userInitials }}</div>
+        <slot></slot>
+    </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 
 const props = defineProps({
-    user: Object
+    user: Object,
+    display: {
+        type: String,
+        default: ''
+    }
 })
 
 const isImageError = ref(false)
@@ -28,14 +33,26 @@ const userInitials = computed(() => {
     display: grid;
     justify-content: center;
 
-    img{
+    &.create-list {
+        
+        justify-content: start;
+        height: 8vh;
+        img {
+            width: 50px;
+            height: 50px;
+        }
+
+       
+    }
+
+    img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         border-radius: 50%;
     }
 
-    .user-initials{
+    .user-initials {
         width: 150px;
         height: 150px;
         display: grid;
@@ -46,5 +63,4 @@ const userInitials = computed(() => {
         color: var(--bClr1);
     }
 }
-
 </style>

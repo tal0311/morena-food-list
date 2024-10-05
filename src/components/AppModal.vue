@@ -1,7 +1,6 @@
 <template>
     <dialog ref="dialogRef" @click="clickOutSide" :class="`app-modal blur-bg ${modalClass} ${addedClasses}`">
-
-        <component :is="modalTYpe" @resetModal="closeModal" :info="modalInfo && modalInfo" @modifyModal="modifyModal" />
+        <component :is="modalTYpe" :info="modalInfo && modalInfo" @resetModal="closeModal" @modifyModal="modifyModal" />
     </dialog>
 </template>
 
@@ -35,6 +34,7 @@ function modifyModal(classToAdd) {
 }
 
 function setModal({ type, info }) {
+    // debugger
     console.debug('type', type);
     console.debug('info', info);
 
@@ -57,12 +57,13 @@ function setModal({ type, info }) {
         case 'ModalLock':
             modalTYpe.value = ModalLock
             break;
-        case 'ModalAddList':
-            modalTYpe.value = ModalAddList
-            break;
         case 'ModalAddItem':
             modalInfo.value = info
             modalTYpe.value = ModalAddItem
+            break;
+        case 'ModalAddList':
+            modalInfo.value = info
+            modalTYpe.value = ModalAddList
             break;
         default:
             modalTYpe.value = ModalDone

@@ -33,7 +33,6 @@ const listStore = useListStore()
 
 onBeforeMount(async() => {
   console.log('App is about to mount');
-
   userStore.loadUser();
   const user = computed(() => userStore.getUser).value
 
@@ -47,44 +46,21 @@ onBeforeMount(async() => {
 
 
 onMounted(() => {
-
-  console.log('App is mounted');
   console.debug('import.mete.env', import.meta.env);
   document.title = import.meta.env.VITE_APP_TITLE;
-
 })
 
 function toggleSocket(val) {
-
+let timeOutIdx = null;
   isSocketConnected.value = val;
   if (val) {
     console.log('Tab is in focus, reconnecting socket');
     socketService.setup()
+    clearInterval(timeOutIdx);
   } else {
-    console.log('Tab is hidden, disconnecting socket');
-    socketService.off()
+      socketService.off()
   }
-
-
 }
-
-
-
-
-
-
-// watchEffect(() => {
- 
-//   const { email, username } = user.value
-
-//   if (email && username) {
-//     setUpSockets()
-//     loadData()
-//   } else {
-//     router.push('/login')
-//   }
-// })
-
 
 
 let timeOutIdx = null;

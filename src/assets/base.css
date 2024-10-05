@@ -100,3 +100,33 @@ details summary::-webkit-details-marker {
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
+
+input,
+select {
+
+    &:valid {
+        border: 1px solid green;
+    }
+
+    &:invalid {
+        border: 1px solid red;
+    }
+
+    &:not(:placeholder-shown) {
+        border: 1px solid green;
+    }
+
+    &:not(:placeholder-shown):invalid {
+        border: 1px solid red;
+    }
+
+    &:focus {
+        outline: transparent;
+        background-color: var(--bClr1);
+
+    }
+   
+
+
+
+}
