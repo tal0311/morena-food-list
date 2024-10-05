@@ -1,17 +1,14 @@
 <template>
     <section class="recipe-view">
         <!-- {{ recipes }} -->
-        <h2>{{ $trans('food-inspiration') }}</h2>
+        <h2>{{ $trans('food-inspiration') }} <span>{{ $trans(filterByGroup) }}</span></h2>
         <section class="filter-container grid grid-dir-col">
-
-            <button v-for="btn in filterBtns" :key="btn"
+            <button class="filter-btn" v-for="btn in filterBtns" :key="btn"
                 :class="[activeLabel === btn && 'active', 'grid', 'secondary-btn']" @click="setFilterByGroup(btn)">
                 <span>{{ getIconByBtn(btn) }}</span>
                 <small>{{ countByGroup[btn] }}</small>
+                <small class="filter-icon-title"> {{ btn }}</small>
             </button>
-
-
-
         </section>
         <RecipeList v-if="recipes" :recipes="recipes" :is="'match'" />
 
@@ -30,7 +27,6 @@ const recipeStore = useRecipeStore()
 const filterByGroup = ref(null)
 const recipes = computed(() => {
     if (!filterByGroup.value || filterByGroup.value === 'all') return recipeStore.getRecipes
-
     return recipeStore.getRecipes.filter(recipe => recipe.group === filterByGroup.value)
 })
 const filterBtns = ref(null)
@@ -39,7 +35,8 @@ const isFirstTime = ref(true)
 const activeLabel = ref(null)
 
 // SOCKET 'recipes-labels' 
-watchEffect(() => {filterByGroup
+watchEffect(() => {
+    filterByGroup
     if (recipes.value && isFirstTime.value) {
         isFirstTime.value = false
         filterBtns.value = ['all', ...Array.from(new Set(recipes.value.map(recipe => recipe.group && recipe.group)))]
@@ -53,9 +50,11 @@ watchEffect(() => {filterByGroup
 
 })
 
+
 function setFilterByGroup(label) {
     activeLabel.value = label
     filterByGroup.value = label
+   
 
 }
 
@@ -77,6 +76,25 @@ function getIconByBtn(btn) {
 
     return opts[btn] || btn
 }
+
+const getGroupName = computed(() => {
+  
+    const group = filterByGroup.value
+    const opts = {
+        'all': 'All',
+        'fish': 'Fish',
+        'meat': 'Meat',
+        'salad': 'Salad',
+        'dessert': 'Dessert',
+        'other': 'Other',
+        'side-dish': 'Side Dish',
+        'soup': 'Soup',
+        'eggs': 'Eggs',
+        'poultry': 'Poultry',
+    }
+
+    return opts[group] || group
+})
 
 
 onBeforeMount(() => {
@@ -131,5 +149,12 @@ function loadRecipes() {
 
         }
     }
+
+   
+        .filter-icon-title {
+           /* opacity: 0; */
+           display: none;
+        }
+    
 }
 </style>

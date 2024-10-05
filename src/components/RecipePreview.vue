@@ -11,7 +11,7 @@
         </article>
         <Transition>
 
-            <section v-if="isOpen">
+            <section class="description-container" v-if="isOpen">
                 <ul>
                     <li v-for="item in descriptionAsList">{{ item }}.</li>
                 </ul>
@@ -61,9 +61,7 @@ const descriptionAsList = computed(() => {
 
     grid-template-columns: 20px 1fr 20px;
     grid-template-rows: 40px 1fr 40px 40px;
-    ;
-
-
+    
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.601) 0%, rgba(47, 47, 47, 0.327) 30%, rgba(64, 64, 64, 0.099) 100%);
 
     .info-container {
@@ -77,6 +75,9 @@ const descriptionAsList = computed(() => {
         }
 
     }
+}
+.description-container{
+    max-width: 550px;
 }
 
 img {
