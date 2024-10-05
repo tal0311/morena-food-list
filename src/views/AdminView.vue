@@ -220,6 +220,8 @@ async function loadUsers() {
 
 async function loadLists() {
     lists.value = await listService.query({ admin: true });
+    console.log('lists', lists.value);
+    
 }
 
 async function loadItems() {
@@ -299,8 +301,8 @@ function selectList(listId) {
     eventBus.emit('toggle-modal', { type: 'ModalAddList', info: JSON.parse(JSON.stringify(list)) });
     // listService.save(list);
 }
-function addList(listToAdd){
-    lists.value.push(listToAdd);
+async function addList(){
+    await loadLists();
 }
 
 function getTranslation(key) {
@@ -316,11 +318,6 @@ function addItem() {
     // console.log(eventBus);
 
 }
-
-
-
-
-
 
 onBeforeUnmount(() => {
     subscriptions.forEach(sub => sub());

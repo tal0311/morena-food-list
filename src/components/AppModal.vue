@@ -1,7 +1,6 @@
 <template>
     <dialog ref="dialogRef" @click="clickOutSide" :class="`app-modal blur-bg ${modalClass} ${addedClasses}`">
-
-        <component :is="modalTYpe" @resetModal="closeModal" :info="modalInfo && modalInfo" @modifyModal="modifyModal" />
+        <component :is="modalTYpe" :info="modalInfo && modalInfo" @resetModal="closeModal" @modifyModal="modifyModal" />
     </dialog>
 </template>
 

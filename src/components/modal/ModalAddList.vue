@@ -3,7 +3,7 @@
         <h2>Create New Item list</h2>
 
         <form ref="fromRef" class="grid" @submit.prevent="">
-            <label v-for="value, key in listToAdd" :for="key">
+            <label v-for="value, key in listToAdd" :for="key" :key="key">
                 <h3 >{{ key }}</h3>
                 <div v-if="key === 'items'">
                     <input type="text" class="items-input" list="list-items" v-model="selectedItem"
@@ -71,6 +71,7 @@ const items = ref(null)
 const selectedItem = ref('')
 
 const props = defineProps(['info'])
+const emit = defineEmits(['resetModal'])
 onBeforeMount(async () => {
 
     await loadItems()
@@ -127,6 +128,7 @@ async function saveList() {
     listToSave.items = listToSave.items.map(item => item._id)
     await listService.save(listToSave)
     eventBus.emit('list-added', listToAdd.value)
+    emit('resetModal')
 }
 </script>
 
