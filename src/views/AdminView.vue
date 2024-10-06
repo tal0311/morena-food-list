@@ -1,5 +1,5 @@
 <template>
-    <section v-if="users || items || lists" :class="['admin-view', filterBy]">
+    <section v-if="users || items || lists || recipes" :class="['admin-view', filterBy]">
 
         <h1>Welcome Moran, You can update your data base from here</h1>
         <section class="admin-filter grid ">
@@ -12,6 +12,7 @@
                     <button class="primary-btn" @click="setFilterBy('users')">Users</button>
                     <button class="primary-btn" @click="setFilterBy('items')">Items</button>
                     <button class="primary-btn" @click="setFilterBy('lists')">Lists</button>
+                    <button class="primary-btn" @click="setFilterBy('recipes')">Recipes</button>
                 </section>
                 <!-- <button class="secondary-btn" @click="addUser">Create user</button> -->
             </section>
@@ -24,7 +25,7 @@
         <details :open="filterBy === 'users'">
             <summary>Users</summary>
             <div class="create-btn grid">
-                <button @click="addUser">create</button>
+                <button @click="createUser">create</button>
             </div>
 
             <table>
@@ -63,7 +64,7 @@
 
             <table>
                 <thead>
-                  
+
                     <tr>
                         <th v-if="false">Id</th>
                         <th>Group</th>
@@ -78,7 +79,7 @@
                     <tr v-for="{ _id, group, color, readMoreURL, icon, name } in filteredItems" :key="_id"
                         :class="`item item-${_id}`">
                         <td v-if="false">{{ _id }}</td>
-                        <td >
+                        <td>
                             <span class="text-bold">
                                 {{ group }}
                             </span>
@@ -120,6 +121,48 @@
         </details>
 
 
+        <details :open="filterBy === 'recipes'">
+            <summary>Recipes</summary>
+            <div class="create-btn grid">
+                <button @click="createRecipe">create</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th v-if="false">Id</th>
+                        <th>Title</th>
+                        <th>Group</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="recipe in filteredRecipes" :key="recipe._id" class="recipe">
+                        <td v-if="false">{{ recipes._id }}</td>
+                        <td>{{ recipe.he.title }}
+                            <hr>
+                            {{ recipe.en.title }}
+                        </td>
+
+                        <td>
+                            {{ recipe.he.description }}
+                            <hr>
+                            {{ recipe.en.description }}
+                        </td>
+
+                        <td>{{ recipe.imgUrl ? '✅' : '❌' }}</td>
+                        <td>
+                            <div class="actions-container grid grid-dir-col">
+
+                                <button @click="removeRecipe(recipe._id)">Delete</button>
+                                <button @click="selectRecipe(recipe._id)">Select</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </details>
+
         <details :open="filterBy === 'lists'">
             <summary>Lists</summary>
             <div class="create-btn grid">
@@ -138,10 +181,10 @@
                 <tbody>
                     <tr v-for="list in filteredLists" :key="list._id" class="list">
                         <td v-if="false">{{ list._id }}</td>
-                        <td >{{ list.title }}</td>
-                        <td >{{ list.items.map(item => item.name).join(', ') }}</td>
-                        <td >{{ list.owner.username }}</td>
-                        <td >
+                        <td>{{ list.title }}</td>
+                        <td>{{ list.items.map(item => item.name).join(', ') }}</td>
+                        <td>{{ list.owner.username }}</td>
+                        <td>
                             <div class="actions-container grid grid-dir-col">
 
                                 <button @click="removeList(list._id)">Delete</button>
@@ -152,6 +195,8 @@
                 </tbody>
             </table>
         </details>
+
+
     </section>
 
     <section v-else>
@@ -167,12 +212,14 @@ import { itemService } from '@/services/item.service';
 import { listService } from '@/services/list.service';
 import { i18Service } from '@/services/i18n.service';
 import { eventBus } from '@/services/event-bus.service';
+import { recipeService } from '@/services/recipe.service.local';
 
 
 
 const users = ref(null);
 const items = ref(null);
 const lists = ref(null);
+const recipes = ref(null);
 
 const searchTerm = ref('');
 const filterBy = ref('');
@@ -181,6 +228,14 @@ const filteredUsers = computed(() => {
     return users.value?.filter(user => {
         const regex = new RegExp(searchTerm.value, 'i');
         return user.username.match(regex) || user.email.match(regex)
+    });
+});
+
+const filteredRecipes = computed(() => {
+    return recipes.value?.filter(recipe => {
+        const regex = new RegExp(searchTerm.value, 'i');
+        return recipe.en.title.match(regex) || recipe.en.description.match(regex) ||
+            recipe.he.title.match(regex) || recipe.he.description.match(regex);
     });
 });
 
@@ -206,11 +261,12 @@ onBeforeMount(async () => {
     await loadItems();
     await loadLists();
     await loadUsers();
+    await loadRecipes();
     subscriptions[0] = eventBus.on('modal-filter', onModalFilter);
     subscriptions[1] = eventBus.on('get-groups-from-admin', getGroups);
     subscriptions[2] = eventBus.on('item-added', loadItems);
     subscriptions[3] = eventBus.on('item-updated', addUpdatedItem);
-    subscriptions[4] = eventBus.on('list-added', addList );
+    subscriptions[4] = eventBus.on('list-added', addList);
     document.body.dir = 'ltr';
 });
 
@@ -220,13 +276,37 @@ async function loadUsers() {
 
 async function loadLists() {
     lists.value = await listService.query({ admin: true });
-    console.log('lists', lists.value);
-    
+    // console.log('lists', lists.value);
+
 }
 
 async function loadItems() {
     items.value = await itemService.query();
 
+}
+
+async function loadRecipes() {
+    recipes.value = await recipeService.query({ admin: true });
+}
+
+function removeRecipe(recipeId) {
+
+    const isConfirm = confirm('Are you sure you want to delete this recipe?');
+    if (!isConfirm) return;
+    recipes.value = recipes.value.filter(recipe => recipe._id !== recipeId);
+    // recipeService.remove(recipeId);
+}
+
+function createRecipe() {
+    // eventBus.emit('toggle-modal', { type: 'ModalAddRecipe' });
+    console.log('creating recipe');
+
+}
+
+function selectRecipe(recipeId) {
+    const recipe = recipes.value.find(recipe => recipe._id === recipeId);
+    console.log('selecting', recipe);
+    // eventBus.emit('toggle-modal', { type: 'ModalAddRecipe', info: JSON.parse(JSON.stringify(recipe)) });
 }
 
 async function addUpdatedItem() {
@@ -249,7 +329,7 @@ function onModalFilter(filter) {
 
 function setFilterBy(filter) {
     filterBy.value = filter;
- 
+
 }
 
 
@@ -272,7 +352,7 @@ function selectItem(itemId) {
 
 async function removeItem(itemId) {
     const isConfirm = confirm('Are you sure you want to delete this item?');
-    if (!isConfirm) return;  
+    if (!isConfirm) return;
     await itemService.remove(itemId);
     items.value = items.value.filter(item => item._id !== itemId);
     console.log('deleted', itemId);
@@ -284,11 +364,11 @@ async function removeList(listId) {
     const isConfirm = confirm('Are you sure you want to delete this list?');
     if (!isConfirm) return;
     try {
-           lists.value = lists.value.filter(list => list._id !== listId);
-       await listService.remove(listId);
+        lists.value = lists.value.filter(list => list._id !== listId);
+        await listService.remove(listId);
     } catch (error) {
         await loadLists();
-        
+
     }
 }
 
@@ -301,7 +381,7 @@ function selectList(listId) {
     eventBus.emit('toggle-modal', { type: 'ModalAddList', info: JSON.parse(JSON.stringify(list)) });
     // listService.save(list);
 }
-async function addList(){
+async function addList() {
     await loadLists();
 }
 
@@ -309,7 +389,7 @@ function getTranslation(key) {
     return i18Service.getTransItem(key);
 }
 
-function addUser() {
+function createUser() {
     eventBus.emit('toggle-modal', { type: 'ModalAddUser' })
 }
 function addItem() {
@@ -443,10 +523,11 @@ onBeforeUnmount(() => {
     }
 }
 
-:is(.item,.list) {
-    td > .actions-container {
+:is(.item, .list, .recipe) {
+    td>.actions-container {
         gap: 1rem;
         place-content: center;
+
         button {
             padding: 0.5rem 1rem;
         }

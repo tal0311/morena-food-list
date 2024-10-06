@@ -1,7 +1,7 @@
 <template>
     <section class="recipe-view">
         <!-- {{ recipes }} -->
-        <h2>{{ $trans('food-inspiration') }} <span>{{ $trans(filterByGroup) }}</span></h2>
+        <h2>{{ $trans('food-inspiration') }} <span class="group-indicator">{{ $trans(filterByGroup) }}</span></h2>
         <section class="filter-container grid grid-dir-col">
             <button class="filter-btn" v-for="btn in filterBtns" :key="btn"
                 :class="[activeLabel === btn && 'active', 'grid', 'secondary-btn']" @click="setFilterByGroup(btn)">
@@ -11,7 +11,6 @@
             </button>
         </section>
         <RecipeList v-if="recipes" :recipes="recipes" :is="'match'" />
-
     </section>
 </template>
 
@@ -19,6 +18,7 @@
 import { ref, computed, onBeforeMount, watchEffect } from 'vue';
 import { useRecipeStore } from '@/stores/recipe-store';
 import RecipeList from '@/components/RecipeList.vue'
+
 
 
 
@@ -34,9 +34,9 @@ const countByGroup = ref(null)
 const isFirstTime = ref(true)
 const activeLabel = ref(null)
 
-// SOCKET 'recipes-labels' 
+
 watchEffect(() => {
-    filterByGroup
+// this did not work as expected with socket.io
     if (recipes.value && isFirstTime.value) {
         isFirstTime.value = false
         filterBtns.value = ['all', ...Array.from(new Set(recipes.value.map(recipe => recipe.group && recipe.group)))]
@@ -46,6 +46,7 @@ watchEffect(() => {
             acc[recipe.group] = acc[recipe.group] + 1 || 1
             return acc
         }, {})
+
     }
 
 })
@@ -54,7 +55,7 @@ watchEffect(() => {
 function setFilterByGroup(label) {
     activeLabel.value = label
     filterByGroup.value = label
-   
+
 
 }
 
@@ -70,45 +71,21 @@ function getIconByBtn(btn) {
         'soup': '🍲',
         'eggs': '🍳',
         'poultry': '🍗',
-
-
+        'laguns': '🫘',
+        'vegan': '🌱',
     }
 
     return opts[btn] || btn
 }
 
-const getGroupName = computed(() => {
-  
-    const group = filterByGroup.value
-    const opts = {
-        'all': 'All',
-        'fish': 'Fish',
-        'meat': 'Meat',
-        'salad': 'Salad',
-        'dessert': 'Dessert',
-        'other': 'Other',
-        'side-dish': 'Side Dish',
-        'soup': 'Soup',
-        'eggs': 'Eggs',
-        'poultry': 'Poultry',
-    }
-
-    return opts[group] || group
-})
-
-
 onBeforeMount(() => {
-
     loadRecipes()
-
 })
 
 
 function loadRecipes() {
     recipeStore.loadRecipes()
-
 }
-
 
 
 
@@ -119,6 +96,7 @@ function loadRecipes() {
 .recipe-view {
     display: grid;
     gap: 2rem;
+    max-width: 570px;
 
     h2 {
         margin-block-end: 0;
@@ -138,7 +116,7 @@ function loadRecipes() {
             height: 3rem;
             width: 3rem;
             place-content: center;
-            /* gap: 0.5rem; */
+          
 
 
             &.active {
@@ -150,11 +128,14 @@ function loadRecipes() {
         }
     }
 
-   
-        .filter-icon-title {
-           /* opacity: 0; */
-           display: none;
-        }
-    
+
+    .filter-icon-title {
+        display: none;
+    }
+
+    .group-indicator {
+        color: var(--bClr3);
+    }
+
 }
 </style>

@@ -4,6 +4,7 @@ import { utilService } from "./util.service.js";
 import { userService } from "./user.service.js";
 
 import gRecipes from "./../data/recipe.json";
+import { httpService } from "./http.service.js";
 
 const RECIPE_KEY = "recipe_DB";
 
@@ -20,27 +21,17 @@ window.recipeService = recipeService;
 
 // loadItems();
 // await query();
-async function query(filterBy={group: 'fish'}) {
-  const recipes = await storageService.query(RECIPE_KEY);
-
-  const { settings } = userService.getLoggedInUser();
-
-
-  return recipes.map(recipe => {
-    const {_id, group, imgUrl} = recipe;
+async function query(filterBy = {}) {
  
-    return {
-      _id,
-      group,
-      imgUrl: imgUrl || DEFAULT_IMG,
-      ... recipe[settings.lang],
-    };
+  const recipes = await httpService.get('recipe', filterBy);
+  // console.log('recipes:', recipes);
   
-  });
+   return recipes;
+
 }
 
 
 // TEST DATA
-(async () => {
-  utilService.saveToStorage(RECIPE_KEY, gRecipes);
-})();
+// (async () => {
+  // utilService.saveToStorage(RECIPE_KEY, gRecipes);
+// })();
