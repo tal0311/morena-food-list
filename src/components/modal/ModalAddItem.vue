@@ -125,12 +125,13 @@ async function addItem() {
         return
     }
 
+    const itemToSave= JSON.parse(JSON.stringify(itemToAdd.value))
 
-    await itemService.save(itemToAdd.value)
+    await itemService.save(itemToSave)
     if (itemToAdd.value._id) {
-        eventBus.emit('item-updated', itemToAdd.value)
+        eventBus.emit('item-updated', itemToSave)
     } else {
-        eventBus.emit('item-added', itemToAdd.value)
+        eventBus.emit('item-added')
     }
 
     resetForm()
@@ -151,6 +152,8 @@ function getGroups() {
 onBeforeUnmount(() => {
     subscriptions.forEach(sub => sub())
     subscriptions.length = 0
+    console.log('unmounted');
+    
 })
 </script>
 

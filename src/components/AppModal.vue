@@ -18,23 +18,22 @@ import ModalAddItem from '@/components/modal/ModalAddItem.vue';
 
 const dialogRef = ref(null)
 const isModalOpen = ref(false)
-const modalTYpe = shallowRef(null)
+const modalTYpe = ref(null)
 const modalInfo = ref(null)
 const modalClass = ref(null)
-const subscription = []
+
 const addedClasses = ref('')
 
 onBeforeMount(() => {
-    // to handle multiple subscriptions
-    subscription[0] = eventBus.on('toggle-modal', setModal)
-})
+    eventBus.on('toggle-modal', setModal)
+ })
 
 function modifyModal(classToAdd) {
     addedClasses.value = classToAdd
 }
 
 function setModal({ type, info }) {
-    // debugger
+
     console.debug('type', type);
     console.debug('info', info);
 
@@ -53,6 +52,7 @@ function setModal({ type, info }) {
             break;
         case 'ModalAddUser':
             modalTYpe.value = ModalAddUser
+            modalInfo.value = info
             break;
         case 'ModalLock':
             modalTYpe.value = ModalLock
@@ -93,6 +93,7 @@ function closeModal() {
     modalClass.value = null
     addedClasses.value = ''
     modalTYpe.value = null
+    isModalOpen.value = false
 }
 
 
@@ -102,8 +103,6 @@ function clickOutSide(ev) {
         isModalOpen.value = false
     }
 }
-
-
 
 
 </script>
