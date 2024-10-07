@@ -71,10 +71,7 @@ function getEntityValue(entity, head) {
         return entity.items.map(item => item.name).join(', ')
     }
 
-    if (head === 'group') {
-        console.log(entity[head] || 'No group')
-
-    }
+   
     if (props.filterBy === 'recipe') {
         if (head === 'title') {
             return entity.en.title + '\n**********\n' + entity.he.title

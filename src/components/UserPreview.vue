@@ -1,6 +1,6 @@
 <template>
     <div :class="`user-preview grid ${display}`">
-        <!-- <pre>{{ props.user.imgUrl }}</pre> -->
+    
         <img v-if="!isImageError" :src="props.user.imgUrl" :alt="props.user.fullname" @error="isImageError = true">
         <div class="user-initials" v-else>{{ userInitials }}</div>
         <slot></slot>
@@ -29,19 +29,21 @@ const userInitials = computed(() => {
 
 <style scoped>
 .user-preview {
-    height: 20vh;
+    /* height: 20vh; */
     display: grid;
     justify-content: center;
 
     &.create-list {
         
+      
         justify-content: start;
-        height: 8vh;
-        img {
-            width: 50px;
-            height: 50px;
-        }
+        /* height: 8vh; */
+      .user-initials{
+        font-size: 2rem;
+        width: 50px;
+        height: 50px;
 
+      }
        
     }
 

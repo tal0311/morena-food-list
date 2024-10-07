@@ -21,7 +21,7 @@ import { userService } from '@/services/user.service';
 import { itemService } from '@/services/item.service';
 import { listService } from '@/services/list.service';
 import { i18Service } from '@/services/i18n.service';
-import { eventBus } from '@/services/event-bus.service';
+import { eventBus, showSuccessMsg, showUserMsg } from '@/services/event-bus.service';
 import { recipeService } from '@/services/recipe.service.local';
 import DashboardFilter from '@/components/dashboardCmps/DashboardFilter.vue';
 import EntityTable from '@/components/dashboardCmps/EntityTable.vue';
@@ -32,7 +32,6 @@ const users = ref(null);
 const items = ref(null);
 const lists = ref(null);
 const recipes = ref(null);
-
 
 const searchTerm = ref('');
 const filterBy = ref('');
@@ -139,7 +138,9 @@ function createEntity(entity) {
             modalTYpe = 'ModalAddList'
             break;
         case 'recipe':
-            modalTYpe = 'ModalAddRecipe'
+            showSuccessMsg('comingSoon');
+            // modalTYpe = 'ModalAddRecipe'
+            return
             break;
     }
     eventBus.emit('toggle-modal', { type: modalTYpe });
