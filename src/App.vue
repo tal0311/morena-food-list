@@ -3,6 +3,7 @@
     <RouterView />
     <UserMsg />
     <AppModal />
+    <BugLogger/>
   </section>
 </template>
 
@@ -23,6 +24,7 @@ import { i18Service } from "./services/i18n.service";
 
 
 import { socketService } from './services/socket.service';
+import BugLogger from './components/BugLogger.vue';
 
 const userStore = useUserStore();
 const isSocketConnected = ref(false);

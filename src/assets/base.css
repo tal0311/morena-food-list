@@ -130,3 +130,26 @@ select {
 
 
 }
+
+.no-scrollbar {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+ overflow: -moz-scrollbars-none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.rtl{
+  direction: rtl;
+}
+
+.ltr{
+  direction: ltr;
+}
+
+textarea {
+  resize: none;
+  font-family: inherit;
+}

@@ -1,12 +1,13 @@
 <template>
-    <dialog ref="dialogRef" @click="clickOutSide" :class="`app-modal blur-bg ${modalClass} ${addedClasses}`">
+    <dialog ref="dialogRef" @click="clickOutSide"
+    :class="`app-modal no-scrollbar blur-bg ${modalClass} ${addedClasses}`">
         <component :is="modalTYpe" :info="modalInfo && modalInfo" @resetModal="closeModal" @modifyModal="modifyModal" />
     </dialog>
 </template>
 
 <script setup>
 
-import { watchEffect, ref, computed, shallowRef, onBeforeMount, onUnmounted } from 'vue';
+import { watchEffect, ref, onBeforeMount } from 'vue';
 import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
 import ModalDone from '@/components/modal/ModalDone.vue';
 import ModalInfo from '@/components/modal/ModalInfo.vue';
@@ -15,6 +16,7 @@ import ModalAddUser from '@/components/modal/ModalAddUser.vue';
 import ModalLock from '@/components/modal/ModalLock.vue';
 import ModalAddList from '@/components/modal/ModalAddList.vue';
 import ModalAddItem from '@/components/modal/ModalAddItem.vue';
+import ModalAddRecipe from '@/components/modal/ModalAddRecipe.vue';
 
 const dialogRef = ref(null)
 const isModalOpen = ref(false)
@@ -25,8 +27,15 @@ const modalClass = ref(null)
 const addedClasses = ref('')
 
 onBeforeMount(() => {
+    document.addEventListener('keydown', (ev)=>{
+        if (ev.key === 'Escape'){
+            ev.preventDefault()
+        }
+    })
     eventBus.on('toggle-modal', setModal)
- })
+})
+
+
 
 function modifyModal(classToAdd) {
     addedClasses.value = classToAdd
@@ -36,6 +45,7 @@ function setModal({ type, info }) {
 
     console.debug('type', type);
     console.debug('info', info);
+
 
 
     isModalOpen.value = true
@@ -64,6 +74,10 @@ function setModal({ type, info }) {
         case 'ModalAddList':
             modalInfo.value = info
             modalTYpe.value = ModalAddList
+            break;
+        case 'ModalAddRecipe':
+            modalInfo.value = info
+            modalTYpe.value = ModalAddRecipe
             break;
         default:
             modalTYpe.value = ModalDone
@@ -109,6 +123,10 @@ function clickOutSide(ev) {
 
 
 <style scoped>
+
+.app-modal{
+   
+}
 button {
     padding: 0.8rem;
 }
@@ -131,7 +149,7 @@ dialog.blur-bg.ModalLock {
     }
 }
 
-dialog.blur-bg:not(.ModalInfo, .ModalAddItem) {
+dialog.blur-bg:not(.ModalInfo, .ModalAddItem, .ModalAddRecipe) {
     width: 70%;
 
 }
@@ -151,8 +169,7 @@ dialog.blur-bg::backdrop {
 }
 
 .mini {
-    /* transform: translateY(100%); */
-    backdrop-filter: blur(0);
+     backdrop-filter: blur(0);
 
     &::backdrop {
         background-color: rgba(0, 0, 0, 0.2);

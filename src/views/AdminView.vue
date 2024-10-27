@@ -98,6 +98,7 @@ onBeforeMount(async () => {
     await loadUsers();
     await loadRecipes();
 
+    // TODO: consider removing listeners for update if proxy is used
     // addListeners();
     subscriptions[0] = eventBus.on('modal-filter', onModalFilter);
     subscriptions[1] = eventBus.on('get-groups-from-admin', getGroups);
@@ -106,6 +107,8 @@ onBeforeMount(async () => {
     subscriptions[4] = eventBus.on('list-added', loadLists);
     subscriptions[5] = eventBus.on('user-updated', loadUsers);
     subscriptions[6] = eventBus.on('user-added', loadUsers);
+    subscriptions[7] = eventBus.on('recipe-added', loadRecipes);
+    // subscriptions[8] = eventBus.on('recipe-updated', updateRecipe);
     document.body.dir = 'ltr';
 });
 
@@ -138,9 +141,9 @@ function createEntity(entity) {
             modalTYpe = 'ModalAddList'
             break;
         case 'recipe':
-            showSuccessMsg('comingSoon');
-            // modalTYpe = 'ModalAddRecipe'
-            return
+            // showSuccessMsg('comingSoon');
+            modalTYpe = 'ModalAddRecipe'
+            
             break;
     }
     eventBus.emit('toggle-modal', { type: modalTYpe });
@@ -176,22 +179,25 @@ function removeEntity(entity, id) {
 }
 
 function selectEntity(entity, id) {
+    console.log('selecting', entity, id);
+    
+    
     const modalData = { type: '', info: {} }
     switch (entity) {
-        case 'users':
+        case 'user':
             modalData.type = 'ModalAddUser';
             modalData.info = users.value.find(user => user._id === id);
 
             break;
-        case 'items':
+        case 'item':
             modalData.type = 'ModalAddItem';
             modalData.info = items.value.find(item => item._id === id);
             break;
-        case 'lists':
+        case 'list':
             modalData.type = 'ModalAddList';
             modalData.info = lists.value.find(list => list._id === id);
             break;
-        case 'recipes':
+        case 'recipe':
             modalData.type = 'ModalAddRecipe';
             modalData.info = recipes.value.find(recipe => recipe._id === id);
             break;
@@ -213,6 +219,10 @@ function onModalFilter(filter) {
 function setFilterBy(filter) {
     filterBy.value = filter;
 
+}
+
+function updateRecipe(recipe) {
+    recipes.value = recipes.value.map(r => r._id === recipe._id ? recipe : r);
 }
 
 function updateItem(item) {
