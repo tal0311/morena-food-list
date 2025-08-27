@@ -21,9 +21,8 @@ window.listService = listService;
 
 _createLists()
 async function query(filterBy = {}) {
-  const loggedUser = userService.getLoggedInUser();
   let lists = await storageService.query(STORAGE_KEY);
-  lists = lists.filter(list => list.owner.id === loggedUser._id)
+  lists = lists.filter(list => list.owner.id === userService.getLoggedInUser()._id);
   
   return lists;
 }

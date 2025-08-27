@@ -15,5 +15,18 @@ export default defineConfig(({ mode }) => ({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  server: {
+    headers: {
+      'Service-Worker-Allowed': '/'
+    }
+  },
+  build: {
+    rollupOptions: {
+      input: {
+        main: './index.html',
+        'service-worker': './service-worker.js'
+      }
+    }
   }
 }));

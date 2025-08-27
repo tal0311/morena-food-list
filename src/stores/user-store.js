@@ -10,22 +10,18 @@ export const useUserStore = defineStore("user", () => {
 
   const currLang = ref("he");
   const loggedUser = ref(null);
-
-  const getUser = computed(() => loggedUser?.value)
-  const getCurrLang = computed(() => currLang.value)
+  const getUser = computed(() => loggedUser?.value);
 
   async function login(loginType, credentials) {
     try {
       loggedUser.value = await userService.login(loginType, credentials);
-      if (!loggedUser.value) return
+      if (!loggedUser.value) return;
       setLang(loggedUser.value.settings.lang);
       return loggedUser.value;
     } catch (error) {
-
       console.error("error", error);
       throw error;
     }
-
   }
 
   async function logout() {
@@ -41,6 +37,7 @@ export const useUserStore = defineStore("user", () => {
   }
 
   async function updateLoggedUser(user) {
+    console.log('updateLoggedUser', user);
     const userToUpdate = { ...loggedUser.value, ...user };
     loggedUser.value = await userService.save(userToUpdate);
   }
@@ -49,14 +46,12 @@ export const useUserStore = defineStore("user", () => {
     try {
       loggedUser.value = { ...JSON.parse(JSON.stringify(loggedUser.value)), [key]: value };
       const user = await userService.save(loggedUser.value);
-      // console.log('user after', user);
       if (key === 'settings') {
         setLang(value);
       }
     } catch (error) {
       console.error(error);
       appStore.logError(`[error: failed to update user with selected items] - ${error}`, true);
-
     }
   }
 
@@ -78,13 +73,9 @@ export const useUserStore = defineStore("user", () => {
     getUser,
     updateLoggedUser,
     setLang,
-    getCurrLang,
     addHistory,
     login,
     logout,
     loadUser,
-    // updateUserItems,
-
-
   }
 })

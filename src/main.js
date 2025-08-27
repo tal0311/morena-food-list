@@ -22,7 +22,6 @@ import { i18Service } from "./services/i18n.service";
 
     // Libraries
     app.use(createPinia());
-
     app.use(router);
 
     app.use(vue3GoogleLogin, {
@@ -43,6 +42,21 @@ import { i18Service } from "./services/i18n.service";
 
   }
 })();
+
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', async () => {
+      try {
+        const registration = await navigator.serviceWorker.register('/service-worker.js');
+        console.log('Service Worker registered with scope:', registration.scope);
+      } catch (error) {
+        console.error('Service Worker registration failed:', error);
+      }
+    });
+  }
+}
+
+registerServiceWorker();
 
 
 

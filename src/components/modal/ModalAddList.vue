@@ -4,8 +4,14 @@
 
         <form ref="fromRef" class="grid" @submit.prevent="">
             <label v-for="value, key in listToAdd" :for="key" :key="key">
-                <h3 >{{ key }}</h3>
+                <h3>{{ key }}</h3>
+
                 <div v-if="key === 'items'">
+                    <ModalItemList :listToAdd="listToAdd" v-model="selectedItem" :items="items" @addItem="AddItem"
+                        @removeFromList="removeFromList" :key="cmpKey"></ModalItemList>
+                </div>
+                <!-- <div v-if="key === 'items'">
+
                     <input type="text" class="items-input" list="list-items" v-model="selectedItem"
                         placeholder="Select item">
                     <button class="primary-btn" @click="AddItem">Add</button>
@@ -20,7 +26,9 @@
                     <div v-else>
                         <span>No items in list</span>
                     </div>
-                </div>
+                </div> -->
+
+
                 <div v-if="key === 'visibility'">
                     <span>
                         Public
@@ -38,8 +46,8 @@
 
 
 
-                <input v-if="['createdAt', 'updatedAt', 'title','_id'].includes(key)" :disabled="key==='_id'" type="text" :name="key"
-                    v-model="listToAdd[key]" required>
+                <input v-if="['createdAt', 'updatedAt', 'title', '_id'].includes(key)" :disabled="key === '_id'"
+                    type="text" :name="key" v-model="listToAdd[key]" required>
 
 
             </label>
@@ -64,6 +72,7 @@ import { userService } from '@/services/user.service';
 import UserPreview from '../UserPreview.vue';
 import { listService } from '@/services/list.service';
 import { eventBus } from '@/services/event-bus.service';
+import ModalItemList from '@/components/ModalItemList.vue';
 
 const listToAdd = ref(null)
 
@@ -91,27 +100,29 @@ async function loadItems() {
 
 async function loadList() {
     const list = await listService.getById(props.info._id)
-        list.items = items.value.filter(item => list.items.includes(item._id))
+    list.items = items.value.filter(item => list.items.includes(item._id))
     listToAdd.value = list
     // listToAdd.value.owner = { _id: id, imgUrl, username }
-    const hDate =new Date().toISOString().split('T')[0]
+    const hDate = new Date().toISOString().split('T')[0]
     listToAdd.value.createdAt = hDate
     listToAdd.value.updatedAt = hDate
 }
 
 function loadEmptyList({ id, imgUrl, username }) {
     listToAdd.value = adminService.getEmptyList()
-    const hDate =new Date().toISOString().split('T')[0]
+    const hDate = new Date().toISOString().split('T')[0]
     listToAdd.value.createdAt = hDate
     listToAdd.value.updatedAt = hDate
     listToAdd.value.owner = { id, imgUrl, username }
 }
 
+const cmpKey = ref(0)
 function AddItem() {
     const item = items.value.find(item => item.name === selectedItem.value)
     if (!item) return
     listToAdd.value.items.push(item)
     selectedItem.value = ''
+    cmpKey.value++
 }
 
 function isItemInList(itemName) {
@@ -164,7 +175,7 @@ h3 {
 
         .icon-svg {
             border: none;
-            /* background-color: var(--bClr4); */
+            background-color: var(--bClr4);
             border-radius: 50%;
             padding: 0.2rem;
         }
