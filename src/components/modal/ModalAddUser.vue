@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </form>
-            <div class="modal-actions grid grid-dir-col">
+            <div class="modal-actions">
                 <button class="modal-btn modal-btn-secondary" @click="$emit('resetModal')">Cancel</button>
                 <button class="modal-btn modal-btn-primary" @click="saveUser">{{ user._id ? 'Update' : 'Add' }}</button>
                 <section>
@@ -292,9 +292,11 @@ function displayPasswd(){
     }
 
     .modal-actions{
-        grid-template-columns: 1fr 1fr;
-      
-      
+        text-align: center;
+        button{
+            width: 40%;
+            margin: 0 1rem;
+        }
     }
 }
 </style>
