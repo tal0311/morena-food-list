@@ -1,6 +1,9 @@
 <template>
-    <section v-if="items" class="dashboard-modal">
+    <section v-if="items && listToAdd" class="dashboard-modal">
+
+    
         <div class="modal-content">
+           
             <div class="modal-header">
                 <h2 class="modal-title">Create New Item List</h2>
             </div>
