@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { computed, ref, onBeforeMount, onBeforeUnmount, watchEffect } from 'vue';
+import { computed, ref, onBeforeMount, onBeforeUnmount, watch } from 'vue';
 import AppLoader from '@/components/AppLoader.vue';
 import { userService } from '@/services/user.service';
 import { itemService } from '@/services/item.service';
@@ -122,6 +122,7 @@ async function loadLists() {
 
 async function loadItems() {
     items.value = await itemService.query();
+
 }
 
 async function loadRecipes() {
@@ -213,6 +214,8 @@ function getGroups() {
 }
 
 function onModalFilter(filter) {
+    console.log('onModalFilter', filter);
+    
     searchTerm.value = filter;
 }
 
@@ -233,6 +236,8 @@ function updateItem(item) {
 function getTranslation(key) {
     return i18Service.getTransItem(key);
 }
+
+
 
 onBeforeUnmount(() => {
     subscriptions.forEach(sub => sub());

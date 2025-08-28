@@ -3,11 +3,37 @@
     display: grid;
     grid-template-columns: 1rem 1fr 1rem;
     grid-template-rows: 1rem auto 1rem;
+    transition: all 0.3s ease;
 
     .modal-content {
         grid-column: 2;
         grid-row: 2;
+        transition: all 0.3s ease;
     }
+
+    /* Minimized state */
+    /* &.see {
+        grid-template-rows: 1rem auto 1rem;
+        
+        .modal-content {
+            transform: scale(0.8);
+            opacity: 0.7;
+            max-height: 60px;
+            overflow: hidden;
+        }
+
+        .modal-form,
+        .modal-actions {
+            opacity: 0;
+            transform: translateY(-20px);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .modal-header {
+            margin-bottom: 0;
+        }
+    } */
 }
 
 /* Modal Header */
@@ -38,6 +64,7 @@
     background-color: var(--bClr1);
     padding: 1.5rem 1rem;
     border-radius: var(--br);
+    transition: all 0.3s ease;
 }
 
 .form-group {
@@ -57,9 +84,13 @@
         }
     }
 
-    input,
-    select,
-    textarea {
+    /* 
+      Override only what's needed for modal forms to avoid conflict with base.css.
+      Use more specific selector to target only modal form fields.
+    */
+    .modal-form input,
+    .modal-form select,
+    .modal-form textarea {
         padding: 0.75rem;
         border: 1px solid var(--clr2);
         border-radius: 4px;
@@ -68,28 +99,38 @@
         color: var(--clr8);
         width: 100%;
         box-sizing: border-box;
+    }
 
-        &:focus {
-            outline: none;
-            border-color: var(--clr26);
-            box-shadow: 0 0 0 2px rgba(68, 138, 255, 0.25);
-        }
+    .modal-form input:focus,
+    .modal-form select:focus,
+    .modal-form textarea:focus {
+        outline: none;
+        border-color: var(--clr26);
+        /* box-shadow: 0 0 0 2px rgba(68, 138, 255, 0.25); */
+    }
 
-        &:valid {
-            border: 1px solid green;
-        }
+    .modal-form input:valid,
+    .modal-form select:valid,
+    .modal-form textarea:valid {
+        border: 1px solid green;
+    }
 
-        &:invalid {
-            border: 1px solid red;
-        }
+    .modal-form input:invalid,
+    .modal-form select:invalid,
+    .modal-form textarea:invalid {
+        border: 1px solid red;
+    }
 
-        &:not(:placeholder-shown) {
-            border: 1px solid green;
+    .modal-form input:not(:placeholder-shown),
+    .modal-form select:not(:placeholder-shown),
+    .modal-form textarea:not(:placeholder-shown) {
+        border: 1px solid green;
+    }
 
-            &:invalid {
-                border: 1px solid red;
-            }
-        }
+    .modal-form input:not(:placeholder-shown):invalid,
+    .modal-form select:not(:placeholder-shown):invalid,
+    .modal-form textarea:not(:placeholder-shown):invalid {
+        border: 1px solid red;
     }
 
     input[type="radio"],
@@ -110,38 +151,12 @@
     }
 }
 
-/* Input styling for datalist inputs */
 input[list] {
-    padding: 0.75rem;
-    border: 1px solid var(--clr2);
-    border-radius: 4px;
-    font-size: 0.9rem;
-    background-color: var(--clr10);
-    color: var(--clr8);
-    width: 100%;
-    box-sizing: border-box;
 
-    &:focus {
-        outline: none;
-        border-color: var(--clr26);
-        box-shadow: 0 0 0 2px rgba(68, 138, 255, 0.25);
-    }
-
-    &:valid {
-        border: 1px solid green;
-    }
-
-    &:invalid {
-        border: 1px solid red;
-    }
-
-    &:not(:placeholder-shown) {
-        border: 1px solid green;
-
-        &:invalid {
-            border: 1px solid red;
-        }
-    }
+    padding: 0.75rem; /* override/add if needed */
+    font-size: 0.9rem; /* override/add if needed */
+    width: 100%; /* override/add if needed */
+    box-sizing: border-box; /* ensure full width */
 }
 
 /* Button styling */
@@ -225,22 +240,7 @@ input[list] {
         gap: 0.5rem;
     }
 
-    .icon-svg {
-        border: none;
-        background-color: var(--clr4);
-        border-radius: 50%;
-        padding: 0.2rem;
-        cursor: pointer;
-        width: 24px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
 
-        &:hover {
-            background-color: var(--clr5);
-        }
-    }
 }
 
 /* No items message */
@@ -255,6 +255,7 @@ input[list] {
 .modal-actions {
     text-align: center;
     margin-top: 1rem;
+    transition: all 0.3s ease;
 
     button {
         width: 40%;
@@ -317,25 +318,12 @@ input[type="checkbox"] {
 
 /* Specific styles for ModalItemList component */
 .small-item-list li {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
     background-color: var(--bClr2);
     padding: 0.3rem 0.5rem;
     border-radius: var(--br);
-    gap: 0.5rem;
 
     .icon-svg {
-        border: none;
         background-color: var(--bClr4);
-        border-radius: 50%;
-        padding: 0.2rem;
-        cursor: pointer;
-        width: 24px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
 
         &:hover {
             background-color: var(--bClr5);
@@ -376,3 +364,6 @@ input[type="checkbox"] {
 .img-input {
     display: none;
 }
+
+
+

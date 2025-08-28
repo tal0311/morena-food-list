@@ -91,8 +91,28 @@ details summary::-webkit-details-marker {
 }
 
 .icon-svg {
+  border: none;
+  background-color: var(--bClr3) !important;
+  border-radius: 50%;
+  padding: 0.2rem;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
   display: grid;
   place-content: center;
+  color: white;
+  font-size: 0.8rem;
+  transition: background-color 0.2s ease;
+}
+
+.icon-svg:hover {
+  background-color: var(--bClr4) !important;
+}
+
+.icon-svg svg {
+  width: 16px;
+  height: 16px;
+  fill: #fff;
 }
 
 .prevent-select {
@@ -103,26 +123,36 @@ details summary::-webkit-details-marker {
 
 input,
 select {
+  padding: 0.75rem;
+  border: 1px solid var(--bClr2);
+  border-radius: var(--br);
+  font-size: 0.9rem;
+  background-color: var(--bClr2);
+  color: var(--bClr4);
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
 
     &:valid {
-        border: 1px solid green;
+        border: 1px solid var(--bClr5);
     }
 
     &:invalid {
-        border: 1px solid red;
+        border: 1px solid var(--bClr6);
     }
 
     &:not(:placeholder-shown) {
-        border: 1px solid green;
+        border: 1px solid var(--bClr5);
     }
 
     &:not(:placeholder-shown):invalid {
-        border: 1px solid red;
+        border: 1px solid var(--bClr6);
     }
 
     &:focus {
         outline: transparent;
-        background-color: var(--bClr1);
+        /* background-color: var(--bClr1); */
+        /* box-shadow: 0 0 0 2px rgba(68, 138, 255, 0.15); */
 
     }
    
@@ -153,3 +183,5 @@ textarea {
   resize: none;
   font-family: inherit;
 }
+
+

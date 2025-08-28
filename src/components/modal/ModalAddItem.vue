@@ -1,15 +1,21 @@
 <template>
-    <section v-if="itemToAdd" :class="['dashboard-modal', isSeeThrow ? 'see' : '']">
+    <section v-if="itemToAdd" class="dashboard-modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Add Item <small>(if its red, it must have a value)</small></h2>
-                <button @click="modify" v-html="$svg(btnState)" class="modal-btn modal-btn-secondary"></button>
             </div>
             
             <form ref="formRef" class="modal-form" @submit.prevent="addItem">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input @input.trim="getItem" type="text" id="name" v-model="itemToAdd.name" required>
+                </div>
+
+                <div class="search-results" v-if="search.length > 0&& itemToAdd.name">
+                    <span v-for="item in search" :key="item" @click="itemToAdd.name = item.name">{{ item.name }} {{ item.icon }},</span>
+                </div>
+                <div class="search-results" v-else>
+                    <span>Products you already have will be shown here</span>
                 </div>
 
                 <div class="form-group">
@@ -59,6 +65,7 @@
             </div>
         </div>
     </section>
+  
 </template>
 <script setup>
 
@@ -78,10 +85,14 @@ const isSeeThrow = ref(false)
 const groups = ref([])
 const subscriptions = []
 
-onBeforeMount(() => {
+const items = ref(null);
+
+
+onBeforeMount(async() => {
     if (props.info) {
         loadItem()
     } else {
+        items.value = await itemService.query()
         itemToAdd.value = adminService.getEmptyItem()
     }
 
@@ -91,7 +102,6 @@ onBeforeMount(() => {
 
     getGroups()
 })
-const btnState = computed(() => isSeeThrow.value ? 'expend' : 'mini')
 
 
 function loadItem(){
@@ -107,17 +117,20 @@ function loadItem(){
 function updateGroup(ev) {
     itemToAdd.value.group = ev.target.value
 }
-function getItem() {
-    eventBus.emit('modal-filter', itemToAdd.value.name)
-}
 
-function modify() {
-    isSeeThrow.value = !isSeeThrow.value
-    emit('modifyModal', isSeeThrow.value ? 'mini' : '')
-}
+
+const search = computed(() => {
+    return items.value.filter(item => item.name.includes(itemToAdd.value.name)).map(item => ({name: item.name, icon: item.icon }))
+})
 
 async function addItem() {
     const isFormValid = formRef.value.checkValidity()
+    if(search.value.length > 0){
+        const confirmation = confirm('This product already exists, do you want to add it anyway?')
+        if(!confirmation){
+            return
+        }
+    }
 
     if (!isFormValid) {
         showErrorMsg('FormValidation')
@@ -139,7 +152,7 @@ async function addItem() {
 }
 
 function resetForm() {
-    itemToAdd.value = null
+    itemToAdd.value = adminService.getEmptyItem()
     formRef.value.reset()
 }
 
@@ -158,4 +171,20 @@ onBeforeUnmount(() => {
 
 <style scoped>
 @import '@/assets/modal-forms.css';
+
+.search-results {
+    height: 100px;
+    overflow-y: auto;
+    font-size: 1.1rem;
+    color: var(--txtClr2);
+    border-radius: var(--br);
+    background-color: var(--bClr2);
+    border: 1px solid var(--bClr3);
+    border-radius: var(--br);
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+}
 </style>
