@@ -1,65 +1,64 @@
 <template>
-    <section v-if="itemToAdd" :class="['add-item', isSeeThrow ? 'see' : '']">
-        <button @click="modify" v-html="$svg(btnState)"></button>
-        <h1>Add Item <small>(if its red, it must have a value)</small> </h1>
-        <form ref="formRef" class="grid" @submit.prevent="addItem">
-
-            <div class="form-group grid">
-                <label for="name">Name</label>
-                <input @input.trim="getItem" type="text" id="name" v-model="itemToAdd.name" required>
-
-                <div class="translation grid">
-                    <label for="name">Translation</label>
-                    <input type="text" id="he" v-model="itemToAdd.translation.he.val"
-                        :required="itemToAdd.translation.he.isRequired" placeholder="Hebrew">
-                    <input type="text" id="en" v-model="itemToAdd.translation.en.val"
-                        :required="itemToAdd.translation.en.isRequired" placeholder="English">
-                    <input type="text" id="es" v-model="itemToAdd.translation.es.val"
-                        :required="itemToAdd.translation.es.isRequired" placeholder="Espanol">
+    <section v-if="itemToAdd" :class="['add-item dashboard-modal', isSeeThrow ? 'see' : '']">
+        <div class="modal-header">
+            <h2 class="modal-title">Add Item <small>(if its red, it must have a value)</small></h2>
+            <button @click="modify" v-html="$svg(btnState)" class="modal-btn modal-btn-secondary"></button>
+        </div>
+        
+        <div class="modal-content">
+            <form ref="formRef" class="modal-form" @submit.prevent="addItem">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input @input.trim="getItem" type="text" id="name" v-model="itemToAdd.name" required>
                 </div>
-            </div>
 
-            <div class="form-group  grid">
-                <label for="icon">Icon</label>
-                <input type="text" id="icon" v-model="itemToAdd.icon">
-            </div>
+                <div class="form-group">
+                    <label for="translation">Translation</label>
+                    <div class="modal-grid modal-grid-3">
+                        <input type="text" id="he" v-model="itemToAdd.translation.he.val"
+                            :required="itemToAdd.translation.he.isRequired" placeholder="Hebrew">
+                        <input type="text" id="en" v-model="itemToAdd.translation.en.val"
+                            :required="itemToAdd.translation.en.isRequired" placeholder="English">
+                        <input type="text" id="es" v-model="itemToAdd.translation.es.val"
+                            :required="itemToAdd.translation.es.isRequired" placeholder="Espanol">
+                    </div>
+                </div>
 
-            <div class="form-group grid">
-                <label for="group">Group <span v-if="itemToAdd.group" class="group-name">({{ itemToAdd.group }})</span></label>
-                <select name="group" @change="updateGroup" :required="itemToAdd._id?false:true">
-                    <option value="">Select Group</option>
-                    <option v-for="(group, idx) in groups" :class="`${group === itemToAdd.group? 'green-txt':''}`" :key="idx">{{ group }}</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="icon">Icon</label>
+                    <input type="text" id="icon" v-model="itemToAdd.icon">
+                </div>
 
-            <div class="form-group grid">
-                <label for="readMoreURL">Read More URL</label>
-                <input type="text" id="readMoreURL" v-model="itemToAdd.readMoreURL">
-            </div>
+                <div class="form-group">
+                    <label for="group">Group <span v-if="itemToAdd.group" class="group-name">({{ itemToAdd.group }})</span></label>
+                    <select name="group" id="group" @change="updateGroup" :required="itemToAdd._id?false:true">
+                        <option value="">Select Group</option>
+                        <option v-for="(group, idx) in groups" :class="`${group === itemToAdd.group? 'green-txt':''}`" :key="idx">{{ group }}</option>
+                    </select>
+                </div>
 
-            <div class="form-group grid">
-                <label for="color">Color</label>
-                <input type="text" id="color" v-model="itemToAdd.color">
-            </div>
+                <div class="form-group">
+                    <label for="readMoreURL">Read More URL</label>
+                    <input type="text" id="readMoreURL" v-model="itemToAdd.readMoreURL">
+                </div>
 
-            <div class="form-group grid">
-                <label for="isSelected">Is Selected</label>
-                <input type="checkbox" id="isSelected" v-model="itemToAdd.isSelected">
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <input type="text" id="color" v-model="itemToAdd.color">
+                </div>
 
-            </div>
+                <div class="form-group">
+                    <label for="isSelected">Is Selected</label>
+                    <input type="checkbox" id="isSelected" v-model="itemToAdd.isSelected">
+                </div>
+            </form>
+        </div>
 
-            <div class="actions-container grid grid-dir-col">
-                <button class="primary-btn" @click.prevent="addItem">{{ itemToAdd._id ? 'Update' : 'Add' }}</button>
-                <button class="secondary-btn" @click.prevent="resetForm">Reset</button>
-            </div>
-
-
-
-        </form>
-
-
+        <div class="modal-actions">
+            <button class="modal-btn modal-btn-secondary" @click="resetForm">Reset</button>
+            <button class="modal-btn modal-btn-primary" @click="addItem">{{ itemToAdd._id ? 'Update' : 'Add' }}</button>
+        </div>
     </section>
-
 </template>
 <script setup>
 

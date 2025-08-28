@@ -1,66 +1,49 @@
 <template>
-    <section v-if="items" class="modal-add-list">
-        <h2>Create New Item list</h2>
+    <section v-if="items" class="modal-add-list dashboard-modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Create New Item List</h2>
+        </div>
 
-        <form ref="fromRef" class="grid" @submit.prevent="">
-            <label v-for="value, key in listToAdd" :for="key" :key="key">
-                <h3>{{ key }}</h3>
+        <div class="modal-content">
+            <form ref="fromRef" class="modal-form" @submit.prevent="">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" v-model="listToAdd.title" required>
+                </div>
 
-                <div v-if="key === 'items'">
+                <div class="form-group">
+                    <label for="visibility">Visibility</label>
+                    <div class="modal-grid modal-grid-2">
+                        <label class="radio-label">
+                            <input type="radio" name="visibility" value="public" v-model="listToAdd.visibility">
+                            <span>Public</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="visibility" value="private" v-model="listToAdd.visibility">
+                            <span>Private</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="items">Items</label>
                     <ModalItemList :listToAdd="listToAdd" v-model="selectedItem" :items="items" @addItem="AddItem"
                         @removeFromList="removeFromList" :key="cmpKey"></ModalItemList>
                 </div>
-                <!-- <div v-if="key === 'items'">
 
-                    <input type="text" class="items-input" list="list-items" v-model="selectedItem"
-                        placeholder="Select item">
-                    <button class="primary-btn" @click="AddItem">Add</button>
-
-                    <ul v-if="listToAdd.items.length" class="small-item-list">
-                        <li v-for="item in listToAdd.items" class="grid grid-dir-col">
-                            <span>{{ item.name }}</span>
-                            <button class="icon-svg" type="button" @click.stop="removeFromList(item._id)"
-                                v-html="$svg('close')"></button>
-                        </li>
-                    </ul>
-                    <div v-else>
-                        <span>No items in list</span>
-                    </div>
-                </div> -->
-
-
-                <div v-if="key === 'visibility'">
-                    <span>
-                        Public
-                        <input type="radio" name="visibility" value="public" v-model="listToAdd[key]">
-                    </span>
-                    <span>
-                        Private
-                        <input type="radio" name="visibility" value="private" v-model="listToAdd[key]">
-                    </span>
+                <div class="form-group">
+                    <label for="owner">Owner</label>
+                    <UserPreview :user="listToAdd.owner" display="create-list">
+                        user: {{ listToAdd.owner.username }}
+                    </UserPreview>
                 </div>
+            </form>
+        </div>
 
-                <UserPreview v-if="key === 'owner'" :user="value" display="create-list">
-                    user: {{ value.username }}
-                </UserPreview>
-
-
-
-                <input v-if="['createdAt', 'updatedAt', 'title', '_id'].includes(key)" :disabled="key === '_id'"
-                    type="text" :name="key" v-model="listToAdd[key]" required>
-
-
-            </label>
-
-            <button type="submit" class="primary-btn" @click="saveList">Save Changes</button>
-        </form>
-
-        <datalist id="list-items">
-            <div v-for="item in items" :key="item._id">
-                <option v-if="!isItemInList(item.name)" :value="item.name"></option>
-            </div>
-
-        </datalist>
+        <div class="modal-actions">
+            <button class="modal-btn modal-btn-secondary" @click="$emit('resetModal')">Cancel</button>
+            <button class="modal-btn modal-btn-primary" @click="saveList">Save Changes</button>
+        </div>
     </section>
 </template>
 

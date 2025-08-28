@@ -1,13 +1,14 @@
 <template>
-    <dialog ref="dialogRef" @click="clickOutSide"
-    :class="`app-modal no-scrollbar blur-bg ${modalClass} ${addedClasses}`">
-        <component :is="modalTYpe" :info="modalInfo && modalInfo" @resetModal="closeModal" @modifyModal="modifyModal" />
+    <dialog v-show="isModalOpen" ref="dialogRef" @click="clickOutSide"
+    :class="`app-modal no-scrollbar blur-bg ${modalClass} ${addedClasses} ${isDashboardModal ? 'dashboard-modal' : ''}`">
+        <div class="modal-container">
+            <component :is="modalTYpe" :info="modalInfo && modalInfo" @resetModal="closeModal" @modifyModal="modifyModal" />
+        </div>
     </dialog>
 </template>
 
 <script setup>
-
-import { watchEffect, ref, onBeforeMount } from 'vue';
+import { watchEffect, ref, onBeforeMount, computed } from 'vue';
 import { showSuccessMsg, eventBus } from '@/services/event-bus.service';
 import ModalDone from '@/components/modal/ModalDone.vue';
 import ModalInfo from '@/components/modal/ModalInfo.vue';
@@ -23,8 +24,14 @@ const isModalOpen = ref(false)
 const modalTYpe = ref(null)
 const modalInfo = ref(null)
 const modalClass = ref(null)
-
 const addedClasses = ref('')
+
+// Dashboard modals that should use the dashboard styling
+const dashboardModals = ['ModalAddUser', 'ModalAddItem', 'ModalAddList', 'ModalAddRecipe']
+
+const isDashboardModal = computed(() => {
+    return dashboardModals.includes(modalClass.value)
+})
 
 onBeforeMount(() => {
     document.addEventListener('keydown', (ev)=>{
@@ -123,22 +130,34 @@ function clickOutSide(ev) {
 
 
 <style scoped>
+.app-modal {
+    display:grid;
+    place-items: center;
+    grid-template-columns: 0.2rem 1fr 0.2rem;
+    grid-template-rows: 0.2rem 1fr 0.2rem;
 
-.app-modal{
-   
+    .modal-container{
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+   &.dashboard-modal{
+    width: 95vw;
+    max-width: 95vw;
+    max-height: 90vh;
+  
+   }
 }
+
 button {
     padding: 0.8rem;
 }
-
 
 dialog.blur-bg {
     border: none;
     padding: 1rem;
     border-radius: var(--br);
     max-height: 80vh;
-
-
 }
 
 dialog.blur-bg.ModalLock {
@@ -149,14 +168,22 @@ dialog.blur-bg.ModalLock {
     }
 }
 
-dialog.blur-bg:not(.ModalInfo, .ModalAddItem, .ModalAddRecipe) {
+/* Default width for regular modals */
+dialog.blur-bg:not(.ModalInfo, .ModalAddItem, .ModalAddRecipe, .ModalAddUser, .ModalAddList) {
     width: 70%;
+}
 
+/* Dashboard modal content styles */
+.app-modal .modal-container {
+    background-color: var(--clr10);
+    border-radius: 8px;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
 }
 
 dialog.blur-bg::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
-
 }
 
 .actions-container {
@@ -169,7 +196,7 @@ dialog.blur-bg::backdrop {
 }
 
 .mini {
-     backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
 
     &::backdrop {
         background-color: rgba(0, 0, 0, 0.2);
@@ -177,6 +204,7 @@ dialog.blur-bg::backdrop {
 
     height: 7vh;
     overflow: hidden;
-
 }
+
+
 </style>
