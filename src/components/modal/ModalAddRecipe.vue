@@ -1,44 +1,63 @@
 <template>
-    <section v-if="recipe" class="add-recipe" >
-        <h2>{{ recipe._id ? 'Update' : 'Add' }} recipe</h2>
-        <form class="grid" @submit.prevent="">
-            <label for="">
-                <div class="grid info-wrapper rtl ">
-
-                    <input type="text" placeholder="כותרת" v-model="recipe.he.title">
-                    <textarea type="text" placeholder="תיאור" rows="10" v-model="recipe.he.description"></textarea>
+    <section v-if="recipe" class="dashboard-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">{{ recipe._id ? 'Update' : 'Add' }} Recipe</h2>
+            </div>
+            
+            <form class="modal-form" @submit.prevent="">
+                <div class="form-group">
+                    <label for="hebrew-title">Hebrew Title</label>
+                    <input type="text" id="hebrew-title" placeholder="כותרת" v-model="recipe.he.title">
                 </div>
-                <hr>
-                <div class="grid info-wrapper">
 
-                    <input type="text" placeholder="Title" v-model="recipe.en.title">
-                    <textarea type="text" placeholder="Title" rows="10" v-model="recipe.en.description"></textarea>
-
+                <div class="form-group">
+                    <label for="hebrew-description">Hebrew Description</label>
+                    <textarea id="hebrew-description" placeholder="תיאור" rows="5" v-model="recipe.he.description"></textarea>
                 </div>
-            </label>
-            <div class="img-wrapper grid">
 
-                <label for="">
-                    <!-- Use the computed property to display either tempImg or existing recipe image -->
-                    <img :src="recipe.imgUrl" alt="Recipe-img">
-                </label>
+                <div class="section-divider">
+                    <h3>English Content</h3>
+                </div>
 
-                <div class="actions-container grid grid-dir-col">
+                <div class="form-group">
+                    <label for="english-title">English Title</label>
+                    <input type="text" id="english-title" placeholder="Title" v-model="recipe.en.title">
+                </div>
 
-                    <button class="primary-btn upload ">
-                        <label for="selectImg">
-                            {{ isImageUploaded ? 'Change' : 'Upload' }} image
-                            <input @change="previewImg" class="img-input" id="selectImg" type="file"
-                                placeholder="Title" />
-                        </label>
-                    </button>
-                    <button class="primary-btn" @click="resetImg">
-                        Reset Image
-                    </button>
+                <div class="form-group">
+                    <label for="english-description">English Description</label>
+                    <textarea id="english-description" placeholder="Description" rows="5" v-model="recipe.en.description"></textarea>
+                </div>
+            <div class="section-divider">
+                <h3>Recipe Image</h3>
+            </div>
+
+            <div class="form-group">
+                <label for="recipe-image">Recipe Image</label>
+                <div class="modal-grid modal-grid-2">
+                    <div class="image-preview">
+                        <img :src="recipe.imgUrl" alt="Recipe-img">
+                    </div>
+                    <div class="image-actions">
+                        <button type="button" class="modal-btn modal-btn-secondary">
+                            <label for="selectImg">
+                                {{ isImageUploaded ? 'Change' : 'Upload' }} Image
+                                <input @change="previewImg" class="img-input" id="selectImg" type="file" />
+                            </label>
+                        </button>
+                        <button type="button" class="modal-btn modal-btn-secondary" @click="resetImg">
+                            Reset Image
+                        </button>
+                    </div>
                 </div>
             </div>
-            <button type="submit" class="secondary-btn" @click="saveRecipe">{{ recipe._id ? 'Update' : 'Add' }} recipe</button>
-        </form>
+            </form>
+            
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-primary" @click="saveRecipe">{{ recipe._id ? 'Update' : 'Add' }} Recipe</button>
+            </div>
+        </div>
     </section>
 </template>
 
@@ -113,68 +132,5 @@ function resetImg() {
 </script>
 
 <style scoped>
-.add-recipe {
-    hr{
-        margin: 1.5rem 0;
-    }
-    .secondary-btn{
-        /* margin: 1rem 0; */
-        padding: 0.5rem;
-        text-align: start;
-        max-width: fit-content;
-    }
-
-
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 6px;
-
-    form {
-
-
-        gap: 1rem;
-
-        .info-wrapper {
-            gap: 1rem;
-
-            input,
-            textarea {
-                width: 100%;
-                padding: 0.5rem;
-                border: 1px solid #ccc;
-                border-radius: var(--br);
-            }
-        }
-
-        .actions-container {
-            gap: 1rem;
-        }
-    }
-
-    &::-ms-thumb {
-        display: none;
-    }
-}
-
-.img-wrapper {
-    place-content: center;
-}
-
-.primary-btn {
-    padding: 0.5rem;
-    max-width: 300px;
-
-    /* margin: 0 auto; */
-}
-
-.img-input {
-    display: none;
-}
-
-img {
-    border-radius: var(--br);
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-}
+@import '@/assets/modal-forms.css';
 </style>

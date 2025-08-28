@@ -3,11 +3,11 @@
     display: grid;
     grid-template-columns: 1rem 1fr 1rem;
     grid-template-rows: 1rem auto 1rem;
-}
 
-.dashboard-modal .modal-content {
-    grid-column: 2;
-    grid-row: 2;
+    .modal-content {
+        grid-column: 2;
+        grid-row: 2;
+    }
 }
 
 /* Modal Header */
@@ -22,12 +22,12 @@
     margin: 0;
     font-size: 1.2rem;
     color: var(--clr7);
-}
 
-.modal-title small {
-    font-size: 0.8rem;
-    color: var(--clr6);
-    font-weight: normal;
+    small {
+        font-size: 0.8rem;
+        color: var(--clr6);
+        font-weight: normal;
+    }
 }
 
 /* Basic form styling */
@@ -44,25 +44,74 @@
     display: grid;
     gap: 0.5rem;
     width: 100%;
+
+    label {
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: var(--clr7);
+
+        small {
+            font-size: 0.8rem;
+            color: var(--clr6);
+            font-weight: normal;
+        }
+    }
+
+    input,
+    select,
+    textarea {
+        padding: 0.75rem;
+        border: 1px solid var(--clr2);
+        border-radius: 4px;
+        font-size: 0.9rem;
+        background-color: var(--clr10);
+        color: var(--clr8);
+        width: 100%;
+        box-sizing: border-box;
+
+        &:focus {
+            outline: none;
+            border-color: var(--clr26);
+            box-shadow: 0 0 0 2px rgba(68, 138, 255, 0.25);
+        }
+
+        &:valid {
+            border: 1px solid green;
+        }
+
+        &:invalid {
+            border: 1px solid red;
+        }
+
+        &:not(:placeholder-shown) {
+            border: 1px solid green;
+
+            &:invalid {
+                border: 1px solid red;
+            }
+        }
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+        padding: 0;
+        width: auto;
+        height: auto;
+        margin: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+
+        &:valid,
+        &:invalid,
+        &:not(:placeholder-shown) {
+            border: none;
+        }
+    }
 }
 
-/* Label styling */
-.form-group label {
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--clr7);
-}
-
-.form-group label small {
-    font-size: 0.8rem;
-    color: var(--clr6);
-    font-weight: normal;
-}
-
-/* Input styling */
-.form-group input,
-.form-group select,
-.form-group textarea {
+/* Input styling for datalist inputs */
+input[list] {
     padding: 0.75rem;
     border: 1px solid var(--clr2);
     border-radius: 4px;
@@ -71,33 +120,28 @@
     color: var(--clr8);
     width: 100%;
     box-sizing: border-box;
-}
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--clr26);
-    box-shadow: 0 0 0 2px rgba(68, 138, 255, 0.25);
-}
+    &:focus {
+        outline: none;
+        border-color: var(--clr26);
+        box-shadow: 0 0 0 2px rgba(68, 138, 255, 0.25);
+    }
 
-/* Validation styling */
-.form-group input:valid,
-.form-group select:valid {
-    border: 1px solid green;
-}
+    &:valid {
+        border: 1px solid green;
+    }
 
-.form-group input:invalid,
-.form-group select:invalid {
-    border: 1px solid red;
-}
+    &:invalid {
+        border: 1px solid red;
+    }
 
-.form-group input:not(:placeholder-shown) {
-    border: 1px solid green;
-}
+    &:not(:placeholder-shown) {
+        border: 1px solid green;
 
-.form-group input:not(:placeholder-shown):invalid {
-    border: 1px solid red;
+        &:invalid {
+            border: 1px solid red;
+        }
+    }
 }
 
 /* Button styling */
@@ -109,39 +153,39 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
-}
 
-.modal-btn-primary {
-    background-color: var(--clr26);
-    color: white;
-}
+    &.modal-btn-primary {
+        background-color: var(--clr26);
+        color: white;
 
-.modal-btn-primary:hover {
-    background-color: var(--clr26);
-    opacity: 0.9;
-}
+        &:hover {
+            background-color: var(--clr26);
+            opacity: 0.9;
+        }
+    }
 
-.modal-btn-secondary {
-    background-color: var(--clr2);
-    color: var(--clr8);
-}
+    &.modal-btn-secondary {
+        background-color: var(--clr2);
+        color: var(--clr8);
 
-.modal-btn-secondary:hover {
-    background-color: var(--clr3);
+        &:hover {
+            background-color: var(--clr3);
+        }
+    }
 }
 
 /* Grid layouts */
 .modal-grid {
     display: grid;
     gap: 0.5rem;
-}
 
-.modal-grid-2 {
-    grid-template-columns: 1fr auto;
-}
+    &.modal-grid-2 {
+        grid-template-columns: 1fr auto;
+    }
 
-.modal-grid-3 {
-    grid-template-columns: 1fr 1fr 1fr;
+    &.modal-grid-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
 /* Section divider */
@@ -149,18 +193,18 @@
     border-top: 1px solid var(--clr2);
     padding-top: 1rem;
     margin-top: 1rem;
-}
 
-.section-divider h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1rem;
-    color: var(--clr7);
-}
+    h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+        color: var(--clr7);
+    }
 
-.section-divider p {
-    margin: 0;
-    font-size: 0.8rem;
-    color: var(--clr6);
+    p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--clr6);
+    }
 }
 
 /* Item list styling */
@@ -170,33 +214,33 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     padding: 0;
     margin-top: 0.5rem;
-}
 
-.small-item-list li {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    background-color: var(--clr1);
-    padding: 0.5rem;
-    border-radius: 4px;
-    gap: 0.5rem;
-}
+    li {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        background-color: var(--clr1);
+        padding: 0.5rem;
+        border-radius: 4px;
+        gap: 0.5rem;
+    }
 
-.small-item-list .icon-svg {
-    border: none;
-    background-color: var(--clr4);
-    border-radius: 50%;
-    padding: 0.2rem;
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .icon-svg {
+        border: none;
+        background-color: var(--clr4);
+        border-radius: 50%;
+        padding: 0.2rem;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-.small-item-list .icon-svg:hover {
-    background-color: var(--clr5);
+        &:hover {
+            background-color: var(--clr5);
+        }
+    }
 }
 
 /* No items message */
@@ -211,11 +255,11 @@
 .modal-actions {
     text-align: center;
     margin-top: 1rem;
-}
 
-.modal-actions button {
-    width: 40%;
-    margin: 0 1rem;
+    button {
+        width: 40%;
+        margin: 0 1rem;
+    }
 }
 
 /* Specific styles for ModalAddItem */
@@ -237,6 +281,98 @@ option.green-txt {
 }
 
 input[type="checkbox"] {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1.8rem;
+    width: 1.8rem;
+    accent-color: var(--clr26);
+    cursor: pointer;
+}
+
+/* Specific styles for ModalAddList */
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: var(--clr1);
+    }
+
+    input[type="radio"] {
+        margin: 0;
+        width: 1.2rem;
+        height: 1.2rem;
+        accent-color: var(--clr26);
+    }
+
+    span {
+        font-size: 0.9rem;
+        color: var(--clr7);
+        font-weight: 500;
+    }
+}
+
+/* Specific styles for ModalItemList component */
+.small-item-list li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    background-color: var(--bClr2);
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--br);
+    gap: 0.5rem;
+
+    .icon-svg {
+        border: none;
+        background-color: var(--bClr4);
+        border-radius: 50%;
+        padding: 0.2rem;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            background-color: var(--bClr5);
+        }
+    }
+}
+
+/* Specific styles for ModalAddRecipe */
+.image-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        border-radius: var(--br);
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border: 1px solid var(--clr2);
+    }
+}
+
+.image-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.img-input {
+    display: none;
 }

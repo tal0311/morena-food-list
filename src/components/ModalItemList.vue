@@ -1,9 +1,9 @@
 <template>
     <!-- {{ props.items }} -->
-       <input type="text" class="items-input" list="list-items" 
+       <input type="text" list="list-items" 
        @input="$emit('update:modelValue', $event.target.value)"
             v-model="modalValue" placeholder="Select item">
-        <button class="primary-btn" @click="$emit('addItem')">Add</button>
+        <button class="modal-btn modal-btn-primary" @click="$emit('addItem')">Add</button>
 
         <ul v-if="listToAdd.items.length" class="small-item-list">
             <li v-for="item in props.listToAdd.items" class="grid grid-dir-col">
@@ -36,45 +36,15 @@ function isItemInList(itemName) {
 </script>
 
 <style scoped>
-input,
-select {
-    padding: 0.2rem 1rem;
-    border-radius: var(--br);
-    border: 1px solid var(--bClr2);
-    font-size: larger;
+@import '@/assets/modal-forms.css';
 
-    &.items-input {
-        margin-bottom: 0.5rem;
-    }
-}
+/* Additional styles specific to ModalItemList */
 .in-list {
     background-color: red;
 }
+
 .primary-btn {
     padding: 0.5rem;
     max-width: max-content;
 }
-
-.small-item-list {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    padding: 0;
-
-    li {
-        align-items: center;
-        background-color: var(--bClr2);
-        grid-template-columns: 1fr auto;
-        padding: 0.3rem 0.5rem;
-        border-radius: var(--br);
-
-        .icon-svg {
-            border: none;
-            /* background-color: var(--bClr4); */
-            border-radius: 50%;
-            padding: 0.2rem;
-        }
-    }
-}
-
 </style>

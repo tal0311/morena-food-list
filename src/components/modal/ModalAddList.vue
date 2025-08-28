@@ -1,10 +1,9 @@
 <template>
-    <section v-if="items" class="modal-add-list dashboard-modal">
-        <div class="modal-header">
-            <h2 class="modal-title">Create New Item List</h2>
-        </div>
-
+    <section v-if="items" class="dashboard-modal">
         <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Create New Item List</h2>
+            </div>
             <form ref="fromRef" class="modal-form" @submit.prevent="">
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -38,11 +37,11 @@
                     </UserPreview>
                 </div>
             </form>
-        </div>
-
-        <div class="modal-actions">
-            <button class="modal-btn modal-btn-secondary" @click="$emit('resetModal')">Cancel</button>
-            <button class="modal-btn modal-btn-primary" @click="saveList">Save Changes</button>
+            
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" @click="$emit('resetModal')">Cancel</button>
+                <button class="modal-btn modal-btn-primary" @click="saveList">Save Changes</button>
+            </div>
         </div>
     </section>
 </template>
@@ -127,68 +126,16 @@ async function saveList() {
 </script>
 
 <style scoped>
+@import '@/assets/modal-forms.css';
+
+/* Additional styles specific to ModalAddList */
 h3 {
     margin: 0;
     text-transform: capitalize;
 }
 
-.modal-add-list {
-    form {
-        gap: 1rem;
-
-    }
-}
-
 .in-list {
     background-color: red;
-}
-
-.small-item-list {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    padding: 0;
-
-    li {
-        align-items: center;
-        background-color: var(--bClr2);
-        grid-template-columns: 1fr auto;
-        padding: 0.3rem 0.5rem;
-        border-radius: var(--br);
-
-        .icon-svg {
-            border: none;
-            background-color: var(--bClr4);
-            border-radius: 50%;
-            padding: 0.2rem;
-        }
-    }
-}
-
-label {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 20% 1fr;
-    align-items: center;
-    background-color: var(--bClr1);
-    padding: 0.5rem;
-}
-
-input,
-select {
-    padding: 0.2rem 1rem;
-    border-radius: var(--br);
-    border: 1px solid var(--bClr2);
-    font-size: larger;
-
-    &.items-input {
-        margin-bottom: 0.5rem;
-    }
-}
-
-input[type="radio"] {
-    margin: 0 0.5rem;
-
 }
 
 .primary-btn {
