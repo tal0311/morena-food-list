@@ -1,11 +1,11 @@
 <template>
-    <section v-if="itemToAdd" :class="['add-item dashboard-modal', isSeeThrow ? 'see' : '']">
-        <div class="modal-header">
-            <h2 class="modal-title">Add Item <small>(if its red, it must have a value)</small></h2>
-            <button @click="modify" v-html="$svg(btnState)" class="modal-btn modal-btn-secondary"></button>
-        </div>
-        
+    <section v-if="itemToAdd" :class="['dashboard-modal', isSeeThrow ? 'see' : '']">
         <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add Item <small>(if its red, it must have a value)</small></h2>
+                <button @click="modify" v-html="$svg(btnState)" class="modal-btn modal-btn-secondary"></button>
+            </div>
+            
             <form ref="formRef" class="modal-form" @submit.prevent="addItem">
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -52,11 +52,11 @@
                     <input type="checkbox" id="isSelected" v-model="itemToAdd.isSelected">
                 </div>
             </form>
-        </div>
-
-        <div class="modal-actions">
-            <button class="modal-btn modal-btn-secondary" @click="resetForm">Reset</button>
-            <button class="modal-btn modal-btn-primary" @click="addItem">{{ itemToAdd._id ? 'Update' : 'Add' }}</button>
+            
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" @click="resetForm">Reset</button>
+                <button class="modal-btn modal-btn-primary" @click="addItem">{{ itemToAdd._id ? 'Update' : 'Add' }}</button>
+            </div>
         </div>
     </section>
 </template>
@@ -157,100 +157,5 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-form {
-    background-color: var(--bClr1);
-    padding: 1.5rem 1rem;
-    border-radius: var(--br);
-
-
-    .actions-container {
-        justify-content: space-between;
-
-        button {
-            padding: 0.8rem 1.5rem;
-            max-width: 10rem;
-
-        }
-    }
-
-
-}
-
-.form-group {
-    display: grid;
-    gap: 0.5rem;
-
-    label {
-        font-weight: bold;
-        font-size: larger;
-    }
-
-
-    .translation {
-        margin-inline-start: 1rem;
-        gap: 0.5rem;
-    }
-
-    input,
-    select {
-        padding: 0.5rem;
-        border-radius: var(--br);
-        border: 1px solid var(--bClr2);
-        font-size: larger;
-    }
-
-    .group-name {
-        font-size: smaller;
-        color: var(--bClr3);
-        border-radius: var(--br);
-    }
-}
-
-
-input,
-select {
-
-    &:valid {
-        border: 1px solid green;
-    }
-
-    &:invalid {
-        border: 1px solid red;
-    }
-
-    &:not(:placeholder-shown) {
-        border: 1px solid green;
-    }
-
-    &:not(:placeholder-shown):invalid {
-        border: 1px solid red;
-    }
-
-    &:focus {
-        outline: transparent;
-        background-color: var(--bClr1);
-
-    }
-
-}
-
-option.green-txt {
-    color: green;
-    background-color: var(--bClr2);
-}
-
-
-.form-group:has(label[for="isSelected"]) {
-    grid-auto-flow: column;
-    grid-template-columns: 7rem min-content;
-    align-items: center;
-
-
-}
-
-
-input[type="checkbox"] {
-    height: 1.5rem;
-    width: 1.5rem;
-}
+@import '@/assets/modal-forms.css';
 </style>

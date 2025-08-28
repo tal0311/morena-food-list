@@ -1,0 +1,242 @@
+/* Shared Modal Form Styles */
+.dashboard-modal {
+    display: grid;
+    grid-template-columns: 1rem 1fr 1rem;
+    grid-template-rows: 1rem auto 1rem;
+}
+
+.dashboard-modal .modal-content {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--clr7);
+}
+
+.modal-title small {
+    font-size: 0.8rem;
+    color: var(--clr6);
+    font-weight: normal;
+}
+
+/* Basic form styling */
+.modal-form {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    background-color: var(--bClr1);
+    padding: 1.5rem 1rem;
+    border-radius: var(--br);
+}
+
+.form-group {
+    display: grid;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+/* Label styling */
+.form-group label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--clr7);
+}
+
+.form-group label small {
+    font-size: 0.8rem;
+    color: var(--clr6);
+    font-weight: normal;
+}
+
+/* Input styling */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.75rem;
+    border: 1px solid var(--clr2);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background-color: var(--clr10);
+    color: var(--clr8);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--clr26);
+    box-shadow: 0 0 0 2px rgba(68, 138, 255, 0.25);
+}
+
+/* Validation styling */
+.form-group input:valid,
+.form-group select:valid {
+    border: 1px solid green;
+}
+
+.form-group input:invalid,
+.form-group select:invalid {
+    border: 1px solid red;
+}
+
+.form-group input:not(:placeholder-shown) {
+    border: 1px solid green;
+}
+
+.form-group input:not(:placeholder-shown):invalid {
+    border: 1px solid red;
+}
+
+/* Button styling */
+.modal-btn {
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-btn-primary {
+    background-color: var(--clr26);
+    color: white;
+}
+
+.modal-btn-primary:hover {
+    background-color: var(--clr26);
+    opacity: 0.9;
+}
+
+.modal-btn-secondary {
+    background-color: var(--clr2);
+    color: var(--clr8);
+}
+
+.modal-btn-secondary:hover {
+    background-color: var(--clr3);
+}
+
+/* Grid layouts */
+.modal-grid {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.modal-grid-2 {
+    grid-template-columns: 1fr auto;
+}
+
+.modal-grid-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Section divider */
+.section-divider {
+    border-top: 1px solid var(--clr2);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.section-divider h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: var(--clr7);
+}
+
+.section-divider p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--clr6);
+}
+
+/* Item list styling */
+.small-item-list {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+.small-item-list li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    background-color: var(--clr1);
+    padding: 0.5rem;
+    border-radius: 4px;
+    gap: 0.5rem;
+}
+
+.small-item-list .icon-svg {
+    border: none;
+    background-color: var(--clr4);
+    border-radius: 50%;
+    padding: 0.2rem;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.small-item-list .icon-svg:hover {
+    background-color: var(--clr5);
+}
+
+/* No items message */
+.no-items-message {
+    text-align: center;
+    padding: 1rem;
+    color: var(--clr6);
+    font-style: italic;
+}
+
+/* Modal actions */
+.modal-actions {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.modal-actions button {
+    width: 40%;
+    margin: 0 1rem;
+}
+
+/* Specific styles for ModalAddItem */
+.group-name {
+    font-size: smaller;
+    color: var(--clr3);
+    border-radius: 4px;
+}
+
+option.green-txt {
+    color: green;
+    background-color: var(--clr2);
+}
+
+.form-group:has(label[for="isSelected"]) {
+    grid-auto-flow: column;
+    grid-template-columns: 7rem min-content;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    height: 1.5rem;
+    width: 1.5rem;
+}
