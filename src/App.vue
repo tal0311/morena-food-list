@@ -3,6 +3,7 @@
     <RouterView />
     <UserMsg />
     <AppModal />
+    <BugLogger/>
   </section>
 </template>
 
@@ -13,16 +14,17 @@
 // TODO: moran filter unwanted items
 
 
-import { computed, onMounted, ref, onBeforeMount } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import UserMsg from '@/components/UserMsg.vue'
 import { useUserStore } from './stores/user-store';
 import { useListStore } from './stores/list-store';
 import AppModal from '@/components/AppModal.vue';
 import { useRouter } from 'vue-router';
-import { i18Service } from "./services/i18n.service";
+
 
 
 import { socketService } from './services/socket.service';
+import BugLogger from './components/BugLogger.vue';
 
 const userStore = useUserStore();
 const isSocketConnected = ref(false);
@@ -30,24 +32,13 @@ const isSocketConnected = ref(false);
 const router = useRouter();
 const listStore = useListStore()
 
-
-onBeforeMount(async() => {
-  console.log('App is about to mount');
-  userStore.loadUser();
-  const user = computed(() => userStore.getUser).value
-
-  if (user?.email && user?.username) {
-    setUpSockets()
-    loadData()
-  } else {
-    router.push('/login')
-  }
-})
-
-
-onMounted(() => {
+onMounted(async () => {
   console.debug('import.mete.env', import.meta.env);
   document.title = import.meta.env.VITE_APP_TITLE;
+  
+  
+  setUpSockets();
+  await loadData();
 })
 
 function toggleSocket(val) {

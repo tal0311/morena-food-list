@@ -1,8 +1,10 @@
 
+
 export const adminService = {
     getEmptyUser,
     getEmptyItem,
-    getEmptyList
+    getEmptyList,
+    getEmptyRecipe,
 }
 
 // BACKEND: check if all fields are allowed to be empty
@@ -75,5 +77,26 @@ function getEmptyList() {
     }
 }
 
+function getEmptyRecipe(){
+    return{
+        group:'',
+        he:{
+            title:'',
+            description:''
+        },
+        en:{
+            title:'',
+            description:''
+        },
+        imgUrl:'https://www.foodservicerewards.com/cdn/shop/t/262/assets/fsr-placeholder.png?v=45093109498714503231652397781',
+        ingredients:[],
+        owner:{
+            id:'',
+            username:'',
+            imgUrl:''
+        },
+        visibility:'public'
+    }
 
+}
 

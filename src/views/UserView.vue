@@ -20,11 +20,9 @@
                 <div class="level-container grid">
 
                     <select name="level" id="" v-model.number="user.level">
-                        <option value="0" selected>{{ $trans('level') }}</option>
-                        <option value="1">{{ $trans('beginner') }}</option>
-                        <option value="2">{{ $trans('intermediate') }}</option>
-                        <option value="3">{{ $trans('advanced') }}</option>
-
+                      <option v-for="(label, index) in ['level', 'beginner', 'intermediate', 'advanced']" :key="index" :value="index">
+                        {{ $trans(label) }}
+                      </option>
                     </select>
 
                 </div>
@@ -38,6 +36,7 @@
             <section class="summary-container">
                 <div class="summary-wrapper">
                     <div class="notify-container grid">
+                        <!-- <pre>{{ user.settings.notifications }}</pre> -->
                         <label for="notifications">{{ $trans('notifications') }}</label>
                         <input type="checkbox" name="notifications" v-model="user.settings.notifications"
                             class="switch">
@@ -144,7 +143,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, onUpdated, computed } from 'vue'
+import { ref, onBeforeMount, onUpdated, computed, watch } from 'vue'
 import { utilService } from '@/services/util.service';
 import { useUserStore } from '@/stores/user-store'
 import { userService } from '@/services/user.service';
@@ -154,8 +153,8 @@ import { useListStore } from '@/stores/list-store';
 import {useRouter} from 'vue-router'
 import UserPreview from '@/components/UserPreview.vue'
 
-const user = ref(null);
 const userStore = useUserStore();
+const user = userStore.getUser;
 
 const diets = [
     { name: 'vegan', label: 'vegan', value: 'isVegan' },
@@ -173,7 +172,7 @@ const publicLists = ref([])
 
 
 onBeforeMount(async () => {
-    user.value = userService.getLoggedInUser();
+    
     await listStore.loadLists()
 })
 
@@ -210,8 +209,14 @@ onUpdated(() => {
 
 updateUser = utilService.debounce(updateUser, 1000);
 
+watch(user, () => {
+    updateUser()
+    console.log('user', user);
+})
 function updateUser() {
-    userStore.updateLoggedUser(user.value);
+    console.log('updateUser', user);
+    
+    userStore.updateLoggedUser(user);
     showSuccessMsg('userUpdated');
 }
 
@@ -410,7 +415,7 @@ input[type="text"] {
     transition: all .1s ease-out;
 }
 
-.switch:checked {
+.switch:not(:checked) {
     background: var(--bClr1);
     border: solid 1px var(--bClr1);
 }

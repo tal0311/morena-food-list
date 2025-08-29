@@ -214,9 +214,9 @@ function getGuestUser() {
 }
 
 function _loadUserFromStorage() {
-    const loggedUser = JSON.parse(localStorage.getItem('rememberMe'))
-        ? JSON.parse(localStorage.getItem(LOGGED_USER))
-        : JSON.parse(sessionStorage.getItem(LOGGED_USER))
+    const loggedUser = JSON.parse(localStorage.getItem(LOGGED_USER))
+        // ? JSON.parse(localStorage.getItem(LOGGED_USER))
+        // : JSON.parse(sessionStorage.getItem(LOGGED_USER))
 
     return loggedUser
 
@@ -224,9 +224,9 @@ function _loadUserFromStorage() {
 
 function _saveLoggedUser(user) {
 
-    JSON.parse(localStorage.getItem('rememberMe'))
-        ? localStorage.setItem(LOGGED_USER, JSON.stringify(user))
-        : sessionStorage.setItem(LOGGED_USER, JSON.stringify(user))
+    localStorage.setItem(LOGGED_USER, JSON.stringify(user))
+    // JSON.parse(localStorage.getItem('rememberMe'))
+        // : sessionStorage.setItem(LOGGED_USER, JSON.stringify(user))
 
     return user;
 }

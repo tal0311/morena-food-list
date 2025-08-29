@@ -1,0 +1,358 @@
+/* Shared Modal Form Styles */
+.dashboard-modal {
+    display: grid;
+    grid-template-columns: 1rem 1fr 1rem;
+    grid-template-rows: 1rem auto 1rem;
+    transition: all 0.3s ease;
+
+    .modal-content {
+        grid-column: 2;
+        grid-row: 2;
+        transition: all 0.3s ease;
+    }
+
+    &.recipe-modal {
+        .image-form-group {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: var(--br);
+                border: 1px solid var(--clr2);
+            }
+        }
+    }
+ 
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--clr7);
+
+    small {
+        font-size: 0.8rem;
+        color: var(--clr6);
+        font-weight: normal;
+    }
+}
+
+/* Basic form styling */
+.modal-form {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    background-color: var(--bClr1);
+    padding: 1.5rem 1rem;
+    border-radius: var(--br);
+    transition: all 0.3s ease;
+}
+
+.form-group {
+    display: grid;
+    gap: 0.5rem;
+    width: 100%;
+
+    label {
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: var(--clr7);
+
+        small {
+            font-size: 0.8rem;
+            color: var(--clr6);
+            font-weight: normal;
+        }
+    }
+
+    /* 
+      Override only what's needed for modal forms to avoid conflict with base.css.
+      Use more specific selector to target only modal form fields.
+    */
+    .modal-form input,
+    .modal-form select,
+    .modal-form textarea {
+        padding: 0.75rem;
+        border: 1px solid var(--clr2);
+        border-radius: 4px;
+        font-size: 0.9rem;
+        background-color: var(--clr10);
+        color: var(--clr8);
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .modal-form input:focus,
+    .modal-form select:focus,
+    .modal-form textarea:focus {
+        outline: none;
+        border-color: var(--clr26);
+        /* box-shadow: 0 0 0 2px rgba(68, 138, 255, 0.25); */
+    }
+
+    .modal-form input:valid,
+    .modal-form select:valid,
+    .modal-form textarea:valid {
+        border: 1px solid green;
+    }
+
+    .modal-form input:invalid,
+    .modal-form select:invalid,
+    .modal-form textarea:invalid {
+        border: 1px solid red;
+    }
+
+    .modal-form input:not(:placeholder-shown),
+    .modal-form select:not(:placeholder-shown),
+    .modal-form textarea:not(:placeholder-shown) {
+        border: 1px solid green;
+    }
+
+    .modal-form input:not(:placeholder-shown):invalid,
+    .modal-form select:not(:placeholder-shown):invalid,
+    .modal-form textarea:not(:placeholder-shown):invalid {
+        border: 1px solid red;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+        padding: 0;
+        width: auto;
+        height: auto;
+        margin: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+
+        &:valid,
+        &:invalid,
+        &:not(:placeholder-shown) {
+            border: none;
+        }
+    }
+}
+
+input[list] {
+
+    padding: 0.75rem; /* override/add if needed */
+    font-size: 0.9rem; /* override/add if needed */
+    width: 100%; /* override/add if needed */
+    box-sizing: border-box; /* ensure full width */
+}
+
+/* Button styling */
+.modal-btn {
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &.modal-btn-primary {
+        background-color: var(--clr26);
+        color: white;
+
+        &:hover {
+            background-color: var(--clr26);
+            opacity: 0.9;
+        }
+    }
+
+    &.modal-btn-secondary {
+        background-color: var(--clr2);
+        color: var(--clr8);
+
+        &:hover {
+            background-color: var(--clr3);
+        }
+    }
+}
+
+/* Grid layouts */
+.modal-grid {
+    display: grid;
+    gap: 0.5rem;
+
+    &.modal-grid-2 {
+        grid-template-columns: 1fr auto;
+    }
+
+    &.modal-grid-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+/* Section divider */
+.section-divider {
+    border-top: 1px solid var(--clr2);
+    padding-top: 1rem;
+    margin-top: 1rem;
+
+    h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+        color: var(--clr7);
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--clr6);
+    }
+}
+
+/* Item list styling */
+.small-item-list {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    padding: 0;
+    margin-top: 0.5rem;
+
+    li {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        background-color: var(--clr1);
+        padding: 0.5rem;
+        border-radius: 4px;
+        gap: 0.5rem;
+    }
+
+
+}
+
+/* No items message */
+.no-items-message {
+    text-align: center;
+    padding: 1rem;
+    color: var(--clr6);
+    font-style: italic;
+}
+
+/* Modal actions */
+.modal-actions {
+    text-align: center;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+
+    button {
+        width: 40%;
+        margin: 0 1rem;
+    }
+}
+
+/* Specific styles for ModalAddItem */
+.group-name {
+    font-size: smaller;
+    color: var(--clr3);
+    border-radius: 4px;
+}
+
+option.green-txt {
+    color: green;
+    background-color: var(--clr2);
+}
+
+.form-group:has(label[for="isSelected"]) {
+    grid-auto-flow: column;
+    grid-template-columns: 7rem min-content;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    height: 1.8rem;
+    width: 1.8rem;
+    accent-color: var(--clr26);
+    cursor: pointer;
+}
+
+/* Specific styles for ModalAddList */
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: var(--clr1);
+    }
+
+    input[type="radio"] {
+        margin: 0;
+        width: 1.2rem;
+        height: 1.2rem;
+        accent-color: var(--clr26);
+    }
+
+    span {
+        font-size: 0.9rem;
+        color: var(--clr7);
+        font-weight: 500;
+    }
+}
+
+/* Specific styles for ModalItemList component */
+.small-item-list li {
+    background-color: var(--bClr2);
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--br);
+
+    .icon-svg {
+        background-color: var(--bClr4);
+
+        &:hover {
+            background-color: var(--bClr5);
+        }
+    }
+}
+
+/* Specific styles for ModalAddRecipe */
+.image-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        border-radius: var(--br);
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border: 1px solid var(--clr2);
+    }
+}
+
+.image-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.img-input {
+    display: none;
+}
+
+
+

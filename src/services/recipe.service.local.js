@@ -12,6 +12,7 @@ const DEFAULT_IMG=  "https://www.foodservicerewards.com/cdn/shop/t/262/assets/fs
 
 export const recipeService = {
   query,
+  save
 
 }
 
@@ -28,6 +29,17 @@ async function query(filterBy = {}) {
   
    return recipes;
 
+}
+
+function save(recipe){
+  console.log(recipe);
+
+  return
+  if(recipe._id){
+   return httpService.put('recipe/'+recipe._id, recipe)
+  }else{
+    httpService.post('recipe',recipe)
+  }
 }
 
 

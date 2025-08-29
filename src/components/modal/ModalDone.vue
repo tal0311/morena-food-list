@@ -1,6 +1,8 @@
 <template>
-    <div class="actions-container grid">
-        <button v-for="btn in btns" :class="`${btn.name==='shop'? 'special-btn':'secondary-btn'}`" @click="btn.action">{{ $trans(btn.name) }}</button>
+    <div class="modal-done grid">
+        <div class="actions-container">
+            <button v-for="btn in btns" :class="`${btn.name==='shop'? 'special-btn':'secondary-btn'}`" @click="btn.action">{{ $trans(btn.name) }}</button>
+        </div>
     </div>
 
 </template>
@@ -113,23 +115,29 @@ function closeModal() {
 </script>
 
 <style scoped>
+.modal-done{
+    display: grid;
+    grid-template-columns: 1rem 1fr 1rem;
+    grid-template-rows: 1rem auto 1rem;
+
+    .actions-container{
+        display: grid;
+        gap: 1rem;
+        grid-column: 2;
+        grid-row: 2;
+
+        .special-btn{
+            font-size: 1.2rem;
+        }
+        .secondary-btn{
+            font-size: 1rem;
+        }
+    }
+}
+
 button {
     padding: 0.8rem;
 }
 
-dialog.blur-bg {
-    width: 60%;
-    border: none;
-    padding: 1rem;
-    border-radius: var(--br);
 
-}
-
-.actions-container {
-    gap: 1rem;
-}
-
-.special-btn{
-    font-size: 1rem;
-}
 </style>

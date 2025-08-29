@@ -1,65 +1,71 @@
 <template>
-    <section v-if="itemToAdd" :class="['add-item', isSeeThrow ? 'see' : '']">
-        <button @click="modify" v-html="$svg(btnState)"></button>
-        <h1>Add Item <small>(if its red, it must have a value)</small> </h1>
-        <form ref="formRef" class="grid" @submit.prevent="addItem">
-
-            <div class="form-group grid">
-                <label for="name">Name</label>
-                <input @input.trim="getItem" type="text" id="name" v-model="itemToAdd.name" required>
-
-                <div class="translation grid">
-                    <label for="name">Translation</label>
-                    <input type="text" id="he" v-model="itemToAdd.translation.he.val"
-                        :required="itemToAdd.translation.he.isRequired" placeholder="Hebrew">
-                    <input type="text" id="en" v-model="itemToAdd.translation.en.val"
-                        :required="itemToAdd.translation.en.isRequired" placeholder="English">
-                    <input type="text" id="es" v-model="itemToAdd.translation.es.val"
-                        :required="itemToAdd.translation.es.isRequired" placeholder="Espanol">
+    <section v-if="itemToAdd" class="dashboard-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add Item <small>(if its red, it must have a value)</small></h2>
+            </div>
+            
+            <form ref="formRef" class="modal-form" @submit.prevent="addItem">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input @input.trim="getItem" type="text" id="name" v-model="itemToAdd.name" required>
                 </div>
+
+                <div class="search-results" v-if="search.length > 0&& itemToAdd.name">
+                    <span v-for="item in search" :key="item" @click="itemToAdd.name = item.name">{{ item.name }} {{ item.icon }},</span>
+                </div>
+                <div class="search-results" v-else>
+                    <span>Products you already have will be shown here</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="translation">Translation</label>
+                    <div class="modal-grid modal-grid-3">
+                        <input type="text" id="he" v-model="itemToAdd.translation.he.val"
+                            :required="itemToAdd.translation.he.isRequired" placeholder="Hebrew">
+                        <input type="text" id="en" v-model="itemToAdd.translation.en.val"
+                            :required="itemToAdd.translation.en.isRequired" placeholder="English">
+                        <input type="text" id="es" v-model="itemToAdd.translation.es.val"
+                            :required="itemToAdd.translation.es.isRequired" placeholder="Espanol">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="icon">Icon</label>
+                    <input type="text" id="icon" v-model="itemToAdd.icon">
+                </div>
+
+                <div class="form-group">
+                    <label for="group">Group <span v-if="itemToAdd.group" class="group-name">({{ itemToAdd.group }})</span></label>
+                    <select name="group" id="group" @change="updateGroup" :required="itemToAdd._id?false:true">
+                        <option value="">Select Group</option>
+                        <option v-for="(group, idx) in groups" :class="`${group === itemToAdd.group? 'green-txt':''}`" :key="idx">{{ group }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="readMoreURL">Read More URL</label>
+                    <input type="text" id="readMoreURL" v-model="itemToAdd.readMoreURL">
+                </div>
+
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <input type="text" id="color" v-model="itemToAdd.color">
+                </div>
+
+                <div class="form-group">
+                    <label for="isSelected">Is Selected</label>
+                    <input type="checkbox" id="isSelected" v-model="itemToAdd.isSelected">
+                </div>
+            </form>
+            
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" @click="resetForm">Reset</button>
+                <button class="modal-btn modal-btn-primary" @click="addItem">{{ itemToAdd._id ? 'Update' : 'Add' }}</button>
             </div>
-
-            <div class="form-group  grid">
-                <label for="icon">Icon</label>
-                <input type="text" id="icon" v-model="itemToAdd.icon">
-            </div>
-
-            <div class="form-group grid">
-                <label for="group">Group <span v-if="itemToAdd.group" class="group-name">({{ itemToAdd.group }})</span></label>
-                <select name="group" @change="updateGroup" :required="itemToAdd._id?false:true">
-                    <option value="">Select Group</option>
-                    <option v-for="(group, idx) in groups" :class="`${group === itemToAdd.group? 'green-txt':''}`" :key="idx">{{ group }}</option>
-                </select>
-            </div>
-
-            <div class="form-group grid">
-                <label for="readMoreURL">Read More URL</label>
-                <input type="text" id="readMoreURL" v-model="itemToAdd.readMoreURL">
-            </div>
-
-            <div class="form-group grid">
-                <label for="color">Color</label>
-                <input type="text" id="color" v-model="itemToAdd.color">
-            </div>
-
-            <div class="form-group grid">
-                <label for="isSelected">Is Selected</label>
-                <input type="checkbox" id="isSelected" v-model="itemToAdd.isSelected">
-
-            </div>
-
-            <div class="actions-container grid grid-dir-col">
-                <button class="primary-btn" @click.prevent="addItem">{{ itemToAdd._id ? 'Update' : 'Add' }}</button>
-                <button class="secondary-btn" @click.prevent="resetForm">Reset</button>
-            </div>
-
-
-
-        </form>
-
-
+        </div>
     </section>
-
+  
 </template>
 <script setup>
 
@@ -79,10 +85,14 @@ const isSeeThrow = ref(false)
 const groups = ref([])
 const subscriptions = []
 
-onBeforeMount(() => {
+const items = ref(null);
+
+
+onBeforeMount(async() => {
     if (props.info) {
         loadItem()
     } else {
+        items.value = await itemService.query()
         itemToAdd.value = adminService.getEmptyItem()
     }
 
@@ -92,7 +102,6 @@ onBeforeMount(() => {
 
     getGroups()
 })
-const btnState = computed(() => isSeeThrow.value ? 'expend' : 'mini')
 
 
 function loadItem(){
@@ -108,17 +117,20 @@ function loadItem(){
 function updateGroup(ev) {
     itemToAdd.value.group = ev.target.value
 }
-function getItem() {
-    eventBus.emit('modal-filter', itemToAdd.value.name)
-}
 
-function modify() {
-    isSeeThrow.value = !isSeeThrow.value
-    emit('modifyModal', isSeeThrow.value ? 'mini' : '')
-}
+
+const search = computed(() => {
+    return items.value.filter(item => item.name.includes(itemToAdd.value.name)).map(item => ({name: item.name, icon: item.icon }))
+})
 
 async function addItem() {
     const isFormValid = formRef.value.checkValidity()
+    if(search.value.length > 0){
+        const confirmation = confirm('This product already exists, do you want to add it anyway?')
+        if(!confirmation){
+            return
+        }
+    }
 
     if (!isFormValid) {
         showErrorMsg('FormValidation')
@@ -140,7 +152,7 @@ async function addItem() {
 }
 
 function resetForm() {
-    itemToAdd.value = null
+    itemToAdd.value = adminService.getEmptyItem()
     formRef.value.reset()
 }
 
@@ -158,100 +170,21 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-form {
-    background-color: var(--bClr1);
-    padding: 1.5rem 1rem;
+@import '@/assets/modal-forms.css';
+
+.search-results {
+    height: 100px;
+    overflow-y: auto;
+    font-size: 1.1rem;
+    color: var(--txtClr2);
     border-radius: var(--br);
-
-
-    .actions-container {
-        justify-content: space-between;
-
-        button {
-            padding: 0.8rem 1.5rem;
-            max-width: 10rem;
-
-        }
-    }
-
-
-}
-
-.form-group {
-    display: grid;
-    gap: 0.5rem;
-
-    label {
-        font-weight: bold;
-        font-size: larger;
-    }
-
-
-    .translation {
-        margin-inline-start: 1rem;
-        gap: 0.5rem;
-    }
-
-    input,
-    select {
-        padding: 0.5rem;
-        border-radius: var(--br);
-        border: 1px solid var(--bClr2);
-        font-size: larger;
-    }
-
-    .group-name {
-        font-size: smaller;
-        color: var(--bClr3);
-        border-radius: var(--br);
-    }
-}
-
-
-input,
-select {
-
-    &:valid {
-        border: 1px solid green;
-    }
-
-    &:invalid {
-        border: 1px solid red;
-    }
-
-    &:not(:placeholder-shown) {
-        border: 1px solid green;
-    }
-
-    &:not(:placeholder-shown):invalid {
-        border: 1px solid red;
-    }
-
-    &:focus {
-        outline: transparent;
-        background-color: var(--bClr1);
-
-    }
-
-}
-
-option.green-txt {
-    color: green;
     background-color: var(--bClr2);
-}
-
-
-.form-group:has(label[for="isSelected"]) {
-    grid-auto-flow: column;
-    grid-template-columns: 7rem min-content;
-    align-items: center;
-
-
-}
-
-
-input[type="checkbox"] {
-    height: 1.5rem;
-    width: 1.5rem;
+    border: 1px solid var(--bClr3);
+    border-radius: var(--br);
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
 }
 </style>
