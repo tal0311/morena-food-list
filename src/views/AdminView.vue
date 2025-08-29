@@ -1,5 +1,5 @@
 <template>
-    <section v-if="users || items || lists || recipes" :class="['admin-view', filterBy]">
+    <section v-if="users && items && lists && recipes" :class="['admin-view', filterBy]">
 
         <h1>Welcome Moran, You can update your data base from here</h1>
         <DashboardFilter :filterBy="filterBy" v-model="searchTerm" @setFilterBy="setFilterBy" />
@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { computed, ref, onBeforeMount, onBeforeUnmount, watch } from 'vue';
+import { computed, ref, onBeforeMount, onBeforeUnmount } from 'vue';
 import AppLoader from '@/components/AppLoader.vue';
 import { userService } from '@/services/user.service';
 import { itemService } from '@/services/item.service';
@@ -93,41 +93,65 @@ const entities = [{
 const subscriptions = [];
 onBeforeMount(async () => {
 
-    await loadItems();
-    await loadLists();
-    await loadUsers();
-    await loadRecipes();
+   loadEntities();
+
 
     // TODO: consider removing listeners for update if proxy is used
     // addListeners();
     subscriptions[0] = eventBus.on('modal-filter', onModalFilter);
     subscriptions[1] = eventBus.on('get-groups-from-admin', getGroups);
-    subscriptions[2] = eventBus.on('item-added', loadItems);
+    subscriptions[2] = eventBus.on('item-added', ()=>loadEntities('item'));
     subscriptions[3] = eventBus.on('item-updated', updateItem);
-    subscriptions[4] = eventBus.on('list-added', loadLists);
-    subscriptions[5] = eventBus.on('user-updated', loadUsers);
-    subscriptions[6] = eventBus.on('user-added', loadUsers);
-    subscriptions[7] = eventBus.on('recipe-added', loadRecipes);
+    subscriptions[4] = eventBus.on('list-added', ()=>loadEntities('list'));
+    subscriptions[5] = eventBus.on('user-updated', ()=>loadEntities('user'));
+    subscriptions[6] = eventBus.on('user-added', ()=>loadEntities('user'));
+    subscriptions[7] = eventBus.on('recipe-added', ()=>loadEntities('recipe'));
     // subscriptions[8] = eventBus.on('recipe-updated', updateRecipe);
     document.body.dir = 'ltr';
 });
 
-async function loadUsers() {
-    users.value = await userService.query();
+
+async function loadEntities(type) {
+    switch (type) {
+        case 'user':
+            users.value = await userService.query();
+            break;
+        case 'item':
+            items.value = await itemService.query();
+            break;
+        case 'list':
+            lists.value = await listService.query({ admin: true });
+            break;
+        case 'recipe':
+            recipes.value = await recipeService.query({ admin: true });
+            break;
+        default:
+            
+            users.value = await userService.query(),
+            recipes.value = await recipeService.query({ admin: true }),
+            items.value = await itemService.query(),
+            lists.value = await listService.query({ admin: true })
+            
+            break;
+    }
 }
 
-async function loadLists() {
-    lists.value = await listService.query({ admin: true });
-}
+// async function loadUsers() {
+//     users.value = await userService.query();
+// }
 
-async function loadItems() {
-    items.value = await itemService.query();
+// async function loadLists() {
+//     lists.value = await listService.query({ admin: true });
+// }
 
-}
+// async function loadItems() {
+//     items.value = await itemService.query();
 
-async function loadRecipes() {
-    recipes.value = await recipeService.query({ admin: true });
-}
+// }
+
+// async function loadRecipes() {
+//     recipes.value = await recipeService.query({ admin: true });
+// }
 
 function createEntity(entity) {
     let modalTYpe = null
@@ -150,6 +174,7 @@ function createEntity(entity) {
     eventBus.emit('toggle-modal', { type: modalTYpe });
 }
 
+// TODO: use archive instead of remove
 function removeEntity(entity, id) {
     console.log('removing', entity, id);
 

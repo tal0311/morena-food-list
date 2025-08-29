@@ -1,11 +1,14 @@
 <template>
-    <section v-if="recipe" class="dashboard-modal">
+    <section v-if="recipe" class="dashboard-modal recipe-modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">{{ recipe._id ? 'Update' : 'Add' }} Recipe</h2>
             </div>
             
             <form class="modal-form" @submit.prevent="">
+                <div class="section-divider">
+                    <h3>Hebrew Content</h3>
+                </div>
                 <div class="form-group">
                     <label for="hebrew-title">Hebrew Title</label>
                     <input type="text" id="hebrew-title" placeholder="כותרת" v-model="recipe.he.title">
@@ -33,9 +36,9 @@
                 <h3>Recipe Image</h3>
             </div>
 
-            <div class="form-group">
-                <label for="recipe-image">Recipe Image</label>
-                <div class="modal-grid modal-grid-2">
+            <div class="form-group image-form-group">
+                <label for="recipe-image"></label>
+                <div class="modal-grid">
                     <div class="image-preview">
                         <img :src="recipe.imgUrl" alt="Recipe-img">
                     </div>
