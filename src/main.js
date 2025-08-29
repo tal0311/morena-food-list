@@ -16,7 +16,10 @@ import { i18Service } from "./services/i18n.service";
 // this is for getting the app translations before the app is mounted
 (async () => {
   try {
-
+    
+    // מחכים לטעינת קבצי ה-CSS החיצוניים
+    // await waitForExternalCSS();
+    
     await i18Service.init();
     const app = createApp(App);
 
@@ -36,27 +39,12 @@ import { i18Service } from "./services/i18n.service";
     if (import.meta.env.MODE === 'development') {
       app.use(bugLoggerPlugin);
     }
+    
     app.mount("#app");
   } catch (error) {
-    console.error("Failed to init app", error);
-
+    console.error("❌ שגיאה בטעינת האפליקציה:", error);
   }
 })();
-
-function registerServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', async () => {
-      try {
-        const registration = await navigator.serviceWorker.register('/service-worker.js');
-        console.log('Service Worker registered with scope:', registration.scope);
-      } catch (error) {
-        console.error('Service Worker registration failed:', error);
-      }
-    });
-  }
-}
-
-registerServiceWorker();
 
 
 
