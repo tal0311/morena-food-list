@@ -1,5 +1,6 @@
 <template>
   <section class="main-app main-layout">
+    <OfflineIndicator />
     <RouterView />
     <UserMsg />
     <AppModal />
@@ -20,8 +21,7 @@ import { useUserStore } from './stores/user-store';
 import { useListStore } from './stores/list-store';
 import AppModal from '@/components/AppModal.vue';
 import { useRouter } from 'vue-router';
-
-
+import OfflineIndicator from '@/components/OfflineIndicator.vue';
 
 import { socketService } from './services/socket.service';
 import BugLogger from './components/BugLogger.vue';
@@ -36,7 +36,7 @@ onMounted(async () => {
   console.debug('import.mete.env', import.meta.env);
   document.title = import.meta.env.VITE_APP_TITLE;
   
-  
+  // טוען נתונים ומגדיר sockets
   setUpSockets();
   await loadData();
 })
@@ -85,8 +85,10 @@ async function loadData() {
 </script>
 
 <style scoped>
+
 .main-app {
   height: 100dvh;
-
+  
 }
+
 </style>
