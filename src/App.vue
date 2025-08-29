@@ -36,7 +36,7 @@ onMounted(async () => {
   console.debug('import.mete.env', import.meta.env);
   document.title = import.meta.env.VITE_APP_TITLE;
   
-  // טוען נתונים ומגדיר sockets
+  
   setUpSockets();
   await loadData();
 })

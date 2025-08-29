@@ -31,6 +31,7 @@ export const useUserStore = defineStore("user", () => {
   }
 
   function loadUser() {
+    
     loggedUser.value = userService.getLoggedInUser();
     if (!loggedUser.value) return;
     setLang(loggedUser.value.settings.lang);

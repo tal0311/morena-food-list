@@ -87,6 +87,8 @@ router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
   const listStore = useListStore()
 
+  userStore.loadUser()
+
   routeHistory.push({ to, from, user: userStore.loggedUser })
 
   if (to.matched.some(record => record.meta.requiresAuth) && !userStore.loggedUser) {
