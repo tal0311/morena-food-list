@@ -5,6 +5,7 @@
     <UserMsg />
     <AppModal />
     <BugLogger/>
+    <RouterLink to="/dev" v-if="isDev">Dev</RouterLink>
   </section>
 </template>
 
@@ -33,7 +34,7 @@ const router = useRouter();
 const route = useRoute();
 const listStore = useListStore()
 userStore.loadUser();
-
+const isDev = ref(import.meta.env.MODE === 'development');
 
 const user  = computed(() => userStore.getUser)
 
