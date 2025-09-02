@@ -37,7 +37,7 @@
 import { ref } from 'vue'
 import { decodeCredential } from 'vue3-google-login'
 import { useUserStore } from '@/stores/user-store';
-import { useRouter } from 'vue-router';
+import { useRouter ,useRoute } from 'vue-router';
 import MiniLoader from '@/components/MiniLoader.vue'
 import { showErrorMsg ,showSuccessMsg } from '@/services/event-bus.service';
 
@@ -59,6 +59,7 @@ const isLoading = ref({ credentials: false, google: false, guest: false })
 const userStore = useUserStore()
 const userCredFromGoogle = ref(null)
 const router = useRouter()
+const route = useRoute()
 
 function callback(response) {
     if (response.error) {
@@ -85,7 +86,7 @@ async function login(type, credential) {
         }
 
         if (loggedUser) {
-            router.push('/')
+            router.push(route.query.redirect)
             showSuccessMsg('loginSuccess')
 
         }

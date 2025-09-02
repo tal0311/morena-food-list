@@ -15,12 +15,12 @@
 // TODO: moran filter unwanted items
 
 
-import { computed, onMounted, ref } from 'vue';
+import { computed, onBeforeMount, onMounted, ref } from 'vue';
 import UserMsg from '@/components/UserMsg.vue'
 import { useUserStore } from './stores/user-store';
 import { useListStore } from './stores/list-store';
 import AppModal from '@/components/AppModal.vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import OfflineIndicator from '@/components/OfflineIndicator.vue';
 
 import { socketService } from './services/socket.service';
@@ -30,15 +30,28 @@ const userStore = useUserStore();
 const isSocketConnected = ref(false);
 
 const router = useRouter();
+const route = useRoute();
 const listStore = useListStore()
+
+onBeforeMount(async () => {
+  
+  // await userStore.loadUser();
+  // if (!userStore.getUser) {
+  //   router.push('/login');
+  // }else{
+    setUpSockets();
+    await loadData();
+  // }
+})
 
 onMounted(async () => {
   console.debug('import.mete.env', import.meta.env);
   document.title = import.meta.env.VITE_APP_TITLE;
   
+;
+  
   // טוען נתונים ומגדיר sockets
-  setUpSockets();
-  await loadData();
+ 
 })
 
 function toggleSocket(val) {

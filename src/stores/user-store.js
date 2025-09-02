@@ -30,11 +30,20 @@ export const useUserStore = defineStore("user", () => {
     showSuccessMsg("logout");
   }
 
-  function loadUser() {
-    
-    loggedUser.value = userService.getLoggedInUser();
-    if (!loggedUser.value) return;
-    setLang(loggedUser.value.settings.lang);
+  async function loadUser() {
+    try {
+      console.log('🔍 loadUser - START')
+      loggedUser.value = userService.getLoggedInUser();
+      console.log('🔍 loadUser - userService.getLoggedInUser() returned:', loggedUser.value)
+      if (!loggedUser.value) {
+        console.log('🔍 loadUser - No user found, returning')
+        return;
+      }
+      setLang(loggedUser.value.settings.lang);
+      console.log('🔍 loadUser - User loaded successfully:', loggedUser.value.username)
+    } catch (error) {
+      console.error('Error loading user:', error);
+    }
   }
 
   async function updateLoggedUser(user) {

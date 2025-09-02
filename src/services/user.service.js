@@ -8,13 +8,13 @@ import { useUserStore } from '@/stores/user-store';
 
 
 
-setTimeout(() => {
-    const userStore = useUserStore();
-    socketService.on(SOCKET_EVENT_UPDATE_USER, (user) => {
-        _saveLoggedUser(user);
-        userStore.loggedUser.value = user;
-    });
-}, 1000);
+// setTimeout(() => {
+//     const userStore = useUserStore();
+//     socketService.on(SOCKET_EVENT_UPDATE_USER, (user) => {
+//         _saveLoggedUser(user);
+//         userStore.loggedUser.value = user;
+//     });
+// }, 1000);
 const STORAGE_KEY = 'user_DB';
 const LOGGED_USER = 'loggedUser';
 
@@ -214,21 +214,14 @@ function getGuestUser() {
 }
 
 function _loadUserFromStorage() {
-    const loggedUser = JSON.parse(localStorage.getItem(LOGGED_USER))
-        // ? JSON.parse(localStorage.getItem(LOGGED_USER))
-        // : JSON.parse(sessionStorage.getItem(LOGGED_USER))
-
-    return loggedUser
-
+        const loggedUser =  JSON.parse(localStorage.getItem(LOGGED_USER))
+        return loggedUser
+ 
 }
 
 function _saveLoggedUser(user) {
-
     localStorage.setItem(LOGGED_USER, JSON.stringify(user))
-    // JSON.parse(localStorage.getItem('rememberMe'))
-        // : sessionStorage.setItem(LOGGED_USER, JSON.stringify(user))
-
-    return user;
+     return user;
 }
 
 
