@@ -86,7 +86,7 @@ async function login(type, credential) {
         }
 
         if (loggedUser) {
-            router.push(route.query.redirect)
+            router.push(route.query.redirect || '/')
             showSuccessMsg('loginSuccess')
 
         }

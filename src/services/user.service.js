@@ -214,9 +214,14 @@ function getGuestUser() {
 }
 
 function _loadUserFromStorage() {
-        const loggedUser =  JSON.parse(localStorage.getItem(LOGGED_USER))
-        return loggedUser
- 
+    try {
+        return JSON.parse(localStorage.getItem(LOGGED_USER))
+       
+    } catch (error) {
+        console.error('Error parsing user from localStorage:', error)
+        localStorage.removeItem(LOGGED_USER) // מנקה נתונים פגומים
+        return null
+    }
 }
 
 function _saveLoggedUser(user) {

@@ -88,30 +88,12 @@ const routeHistory = []
 
 
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore();
+ 
 
   
-  if (to.path === '/login') {
-    return next();
-  }
-
-  
-  if (!userStore.getUser) {
-    userStore.loadUser(); 
-  }
-
-
-  const isAuthenticated = !!userStore.getUser;
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    return next({
-      path: '/login',
-      query: { redirect: to.fullPath },
-    });
-  }
-
-  
-  routeHistory.push({ to, from, user: userStore.getUser || null });
+  routeHistory.push({ to, from, user: userStore.loggedUser || null });
 
   // Proceed to the route
   next();
