@@ -5,6 +5,7 @@
     <UserMsg />
     <AppModal />
     <BugLogger/>
+    <RouterLink to="/dev" v-if="import.meta.env.MODE === 'development'">Dev</RouterLink>
   </section>
 </template>
 
