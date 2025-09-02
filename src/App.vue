@@ -32,22 +32,28 @@ const isSocketConnected = ref(false);
 const router = useRouter();
 const route = useRoute();
 const listStore = useListStore()
-userStore.loadUser();
+
 
 const user  = computed(() => userStore.getUser)
 
 onBeforeMount(async () => {
-
+  
   if (!user.value) {
     console.log('PUSHING TO LOGIN');
     router.push('/login');
-  }else{
-    console.log('GETTING DATA');
-    
-    setUpSockets();
-    await listStore.loadLists()
+  }
+})
 
-    
+watchEffect(async() => {
+ 
+  if (user.value) {
+    setUpSockets();
+    try {
+      
+      await listStore.loadLists()
+    } catch (error) {
+      showErrorMsg(error);
+    }
   }
 })
 
