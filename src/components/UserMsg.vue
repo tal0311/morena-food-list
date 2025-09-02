@@ -23,7 +23,11 @@ onBeforeMount(() => {
         userMsg.value = txt
         msgType.value = type
         userMsgRef.value.showModal()
-        alert(userMsg.value)
+
+        if( type === 'error') {
+            alert(userMsg.value)
+        }
+       
 
         // const delay = txt.length > 20 ? 3000 : 1000
         let delay=2000
