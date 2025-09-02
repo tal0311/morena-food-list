@@ -32,6 +32,7 @@ const isSocketConnected = ref(false);
 const router = useRouter();
 const route = useRoute();
 const listStore = useListStore()
+userStore.loadUser();
 
 
 const user  = computed(() => userStore.getUser)
