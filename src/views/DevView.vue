@@ -4,7 +4,7 @@
 
 
         <h2>Local Storage</h2>
-        <pre>{{ localStorage }}</pre>
+        <pre>{{ getLoggedUser() }}</pre>
 
 
 
@@ -14,6 +14,10 @@
 </template>
 
 <script setup>
+
+function getLoggedUser() {
+    return JSON.parse(localStorage.getItem('loggedUser'));
+}
 
 
 </script>
