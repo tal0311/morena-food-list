@@ -35,13 +35,13 @@ const listStore = useListStore()
 
 onBeforeMount(async () => {
   
-  // await userStore.loadUser();
-  // if (!userStore.getUser) {
-  //   router.push('/login');
-  // }else{
+  await userStore.loadUser();
+  if (!userStore.getUser) {
+    router.push('/login');
+  }else{
     setUpSockets();
     await loadData();
-  // }
+  }
 })
 
 onMounted(async () => {
