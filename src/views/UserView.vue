@@ -73,19 +73,23 @@
                 {{ $trans('group-order') }}
             </summary>
             <section class="group-order-container">
-                <ul class="group-list clean-list grid">
-                    <li v-for="label, idx in user.labelOrder" class="grid grid-dir-col">
-                        <span> {{ $trans(label) }} </span>
-                        <div class="btn-container grid grid-dir-col">
-                            <button class="icon-svg icon" v-html="$svg('up_arrow')"
-                                @click="setGroupOrder(label, idx, -1)" :disabled="idx === 0"></button>
-                            <button class="icon-svg icon" v-html="$svg('down_arrow')"
-                                @click="setGroupOrder(label, idx, 1)"
-                                :disabled="idx === user.labelOrder.length - 1"></button>
-                        </div>
-
-                    </li>
-                </ul>
+                <draggable 
+                    v-model="user.labelOrder" 
+                    class="group-list clean-list grid"
+                    item-key="name"
+                    @end="onDragEnd"
+                    ghost-class="ghost-item"
+                    chosen-class="chosen-item"
+                >
+                    <template #item="{ element: label, index: idx }">
+                        <li class="grid grid-dir-col drag-item">
+                            <span> {{ $trans(label) }} </span>
+                            <div class="drag-handle">
+                                <span class="drag-icon">⋮⋮</span>
+                            </div>
+                        </li>
+                    </template>
+                </draggable>
             </section>
 
         </details>
@@ -152,6 +156,7 @@ import { showSuccessMsg } from '@/services/event-bus.service';
 import { useListStore } from '@/stores/list-store';
 import {useRouter} from 'vue-router'
 import UserPreview from '@/components/UserPreview.vue'
+import draggable from 'vuedraggable';
 
 const userStore = useUserStore();
 const user = userStore.getUser;
@@ -187,13 +192,12 @@ async function loadPublicLists() {
 
 }
 
-function setGroupOrder(label, idx, dir) {
-    const labelToMove = user.value.labels.find(l => l.name === label)
-    user.value.labels.splice(idx, 1)
-    user.value.labels.splice((idx + dir), 0, labelToMove)
-
-    user.value.labelOrder = user.value.labels.map(l => l.name)
-    updateUser()
+function onDragEnd(evt) {
+    
+    // עדכון סדר הקבוצות לפי המיקום החדש
+    if (evt.oldIndex !== evt.newIndex) {
+        updateUser();
+    }
 }
 
 const isFirstLoad = ref(true);
@@ -236,6 +240,7 @@ async function logout() {
 }
 
 const historyCounter = computed(() => lists?.value?.length || 'No history');
+
 </script>
 
 <style scoped>
@@ -476,18 +481,50 @@ textarea {
 
         li {
             justify-content: space-between;
+            cursor: grab;
+            transition: all 0.2s ease;
+            padding: 0.5rem;
+            border: 1px solid transparent;
+            border-radius: 4px;
 
-            .btn-container {
-                gap: 1rem;
+            &:hover {
+                background-color: var(--bClr1);
+                border-color: var(--bClr3);
+            }
 
-                button {
-                    &:disabled {
-                        opacity: 0.2;
-                    }
+            &:active {
+                cursor: grabbing;
+            }
+
+            .drag-handle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 2rem;
+                height: 2rem;
+                cursor: grab;
+
+                .drag-icon {
+                    font-size: 1.2rem;
+                    color: var(--bClr3);
+                    user-select: none;
                 }
             }
         }
     }
+}
+
+.ghost-item {
+    opacity: 0.5;
+    background-color: var(--bClr1);
+    border: 2px dashed var(--bClr3);
+}
+
+.chosen-item {
+    background-color: var(--bClr2);
+    border-color: var(--bClr5);
+    transform: rotate(2deg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .public-list-btn.primary-btn{
     padding: 0.5rem 1rem;

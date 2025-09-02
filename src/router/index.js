@@ -8,6 +8,7 @@ import { useListStore } from "@/stores/list-store";
 import { showUserMsg, showSuccessMsg } from "@/services/event-bus.service";
 
 
+
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -83,36 +84,37 @@ const router = createRouter({
 
 
 const routeHistory = []
-router.beforeEach(async (to, from, next) => {
-  const userStore = useUserStore()
-  const listStore = useListStore()
 
-  userStore.loadUser()
 
-  routeHistory.push({ to, from, user: userStore.loggedUser })
 
-  if (to.matched.some(record => record.meta.requiresAuth) && !userStore.loggedUser) {
-    next({ name: 'login' });
-    return;
+
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore();
+
+  
+  if (to.path === '/login') {
+    return next();
   }
 
-  if (to.name === 'list') {
-    // await listStore.loadItems()
-  }
-
-  if (to.name === 'list-summary') {
-    if (!listStore.getCurrList) {
-      showSuccessMsg('noItemsForSummary')
-      // to.meta = userStore.loggedUser.selectedItems
-      next({ name: 'list' })
-      return
-    }
-
+  
+  if (!userStore.getUser) {
+    userStore.loadUser(); 
   }
 
 
-  // default to the next route
+  const isAuthenticated = !!userStore.getUser;
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    return next({
+      path: '/login',
+      query: { redirect: to.fullPath },
+    });
+  }
+
+  
+  routeHistory.push({ to, from, user: userStore.getUser || null });
+
+  // Proceed to the route
   next();
-})
+});
 
 export default router;
