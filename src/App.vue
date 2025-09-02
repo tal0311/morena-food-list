@@ -5,15 +5,15 @@
     <UserMsg />
     <AppModal />
     <BugLogger/>
-    <RouterLink to="/dev" v-if="!isDev">Dev</RouterLink>
+    <RouterLink to="/dev" v-if="true">Dev</RouterLink>
   </section>
 </template>
 
 <script setup>
 //TODO: canva info ang img
 // TODO: in summary screen, show the items that by group order
-// TODO: lock screen in super mode to prevent touching the screen,
-// TODO: moran filter unwanted items
+
+
 
 
 import { computed, onBeforeMount, onMounted, ref, watchEffect } from 'vue';
@@ -31,7 +31,7 @@ const userStore = useUserStore();
 const isSocketConnected = ref(false);
 
 const router = useRouter();
-const route = useRoute();
+
 const listStore = useListStore()
 userStore.loadUser();
 const isDev = ref(import.meta.env.MODE === 'development');

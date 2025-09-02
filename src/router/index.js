@@ -94,22 +94,29 @@ const routeHistory = []
 
 
 
+
 router.beforeEach(async (to, from, next) => {
   const user  = JSON.parse(localStorage.getItem('loggedUser'))
   console.log('user', user);
-  
-//  if (!user && to.path !== '/login') {
-//   return {
-//     path: '/login',
-//     query: { redirect: to.fullPath },
-//   }
-//  }
+
 
   
-  
+  const confirmRefresh = ['list'];
   routeHistory.push({ to, from, user: user || {}});
 
-  // Proceed to the route
+
+  if(confirmRefresh.includes(to.name)) {
+    window.addEventListener('beforeunload', (ev) => {
+    
+      console.log(ev);
+      ev.preventDefault();
+      ev.returnValue = '';
+      
+      
+    });
+    
+  }
+  
   next();
 });
 
