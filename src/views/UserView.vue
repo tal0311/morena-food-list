@@ -80,6 +80,7 @@
                     @end="onDragEnd"
                     ghost-class="ghost-item"
                     chosen-class="chosen-item"
+                    handle=".drag-handle"
                 >
                     <template #item="{ element: label, index: idx }">
                         <li class="grid grid-dir-col drag-item">
@@ -481,7 +482,6 @@ textarea {
 
         li {
             justify-content: space-between;
-            cursor: grab;
             transition: all 0.2s ease;
             padding: 0.5rem;
             border: 1px solid transparent;
@@ -490,10 +490,6 @@ textarea {
             &:hover {
                 background-color: var(--bClr1);
                 border-color: var(--bClr3);
-            }
-
-            &:active {
-                cursor: grabbing;
             }
 
             .drag-handle {
