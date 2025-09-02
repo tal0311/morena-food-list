@@ -70,7 +70,16 @@ const cmpKey = ref(0)
 onBeforeMount(async () => {
     await loadItems()
     await getDataFromRoute()
+
+    // The previous code attempted to show a confirmation dialog on page load, but this is not supported by browsers.
+    // If you want to warn users before they refresh or leave the page, use the 'beforeunload' event instead.
+    // Here is a working example:
+
+   
+
+    
 })
+
 
 async function loadItems() {
     await listStore.loadItems()
