@@ -32,18 +32,22 @@ const isSocketConnected = ref(false);
 const router = useRouter();
 const route = useRoute();
 const listStore = useListStore()
+userStore.loadUser();
+
+const user  = computed(() => userStore.getUser)
 
 onBeforeMount(async () => {
-  
-  userStore.loadUser();
-  if (!userStore.getUser) {
+
+  if (!user.value) {
     console.log('PUSHING TO LOGIN');
     router.push('/login');
   }else{
     console.log('GETTING DATA');
     
     setUpSockets();
-    await loadData();
+    await listStore.loadLists()
+
+    
   }
 })
 
@@ -95,9 +99,7 @@ function setUpSockets() {
 
 
 
-async function loadData() {
-  await listStore.loadLists()
-}
+
 </script>
 
 <style scoped>
