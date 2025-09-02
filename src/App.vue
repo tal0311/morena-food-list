@@ -15,7 +15,7 @@
 // TODO: moran filter unwanted items
 
 
-import { computed, onBeforeMount, onMounted, ref } from 'vue';
+import { computed, onBeforeMount, onMounted, ref, watchEffect } from 'vue';
 import UserMsg from '@/components/UserMsg.vue'
 import { useUserStore } from './stores/user-store';
 import { useListStore } from './stores/list-store';
