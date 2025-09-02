@@ -92,12 +92,12 @@ router.beforeEach(async (to, from, next) => {
   const user  = JSON.parse(localStorage.getItem('loggedUser'))
   console.log('user', user);
   
- if (!user && to.path !== '/login') {
-  return {
-    path: '/login',
-    query: { redirect: to.fullPath },
-  }
- }
+//  if (!user && to.path !== '/login') {
+//   return {
+//     path: '/login',
+//     query: { redirect: to.fullPath },
+//   }
+//  }
 
   
   
