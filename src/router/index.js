@@ -89,11 +89,19 @@ const routeHistory = []
 
 
 router.beforeEach(async (to, from, next) => {
-  const userStore = useUserStore();
- 
+  const user  = JSON.parse(localStorage.getItem('loggedUser'))
+  console.log('user', user);
+  
+ if (!user && to.path !== '/login') {
+  return {
+    path: '/login',
+    query: { redirect: to.fullPath },
+  }
+ }
 
   
-  routeHistory.push({ to, from, user: userStore.loggedUser || null });
+  
+  routeHistory.push({ to, from, user: user || {}});
 
   // Proceed to the route
   next();

@@ -42,7 +42,7 @@ function resetStorage() {
 }
 
 const isBtnDisplayed = computed(() => {
-
+if (!user.value) return false
   const admins =['admin', 'super-admin','super_user']
   return admins.includes(user.value.role)
 })
