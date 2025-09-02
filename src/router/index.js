@@ -78,13 +78,7 @@ const router = createRouter({
       component: () => import("@/views/AdminView.vue"),
       meta: { requiresAuth: true }
     },
-    {
-      path: '/dev',
-      name: 'dev',
-      component: () => import("@/views/DevView.vue"),
-      meta: { requiresAuth: true }
-    }
-
+  
   ],
 });
 
@@ -104,11 +98,18 @@ router.beforeEach(async (to, from, next) => {
   const confirmRefresh = ['list'];
   routeHistory.push({ to, from, user: user || {}});
 
+  if(to.matched.some(record => record.meta.requiresAuth) && !user) {
+    return {
+      path: '/login',
+      query: { redirect: to.fullPath }
+    }
+  }
+
 
   if(confirmRefresh.includes(to.name)) {
     window.addEventListener('beforeunload', (ev) => {
     
-      console.log(ev);
+      
       ev.preventDefault();
       ev.returnValue = '';
       

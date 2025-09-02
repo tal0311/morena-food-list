@@ -5,7 +5,7 @@
     <UserMsg />
     <AppModal />
     <BugLogger/>
-    <RouterLink to="/dev" v-if="true">Dev</RouterLink>
+    <RouterLink to="/debug" v-if="isDev">Dev</RouterLink>
   </section>
 </template>
 
