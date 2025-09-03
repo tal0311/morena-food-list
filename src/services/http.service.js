@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import { useUserStore } from '@/stores/user-store'
-import {useRouter} from 'vue-router'
+
 // import { router } from '@/router'
 
 
@@ -51,9 +51,9 @@ async function ajax(endpoint, method = 'GET', data = null) {
         } catch (e) {
           console.log('Could not clear user store:', e)
         }
-        const router = useRouter()
+        
 
-        router.push('/login')
+        window.location.assign('/')
         
         return true // Indicates error was handled
       },
