@@ -9,14 +9,12 @@
             @select="id => selectEntity(e.name, id)" />
     </section>
 
-    <section v-else>
-        <AppLoader />
-    </section>
+   
 </template>
 
 <script setup>
 import { computed, ref, onBeforeMount, onBeforeUnmount } from 'vue';
-import AppLoader from '@/components/AppLoader.vue';
+// import AppLoader from '@/components/AppLoader.vue';
 import { userService } from '@/services/user.service';
 import { itemService } from '@/services/item.service';
 import { listService } from '@/services/list.service';
@@ -93,7 +91,14 @@ const entities = [{
 const subscriptions = [];
 onBeforeMount(async () => {
 
-   loadEntities();
+   try {
+        $showLoader('Loading entities')
+      await  loadEntities();
+   } catch (error) {
+        console.error('error', error)
+   }finally {
+        $hideLoader()
+   }
 
 
     // TODO: consider removing listeners for update if proxy is used

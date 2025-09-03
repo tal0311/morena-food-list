@@ -11,6 +11,7 @@ import svgPlugin from "./plugins/svgPlugin";
 import errorPlugin from './plugins/errorPlugin'
 import vue3GoogleLogin from 'vue3-google-login'
 import bugLoggerPlugin from './plugins/bugLoggerPlugin'
+import appLoaderPlugin from './plugins/appLoaderPlugin'
 import { i18Service } from "./services/i18n.service";
 
 // this is for getting the app translations before the app is mounted
@@ -35,6 +36,7 @@ import { i18Service } from "./services/i18n.service";
     app.use(i18nPlugin);
     app.use(svgPlugin);
     app.use(errorPlugin);
+    app.use(appLoaderPlugin);
 
     if (import.meta.env.MODE === 'development') {
       app.use(bugLoggerPlugin);

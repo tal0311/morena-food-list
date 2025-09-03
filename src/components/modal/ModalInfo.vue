@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import { computed, watchEffect, ref, onMounted } from 'vue';
+import { computed} from 'vue';
 import { useUserStore } from '@/stores/user-store';
 import { moreInfoService } from '@/services/moreinfo.service';
 
@@ -16,19 +16,21 @@ const props = defineProps({
     info: String
 })
 
-const infoForDisplay = ref(null)
 const userStore = useUserStore()
-const currLang = computed(() => userStore.getCurrLang)
-
-
-
-
-watchEffect(() => {
-    if (props.info) {
-      
-        infoForDisplay.value = moreInfoService.getInfoByLabel(props.info, currLang.value)
-    }
+const infoForDisplay = computed(() => {
+    if (!props.info) return
+    return moreInfoService.getInfoByLabel(props.info, userStore.currLang)
 })
+
+
+
+// watchEffect(() => {
+//     debugger
+//     if (props.info) {
+//       const lang = userStore.currLang
+//         infoForDisplay.value = moreInfoService.getInfoByLabel(props.info, lang)
+//     }
+// })
 </script>
 
 <style scoped>
