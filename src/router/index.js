@@ -98,12 +98,6 @@ router.beforeEach(async (to, from, next) => {
   const confirmRefresh = ['list'];
   routeHistory.push({ to, from, user: user || {}});
 
-  if(to.matched.some(record => record.meta.requiresAuth) && !user) {
-    return {
-      path: '/login',
-      query: { redirect: to.fullPath }
-    }
-  }
 
 
   if(confirmRefresh.includes(to.name)) {
