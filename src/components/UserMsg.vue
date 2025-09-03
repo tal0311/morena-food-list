@@ -9,7 +9,7 @@
 
 <script setup>
 import { eventBus } from '@/services/event-bus.service';
-import { ref, onBeforeMount } from 'vue'
+import { ref, onBeforeMount, onMounted } from 'vue'
 import { useAppStore } from '@/stores/app-store';
 
 const userMsgRef = ref(null)
@@ -17,7 +17,7 @@ const userMsgRef = ref(null)
 const userMsg = ref('Hello User')
 const msgType = ref('')
 
-onBeforeMount(() => {
+onMounted(() => {
     eventBus.on('show-msg', ({ txt, type }) => {
         
         userMsg.value = txt

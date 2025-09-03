@@ -148,7 +148,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, onUpdated, computed, watch } from 'vue'
+import { ref, onBeforeMount, onUpdated, computed, watch, watchEffect } from 'vue'
 import { utilService } from '@/services/util.service';
 import { useUserStore } from '@/stores/user-store'
 import { userService } from '@/services/user.service';
@@ -160,7 +160,7 @@ import UserPreview from '@/components/UserPreview.vue'
 import draggable from 'vuedraggable';
 
 const userStore = useUserStore();
-const user = userStore.getUser;
+const user = userStore.loggedUser;
 
 const diets = [
     { name: 'vegan', label: 'vegan', value: 'isVegan' },
@@ -170,6 +170,10 @@ const diets = [
     { name: 'kosher', label: 'kosher', value: 'isKosher' }
 
 ]
+
+watch(user, () => {
+    console.log('USER UPDATED', user);
+})
 
 const listStore = useListStore();
 const lists = computed(() => listStore.userLists)
@@ -218,10 +222,10 @@ watch(user, () => {
     updateUser()
     console.log('user', user);
 })
-function updateUser() {
+async function updateUser() {
     console.log('updateUser', user);
     
-    userStore.updateLoggedUser(user);
+    await userStore.updateLoggedUser(user);
     showSuccessMsg('userUpdated');
 }
 
