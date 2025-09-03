@@ -1,5 +1,6 @@
 import Axios from 'axios'
 import { useUserStore } from '@/stores/user-store'
+
 // import { router } from '@/router'
 
 
@@ -51,7 +52,9 @@ async function ajax(endpoint, method = 'GET', data = null) {
           console.log('Could not clear user store:', e)
         }
         
-        window.location.assign('/login')
+
+        window.location.assign('/')
+        
         return true // Indicates error was handled
       },
       
