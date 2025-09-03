@@ -1,5 +1,5 @@
 <template>
-    <section class="recipe-view">
+    <section v-if="recipes" class="recipe-view">
         <!-- {{ recipes }} -->
         <h2>{{ $trans('food-inspiration') }} <span class="group-indicator">{{ $trans(filterByGroup) }}</span></h2>
         <section class="filter-container grid grid-dir-col">
@@ -10,7 +10,7 @@
                 <small class="filter-icon-title"> {{ btn }}</small>
             </button>
         </section>
-        <RecipeList v-if="recipes" :recipes="recipes" :is="'match'" />
+        <RecipeList :recipes="recipes" :is="'match'" />
     </section>
 </template>
 
@@ -18,7 +18,7 @@
 import { ref, computed, onBeforeMount, watchEffect } from 'vue';
 import { useRecipeStore } from '@/stores/recipe-store';
 import RecipeList from '@/components/RecipeList.vue'
-
+import { showErrorMsg } from '@/services/event-bus.service';
 
 
 
@@ -85,12 +85,13 @@ onBeforeMount(() => {
 
 async function loadRecipes() {
     try {
-    await recipeStore.loadRecipes()
-    // recipeStore.loadRecipes()
+        $showLoader('Loading recipes')
+        await recipeStore.loadRecipes()
+    
     } catch (error) {
-        console.error('error', error)
+        showErrorMsg('Failed to load recipes')
     }finally {
-        
+        $hideLoader()
     }
 }
 
