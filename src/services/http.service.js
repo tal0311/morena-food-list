@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import { useUserStore } from '@/stores/user-store'
 // import { router } from '@/router'
 
 
@@ -36,14 +37,49 @@ async function ajax(endpoint, method = 'GET', data = null) {
   } catch (err) {
     console.info(`Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data:`, data)
     console.dir(err)
-    if (err.response && err.response.status === 401) {
-      sessionStorage.clear()
-      window.location.assign('/')
-      // Depends on routing startegy - hash or history
-      // window.location.assign('/#/login')
-      // window.location.assign('/login')
-      // router.push('/login')
+    // Error handling map for different HTTP status codes
+    const errorHandlers = {
+      401: () => {
+        // Unauthorized - clear all storage and redirect to login
+        sessionStorage.clear()
+        localStorage.removeItem('loggedUser')
+        
+        try {
+          const userStore = useUserStore()
+          userStore.loggedUser = null
+        } catch (e) {
+          console.log('Could not clear user store:', e)
+        }
+        
+        window.location.assign('/login')
+        return true // Indicates error was handled
+      },
+      
+      403: () => {
+        // Forbidden - log and don't retry
+        console.error('Access forbidden:', err.response.data)
+        return true
+      },
+      
+      500: () => {
+        // Server error - log and don't retry
+        console.error('Server error:', err.response.data)
+        return true
+      },
+      
+      429: () => {
+        // Rate limited - wait before retry
+        console.warn('Rate limited, waiting before retry...')
+        return true
+      }
     }
+    
+    // Handle error if we have a handler for this status code
+    if (err.response && errorHandlers[err.response.status]) {
+      const wasHandled = errorHandlers[err.response.status]()
+      if (wasHandled) return // Don't throw if error was handled
+    }
+    
     throw err
   }
 }
