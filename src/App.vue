@@ -38,13 +38,7 @@ const isDev = ref(import.meta.env.MODE === 'development');
 
 const user  = computed(() => userStore.getUser)
 
-onBeforeMount(async () => {
-  
-  if (!user.value) {
-    console.log('PUSHING TO LOGIN');
-    router.push('/login');
-  }
-})
+
 
 watchEffect(async() => {
  
