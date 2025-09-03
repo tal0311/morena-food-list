@@ -48,7 +48,7 @@ onBeforeMount(async () => {
 
 watchEffect(async() => {
  
-  if (user.value) {
+  if (user.value && !isSocketConnected.value) {
     setUpSockets();
     try {
       
@@ -86,7 +86,8 @@ let timeOutIdx = null;
 const SOCKET_TIMEOUT = 7 * 60 * 1000;
 // SOCKET: manage socket connections
 function setUpSockets() {
-
+  
+   
   toggleSocket(true);
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
