@@ -91,7 +91,7 @@ const routeHistory = []
 
 router.beforeEach(async (to, from, next) => {
   const user  = JSON.parse(localStorage.getItem('loggedUser'))
-  console.log('user', user);
+console.log('USER IN ROUTER', user);
 
 
   

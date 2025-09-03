@@ -24,7 +24,7 @@ import AppModal from '@/components/AppModal.vue';
 import { useRouter, useRoute } from 'vue-router';
 import OfflineIndicator from '@/components/OfflineIndicator.vue';
 
-import { socketService } from './services/socket.service';
+import { socketService, SOCKET_EVENT_UPDATE_USER } from './services/socket.service';
 import BugLogger from './components/BugLogger.vue';
 
 const userStore = useUserStore();
@@ -75,10 +75,20 @@ let timeOutIdx = null;
   if (val) {
     console.log('Tab is in focus, reconnecting socket');
     socketService.setup()
+    setSocketForUserUpdate()
     clearInterval(timeOutIdx);
   } else {
       socketService.off()
   }
+}
+
+function setSocketForUserUpdate() {
+
+    socketService.on(SOCKET_EVENT_UPDATE_USER, (user) => {
+        localStorage.setItem('loggedUser', JSON.stringify(user));
+        userStore.loadUser();
+    });
+
 }
 
 
