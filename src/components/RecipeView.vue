@@ -83,8 +83,15 @@ onBeforeMount(() => {
 })
 
 
-function loadRecipes() {
-    recipeStore.loadRecipes()
+async function loadRecipes() {
+    try {
+    await recipeStore.loadRecipes()
+    // recipeStore.loadRecipes()
+    } catch (error) {
+        console.error('error', error)
+    }finally {
+        
+    }
 }
 
 

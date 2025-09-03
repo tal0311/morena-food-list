@@ -5,6 +5,7 @@
     <UserMsg />
     <AppModal />
     <BugLogger/>
+    <AppLoader />
     <RouterLink to="/debug" v-if="isDev">Dev</RouterLink>
   </section>
 </template>
@@ -23,6 +24,7 @@ import { useListStore } from './stores/list-store';
 import AppModal from '@/components/AppModal.vue';
 import { useRouter, useRoute } from 'vue-router';
 import OfflineIndicator from '@/components/OfflineIndicator.vue';
+import AppLoader from '@/components/AppLoader.vue';
 
 import { socketService, SOCKET_EVENT_UPDATE_USER } from './services/socket.service';
 import BugLogger from './components/BugLogger.vue';

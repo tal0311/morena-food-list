@@ -21,7 +21,7 @@
         </footer>
         <!-- <AppModal /> -->
     </section>
-    <AppLoader v-else />
+    
     <section class="router-view">
         <RouterView />
     </section>
@@ -39,7 +39,7 @@ import { showSuccessMsg } from '@/services/event-bus.service';
 import { useUserStore } from '@/stores/user-store';
 
 import GroupList from '@/components/GroupList.vue';
-import AppLoader from '@/components/AppLoader.vue';
+
 // import AppModal from '@/components/AppModal.vue';
 import { listService } from '@/services/list.service.js';
 // import { listService } from '@/services/list.service.local.js';
@@ -68,17 +68,17 @@ watchEffect(() => {
 const subscriptions = []
 const cmpKey = ref(0)
 onBeforeMount(async () => {
-    await loadItems()
-    await getDataFromRoute()
+    try {
+        $showLoader('Loading item list')
+        await loadItems()
+        await getDataFromRoute()
+    } catch (error) {
+        console.error('error', error)
+    }finally {
+        $hideLoader()
+    }
+    })
 
-    // The previous code attempted to show a confirmation dialog on page load, but this is not supported by browsers.
-    // If you want to warn users before they refresh or leave the page, use the 'beforeunload' event instead.
-    // Here is a working example:
-
-   
-
-    
-})
 
 
 async function loadItems() {
