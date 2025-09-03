@@ -8,14 +8,14 @@ import { useUserStore } from '@/stores/user-store';
 
 
 
-setTimeout(() => {
-    const userStore = useUserStore();
-    socketService.on(SOCKET_EVENT_UPDATE_USER, (user) => {
-        debugger
-        _saveLoggedUser(user);
-        userStore.loadUser();
-    });
-}, 1000);
+// setTimeout(() => {
+//     const userStore = useUserStore();
+//     socketService.on(SOCKET_EVENT_UPDATE_USER, (user) => {
+//         debugger
+//         _saveLoggedUser(user);
+//         userStore.loadUser();
+//     });
+// }, 1000);
 const STORAGE_KEY = 'user_DB';
 const LOGGED_USER = 'loggedUser';
 
