@@ -1,9 +1,11 @@
 <template>
   <section  id="welcome-view" class="the-welcome grid">
-    <h1>{{ $trans('home-page') }}</h1>
+    <h1 class="home-page-title">{{ $trans('home-page') }}</h1>
 
     <div class="action-container grid">
-      <button class="tour-btn primary-btn" @click="navigateTo">{{ $trans('food-ideas') }}</button>
+      <button class="tour-btn primary-btn" @click="navigateTo">
+        <RouterLink to="/recipe">{{ $trans('food-ideas') }}</RouterLink>
+      </button>
       <button class="link-btn primary-btn">
         <RouterLink to="/list">{{ $trans('home-action-2') }}</RouterLink>
       </button>
@@ -24,9 +26,9 @@ router.push({ name: 'recipe' })
 </script>
 
 <style scoped>
-h1 {
+.home-page-title {
   margin: 0;
-
+  font-size: 2rem;
 }
 
 button{

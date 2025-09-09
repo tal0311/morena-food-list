@@ -52,6 +52,7 @@ const userInitials = computed(() => {
         height: 100%;
         object-fit: cover;
         border-radius: 50%;
+        border: 1px solid var(--bClr4);
     }
 
     .user-initials {
@@ -63,6 +64,21 @@ const userInitials = computed(() => {
         border-radius: 50%;
         background-color: var(--bClr4);
         color: var(--bClr1);
+    }
+
+    &.app-nav {
+        justify-content: start;
+        width: fit-content;
+        height: fit-content;
+        img{
+            width: 30px;
+            height: 30px;
+        }
+        .user-initials{
+            font-size: 1rem;
+            width: 30px;
+            height: 30px;
+        }
     }
 }
 </style>

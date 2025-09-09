@@ -19,7 +19,7 @@ import { userService } from '@/services/user.service';
 import { itemService } from '@/services/item.service';
 import { listService } from '@/services/list.service';
 import { i18Service } from '@/services/i18n.service';
-import { eventBus, showSuccessMsg, showUserMsg } from '@/services/event-bus.service';
+import { eventBus, showSuccessMsg, showUserMsg, showErrorMsg } from '@/services/event-bus.service';
 import { recipeService } from '@/services/recipe.service.local';
 import DashboardFilter from '@/components/dashboardCmps/DashboardFilter.vue';
 import EntityTable from '@/components/dashboardCmps/EntityTable.vue';
@@ -117,27 +117,37 @@ onBeforeMount(async () => {
 
 
 async function loadEntities(type) {
-    switch (type) {
-        case 'user':
-            users.value = await userService.query();
-            break;
-        case 'item':
-            items.value = await itemService.query();
-            break;
-        case 'list':
-            lists.value = await listService.query({ admin: true });
-            break;
-        case 'recipe':
-            recipes.value = await recipeService.query({ admin: true });
-            break;
-        default:
-            
-            users.value = await userService.query(),
-            recipes.value = await recipeService.query({ admin: true }),
-            items.value = await itemService.query(),
-            lists.value = await listService.query({ admin: true })
-            
-            break;
+    try {
+        switch (type) {
+            case 'user':
+                users.value = await userService.query();
+                break;
+            case 'item':
+                items.value = await itemService.query();
+                break;
+            case 'list':
+                lists.value = await listService.query({ admin: true });
+                break;
+            case 'recipe':
+                recipes.value = await recipeService.query({ admin: true });
+                break;
+            default:
+                const [usersData, recipesData, itemsData, listsData] = await Promise.all([
+                    userService.query(),  
+                    recipeService.query({ admin: true }),  
+                    itemService.query(),  
+                    listService.query({ admin: true })  
+                ])
+
+                users.value = usersData
+                recipes.value = recipesData
+                items.value = itemsData
+                lists.value = listsData
+                break;
+        }
+    } catch (error) {
+        console.error('Error loading entities:', error)
+        showErrorMsg('Failed to load entities, please try again later');
     }
 }
 

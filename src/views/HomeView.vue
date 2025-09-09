@@ -1,7 +1,7 @@
 <template>
   <section class="home-view">
     <header>
-      <h1>Mrena's Food List</h1>
+      <h1 class="home-page-title">Mrena's Food List</h1>
       <p>{{ getIcon }}</p>
     </header>
 
@@ -10,7 +10,7 @@
       <TheWelcome />
 
       <footer class="grid" @contextmenu.prevent="resetStorage">
-        <RouterLink to="/user" class="icon" v-html="$svg('account')"></RouterLink>
+        <RouterLink :to="`/user/${user._id}`" class="icon" v-html="$svg('account')"></RouterLink>
         <RouterLink v-if="isBtnDisplayed" to="/admin" class="icon admin-btn" v-html="$svg('admin')"></RouterLink>
       </footer>
       <section>
@@ -34,6 +34,7 @@ const getIcon = computed(() => {
 
 const user = computed(() => useUserStore().getUser)
 
+console.log('user', user);
 
 
 function resetStorage() {

@@ -66,7 +66,7 @@ watchEffect(() => {
 })
 
 const subscriptions = []
-const cmpKey = ref(0)
+// const cmpKey = ref(0)
 onBeforeMount(async () => {
     try {
         $showLoader('Loading item list')
@@ -161,6 +161,7 @@ onUnmounted(() => {
 
 <style scoped>
 .list-idx {
+    margin-block-start: 6rem;
     display: grid;
     height: 100%;
     width: 100%;
