@@ -2,8 +2,8 @@
     <section class="main-layout login-view">
         <h1>Login</h1>
         <form class="grid" @submit.prevent="login('credentials', credentials)">
-            <input type="email" v-model="credentials.email" placeholder="Email" required>
-            <input type="password" v-model="credentials.password" placeholder="Password" required>
+            <input type="email" v-model="credentials.email" autocomplete="email" placeholder="example@gmail.com" required>
+            <input type="password" v-model="credentials.password" autocomplete="current-password"  required>
             <button type="submit" :class="`primary-btn ${isLoading.credentials ? 'loading' : ''}`">
                 <MiniLoader v-if="isLoading.credentials" />
                 <p v-else>Login</p>
@@ -110,6 +110,7 @@ async function getCredFromGoogle({ credential }) {
 
 <style scoped>
 .login-view {
+    direction: ltr;
     gap: 1.5rem;
     border: 1px solid var(--bClr1);
     padding: 2.5rem 0;

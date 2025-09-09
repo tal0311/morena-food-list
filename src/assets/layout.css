@@ -10,6 +10,6 @@
     grid-column: 2;
 }
 
-.full{
+.main-layout.full{
     grid-area: 1/-1;
 }

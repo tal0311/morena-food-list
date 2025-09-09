@@ -21,9 +21,14 @@ export const useListStore = defineStore("list", () => {
 
   const getCurrList = computed(() => currList.value);
 
-  const getListForSummary = computed(() => Object.values(listByLabels.value)
-    .flatMap(item => item)
-    .filter(item => currList.value.items.includes(item._id)));
+  const getListForSummary = computed(() => {
+    if (!listByLabels.value || !currList.value || !currList.value.items) {
+      return null;
+    }
+    return Object.values(listByLabels.value)
+      .flatMap(item => item)
+      .filter(item => currList.value.items.includes(item._id));
+  });
 
   const getItemList = computed(() => {
     return listByLabels.value;

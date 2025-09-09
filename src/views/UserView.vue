@@ -1,8 +1,9 @@
 <template>
-    <section class="user-page grid">
+    <section class="user-page grid" v-if="user">
 
         <UserPreview :user="user" />
         <h1> {{ getTitle(user.username) }} <span>👋</span></h1>
+        <!-- user info -->
         <details>
             <summary>{{ $trans('user-info') }}</summary>
             <section class="summary-container grid">
@@ -12,7 +13,7 @@
                 <button class="special-btn" @click="logout">{{$trans('logout') }}</button>
             </section>
         </details>
-
+       <!-- goals and preferences -->
         <details>
             <summary>{{ $trans('goals-and-pref') }}</summary>
             <section class="summary-container">
@@ -31,6 +32,7 @@
             </section>
         </details>
 
+        <!-- settings -->
         <details>
             <summary>{{ $trans('settings') }}</summary>
             <section class="summary-container">
@@ -54,7 +56,7 @@
                     <section class="preferences grid">
                         <label v-for="diet in diets" :for="diet.label">
                             {{ $trans(diet.label) }}
-                            <input type="checkbox" name="diet" @change="updateUser" :id="diet.label"
+                            <input type="checkbox" name="diet" :id="diet.label"
                                 v-model="user.settings[diet.value]">
                         </label>
                     </section>
@@ -67,7 +69,7 @@
 
 
         </details>
-
+        <!-- group order -->
         <details v-if="user.labelOrder">
             <summary>
                 {{ $trans('group-order') }}
@@ -94,6 +96,7 @@
             </section>
 
         </details>
+        <!-- my lists -->
         <details>
             <summary>
                 <div>{{ $trans('my-lists') }}
@@ -127,7 +130,7 @@
 
             </section>
         </details>
-     
+        
         <details>
             <summary>{{ $trans('personal-notes') }}</summary>
             <section class="notes-container">
@@ -148,19 +151,22 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, onUpdated, computed, watch, watchEffect } from 'vue'
+import { ref, onBeforeMount, computed, watch } from 'vue'
 import { utilService } from '@/services/util.service';
 import { useUserStore } from '@/stores/user-store'
 import { userService } from '@/services/user.service';
 import { listService } from '@/services/list.service';
 import { showSuccessMsg } from '@/services/event-bus.service';
 import { useListStore } from '@/stores/list-store';
-import {useRouter} from 'vue-router'
+import {useRouter,useRoute} from 'vue-router'
 import UserPreview from '@/components/UserPreview.vue'
 import draggable from 'vuedraggable';
 
-const userStore = useUserStore();
-const user = userStore.loggedUser;
+
+const route = useRoute()
+const router = useRouter()
+const userStore = useUserStore()
+
 
 const diets = [
     { name: 'vegan', label: 'vegan', value: 'isVegan' },
@@ -170,10 +176,8 @@ const diets = [
     { name: 'kosher', label: 'kosher', value: 'isKosher' }
 
 ]
+const user = ref(null)
 
-watch(user, () => {
-    console.log('USER UPDATED', user);
-})
 
 const listStore = useListStore();
 const lists = computed(() => listStore.userLists)
@@ -182,9 +186,24 @@ const publicLists = ref([])
 
 
 onBeforeMount(async () => {
-    
-    await listStore.loadLists()
+    try{
+        $showLoader('Loading User')
+        
+        console.log('route.meta.userId', route.meta);
+        
+        user.value = await userService.getById(route.meta.userId)
+        await listStore.loadLists()
+    } catch (error) {
+        console.error('Error loading user:', error);
+    }finally{
+        isFirstLoad.value = false
+        $hideLoader()
+    }
 })
+
+// function loadUser() {
+//     user.value = utilService.loadFromStorage('loggedUser', user)
+// }
 
 async function loadPublicLists() {
     btnSate.value ='loading-public-lists'
@@ -201,33 +220,62 @@ function onDragEnd(evt) {
     
     // עדכון סדר הקבוצות לפי המיקום החדש
     if (evt.oldIndex !== evt.newIndex) {
-        updateUser();
+        debouncedUpdateUser();
     }
 }
+
+// const isFirstLoad = ref(true);
+// onUpdated(() => {
+//     if (isFirstLoad.value) {
+//         isFirstLoad.value = false;
+//         return;
+//     }
+//     // updateUser()
+// })
+
+
+
 
 const isFirstLoad = ref(true);
-onUpdated(() => {
-    if (isFirstLoad.value) {
-        isFirstLoad.value = false;
-        return;
-    }
-    // updateUser()
-})
 
-
-
-updateUser = utilService.debounce(updateUser, 1000);
-
-watch(user, () => {
-    updateUser()
-    console.log('user', user);
-})
 async function updateUser() {
-    console.log('updateUser', user);
     
-    await userStore.updateLoggedUser(user);
+    user.value = await userService.save(user.value);
+    userStore.updateLoggedUser(user.value);
+    // console.log('updateUser AFTER', user.value.settings);
+    isFirstLoad.value = true
+    
     showSuccessMsg('userUpdated');
 }
+
+// Debounce the updateUser function to prevent multiple rapid calls
+const debouncedUpdateUser = utilService.debounce(updateUser, 1000);
+
+// Store previous user state for comparison
+const previousUser = ref(null);
+
+// Watch for user changes and update when needed
+watch(user, (newUser) => {
+
+    if (!previousUser.value) {
+        previousUser.value = JSON.parse(JSON.stringify(newUser));
+        return;
+    }
+    
+    // Check if there's an actual change in user properties
+    const hasChanged = (
+        newUser.username !== previousUser.value.username ||
+        newUser.level !== previousUser.value.level ||
+        newUser.personalTxt !== previousUser.value.personalTxt ||
+        JSON.stringify(newUser.settings) !== JSON.stringify(previousUser.value.settings) ||
+        JSON.stringify(newUser.labelOrder) !== JSON.stringify(previousUser.value.labelOrder)
+    );
+    
+    if (hasChanged) {
+        debouncedUpdateUser();
+        previousUser.value = JSON.parse(JSON.stringify(newUser));
+    }
+}, { deep: true });
 
 function getTitle(username) {
     const elBody = document.querySelector('body')
@@ -238,7 +286,7 @@ function formatDate(date) {
     return new Date(date).toLocaleDateString('he-IL');
 };
 
-const router = useRouter()
+
 async function logout() {
     await userStore.logout();
     router.push('/login');
@@ -249,6 +297,7 @@ const historyCounter = computed(() => lists?.value?.length || 'No history');
 </script>
 
 <style scoped>
+
 .history-list,.public-list {
     gap: 0.5rem;
     padding: 0.5rem;
@@ -282,6 +331,10 @@ const historyCounter = computed(() => lists?.value?.length || 'No history');
     gap: 1rem;
     width: 100%;
     padding-block: 5rem;
+
+    h1 {
+        font-size: 2rem;
+    }
 }
 
 footer {

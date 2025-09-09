@@ -50,6 +50,7 @@ export const useUserStore = defineStore("user", () => {
     console.log('updateLoggedUser', user);
     const userToUpdate = { ...loggedUser.value, ...user };
     loggedUser.value = await userService.save(userToUpdate);
+    return loggedUser.value;
   }
 
   async function updateUser(key, value) {

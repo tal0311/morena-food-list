@@ -27,6 +27,7 @@ export const userService = {
     getLoggedInUser,
     signup,
     getGuestUser,
+    getById,
     // updateUser
     query,
     logout,
@@ -39,6 +40,10 @@ window.userService = userService;
 
 async function query() {
     return await httpService.get('user');
+}
+
+async function getById(userId) {
+    return await httpService.get('user/' + userId);
 }
 
 function getLoggedInUser() {

@@ -6,7 +6,7 @@ import HomeView from "../views/HomeView.vue";
 import { useUserStore } from "@/stores/user-store";
 import { useListStore } from "@/stores/list-store";
 import { showUserMsg, showSuccessMsg } from "@/services/event-bus.service";
-
+import { computed } from "vue";
 
 
 const router = createRouter({
@@ -19,7 +19,7 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
-      path: "/user",
+      path: "/user/:userId",
       name: "user",
       component: () => import("@/views/UserView.vue"),
       meta: { requiresAuth: true }
@@ -90,6 +90,7 @@ const routeHistory = []
 
 
 router.beforeEach(async (to, from, next) => {
+  const listStore = useListStore()
   const user  = JSON.parse(localStorage.getItem('loggedUser'))
 console.log('USER IN ROUTER', user);
 
@@ -99,13 +100,34 @@ console.log('USER IN ROUTER', user);
   routeHistory.push({ to, from, user: user || {}});
 
   if(to.matched.some(record => record.meta.requiresAuth) && !user) {
-    return {
+    return next({
       path: '/login',
       query: { redirect: to.fullPath }
+    })
+  }
+
+  // debugger
+
+  if(to.name === 'list-summary') {
+    const list = listStore.getListForSummary
+    if(!list) {
+      showSuccessMsg('noItemsForSummary')
+      return next({
+        path: '/list',
+        query: { ...to.query }
+      })
     }
+  //  console.log( list );
+  }
+
+  if(to.name === 'user') {
+// TO CONVERT TO USERNAME TO ID IN THE SERVER CALL
+    to.meta.userId = user._id
   }
 
 
+  // console.log(from.name);
+  
   if(confirmRefresh.includes(to.name)) {
     window.addEventListener('beforeunload', (ev) => {
     

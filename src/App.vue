@@ -1,12 +1,13 @@
 <template>
   <section class="main-app main-layout">
-    <OfflineIndicator />
-    <RouterView />
-    <UserMsg />
-    <AppModal />
-    <BugLogger/>
-    <AppLoader />
-    <RouterLink to="/debug" v-if="isDev">Dev</RouterLink>
+      <OfflineIndicator />
+      <AppHeader :user="user" />
+      <RouterView />
+      <UserMsg />
+      <AppModal />
+      <BugLogger/>
+      <AppLoader />
+    <!-- <RouterLink to="/debug" v-if="isDev">Dev</RouterLink> -->
   </section>
 </template>
 
@@ -25,13 +26,12 @@ import AppModal from '@/components/AppModal.vue';
 import { useRouter, useRoute } from 'vue-router';
 import OfflineIndicator from '@/components/OfflineIndicator.vue';
 import AppLoader from '@/components/AppLoader.vue';
-
+import AppHeader from '@/components/AppHeader.vue';
 import { socketService, SOCKET_EVENT_UPDATE_USER } from './services/socket.service';
 import BugLogger from './components/BugLogger.vue';
 
 const userStore = useUserStore();
 const isSocketConnected = ref(false);
-
 const router = useRouter();
 
 const listStore = useListStore()
@@ -67,7 +67,7 @@ onMounted(async () => {
   
 ;
   
-  // טוען נתונים ומגדיר sockets
+
  
 })
 
@@ -85,9 +85,8 @@ let timeOutIdx = null;
 }
 
 function setSocketForUserUpdate() {
-
-    socketService.on(SOCKET_EVENT_UPDATE_USER, (user) => {
-        localStorage.setItem('loggedUser', JSON.stringify(user));
+      socketService.on(SOCKET_EVENT_UPDATE_USER, (user) => {
+       localStorage.setItem('loggedUser', JSON.stringify(user));
         userStore.loadUser();
     });
 
@@ -129,5 +128,7 @@ function setUpSockets() {
   height: 100dvh;
   
 }
+
+
 
 </style>
