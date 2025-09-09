@@ -128,14 +128,11 @@ console.log('USER IN ROUTER', user);
 
   // console.log(from.name);
   
-  if(confirmRefresh.includes(to.name)) {
+  if(confirmRefresh.includes(to.name) && !from.name) {
     window.addEventListener('beforeunload', (ev) => {
-    
-      
       ev.preventDefault();
       ev.returnValue = '';
-      
-      
+  
     });
     
   }
