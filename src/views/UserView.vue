@@ -188,9 +188,6 @@ const publicLists = ref([])
 onBeforeMount(async () => {
     try{
         $showLoader('Loading User')
-        
-        console.log('route.meta.userId', route.meta);
-        
         user.value = await userService.getById(route.meta.userId)
         await listStore.loadLists()
     } catch (error) {
