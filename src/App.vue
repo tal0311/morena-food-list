@@ -54,6 +54,7 @@ watchEffect(async() => {
     setUpSockets();
     try {
       
+
       await listStore.loadLists()
     } catch (error) {
       showErrorMsg(error);

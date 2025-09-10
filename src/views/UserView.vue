@@ -104,8 +104,8 @@
                 </div>
             </summary>
             <section class="history-container">
-                <ul v-if="lists" class="history-list clean-list grid">
-                    <li v-for="list in lists" :key="list._id" class="grid grid-dir-col">
+                <ul v-if="user.lists" class="history-list clean-list grid">
+                    <li v-for="list in user.lists" :key="list._id" class="grid grid-dir-col">
                         <small>{{ formatDate(list.createdAt) }}</small>
                         <small>{{ list.title }}</small>
                         <RouterLink :to="`/list/${list._id}`">
@@ -180,7 +180,7 @@ const user = ref(null)
 
 
 const listStore = useListStore();
-const lists = computed(() => listStore.userLists)
+// const lists = computed(() => listStore.userLists)
 const btnSate = ref('import-public-lists')
 const publicLists = ref([])
 
@@ -188,9 +188,9 @@ const publicLists = ref([])
 onBeforeMount(async () => {
     try{
         $showLoader('Loading User')
-        user.value = await userService.getById(route.meta.userId)
-        await listStore.loadLists()
-    } catch (error) {
+        user.value = await userService.getById(route.params.userId)
+       
+         } catch (error) {
         console.error('Error loading user:', error);
     }finally{
         isFirstLoad.value = false
@@ -289,7 +289,7 @@ async function logout() {
     router.push('/login');
 }
 
-const historyCounter = computed(() => lists?.value?.length || 'No history');
+const historyCounter = computed(() => user.value?.lists?.length || 'No history');
 
 </script>
 
