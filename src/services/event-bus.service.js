@@ -68,6 +68,7 @@ const userMsgs = {
       listRemoved: 'הרשימה לא נמצאה',
       itemUpdated: 'עדכון הפריט נכשל',
       listUpdated: 'עדכון הרשימה נכשל',
+      errorLoadingList: 'הרשימה לא נטענה',
     }
   },
   en: {
@@ -101,6 +102,7 @@ const userMsgs = {
       listRemoved: 'List not found',
       itemUpdated: 'Failed to update item',
       listUpdated: 'Failed to update list',
+      errorLoadingList: 'List not loaded',
     }
   }
 

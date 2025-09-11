@@ -104,30 +104,11 @@
                 </div>
             </summary>
             <section class="history-container">
-                <ul v-if="user.lists" class="history-list clean-list grid">
-                    <li v-for="list in user.lists" :key="list._id" class="grid grid-dir-col">
-                        <small>{{ formatDate(list.createdAt) }}</small>
-                        <small>{{ list.title }}</small>
-                        <RouterLink :to="`/list/${list._id}`">
-                            <span class="secondary-btn">{{ $trans('restore') }}</span>
-                        </RouterLink>
-                    </li>
-                </ul>
-                <p v-else>{{ $trans('no-history') }}</p>
+               <ShopListList :lists="user.lists" @selectList="getListById" :currList="currList"/>
                 <button class="public-list-btn primary-btn" @click="loadPublicLists">
                     {{$trans(btnSate)}}
                 </button>
-          
-                <ul v-if="publicLists" class="public-list clean-list grid">
-                    <li v-for="list in publicLists" :key="list._id" class="grid grid-dir-col">
-                        <small>{{ formatDate(list.createdAt) }}</small>
-                        <small>{{ list.title }}</small>
-                        <RouterLink :to="`/list/${list._id}`">
-                            <span class="secondary-btn">{{ $trans('restore') }}</span>
-                        </RouterLink>
-                    </li>
-                </ul>
-
+                <ShopListList :lists="publicLists" @selectList="getListById" :currList="currList"/>
             </section>
         </details>
         
@@ -160,6 +141,7 @@ import { showSuccessMsg } from '@/services/event-bus.service';
 import { useListStore } from '@/stores/list-store';
 import {useRouter,useRoute} from 'vue-router'
 import UserPreview from '@/components/UserPreview.vue'
+import ShopListList from '@/components/ShopListList.vue'
 import draggable from 'vuedraggable';
 
 
@@ -177,9 +159,9 @@ const diets = [
 
 ]
 const user = ref(null)
+const currList = ref(null)
+// const listStore = useListStore();
 
-
-const listStore = useListStore();
 // const lists = computed(() => listStore.userLists)
 const btnSate = ref('import-public-lists')
 const publicLists = ref([])
@@ -211,6 +193,17 @@ async function loadPublicLists() {
     }
     btnSate.value = 'public-lists'
 
+}
+
+ async function getListById(listId) {
+    try{
+    currList.value = await listService.getById(listId)
+    } catch (error) {
+        showErrorMsg( 'error-loading-list');
+        currList.value = null
+    }
+
+  
 }
 
 function onDragEnd(evt) {
@@ -279,9 +272,7 @@ function getTitle(username) {
     return elBody.dir === 'rtl' ? `שלום, ${username}` : `Hi, ${username}`;
 
 }
-function formatDate(date) {
-    return new Date(date).toLocaleDateString('he-IL');
-};
+
 
 
 async function logout() {
