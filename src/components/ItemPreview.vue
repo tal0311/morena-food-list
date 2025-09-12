@@ -13,12 +13,14 @@
 </template>
 
 <script setup>
-import { computed, ref, watchEffect } from 'vue';
+import { computed, ref, watchEffect, onBeforeMount } from 'vue';
 import { showSuccessMsg } from '@/services/event-bus.service';
+import { useRoute } from 'vue-router';
+
 const props = defineProps({
     item: Object,
     idx: Number,
-    labelName: String,
+    labelName: String, 
     display: {
         type: String,
         default: 'list-items'
@@ -26,9 +28,17 @@ const props = defineProps({
     }
 })
 
+const route = useRoute()
+
 const emit = defineEmits(['selectItem', 'shearSelectItem'])
 
 const isSwiped = ref(false)
+
+onBeforeMount(() => {
+  if (route.name === 'list-summary') {
+    isSwiped.value = true
+      }
+})
 
 function onSelect() {
     if (props.display === 'shopping-list') return

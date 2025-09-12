@@ -92,7 +92,8 @@ const routeHistory = []
 router.beforeEach(async (to, from, next) => {
   const listStore = useListStore()
   const user  = JSON.parse(localStorage.getItem('loggedUser'))
-console.log('USER IN ROUTER', user);
+
+  listStore.setSearch(to.query.search)
 
 
   
@@ -105,8 +106,6 @@ console.log('USER IN ROUTER', user);
       query: { redirect: to.fullPath }
     })
   }
-
-  // debugger
 
   if(to.name === 'list-summary') {
     const list = listStore.getListForSummary

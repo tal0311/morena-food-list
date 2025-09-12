@@ -4,6 +4,7 @@
           <RouterLink :to="{path: `/user/${ props.user._id }`, meta: { userId: props.user._id }}">
             <UserPreview :user="props.user" display="app-nav" />
           </RouterLink>
+          <input v-show="searchVisible" name="search" type="text" v-model="search" :placeholder="$trans('search')" />
           <RouterLink to="/">
             <img src="/android-chrome-512x512.png" alt="Logo" class="logo">
           </RouterLink>
@@ -13,14 +14,33 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
+import { ref, watchEffect , computed } from 'vue';
+import { useRouter , useRoute } from 'vue-router';
 import UserPreview from '@/components/UserPreview.vue';
+import { useGlobals } from '@/composables/useGlobals';
 
-const router = useRouter();
+const { $trans } = useGlobals()
+const router = useRouter()
+const route = useRoute()
+
+const search = ref('')
+
+const searchVisible = computed(() => {
+  return router.currentRoute.value.name === 'list'
+})
+
+
 const props = defineProps({
     user: {
         type: Object,
       }
+})
+  
+watchEffect(() => {
+  router.push({ name: route.name, query: { search: search.value } })
+  // listStore.setSearch(search.value)
+
+  // route.query.search = search.value
 })
 
 const excludedRoutes = ['home', 'login', 'user', 'admin'];
@@ -39,7 +59,13 @@ const excludedRoutes = ['home', 'login', 'user', 'admin'];
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 
   .app-nav{
-    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    input{
+      padding: 0.5rem;
+      width: 100%;
+      border: 1px solid var(--bClr4);
+    }
+    grid-template-columns: 1fr auto 1fr;
     >*:first-child{
       justify-self: start;
     }
@@ -51,7 +77,7 @@ const excludedRoutes = ['home', 'login', 'user', 'admin'];
   }
   .logo{
       width: 30px;
-      border: 1px solid #adadad;
+      border: 1px solid var(--bClr4);
     border-radius: 50%;
     
     }

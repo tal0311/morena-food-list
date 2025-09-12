@@ -3,13 +3,15 @@
     <section class="summary-view grid">
 
         <div id="list-container">
-            <ItemList v-if="selectItems" :list="selectItems" :display="isShoppingMode ? 'shopping-list' : 'list-items'"
-                @selectItem="toggleSelectItem">
-                <h3>{{ $trans('list-results') }}</h3>
-            </ItemList>
+            <section v-if="mappedItemsByGroup" v-for="(value, key) in mappedItemsByGroup" :key="key" class="list-by-group">
+                <h3 class="list-by-group-title">{{ $trans(key) }}</h3>
+                <ItemList :list="value" :labelName="key" :display="isShoppingMode ? 'shopping-list' : 'list-items'"
+                    @selectItem="toggleSelectItem">
+                </ItemList>
+             </section>
+        
             <section v-else class="no-items grid">
                 <h3>{{ $trans('no-items-to-show') }}</h3>
-
                 <div class="svg-placeholder grid" v-html="$svg('list')"></div>
             </section>
         </div>
@@ -27,7 +29,7 @@
 
         <footer v-if="isFooterVisible" :class="`grid grid-dir-col ${isShoppingMode ? 'shopping blur-bg' : ''}`">
             <button class="secondary-btn" @click="onBack">{{ $trans('back') }}</button>
-            <button v-if="isShoppingMode" class="special-btn icon-svg" @click="lockScreen"
+            <button v-if="isShoppingMode" class="special-btn" @click="lockScreen"
                 v-html="$svg('lock')"></button>
         </footer>
 
@@ -50,7 +52,9 @@ import { eventBus } from '@/services/event-bus.service';
 const listStore = useListStore()
 const { $trans } = useGlobals()
 
+
 const route = useRoute()
+const router = useRouter()
 
 const isShoppingMode = ref(route.query.shopping === 'true')
 
@@ -60,20 +64,38 @@ let labels = ref(null)
 
 const cmpKey = ref(0)
 const selectItems = computed(() => listStore.getListForSummary)
+const mappedItemsByGroup = computed(() => {
+       return selectItems.value.reduce((acc, item) => {
+        item.isSelected = true
+        if (!acc[item.group]) {
+            acc[item.group] = []
+        }
+        acc[item.group].push(item)
+        return acc
+    }, {})
+    
+})
+
+
 
 // Debug logs
 
 
 onBeforeMount(async () => {
     // Load items if not already loaded
-    if (!listStore.listByLabels.value) {
+        
+    if (!listStore.listByLabels) {
         console.log('Loading items for summary...');
         await listStore.loadItems();
     }
+    
+    // console.log('After loading - selectItems:', selectItems.value);
 });
 
 watchEffect(() => {
+    // console.log('watchEffect triggered - selectItems:', selectItems.value);
     if (selectItems.value && selectItems.value.length > 0) {
+        // console.log('Preparing chart data...');
         prepDataForChart()
     }
 })
@@ -92,10 +114,9 @@ function toggleSelectItem({ item }) {
 
 }
 
-const router = useRouter()
+
 
 function onBack() {
-
     router.push({ name: 'list', params: route.params })
 }
 
@@ -114,6 +135,7 @@ function lockScreen() {
 
 <style scoped>
 .summary-view {
+    margin-block-start: 3rem;
     padding-inline: 0.5rem;
     position: fixed;
     width: 100vw;
@@ -122,6 +144,11 @@ function lockScreen() {
     transform: translate(-50%, -50%);
     overflow-y: auto;
     height: 100vh;
+
+    .list-by-group-title {
+        text-align: start;
+        font-size: 1.5rem;
+    }
 
     
     align-content: space-between;

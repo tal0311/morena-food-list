@@ -51,6 +51,7 @@ const listStore = useListStore()
 const userStore = useUserStore()
 
 const groupList = computed(() => {
+    
     return listStore.getItemList
 })
 const labelList = ref(null)
