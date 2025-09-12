@@ -19,15 +19,21 @@ export const useListStore = defineStore("list", () => {
   const currList = ref(null);
   const listByLabels = ref(null);
 
+
   const getCurrList = computed(() => currList.value);
 
   const getListForSummary = computed(() => {
-    if (!listByLabels.value || !currList.value || !currList.value.items) {
-      return null;
-    }
-    return Object.values(listByLabels.value)
-      .flatMap(item => item)
-      .filter(item => currList.value.items.includes(item._id));
+
+  try {
+    //  const itemIds = currList.value.items.map(item => item._id)
+     return Object.values(listByLabels.value)
+    .flatMap(item => item).filter(item => currList.value.items.includes(item._id));
+  } catch (error) {
+    console.log('error', error);
+    
+    return null
+  }
+
   });
 
   const getItemList = computed(() => {
@@ -49,9 +55,7 @@ export const useListStore = defineStore("list", () => {
 
     } catch (error) {
       console.debug("Failed to load list", error);
-      // useAppStore().logError(error, false);
-      // TODO: show error message 
-      // showErrorMsg("Failed to load list, please try again later");
+    
     }
   }
 
@@ -70,8 +74,6 @@ export const useListStore = defineStore("list", () => {
   async function updateLabel(label) {
     // debugger
     await itemService.updateLabel(label);
-
-
     showSuccessMsg('labelUpdated');
   }
 
@@ -106,12 +108,22 @@ export const useListStore = defineStore("list", () => {
 
   }
 
+  // make list has items is array of Ides
   function setCurrList(list, isShared = false) {
+    console.log('list setCurrList', list);
+    
     currList.value = list;
-    const listItems = currList.value.items
+    const listItems = list.items
 
+    // console.log('listByLabels', listByLabels.value);
+    
+    // console.log('listItems', listItems);
+    
     for (const key in listByLabels.value) {
       listByLabels.value[key].map(item => {
+       
+        // console.log('item', item._id);
+        
         if (listItems.includes(item._id)) {
           item.isSelected = true;
           if (isShared) {
@@ -122,6 +134,9 @@ export const useListStore = defineStore("list", () => {
         return item;
       });
     }
+
+ 
+    
 
   }
 

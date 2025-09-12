@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watchEffect } from 'vue'
+import { ref, computed, watchEffect, onBeforeMount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useListStore } from '@/stores/list-store';
 import ItemList from '@/components/ItemList.vue'
@@ -61,8 +61,19 @@ let labels = ref(null)
 const cmpKey = ref(0)
 const selectItems = computed(() => listStore.getListForSummary)
 
+// Debug logs
+
+
+onBeforeMount(async () => {
+    // Load items if not already loaded
+    if (!listStore.listByLabels.value) {
+        console.log('Loading items for summary...');
+        await listStore.loadItems();
+    }
+});
+
 watchEffect(() => {
-    if (selectItems.value) {
+    if (selectItems.value && selectItems.value.length > 0) {
         prepDataForChart()
     }
 })

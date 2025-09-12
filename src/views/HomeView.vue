@@ -34,9 +34,6 @@ const getIcon = computed(() => {
 
 const user = computed(() => useUserStore().getUser)
 
-console.log('user', user);
-
-
 function resetStorage() {
   localStorage.clear()
   location.reload()

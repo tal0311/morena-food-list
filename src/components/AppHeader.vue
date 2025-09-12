@@ -1,7 +1,7 @@
 <template>
     <header v-if="!excludedRoutes.includes(router.currentRoute.value.name)" class="main-header main-layout">
         <nav class="grid app-nav grid-dir-cols">
-          <RouterLink :to="{path: `/user/${ props.user.username }`, meta: { userId: props.user._id }}">
+          <RouterLink :to="{path: `/user/${ props.user._id }`, meta: { userId: props.user._id }}">
             <UserPreview :user="props.user" display="app-nav" />
           </RouterLink>
           <RouterLink to="/">

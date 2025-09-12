@@ -110,6 +110,8 @@ console.log('USER IN ROUTER', user);
 
   if(to.name === 'list-summary') {
     const list = listStore.getListForSummary
+    
+    
     if(!list) {
       showSuccessMsg('noItemsForSummary')
       return next({
@@ -128,14 +130,11 @@ console.log('USER IN ROUTER', user);
 
   // console.log(from.name);
   
-  if(confirmRefresh.includes(to.name)) {
+  if(confirmRefresh.includes(to.name) && !from.name) {
     window.addEventListener('beforeunload', (ev) => {
-    
-      
       ev.preventDefault();
       ev.returnValue = '';
-      
-      
+  
     });
     
   }
