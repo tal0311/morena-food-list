@@ -54,7 +54,7 @@ export const useListStore = defineStore("list", () => {
       // filteredLabels[key] = [];
       // console.log('filteredLabels', filteredLabels[key]);
       
-      const regex = new RegExp(search.value.toLowerCase(), 'i')
+      const regex = new RegExp(search.value, 'i')
       filteredLabels[key] = filteredLabels[key]
       .filter(item => regex.test($trans(item.name)))
    
