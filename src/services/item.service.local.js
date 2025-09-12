@@ -158,24 +158,17 @@ function getEmptyItem(name) {
 function prepDataForChart(list) {
 
   list = JSON.parse(JSON.stringify(list));
-
-  // console.log(list.items);
   const itemsMap = list.reduce((acc, curr) => {
-
-
     if (!acc[curr.group]) {
       acc[curr.group] = []
     }
     acc[curr.group].push(curr)
-
-
     return acc
   }, {})
-
   for (const group in itemsMap) {
     itemsMap[group] = itemsMap[group].length;
   }
-  console.log(itemsMap);
+  
   return itemsMap;
 }
 
