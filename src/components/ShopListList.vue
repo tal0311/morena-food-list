@@ -16,7 +16,7 @@
                </ul>
               
             </details>
-            <RouterLink :to="`/list/${list._id}`">
+            <RouterLink :to="`/list/${list._id}?restore=true`">
                     <span class="primary-btn">{{ $trans('restore') }}</span>
             </RouterLink>
 

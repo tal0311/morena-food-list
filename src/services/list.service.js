@@ -37,9 +37,9 @@ async function query(filterBy = {}) {
 }
 
 
-function getById(listId) {
+function getById(listId, filterBy = {}) {
   // return storageService.get(STORAGE_KEY, itemId);
-  return httpService.get(`list/${listId}`)
+  return httpService.get(`list/${listId}`, filterBy)
 }
 
 async function remove(listId) {

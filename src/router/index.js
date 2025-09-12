@@ -110,6 +110,8 @@ console.log('USER IN ROUTER', user);
 
   if(to.name === 'list-summary') {
     const list = listStore.getListForSummary
+    
+    
     if(!list) {
       showSuccessMsg('noItemsForSummary')
       return next({

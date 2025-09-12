@@ -86,7 +86,7 @@ async function loadItems() {
 }
 
 async function getDataFromRoute() {
-    const { share, ids } = route.query
+    const { share, ids , restore } = route.query
     const { listId } = route.params
 
     if (ids) {
@@ -96,14 +96,22 @@ async function getDataFromRoute() {
     if (share && listId) {
         listStore.loadSharedList()
     }
-    if (listId && !share) {
+    if (listId && restore) {
+        console.log('listId', listId);
+        
         await loadList(listId)
     }
 }
 
 async function loadList(listId) {
-    const list = await listService.getById(listId)
-    listStore.setCurrList(list)
+    try{
+        const list = await listService.getById(listId)
+        listStore.setCurrList(list)
+    } catch (error) {
+        console.error('error', error);
+
+    }
+   
 }
 
 async function clearItems() {

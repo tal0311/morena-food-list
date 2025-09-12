@@ -170,6 +170,7 @@ const publicLists = ref([])
 onBeforeMount(async () => {
     try{
         $showLoader('Loading User')
+        
         user.value = await userService.getById(route.params.userId)
        
          } catch (error) {
@@ -197,7 +198,7 @@ async function loadPublicLists() {
 
  async function getListById(listId) {
     try{
-    currList.value = await listService.getById(listId)
+    currList.value = await listService.getById(listId , {products: true})
     } catch (error) {
         showErrorMsg( 'error-loading-list');
         currList.value = null
