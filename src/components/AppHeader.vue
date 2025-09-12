@@ -4,7 +4,7 @@
           <RouterLink :to="{path: `/user/${ props.user._id }`, meta: { userId: props.user._id }}">
             <UserPreview :user="props.user" display="app-nav" />
           </RouterLink>
-          <input v-show="searchVisible" name="search" type="text" v-model="search" :placeholder="$trans('search')" />
+          <input  name="search" :class="searchVisible?'':'hidden'" type="text" v-model="search" :placeholder="$trans('search')" />
           <RouterLink to="/">
             <img src="/android-chrome-512x512.png" alt="Logo" class="logo">
           </RouterLink>
@@ -37,10 +37,11 @@ const props = defineProps({
 })
   
 watchEffect(() => {
-  router.push({ name: route.name, query: { search: search.value } })
-  // listStore.setSearch(search.value)
+  if(searchVisible.value){
+    router.push({ name: route.name, query: { search: search.value } })
 
-  // route.query.search = search.value
+  }
+  
 })
 
 const excludedRoutes = ['home', 'login', 'user', 'admin'];
@@ -64,6 +65,9 @@ const excludedRoutes = ['home', 'login', 'user', 'admin'];
       padding: 0.5rem;
       width: 100%;
       border: 1px solid var(--bClr4);
+      &.hidden{
+        opacity: 0;
+      }
     }
     grid-template-columns: 1fr auto 1fr;
     >*:first-child{
