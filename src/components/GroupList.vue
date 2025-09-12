@@ -1,6 +1,6 @@
 <template>
     <details v-for=" label, idx in labelList" :key="label.name" :class="`list-details ${labelOrder[idx]}`">
-        <summary>
+        <summary :class="`list-summary ${isDisabled(labelOrder[idx]) ? 'disabled' : ''}`">
             <div class="summary-container">
                 <span>{{ $trans(labelOrder[idx]) }} <span class="counter">{{ getCount(labelOrder[idx]) }}</span></span>
                 <button @click.stop="onMore(labelOrder[idx])" class="more-btn" v-html="$svg('more')">
@@ -40,6 +40,10 @@ function getCount(label) {
 
 function onSelect({ item, labelName }) {
    emit('selectItem', { labelName, itemId: item._id })
+}
+
+function isDisabled(label) {
+    return props.groupList[label]?.length === 0
 }
 
 
@@ -120,5 +124,12 @@ textarea {
     padding: 0.3rem;
     font-family: inherit;
     font-size: 1.5rem;
+}
+
+.list-summary{
+    &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 }
 </style>

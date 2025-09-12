@@ -4,20 +4,27 @@ import { itemService } from "@/services/item.service";
 // import { listService } from "@/services/list.service.local.js";
 import { listService } from "@/services/list.service.js";
 import { utilService } from "@/services/util.service";
+
 import {
   showUserMsg,
   showErrorMsg,
   showSuccessMsg,
 } from "@/services/event-bus.service";
 import { useUserStore } from "@/stores/user-store";
+import { useGlobals } from "@/composables/useGlobals";
 
+
+
+// const route = useRoute()
 
 export const useListStore = defineStore("list", () => {
+  const { $trans } = useGlobals();
   const userStore = useUserStore();
 
   const lists = ref(null);
   const currList = ref(null);
   const listByLabels = ref(null);
+  const search = ref('');
 
 
   const getCurrList = computed(() => currList.value);
@@ -37,12 +44,43 @@ export const useListStore = defineStore("list", () => {
   });
 
   const getItemList = computed(() => {
-    return listByLabels.value;
+    // console.log('labels', listByLabels.value);
+    if(search.value || listByLabels.value) {
+
+    //   console.log('getItemList', search.value);
+
+    const filteredLabels = JSON.parse(JSON.stringify(listByLabels.value));
+    for (const key in filteredLabels) {
+      // filteredLabels[key] = [];
+      // console.log('filteredLabels', filteredLabels[key]);
+      
+      const regex = new RegExp(search.value.toLowerCase(), 'i')
+      filteredLabels[key] = filteredLabels[key]
+      .filter(item => regex.test($trans(item.name)))
+   
+ 
+     
+      }
+
+ 
+     
+      
+      return filteredLabels;
+    }
+
+  
+    
+     
+  
   });
 
   const userLists = computed(() => {
     return lists?.value;
   });
+
+  function setSearch(searchTerm) {
+    search.value = searchTerm
+  }
 
   async function loadItems(labels = true) {
     try {
@@ -191,6 +229,7 @@ export const useListStore = defineStore("list", () => {
     userLists,
     setCurrList,
     getCurrList,
-    getListForSummary
+    getListForSummary,
+    setSearch
   };
 });
